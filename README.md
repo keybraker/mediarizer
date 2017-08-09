@@ -1,4 +1,4 @@
-# jpeg-Organizer
+# jpeg Organizer
 Organises a folder of images in a chronological order
 
 ## Authors
