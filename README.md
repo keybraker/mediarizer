@@ -1,5 +1,5 @@
-# jpeg Organizer
-Organises a folder of images in a chronological order
+# Picture Organizer 
+Organises a folder of images in a chronological order ( Only jpeg )
 
 ## How does it work ( simple representation )
 ```text
