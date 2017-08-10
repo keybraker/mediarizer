@@ -9,11 +9,11 @@ make                                                    |----------|
                                                         | creation |
                                                         |----------|
                                                              |
-cd .. :                                                      |                                          
+cd .. :                                                      |
 make     |---------------| ./jpegOrganizer picture.jpg       |
--------> | jpegOrganizer |-----------------------------------/ 
-         |               | ./jpegOrganizer path         
-         |---------------|                                        
+-------> | jpegOrganizer |-----------------------------------/
+         |               | ./jpegOrganizer path
+         |---------------|
 ```
 
 ## Installation Guide
