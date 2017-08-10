@@ -22,7 +22,7 @@ using namespace std;
 
 int transfer(const char *source, const char *dest){
 
-  char* transfer = (char*) malloc (1024 * sizeof(char));
+  char* transfer = (char*) malloc (4096 * sizeof(char));
 
   strcpy(transfer, "sudo cp ");
   strcat(transfer, source);
@@ -132,7 +132,7 @@ originalDateData *dateReturn(string originalDate){
 
 char *destinationFinder(int year, int month){
   
-  char *destinationPath = (char *) malloc (50 * sizeof(char));
+  char *destinationPath = (char *) malloc (4096 * sizeof(char));
 
   if(year == 2003){
     strcpy(destinationPath,"photosOrganized/2003/");
@@ -222,8 +222,6 @@ void jpegVersion(const char *path){
 
 void folderVersion(const char *path){
  
-  printf(" , folder -> ");
-
   DIR           *d;
   struct dirent *dir;
   d = opendir(path);
@@ -231,12 +229,12 @@ void folderVersion(const char *path){
   string dirFile;
   string jpegO = ".jpg";
   string jpegT = ".JPG";
-  
+
   size_t foundO;
   size_t foundT;
 
-  char* imagePath   = (char*) malloc (50 * sizeof(char));
-  char* unknownPath = (char*) malloc (50 * sizeof(char));
+  char* imagePath   = (char*) malloc (4096 * sizeof(char));
+  char* unknownPath = (char*) malloc (4096 * sizeof(char));
 
   strcpy(imagePath, path);
   strcat(imagePath, "/");
@@ -253,7 +251,7 @@ void folderVersion(const char *path){
       foundT = dirFile.find(jpegT);
 
       strcat(unknownPath, dir->d_name);
-      printf("unknownPath = %s\n", unknownPath);
+      //printf("unknownPath = %s\n", unknownPath);
 
       if (foundO != string::npos || foundT != string::npos){
 
@@ -265,9 +263,9 @@ void folderVersion(const char *path){
         strcat(imagePath, "/");
 
       }else if(!isRegularFile(unknownPath) && (dirFile.find('.') == std::string::npos)){
-        printf("->mpika gia (%s)\n",unknownPath);
+        //printf("ENTERING->%s)\n",unknownPath);
         folderVersion(unknownPath);
-      
+        //printf("  LEAVING<-%s)\n",unknownPath);
       }
 
       strcpy(unknownPath, path);
