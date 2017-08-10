@@ -1,4 +1,6 @@
 all:	
+	mkdir unknown	
+
 	mkdir 2003
 	mkdir 2003/January
 	mkdir 2003/February
@@ -225,3 +227,5 @@ clean:
 	rm -rf 2015
 	rm -rf 2016
 	rm -rf 2017
+	rm -rf unknown	
+

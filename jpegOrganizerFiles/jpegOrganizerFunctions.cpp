@@ -164,6 +164,9 @@ char *destinationFinder(int year, int month){
     strcpy(destinationPath,"photosOrganized/2016/");
   }else if(year == 2017){
     strcpy(destinationPath,"photosOrganized/2017/");
+  }else{
+    strcpy(destinationPath,"photosOrganized/unknown");
+    return destinationPath;
   }
 
   if(month == 1){
@@ -218,6 +221,8 @@ void jpegVersion(const char *path){
 }
 
 void folderVersion(const char *path){
+ 
+  printf(" , folder -> ");
 
   DIR           *d;
   struct dirent *dir;
@@ -226,8 +231,11 @@ void folderVersion(const char *path){
   string dirFile;
   string jpegO = ".jpg";
   string jpegT = ".JPG";
+  
+  size_t foundO;
+  size_t foundT;
 
-  char* imagePath = (char*) malloc (50 * sizeof(char));
+  char* imagePath   = (char*) malloc (50 * sizeof(char));
   char* unknownPath = (char*) malloc (50 * sizeof(char));
 
   strcpy(imagePath, path);
@@ -237,11 +245,12 @@ void folderVersion(const char *path){
   strcat(unknownPath, "/");
 
   if (d) {
+    
     while ((dir = readdir(d)) != NULL){
 
-      dirFile = dir->d_name;
-      size_t foundO = dirFile.find(jpegO);
-      size_t foundT = dirFile.find(jpegT);
+      dirFile       = dir->d_name;
+      foundO = dirFile.find(jpegO);
+      foundT = dirFile.find(jpegT);
 
       strcat(unknownPath, dir->d_name);
       printf("unknownPath = %s\n", unknownPath);
@@ -255,18 +264,19 @@ void folderVersion(const char *path){
         strcpy(imagePath, path);
         strcat(imagePath, "/");
 
-      }else if(!isRegularFile(unknownPath) && (dir->d_name[0] != '.')){
+      }else if(!isRegularFile(unknownPath) && (dirFile.find('.') == std::string::npos)){
         printf("->mpika gia (%s)\n",unknownPath);
         folderVersion(unknownPath);
       
-
       }
 
       strcpy(unknownPath, path);
       strcat(unknownPath, "/");
 
     }
+
     closedir(d);
+    return ;
     
   }
   

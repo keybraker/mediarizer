@@ -9,5 +9,8 @@ exif.o: jpegOrganizerFiles/exif.cpp
 jpegOrganizer: exif.o jpegOrganizerFiles/jpegOrganizer.cpp
 	$(CXX) $(CXXFLAGS) -o jpegOrganizer exif.o jpegOrganizerFiles/jpegOrganizer.cpp jpegOrganizerFiles/jpegOrganizerFunctions.cpp
 
+run:
+	./jpegOrganizer /Users/Keybraker/github
+
 clean:
 	rm -f *.o jpegOrganizer jpegOrganizer.exe
