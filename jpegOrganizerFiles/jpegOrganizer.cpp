@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
 
   }else if (argc == 2) {
     
-    if(is_regular_file(argv[1]) == 1){
+    if(isRegularFile(argv[1]) == 1){
       printf("jpeg version -> ");
       jpegVersion(argv[1]);
       return 0;
@@ -25,12 +25,6 @@ int main(int argc, char *argv[]) {
     printf("Too much info\n");
 
   }
-
-
-
-
-
-
 
   return 0;
 }

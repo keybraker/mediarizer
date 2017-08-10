@@ -9,19 +9,36 @@
 #include <dirent.h> 
 #include <stdio.h>
 #include <fstream>
+#include <stdio.h>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <cassert>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
 
 using namespace std;
 
-bool transfer(const char *source, const char *destination){
-  
-      std::ifstream src(source, std::ios::binary);
-      std::ofstream dest(destination, std::ios::binary);
-      dest << src.rdbuf();
-      return src && dest;
+int transfer(const char *source, const char *dest){
+
+  char* transfer = (char*) malloc (1024 * sizeof(char));
+
+  strcpy(transfer, "sudo cp ");
+  strcat(transfer, source);
+  strcat(transfer, " ");
+  strcat(transfer, dest);
+
+  system(transfer);
+
+  printf("\n%s\n", transfer);
+  printf("s: %s -> ", source);
+  printf("d: %s : ", dest);
+
+  return 0;
 
 }
 
-//const char *dateOfCreation(const char *path){
 string dateOfCreation(const char *path){
 
   // Read the JPEG file into a buffer
@@ -55,7 +72,7 @@ string dateOfCreation(const char *path){
   
 }
 
-int is_regular_file(const char *path){
+int isRegularFile(const char *path){
 
     struct stat path_stat;
     stat(path, &path_stat);
@@ -113,34 +130,141 @@ originalDateData *dateReturn(string originalDate){
 
 }
 
+char *destinationFinder(int year, int month){
+  
+  char *destinationPath = (char *) malloc (50 * sizeof(char));
+
+  if(year == 2003){
+    strcpy(destinationPath,"photosOrganized/2003/");
+  }else if(year == 2004){
+    strcpy(destinationPath,"photosOrganized/2004/");
+  }else if(year == 2005){
+    strcpy(destinationPath,"photosOrganized/2005/");
+  }else if(year == 2006){
+    strcpy(destinationPath,"photosOrganized/2006/");
+  }else if(year == 2007){
+    strcpy(destinationPath,"photosOrganized/2007/");
+  }else if(year == 2008){
+    strcpy(destinationPath,"photosOrganized/2008/");
+  }else if(year == 2009){
+    strcpy(destinationPath,"photosOrganized/2009/");
+  }else if(year == 2010){
+    strcpy(destinationPath,"photosOrganized/2010/");
+  }else if(year == 2011){
+    strcpy(destinationPath,"photosOrganized/2011/");
+  }else if(year == 2012){
+    strcpy(destinationPath,"photosOrganized/2012/");
+  }else if(year == 2013){
+    strcpy(destinationPath,"photosOrganized/2013/");
+  }else if(year == 2014){
+    strcpy(destinationPath,"photosOrganized/2014/");
+  }else if(year == 2015){
+    strcpy(destinationPath,"photosOrganized/2015/");
+  }else if(year == 2016){
+    strcpy(destinationPath,"photosOrganized/2016/");
+  }else if(year == 2017){
+    strcpy(destinationPath,"photosOrganized/2017/");
+  }
+
+  if(month == 1){
+    strcat(destinationPath,"January");
+  }else if(month == 2){
+    strcat(destinationPath,"February");
+  }else if(month == 3){
+    strcat(destinationPath,"March");
+  }else if(month == 4){
+    strcat(destinationPath,"April");
+  }else if(month == 5){
+    strcat(destinationPath,"May");
+  }else if(month == 6){
+    strcat(destinationPath,"June");
+  }else if(month == 7){
+    strcat(destinationPath,"July");
+  }else if(month == 8){
+    strcat(destinationPath,"August");
+  }else if(month == 9){
+    strcat(destinationPath,"September");
+  }else if(month == 10){
+    strcat(destinationPath,"October");
+  }else if(month == 11){
+    strcat(destinationPath,"November");
+  }else if(month == 12){
+    strcat(destinationPath,"December");
+  }
+
+  return destinationPath;
+
+}
+
 void jpegVersion(const char *path){
 
   string originalDate = dateOfCreation(path);
-
-  cout << "JPEGER: Original date/time   : " << originalDate << endl;
   
   originalDateData *originalDateStruct = (originalDateData *) malloc (sizeof(originalDateData));
   originalDateStruct = dateReturn(originalDate);
-  
-  cout << "originalYear:    " << originalDateStruct->year << endl;
-  cout << "originalMonth:   " << originalDateStruct->month << endl;
-  cout << "originalDay:     " << originalDateStruct->day << endl;
-  cout << "originalHour:    " << originalDateStruct->hour << endl;
-  cout << "originalMinute:  " << originalDateStruct->minute << endl;
-  cout << "originalSecond:  " << originalDateStruct->second << endl;
+  char *destinationPath = destinationFinder(originalDateStruct->year, originalDateStruct->month);
+
+  int what = transfer(path, destinationPath);
+
+  if( what == 0 ){ printf("successful\n"); } else if( what == -1){ printf("failed\n"); }
+
+  // cout << "originalYear   : " << originalDateStruct->year   << endl;
+  // cout << "originalMonth  : " << originalDateStruct->month  << endl;
+  // cout << "originalDay    : " << originalDateStruct->day    << endl;
+  // cout << "originalHour   : " << originalDateStruct->hour   << endl;
+  // cout << "originalMinute : " << originalDateStruct->minute << endl;
+  // cout << "originalSecond : " << originalDateStruct->second << endl;
 
 }
 
 void folderVersion(const char *path){
 
-  printf("FOLDERER: ");
   DIR           *d;
   struct dirent *dir;
   d = opendir(path);
   
+  string dirFile;
+  string jpegO = ".jpg";
+  string jpegT = ".JPG";
+
+  char* imagePath = (char*) malloc (50 * sizeof(char));
+  char* unknownPath = (char*) malloc (50 * sizeof(char));
+
+  strcpy(imagePath, path);
+  strcat(imagePath, "/");
+
+  strcpy(unknownPath, path);
+  strcat(unknownPath, "/");
+
   if (d) {
     while ((dir = readdir(d)) != NULL){
-      printf("%s\n", dir->d_name);
+
+      dirFile = dir->d_name;
+      size_t foundO = dirFile.find(jpegO);
+      size_t foundT = dirFile.find(jpegT);
+
+      strcat(unknownPath, dir->d_name);
+      printf("unknownPath = %s\n", unknownPath);
+
+      if (foundO != string::npos || foundT != string::npos){
+
+        strcat(imagePath, dir->d_name);
+
+        jpegVersion(imagePath);
+
+        strcpy(imagePath, path);
+        strcat(imagePath, "/");
+
+      }else if(!isRegularFile(unknownPath) && (dir->d_name[0] != '.')){
+        printf("->mpika gia (%s)\n",unknownPath);
+        folderVersion(unknownPath);
+      
+
+      }
+
+      strcpy(unknownPath, path);
+      strcat(unknownPath, "/");
+
     }
     closedir(d);
     

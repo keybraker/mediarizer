@@ -21,10 +21,12 @@ struct originalDateData{
   int second;
 };
 
-string  dateOfCreation  (const char *path);
-int     is_regular_file (const char *path);
+int transfer (char *source, char *dest);
+string dateOfCreation (const char *path);
+int isRegularFile (const char *path);
 originalDateData *dateReturn(string originalDate);
-void    jpegVersion     (const char *path);
-void    folderVersion   (const char *path);
+char *destinationFinder(int year, int month);
+void jpegVersion (const char *path);
+void folderVersion (const char *path);
 
 #endif
