@@ -1,6 +1,48 @@
 all:	
 	mkdir unknown	
 
+	mkdir 2000
+	mkdir 2000/January
+	mkdir 2000/February
+	mkdir 2000/March
+	mkdir 2000/April
+	mkdir 2000/May
+	mkdir 2000/June
+	mkdir 2000/July
+	mkdir 2000/August
+	mkdir 2000/September
+	mkdir 2000/October
+	mkdir 2000/November
+	mkdir 2000/December
+
+	mkdir 2001
+	mkdir 2001/January
+	mkdir 2001/February
+	mkdir 2001/March
+	mkdir 2001/April
+	mkdir 2001/May
+	mkdir 2001/June
+	mkdir 2001/July
+	mkdir 2001/August
+	mkdir 2001/September
+	mkdir 2001/October
+	mkdir 2001/November
+	mkdir 2001/December
+
+	mkdir 2002
+	mkdir 2002/January
+	mkdir 2002/February
+	mkdir 2002/March
+	mkdir 2002/April
+	mkdir 2002/May
+	mkdir 2002/June
+	mkdir 2002/July
+	mkdir 2002/August
+	mkdir 2002/September
+	mkdir 2002/October
+	mkdir 2002/November
+	mkdir 2002/December
+
 	mkdir 2003
 	mkdir 2003/January
 	mkdir 2003/February
@@ -212,6 +254,9 @@ all:
 	mkdir 2017/December
 
 clean:	
+	rm -rf 2000
+	rm -rf 2001
+	rm -rf 2002
 	rm -rf 2003
 	rm -rf 2004
 	rm -rf 2005

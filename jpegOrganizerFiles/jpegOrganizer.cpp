@@ -10,12 +10,10 @@ int main(int argc, char *argv[]) {
   }else if (argc == 2) {
     
     if(isRegularFile(argv[1]) == 1){
-      printf("jpeg version -> ");
       jpegVersion(argv[1]);
       return 0;
 
     }else{
-      printf("folder version -> ");
       folderVersion(argv[1]);
       return 0;
 

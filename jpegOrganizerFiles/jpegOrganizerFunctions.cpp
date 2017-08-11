@@ -29,11 +29,8 @@ int transfer(const char *source, const char *dest){
   strcat(transfer, " ");
   strcat(transfer, dest);
 
+  printf("cp :: %s\n", transfer);
   system(transfer);
-
-  printf("\n%s\n", transfer);
-  printf("s: %s -> ", source);
-  printf("d: %s : ", dest);
 
   return 0;
 
@@ -134,8 +131,14 @@ char *destinationFinder(int year, int month){
   
   char *destinationPath = (char *) malloc (4096 * sizeof(char));
 
-  if(year == 2003){
-    strcpy(destinationPath,"photosOrganized/2003/");
+  if(year == 2000){
+    strcpy(destinationPath,"photosOrganized/2000/");
+  }else if(year == 2001){
+    strcpy(destinationPath,"photosOrganized/2001/");
+  }else if(year == 2002){
+    strcpy(destinationPath,"photosOrganized/2002/");
+  }else if(year == 2003){
+    strcpy(destinationPath,"photosOrganized/2003/");  
   }else if(year == 2004){
     strcpy(destinationPath,"photosOrganized/2004/");
   }else if(year == 2005){
@@ -207,9 +210,7 @@ void jpegVersion(const char *path){
   originalDateStruct = dateReturn(originalDate);
   char *destinationPath = destinationFinder(originalDateStruct->year, originalDateStruct->month);
 
-  int what = transfer(path, destinationPath);
-
-  if( what == 0 ){ printf("successful\n"); } else if( what == -1){ printf("failed\n"); }
+  transfer(path, destinationPath);
 
   // cout << "originalYear   : " << originalDateStruct->year   << endl;
   // cout << "originalMonth  : " << originalDateStruct->month  << endl;
