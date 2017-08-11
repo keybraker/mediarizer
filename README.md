@@ -65,6 +65,11 @@ If you want to organise all the picture in a folder, and the folders in them, ju
 ./jpegOrganizer /filePath/folder
 ```
 
+## Corrupted files
+All corrupted jpeg files are not being copied. If even one file is copputed, a txt file is
+created called ``` corruptedFiles ``` in which every corrupted files is listed wby its full
+path, so that you can handle it manually.
+
 ## Cleaning
 * To clean the program type ``` make clean ``` in ``` /jpeg-Organizer ```
 * To clean the organized folders type ``` make clean ``` in ``` /photosOrganized ```

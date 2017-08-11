@@ -13,4 +13,4 @@ run:
 	./jpegOrganizer /Users/Keybraker/github
 
 clean:
-	rm -f *.o jpegOrganizer jpegOrganizer.exe
+	rm -f *.o jpegOrganizer jpegOrganizer.exe corruptedFiles.txt

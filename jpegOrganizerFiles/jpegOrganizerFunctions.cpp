@@ -212,6 +212,11 @@ void jpegVersion(const char *path){
   
   if(originalDate.empty()){ 
     printf(ACR " > file: %s, is corrupt.\n" ACRE, path);
+    
+    FILE *corruptedFiles = fopen("corruptedFiles.txt", "a");
+    if(corruptedFiles == NULL){printf("Error while opening file.\n");}
+    fprintf(corruptedFiles,"%s",path);            
+
     return;
 
   }
