@@ -12,9 +12,9 @@
 #include <fcntl.h>
 #include <errno.h>
 
-#define ACR     "\x1b[31m"
+#define ACR   "\x1b[31m"
 #define ACG   "\x1b[32m"
-#define ACRE   "\x1b[0m"
+#define ACRE  "\x1b[0m"
 
 using namespace std;
 
@@ -125,12 +125,10 @@ originalDateData *dateReturn(string originalDate){
 
 }
 
-bool dirEx(const char* directory)
-{
+bool dirEx(const char* directory){
     
   DIR* dir = opendir(directory);
-  if (dir)
-  {
+  if (dir) {
     closedir(dir);
     return true;
   }
@@ -146,105 +144,58 @@ char *destinationFinder(int year, int month){
 
   strcpy(destinationPathFolder, "mkdir ");
 
-  if(year == 2000){
-    strcpy(destinationPath,"photosOrganized/2000/");
+  if(year >= 1989 && year <= 2040){
+    char yearStr[12];
+    sprintf(yearStr, "%d", year);
+
+    strcpy(destinationPath, "photosOrganized/");
+    strcat(destinationPath, yearStr);
+    strcat(destinationPath, "/");
     
-  }else if(year == 2001){
-    strcpy(destinationPath,"photosOrganized/2001/");
-
-  }else if(year == 2002){
-    strcpy(destinationPath,"photosOrganized/2002/");
-
-  }else if(year == 2003){
-    strcpy(destinationPath,"photosOrganized/2003/");  
-
-  }else if(year == 2004){
-    strcpy(destinationPath,"photosOrganized/2004/");
-
-  }else if(year == 2005){
-    strcpy(destinationPath,"photosOrganized/2005/");
-
-  }else if(year == 2006){
-    strcpy(destinationPath,"photosOrganized/2006/");
-
-  }else if(year == 2007){
-    strcpy(destinationPath,"photosOrganized/2007/");
-
-  }else if(year == 2008){
-    strcpy(destinationPath,"photosOrganized/2008/");
-
-  }else if(year == 2009){
-    strcpy(destinationPath,"photosOrganized/2009/");
-
-  }else if(year == 2010){
-    strcpy(destinationPath,"photosOrganized/2010/");
-
-  }else if(year == 2011){
-    strcpy(destinationPath,"photosOrganized/2011/");
-
-  }else if(year == 2012){
-    strcpy(destinationPath,"photosOrganized/2012/");
-
-  }else if(year == 2013){
-    strcpy(destinationPath,"photosOrganized/2013/");
-
-  }else if(year == 2014){
-    strcpy(destinationPath,"photosOrganized/2014/");
-
-  }else if(year == 2015){
-    strcpy(destinationPath,"photosOrganized/2015/");
-
-  }else if(year == 2016){
-    strcpy(destinationPath,"photosOrganized/2016/");
-
-  }else if(year == 2017){
-    strcpy(destinationPath,"photosOrganized/2017/");
+    strcat(destinationPathFolder, destinationPath);
+    if(!dirEx(destinationPath))
+      system(destinationPathFolder);
 
   }else{
-    strcpy(destinationPath,"photosOrganized/unknown");
+    strcpy(destinationPath, "photosOrganized/unknownDate");
+    
     strcat(destinationPathFolder, destinationPath);
     if(!dirEx(destinationPath))
       system(destinationPathFolder);
 
     return destinationPath;
   }
-  //printf("FIRST: %s\n", destinationPathFolder);
-
-  strcat(destinationPathFolder, destinationPath);
-  if(!dirEx(destinationPath))
-    system(destinationPathFolder);
 
   if(month == 1){
-    strcat(destinationPath,"January");
+    strcat(destinationPath, "January");
   }else if(month == 2){
-    strcat(destinationPath,"February");
+    strcat(destinationPath, "February");
   }else if(month == 3){
-    strcat(destinationPath,"March");
+    strcat(destinationPath, "March");
   }else if(month == 4){
-    strcat(destinationPath,"April");
+    strcat(destinationPath, "April");
   }else if(month == 5){
-    strcat(destinationPath,"May");
+    strcat(destinationPath, "May");
   }else if(month == 6){
-    strcat(destinationPath,"June");
+    strcat(destinationPath, "June");
   }else if(month == 7){
-    strcat(destinationPath,"July");
+    strcat(destinationPath, "July");
   }else if(month == 8){
-    strcat(destinationPath,"August");
+    strcat(destinationPath, "August");
   }else if(month == 9){
-    strcat(destinationPath,"September");
+    strcat(destinationPath, "September");
   }else if(month == 10){
-    strcat(destinationPath,"October");
+    strcat(destinationPath, "October");
   }else if(month == 11){
-    strcat(destinationPath,"November");
+    strcat(destinationPath, "November");
   }else if(month == 12){
-    strcat(destinationPath,"December");
+    strcat(destinationPath, "December");
   }
 
   strcpy(destinationPathFolder, "mkdir ");
   strcat(destinationPathFolder, destinationPath);
   if(!dirEx(destinationPath))
     system(destinationPathFolder);
-  //printf("SECOND: %s\n", destinationPathFolder);
 
   return destinationPath;
 
