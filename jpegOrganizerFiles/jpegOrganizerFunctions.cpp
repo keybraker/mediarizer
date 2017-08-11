@@ -238,6 +238,7 @@ void jpegVersion(const char *path){
 
 void folderVersion(const char *path){
  
+  int j = 1;
   DIR           *d;
   struct dirent *dir;
   d = opendir(path);
@@ -262,7 +263,7 @@ void folderVersion(const char *path){
     
     while ((dir = readdir(d)) != NULL){
 
-      dirFile       = dir->d_name;
+      dirFile = dir->d_name;
       foundO = dirFile.find(jpegO);
       foundT = dirFile.find(jpegT);
 
@@ -273,8 +274,18 @@ void folderVersion(const char *path){
 
         strcat(imagePath, dir->d_name);
 
-        jpegVersion(imagePath);
+        int length = (int) strlen(imagePath);
+        for(int i = 0; i < length; i++){
+          if(imagePath[i] == '.' && i+1 <= length && imagePath[i+1] == '_'){
+            j = 0; break; 
+          }
+        }
 
+        if(j)
+          jpegVersion(imagePath);
+        
+
+        j = 1;
         strcpy(imagePath, path);
         strcat(imagePath, "/");
 
