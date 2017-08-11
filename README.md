@@ -31,30 +31,12 @@ cd .../jpeg-Organizer
 ```
 
 ##### 2.
-```
-cd .../photosOrganized
-```
-
-##### 3.
-To create all the folders in which your photos will be organised to type:
-( Folder will be created from 2000 - 2017 if your pictures range in other years please add the folders )
-```
-make 
-```
-( Folder will be created from 2000 - 2017 if your pictures range in other years please add the folders )
-
-##### 4.
-```
-cd ..
-```
-
-##### 5.
 To compile the program just type:
 ```
 make 
 ```
 
-##### 6.
+##### 3.
 You can run the program in two ways, a single picture mode and a folder mode.
 The single picture only organises this one picture and to do that just type:
 ```

@@ -4,18 +4,12 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <string>
-#include <iostream>
 #include <dirent.h> 
 #include <stdio.h>
 #include <fstream>
-#include <stdio.h>
-#include <fstream>
 #include <iostream>
-#include <string>
 #include <cassert>
 #include <fcntl.h>
-#include <unistd.h>
 #include <errno.h>
 
 #define ACR     "\x1b[31m"
@@ -26,7 +20,7 @@ using namespace std;
 
 int transfer(const char *source, const char *dest){
 
-  char* transfer = (char*) malloc (4096 * sizeof(char));
+  char* transfer = (char*) malloc (32768 * sizeof(char));
 
   strcpy(transfer, "sudo cp \"");
   strcat(transfer, source);
@@ -46,7 +40,7 @@ string dateOfCreation(const char *path){
   FILE *fp = fopen(path, "rb");
   if (!fp) {
     printf("Can't open file.\n");
-    return string();
+    return string(); // EMPTY STRING
   }
   fseek(fp, 0, SEEK_END);
   unsigned long fsize = ftell(fp);
@@ -55,7 +49,7 @@ string dateOfCreation(const char *path){
   if (fread(buf, 1, fsize, fp) != fsize) {
     printf("Can't read file.\n");
     delete[] buf;
-    return string();
+    return string(); // EMPTY STRING
   }
   fclose(fp);
 
@@ -65,7 +59,7 @@ string dateOfCreation(const char *path){
   delete[] buf;
   if (code) {
     printf("Error parsing EXIF: code %d\n", code);
-    return string();
+    return string(); // EMPTY STRING
   }
 
   // Dump EXIF information
@@ -131,50 +125,94 @@ originalDateData *dateReturn(string originalDate){
 
 }
 
+bool dirEx(const char* directory)
+{
+    
+  DIR* dir = opendir(directory);
+  if (dir)
+  {
+    closedir(dir);
+    return true;
+  }
+
+  return false;
+
+}
+
 char *destinationFinder(int year, int month){
   
-  char *destinationPath = (char *) malloc (4096 * sizeof(char));
+  char *destinationPath = (char *) malloc (32768 * sizeof(char));
+  char *destinationPathFolder = (char *) malloc (32768 * sizeof(char));
+
+  strcpy(destinationPathFolder, "mkdir ");
 
   if(year == 2000){
     strcpy(destinationPath,"photosOrganized/2000/");
+    
   }else if(year == 2001){
     strcpy(destinationPath,"photosOrganized/2001/");
+
   }else if(year == 2002){
     strcpy(destinationPath,"photosOrganized/2002/");
+
   }else if(year == 2003){
     strcpy(destinationPath,"photosOrganized/2003/");  
+
   }else if(year == 2004){
     strcpy(destinationPath,"photosOrganized/2004/");
+
   }else if(year == 2005){
     strcpy(destinationPath,"photosOrganized/2005/");
+
   }else if(year == 2006){
     strcpy(destinationPath,"photosOrganized/2006/");
+
   }else if(year == 2007){
     strcpy(destinationPath,"photosOrganized/2007/");
+
   }else if(year == 2008){
     strcpy(destinationPath,"photosOrganized/2008/");
+
   }else if(year == 2009){
     strcpy(destinationPath,"photosOrganized/2009/");
+
   }else if(year == 2010){
     strcpy(destinationPath,"photosOrganized/2010/");
+
   }else if(year == 2011){
     strcpy(destinationPath,"photosOrganized/2011/");
+
   }else if(year == 2012){
     strcpy(destinationPath,"photosOrganized/2012/");
+
   }else if(year == 2013){
     strcpy(destinationPath,"photosOrganized/2013/");
+
   }else if(year == 2014){
     strcpy(destinationPath,"photosOrganized/2014/");
+
   }else if(year == 2015){
     strcpy(destinationPath,"photosOrganized/2015/");
+
   }else if(year == 2016){
     strcpy(destinationPath,"photosOrganized/2016/");
+
   }else if(year == 2017){
     strcpy(destinationPath,"photosOrganized/2017/");
+
   }else{
     strcpy(destinationPath,"photosOrganized/unknown");
+    strcat(destinationPathFolder, destinationPath);
+    if(!dirEx(destinationPath))
+      system(destinationPathFolder);
+
     return destinationPath;
   }
+  //printf("FIRST: %s\n", destinationPathFolder);
+
+  strcat(destinationPathFolder, destinationPath);
+  if(!dirEx(destinationPath))
+    system(destinationPathFolder);
 
   if(month == 1){
     strcat(destinationPath,"January");
@@ -202,6 +240,12 @@ char *destinationFinder(int year, int month){
     strcat(destinationPath,"December");
   }
 
+  strcpy(destinationPathFolder, "mkdir ");
+  strcat(destinationPathFolder, destinationPath);
+  if(!dirEx(destinationPath))
+    system(destinationPathFolder);
+  //printf("SECOND: %s\n", destinationPathFolder);
+
   return destinationPath;
 
 }
@@ -211,7 +255,6 @@ void jpegVersion(const char *path){
   string originalDate = dateOfCreation(path);
   
   if(originalDate.empty()){ 
-    printf(ACR " > file: %s, is corrupt.\n" ACRE, path);
     
     FILE *corruptedFiles = fopen("corruptedFiles.txt", "a");
     if(corruptedFiles == NULL){printf("Error while opening file.\n");}
@@ -226,6 +269,8 @@ void jpegVersion(const char *path){
   char *destinationPath = destinationFinder(originalDateStruct->year, originalDateStruct->month);
 
   transfer(path, destinationPath);
+  
+  return;
 
   // cout << "originalYear   : " << originalDateStruct->year   << endl;
   // cout << "originalMonth  : " << originalDateStruct->month  << endl;
@@ -250,8 +295,8 @@ void folderVersion(const char *path){
   size_t foundO;
   size_t foundT;
 
-  char* imagePath   = (char*) malloc (4096 * sizeof(char));
-  char* unknownPath = (char*) malloc (4096 * sizeof(char));
+  char* imagePath   = (char*) malloc (32768 * sizeof(char));
+  char* unknownPath = (char*) malloc (32768 * sizeof(char));
 
   strcpy(imagePath, path);
   strcat(imagePath, "/");
