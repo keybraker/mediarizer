@@ -18,15 +18,19 @@
 #include <unistd.h>
 #include <errno.h>
 
+#define ACR     "\x1b[31m"
+#define ACG   "\x1b[32m"
+#define ACRE   "\x1b[0m"
+
 using namespace std;
 
 int transfer(const char *source, const char *dest){
 
   char* transfer = (char*) malloc (4096 * sizeof(char));
 
-  strcpy(transfer, "sudo cp ");
+  strcpy(transfer, "sudo cp \"");
   strcat(transfer, source);
-  strcat(transfer, " ");
+  strcat(transfer, "\" ");
   strcat(transfer, dest);
 
   printf("cp :: %s\n", transfer);
@@ -42,7 +46,7 @@ string dateOfCreation(const char *path){
   FILE *fp = fopen(path, "rb");
   if (!fp) {
     printf("Can't open file.\n");
-    return NULL;
+    return string();
   }
   fseek(fp, 0, SEEK_END);
   unsigned long fsize = ftell(fp);
@@ -51,7 +55,7 @@ string dateOfCreation(const char *path){
   if (fread(buf, 1, fsize, fp) != fsize) {
     printf("Can't read file.\n");
     delete[] buf;
-    return NULL;
+    return string();
   }
   fclose(fp);
 
@@ -61,7 +65,7 @@ string dateOfCreation(const char *path){
   delete[] buf;
   if (code) {
     printf("Error parsing EXIF: code %d\n", code);
-    return NULL;
+    return string();
   }
 
   // Dump EXIF information
@@ -206,6 +210,12 @@ void jpegVersion(const char *path){
 
   string originalDate = dateOfCreation(path);
   
+  if(originalDate.empty()){ 
+    printf(ACR " > file: %s, is corrupt.\n" ACRE, path);
+    return;
+
+  }
+
   originalDateData *originalDateStruct = (originalDateData *) malloc (sizeof(originalDateData));
   originalDateStruct = dateReturn(originalDate);
   char *destinationPath = destinationFinder(originalDateStruct->year, originalDateStruct->month);
