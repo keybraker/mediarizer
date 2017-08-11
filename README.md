@@ -3,10 +3,12 @@ Organises a folder of images in a chronological order ( Only jpeg )
 
 ## How does it work ( simple representation )
 ```text
-make     |---------------| ./jpegOrganizer picture.jpg   |------------------| 
--------> | jpegOrganizer |-----------------------------> | organised photos | 
-         |               | ./jpegOrganizer path          | in year/month    | 
-         |---------------|                               |------------------| 
+make     |---------------| ./jpegOrganizer picture.jpg   |---------------------| 
+-------> | jpegOrganizer |-----------------------------> | organised photos    | 
+         |---------------| ./jpegOrganizer path          | in year/month       | 
+                                                         | follders that       | 
+                                                         | created dynamically |
+                                                         |---------------------| 
 ```
 
 ## Installation Guide
