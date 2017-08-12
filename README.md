@@ -58,10 +58,16 @@ path, so that you can handle it manually.
 * To clean the organized folders type ``` make clean ``` in ``` /photosOrganized ```
   ( but be careful to delete the folders when pictures are stored there )
 
-## File support list 
+## Photo file support list 
 #### 1. jpeg ✔︎
-#### 2. png ( to be done )
-#### 3. avi ( to be done )
+#### 2. png ( to be added )
+#### 3. tiff ( to be added )
+
+## Video file support list 
+#### 1. avi ( to be added )
+#### 2. mp4 ( to be added )
+#### 3. wmv ( to be added )
+#### 3. mov ( to be added )
 
 ## Authors
 * **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
