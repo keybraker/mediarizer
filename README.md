@@ -2,9 +2,9 @@
 Organises a folder of images in a chronological order ( Only jpeg )
 
 ## Why use Picture Organiser
-#### 1. Organises photos super fast, the only limit is your hardware
-#### 2. Cleans your photos from duplicates
-#### 3. Lightweight and runs everywhere
+* Organises photos super fast, the only limit is your hardware
+* Cleans your photos from duplicates
+* Lightweight and runs everywhere
 
 ## How does it work ( simple representation )
 ```text
