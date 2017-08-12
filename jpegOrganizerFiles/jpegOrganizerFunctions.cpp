@@ -137,63 +137,96 @@ bool dirEx(const char* directory){
 
 }
 
-char *destinationFinder(int year, int month){
+char *destinationFinder(int year, int month, const char *pathToStore){
   
   char *destinationPath = (char *) malloc (32768 * sizeof(char));
   char *destinationPathFolder = (char *) malloc (32768 * sizeof(char));
 
   strcpy(destinationPathFolder, "mkdir ");
+  strcat(destinationPathFolder, pathToStore);
+  strcat(destinationPathFolder, "/");
+
+  strcpy(destinationPath, pathToStore);
+  strcat(destinationPath, "/");
 
   if(year >= 1989 && year <= 2040){
     char yearStr[12];
     sprintf(yearStr, "%d", year);
 
-    strcpy(destinationPath, "photosOrganized/");
     strcat(destinationPath, yearStr);
     strcat(destinationPath, "/");
-    
-    strcat(destinationPathFolder, destinationPath);
+    strcat(destinationPathFolder, yearStr);
+    strcat(destinationPathFolder, "/");
+
     if(!dirEx(destinationPath))
       system(destinationPathFolder);
 
   }else{
-    strcpy(destinationPath, "photosOrganized/unknownDate");
-    
+    strcat(destinationPath, "unknownDate"); // peritti apla gia to fainestai
     strcat(destinationPathFolder, destinationPath);
+    
     if(!dirEx(destinationPath))
       system(destinationPathFolder);
 
     return destinationPath;
   }
 
-  if(month == 1){
-    strcat(destinationPath, "January");
-  }else if(month == 2){
-    strcat(destinationPath, "February");
-  }else if(month == 3){
-    strcat(destinationPath, "March");
-  }else if(month == 4){
-    strcat(destinationPath, "April");
-  }else if(month == 5){
-    strcat(destinationPath, "May");
-  }else if(month == 6){
-    strcat(destinationPath, "June");
-  }else if(month == 7){
-    strcat(destinationPath, "July");
-  }else if(month == 8){
-    strcat(destinationPath, "August");
-  }else if(month == 9){
-    strcat(destinationPath, "September");
-  }else if(month == 10){
-    strcat(destinationPath, "October");
-  }else if(month == 11){
-    strcat(destinationPath, "November");
-  }else if(month == 12){
-    strcat(destinationPath, "December");
+  switch(month) {
+    case 1 :
+      strcat(destinationPath, "January");
+      strcat(destinationPathFolder, "January");
+      break;
+    case 2 :
+      strcat(destinationPath, "February");
+      strcat(destinationPathFolder, "February");
+      break;
+    case 3 :
+      strcat(destinationPath, "March");
+      strcat(destinationPathFolder, "March");
+      break;
+    case 4 :
+      strcat(destinationPath, "April");
+      strcat(destinationPathFolder, "April");
+      break;
+    case 5 :
+      strcat(destinationPath, "May");
+      strcat(destinationPathFolder, "May");
+      break;
+    case 6 :
+      strcat(destinationPath, "June");
+      strcat(destinationPathFolder, "June");
+      break;
+    case 7 :
+      strcat(destinationPath, "July");
+      strcat(destinationPathFolder, "July");
+      break;
+    case 8 :
+      strcat(destinationPath, "August");
+      strcat(destinationPathFolder, "August");
+      break;
+    case 9 :
+      strcat(destinationPath, "September");
+      strcat(destinationPathFolder, "September");
+      break;
+    case 10 :
+       strcat(destinationPath, "October");
+      strcat(destinationPathFolder, "October");
+      break;
+    case 11 :
+      strcat(destinationPath, "November");
+      strcat(destinationPathFolder, "November");
+      break;
+    case 12 :
+      strcat(destinationPath, "December");
+      strcat(destinationPathFolder, "December"); 
+      break;
+
+    default:
+      strcat(destinationPath, "unknown");
+      strcat(destinationPathFolder, "unknown");
+      break;
   }
 
-  strcpy(destinationPathFolder, "mkdir ");
-  strcat(destinationPathFolder, destinationPath);
   if(!dirEx(destinationPath))
     system(destinationPathFolder);
 
@@ -201,7 +234,7 @@ char *destinationFinder(int year, int month){
 
 }
 
-void jpegVersion(const char *path){
+void jpegVersion(const char *path, const char *pathToStore){
 
   string originalDate = dateOfCreation(path);
   
@@ -217,8 +250,8 @@ void jpegVersion(const char *path){
 
   originalDateData *originalDateStruct = (originalDateData *) malloc (sizeof(originalDateData));
   originalDateStruct = dateReturn(originalDate);
-  char *destinationPath = destinationFinder(originalDateStruct->year, originalDateStruct->month);
-
+  char *destinationPath = destinationFinder(originalDateStruct->year, originalDateStruct->month, pathToStore);
+ 
   transfer(path, destinationPath);
   
   return;
@@ -232,8 +265,8 @@ void jpegVersion(const char *path){
 
 }
 
-void folderVersion(const char *path){
- 
+void folderVersion(const char *path, const char *pathToStore){
+
   int j = 1;
   DIR           *d;
   struct dirent *dir;
@@ -277,7 +310,7 @@ void folderVersion(const char *path){
         }
 
         if(j)
-          jpegVersion(imagePath);
+          jpegVersion(imagePath, pathToStore);
         
 
         j = 1;
@@ -285,7 +318,7 @@ void folderVersion(const char *path){
         strcat(imagePath, "/");
 
       }else if(!isRegularFile(unknownPath) && (dirFile.find('.') == std::string::npos)){
-        folderVersion(unknownPath);
+        folderVersion(unknownPath, pathToStore);
 
       }
 
