@@ -59,7 +59,7 @@ path, so that you can handle it manually.
   ( but be careful to delete the folders when pictures are stored there )
 
 ## Photo file support list 
-#### 1. jpeg  ✔︎
+#### 1. jpeg ✔︎
 #### 2. png ( to be added )
 #### 3. tiff ( to be added )
 
