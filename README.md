@@ -59,7 +59,7 @@ path, so that you can handle it manually.
   ( but be careful to delete the folders when pictures are stored there )
 
 ## Photo file support list 
-#### 1. jpeg ✔︎
+#### 1. jpeg  ✔︎
 #### 2. png ( to be added )
 #### 3. tiff ( to be added )
 
@@ -67,7 +67,7 @@ path, so that you can handle it manually.
 #### 1. avi ( to be added )
 #### 2. mp4 ( to be added )
 #### 3. wmv ( to be added )
-#### 3. mov ( to be added )
+#### 4. mov ( to be added )
 
 ## Authors
 * **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
