@@ -21,22 +21,19 @@ git clone https://github.com/keybraker/jpeg-Organizer.git
 ```
 
 ## Usage Guide
-Open a terminal window and cd to cloned project
 
-##### 1. 
+
+##### 1. Open a terminal window and cd to cloned project
 ```
 cd .../jpeg-Organizer
 ```
 
-##### 2.
-To compile the program just type:
+##### 2. To compile the program just type:
 ```
 make 
 ```
 
-##### 3.
-You can run the program in two ways, a single picture mode and a folder mode.
-The single picture only organises this one picture and to do that just type:
+##### 3. You can run the program in two ways, a single picture mode and a folder mode. The single picture only organises this one picture and to do that just type:
 ```
 ./jpegOrganizer /path/picture.jpg /destinationPath
 ```
