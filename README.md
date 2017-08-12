@@ -59,15 +59,15 @@ path, so that you can handle it manually.
   ( but be careful to delete the folders when pictures are stored there )
 
 ## Photo file support list 
-#### 1. jpeg ✔︎
-#### 2. png ( to be added )
-#### 3. tiff ( to be added )
+* jpeg ✔︎
+* png ( to be added )
+* tiff ( to be added )
 
 ## Video file support list 
-#### 1. avi ( to be added )
-#### 2. mp4 ( to be added )
-#### 3. wmv ( to be added )
-#### 4. mov ( to be added )
+* avi ( to be added )
+* mp4 ( to be added )
+* wmv ( to be added )
+* mov ( to be added )
 
 ## Release History
 
