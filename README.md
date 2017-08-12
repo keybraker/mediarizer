@@ -69,6 +69,11 @@ path, so that you can handle it manually.
 #### 3. wmv ( to be added )
 #### 4. mov ( to be added )
 
+## Release History
+
+* v1.0.0: 12 August 2017: Full jpeg release !
+* v0.1.0: 9 August 2017: Creation.
+
 ## Authors
 * **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
 
