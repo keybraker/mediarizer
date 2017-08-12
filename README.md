@@ -1,18 +1,18 @@
 # Picture Organizer 
 Organises a folder of images in a chronological order ( Only jpeg )
 
-## Why use Picture Organiser
-* Organises photos super fast, the only limit is your hardware
-* Cleans your photos from duplicates
-* Lightweight and runs everywhere
-
-## How does it work ( simple representation )
+## How does it work 
 ```text
 make  |---------------| ./jpegOrganizer /picture.jpg /desPath  |------------------| 
 ----> | jpegOrganizer |--------------------------------------> | organised photos | 
       |---------------| ./jpegOrganizer /folderPath /desPath   | in year/month    | 
                                                                |------------------| 
 ```
+
+## Why use Picture Organiser
+* Organises photos super fast, the only limit is your hardware
+* Cleans your photos from duplicates
+* Lightweight and runs everywhere
 
 ## Installation Guide
 Clone this repository with ( or download zip ):
