@@ -27,7 +27,7 @@ int transfer(const char *source, const char *dest){
   strcat(transfer, "\" ");
   strcat(transfer, dest);
 
-  printf("cp :: %s\n", transfer);
+  printf("> %s\n", transfer);
   system(transfer);
 
   return 0;
@@ -209,7 +209,7 @@ void jpegVersion(const char *path){
     
     FILE *corruptedFiles = fopen("corruptedFiles.txt", "a");
     if(corruptedFiles == NULL){printf("Error while opening file.\n");}
-    fprintf(corruptedFiles,"%s",path);            
+    fprintf(corruptedFiles,"%s\n",path);            
 
     return;
 
@@ -264,7 +264,6 @@ void folderVersion(const char *path){
       foundT = dirFile.find(jpegT);
 
       strcat(unknownPath, dir->d_name);
-      //printf("unknownPath = %s\n", unknownPath);
 
       if (foundO != string::npos || foundT != string::npos){
 
@@ -286,9 +285,8 @@ void folderVersion(const char *path){
         strcat(imagePath, "/");
 
       }else if(!isRegularFile(unknownPath) && (dirFile.find('.') == std::string::npos)){
-        //printf("ENTERING->%s)\n",unknownPath);
         folderVersion(unknownPath);
-        //printf("  LEAVING<-%s)\n",unknownPath);
+
       }
 
       strcpy(unknownPath, path);

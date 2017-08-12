@@ -1,6 +1,11 @@
 # Picture Organizer 
 Organises a folder of images in a chronological order ( Only jpeg )
 
+## Why use Picture Organiser
+##### 1. Organises photos super fast, the only limit is your hardware
+##### 2. Cleans your photos from duplicates
+##### 3. Lightweight and runs everywhere
+
 ## How does it work ( simple representation )
 ```text
 make     |---------------| ./jpegOrganizer picture.jpg   |------------------| 
@@ -39,6 +44,9 @@ If you want to organise all the picture in a folder, and the folders in them, ju
 ```
 ./jpegOrganizer /filePath/folder
 ```
+
+## Coping Files
+Photos are only copied once, so cleaning is done aswell !
 
 ## Corrupted files
 All corrupted jpeg files are not being copied. If even one file is copputed, a txt file is
