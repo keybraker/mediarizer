@@ -2,16 +2,16 @@
 Organises a folder of images in a chronological order ( Only jpeg )
 
 ## Why use Picture Organiser
-##### 1. Organises photos super fast, the only limit is your hardware
-##### 2. Cleans your photos from duplicates
-##### 3. Lightweight and runs everywhere
+#### 1. Organises photos super fast, the only limit is your hardware
+#### 2. Cleans your photos from duplicates
+#### 3. Lightweight and runs everywhere
 
 ## How does it work ( simple representation )
 ```text
 make     |---------------| ./jpegOrganizer picture.jpg   |------------------| 
 -------> | jpegOrganizer |-----------------------------> | organised photos | 
-         |               | ./jpegOrganizer path          | in year/month    | 
-         |---------------|                               |------------------| 
+         |---------------| ./jpegOrganizer path          | in year/month    | 
+                                                         |------------------| 
 ```
 
 ## Installation Guide
@@ -38,15 +38,15 @@ make
 You can run the program in two ways, a single picture mode and a folder mode.
 The single picture only organises this one picture and to do that just type:
 ```
-./jpegOrganizer /filePath/picture.jpg
+./jpegOrganizer /filePath/picture.jpg /destinationPath
 ```
 If you want to organise all the picture in a folder, and the folders in them, just type :
 ```
-./jpegOrganizer /filePath/folder
+./jpegOrganizer /filePath/folder /destinationPath
 ```
 
 ## Coping Files
-Photos are only copied once, so cleaning is done aswell !
+Photos are only copied once, so cleaning is done as-well !
 
 ## Corrupted files
 All corrupted jpeg files are not being copied. If even one file is copputed, a txt file is
