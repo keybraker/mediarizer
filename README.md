@@ -38,11 +38,11 @@ make
 You can run the program in two ways, a single picture mode and a folder mode.
 The single picture only organises this one picture and to do that just type:
 ```
-./jpegOrganizer /filePath/picture.jpg /destinationPath
+./jpegOrganizer /path/picture.jpg /destinationPath
 ```
 If you want to organise all the picture in a folder, and the folders in them, just type :
 ```
-./jpegOrganizer /filePath/folder /destinationPath
+./jpegOrganizer /path/folder /destinationPath
 ```
 
 ## Coping Files
