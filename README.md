@@ -76,3 +76,6 @@ path, so that you can handle it manually.
 
 ## Acknowledgments
 * mayanklahiri with the exeptional project:  [easyexif](https://github.com/mayanklahiri/easyexif)
+
+## License
+* [FREE SOFTWARE](http://www.gnu.org/philosophy/free-sw.html)
