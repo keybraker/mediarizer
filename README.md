@@ -8,6 +8,7 @@ make  |----------------| ./mediaOrganizer /picture.jpg /desPath  |--------------
       |----------------| ./mediaOrganizer /folderPath /desPath   | in year/month    | 
                                                                  |------------------| 
 ```
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrgaanizerDisplay.jpg)
 
 ## Why use Picture Organiser
 * Organises photos extremply fast, the only limitation is your hardware
@@ -69,6 +70,7 @@ path, so that you can handle it manually.
 
 ## Release History
 
+* v1.1.1: 17 August 2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
 * v1.1.0: 17 August 2017: Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool.
 						  Basically everyfile is supported, implementations,
 						  are on the way !
