@@ -6,8 +6,8 @@ CXXFLAGS=-O2 -pedantic -Wall -Wextra -ansi -std=c++11
 
 all: organizer
 
-organizer: organizerFiles/organizer.cpp
-	$(CXX) $(CXXFLAGS) -o mediaOrganizer organizerFiles/organizer.cpp organizerFiles/organizerFunctions.cpp
+organizer: OrganizerFiles/Organizer.cpp
+	$(CXX) $(CXXFLAGS) -o mediaOrganizer OrganizerFiles/Organizer.cpp OrganizerFiles/OrganizerFunctions.cpp
 
 ############################################################################################################################################
 # CLEANING

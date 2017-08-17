@@ -1,4 +1,4 @@
-#include "organizer.h"
+#include "Organizer.h"
 #include <stdio.h>
 
 #define ACR   "\x1b[31m"
