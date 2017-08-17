@@ -10,9 +10,9 @@ make  |----------------| ./mediaOrganizer /picture.jpg /desPath  |--------------
 ```
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplay.jpg)
 
-## Why use Picture Organiser
-* Organises photos extremply fast, the only limitation is your hardware
-* Cleans your photos from duplicates
+## Why use Media Organiser
+* Organises photos / videos extremly fast, the only limitation is your hardware
+* Cleans your library from duplicates
 * Lightweight and runs everywhere
 
 ## Installation Guide
@@ -20,25 +20,23 @@ Clone this repository with ( or download zip ):
 ```
 git clone https://github.com/keybraker/Media-Organizer.git
 ```
-
-## Usage Guide
-
-##### 1. Install ExifTool by Phil Harvey
+##### Install ExifTool by Phil Harvey
 Download and install from here [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/).
 This program may very well be the best exif parser in the world (nj)
 This is the heart of the program and the essential tool that helped create this project.
 
-##### 2. Open a terminal window and cd to cloned project
+## Usage Guide
+##### 1. Open a terminal window and cd to cloned project
 ```
 cd .../Media-Organizer 
 ```
 
-##### 3. To compile the program just type:
+##### 2. To compile the program just type:
 ```
 make 
 ```
 
-##### 4. You can run the program in two ways, a single picture mode and a folder mode. The single picture only organises this one picture and to do that just type:
+##### 3. You can run the program in two ways, a single picture mode and a folder mode. The single picture only organises this one picture and to do that just type:
 ```
 ./mediaOrganizer /path/picture.jpg /destinationPath
 ```
@@ -47,7 +45,16 @@ If you want to organise all the picture in a folder, and the folders in them, ju
 ./mediaOrganizer /path/folder /destinationPath
 ```
 
-## Arguments
+## Flags
+Flags can only be used in the end of the command in whatever order you wish.
+```
+./mediaOrganizer /path/picture.jpg /destinationPath -mp4 -jpg
+```
+will only copy jpg and mp4 files
+```
+./mediaOrganizer /path/picture.jpg /destinationPath -photo
+```
+will only copy photos not videos
 ##### Category:
  * -photo : for photo organization only
  * -video : for video organization only
