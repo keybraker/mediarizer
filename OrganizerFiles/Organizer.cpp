@@ -38,31 +38,41 @@ int main(int argc, char *argv[]) {
 
     int arg[7] = {-1, -1, -1, -1, -1, -1, -1};
     int *argp = arg;
+    
+    if(argc == 4 && strcmp(argv[3], "-photo") == 0){
+      arg[0] = 2;
 
-    for(int i = 0; i+3 < argc; i++){
+    }else if(argc == 4 && strcmp(argv[3], "-video") == 0){
+      arg[0] = 3;
 
-            if(strcmp(argv[i+3], "-jpg") == 0){ arg[0] = 1;      
-      }else if(strcmp(argv[i+3], "-png") == 0){ arg[1] = 1;
-      }else if(strcmp(argv[i+3], "-avi") == 0){ arg[2] = 1;
-      }else if(strcmp(argv[i+3], "-mov") == 0){ arg[3] = 1;
-      }else if(strcmp(argv[i+3], "-wmv") == 0){ arg[4] = 1;
-      }else if(strcmp(argv[i+3], "-mp4") == 0){ arg[5] = 1;
-      }else if(strcmp(argv[i+3], "-mts") == 0){ arg[6] = 1;
-      }else{
-        printf("%s: is an unrecognizable argument.\n", argv[i+3]);
-        printf("Please consider using one of the following:\n\n");
-        printf("Category: (not currently supported)\n---------\n");
-        printf(" -photos -> for photo organization only\n");
-        printf(" -video -> for video organization only\n\n");
-        printf("File type:\n----------\n");
-        printf(" -jpg -> for jpg organization only\n");
-        printf(" -png -> for png organization only\n");
-        printf(" -avi -> for avi organization only\n");
-        printf(" -mov -> for mov organization only\n");
-        printf(" -wmv -> for wmv organization only\n");
-        printf(" -mp4 -> for mp4 organization only\n");
-        printf(" -mts -> for mts organization only\n");
-        return -1;
+    }else{
+
+      for(int i = 0; i+3 < argc; i++){
+
+              if(strcmp(argv[i+3], "-jpg") == 0){ arg[0] = 1;      
+        }else if(strcmp(argv[i+3], "-png") == 0){ arg[1] = 1;
+        }else if(strcmp(argv[i+3], "-avi") == 0){ arg[2] = 1;
+        }else if(strcmp(argv[i+3], "-mov") == 0){ arg[3] = 1;
+        }else if(strcmp(argv[i+3], "-wmv") == 0){ arg[4] = 1;
+        }else if(strcmp(argv[i+3], "-mp4") == 0){ arg[5] = 1;
+        }else if(strcmp(argv[i+3], "-mts") == 0){ arg[6] = 1;
+        }else{
+          printf("%s: is an unrecognizable argument.\n", argv[i+3]);
+          printf("Please consider using one of the following:\n\n");
+          printf("Category:\n---------\n");
+          printf(" -photos -> for photo organization only\n");
+          printf(" -video -> for video organization only\n\n");
+          printf("File type:\n----------\n");
+          printf(" -jpg -> for jpg organization only\n");
+          printf(" -png -> for png organization only\n");
+          printf(" -avi -> for avi organization only\n");
+          printf(" -mov -> for mov organization only\n");
+          printf(" -wmv -> for wmv organization only\n");
+          printf(" -mp4 -> for mp4 organization only\n");
+          printf(" -mts -> for mts organization only\n");
+          return -1;
+        }
+
       }
 
     }

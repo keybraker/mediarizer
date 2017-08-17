@@ -48,9 +48,10 @@ If you want to organise all the picture in a folder, and the folders in them, ju
 ```
 
 ## Arguments
-##### Category ( not currently supported ):
+##### Category:
  * -photo : for photo organization only
  * -video : for video organization only
+   ( Attention: These modes can only be used solely )
 
 ##### File type:
  * -jpg : for jpg organization only

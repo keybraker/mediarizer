@@ -426,7 +426,10 @@ void fileVersion(const char *path, const char *pathToStore){
 
 void folderVersion(const char *path, const char *pathToStore, int *arg){
 
-  bool isArgFree = true;
+  bool isArgFree = true, photoOnly = false, videoOnly = false;
+
+  if(arg[0] == 2){ photoOnly = true; }
+  if(arg[0] == 3){ videoOnly = true; }
 
   for(int i = 0; i < 7; i++){
     if(arg[i] != -1){
@@ -517,11 +520,23 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
         string stringer;
 
         if(j){
-          if(isArgFree){
-            fileVersion(imagePath, pathToStore);
-          }else if(arg[typeOfFileInt(imagePath)] == 1){
-            fileVersion(imagePath, pathToStore);
+          if(photoOnly){
+            if(typeOfFile(imagePath))
+              fileVersion(imagePath, pathToStore);
+
+          }else if(videoOnly){
+            if(!typeOfFile(imagePath))
+              fileVersion(imagePath, pathToStore);
+
+          }else{
+            if(isArgFree){
+              fileVersion(imagePath, pathToStore);
+            }else if(arg[typeOfFileInt(imagePath)] == 1){
+              fileVersion(imagePath, pathToStore);
+            }
+
           }
+          
         }
         j = 1;
         strcpy(imagePath, path);
