@@ -1,5 +1,6 @@
-# Picture Organizer 
-Organises a folder of images in a chronological order ( Only jpeg )
+# Media Organizer 
+Organises all your media in a chronological order.
+(see file type support beneath)
 
 ## How does it work 
 ```text
@@ -55,17 +56,17 @@ created called ``` corruptedFiles ``` in which every corrupted files is listed w
 path, so that you can handle it manually.
 
 ## Cleaning
-* To clean the program type ``` make clean ``` in ``` /media-Organizer ```
+* To clean the program type ``` make clean ``` in ``` /Media-Organizer ```
 
 ## Photo file support list 
-* jpeg ✔︎
-* png ✔︎
+* jpeg
+* png
 
 ## Video file support list 
-* avi ✔︎
-* mov ✔︎
-* wmv ✔︎
-* mp4 ✔
+* avi
+* mov
+* wmv
+* mp4
 
 ## Release History
 
