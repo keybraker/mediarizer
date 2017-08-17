@@ -193,7 +193,7 @@ bool dirEx(const char* directory){
 
 }
 
-char *destinationFinder(int year, int month, const char *pathToStore){
+char *destinationFinder(int year, int month, const char *pathToStore, bool type){
   
   char *destinationPath = (char *) malloc (32768 * sizeof(char));
   char *destinationPathFolder = (char *) malloc (32768 * sizeof(char));
@@ -220,7 +220,21 @@ char *destinationFinder(int year, int month, const char *pathToStore){
   }else{
     strcat(destinationPath, "unknownDate"); // peritti apla gia to fainestai
     strcat(destinationPathFolder, destinationPath);
-    
+
+    if(!dirEx(destinationPath))
+      system(destinationPathFolder);
+
+    if(type){
+      strcat(destinationPath, "/photos");
+      strcat(destinationPathFolder, "/photos");
+    }else{
+      strcat(destinationPath, "/videos");      
+      strcat(destinationPathFolder, "/videos");      
+    }
+
+    printf(" >>>> destinationPath = %s\n", destinationPath);
+    printf(" >>>> destinationPathFolder = %s\n", destinationPathFolder);
+
     if(!dirEx(destinationPath))
       system(destinationPathFolder);
 
@@ -287,7 +301,56 @@ char *destinationFinder(int year, int month, const char *pathToStore){
   if(!dirEx(destinationPath))
     system(destinationPathFolder);
 
+  if(type){
+    strcat(destinationPath, "/photos");
+    strcat(destinationPathFolder, "/photos");
+  }else{
+    strcat(destinationPath, "/videos");      
+    strcat(destinationPathFolder, "/videos");      
+  }
+
+  printf(" >>>> destinationPath = %s\n", destinationPath);
+  printf(" >>>> destinationPathFolder = %s\n", destinationPathFolder);
+
+  if(!dirEx(destinationPath))
+    system(destinationPathFolder);
+
   return destinationPath;
+
+}
+
+bool typeOfFile(const char* path){
+
+  char* cmd = (char *) malloc (32768 * sizeof(char));
+  strcpy(cmd, "exiftool -FileType \"");
+  strcat(cmd, path);
+  strcat(cmd, "\"");
+
+  string fileType = exec(cmd);
+  fileType = fileType.substr(34,fileType.length());
+
+  if(fileType.compare("JPEG\n") == 0){
+    return true;
+
+  }else if(fileType.compare("PNG\n") == 0){
+    return true;
+
+  }else if(fileType.compare("AVI\n") == 0){
+    return false;
+
+  }else if(fileType.compare("MOV\n") == 0){
+    return false;
+
+  }else if(fileType.compare("WMV\n") == 0){
+    return false;
+
+  }else if(fileType.compare("MP4\n") == 0){
+    return false;
+
+  }else{
+    return -1;
+
+  }
 
 }
 
@@ -307,18 +370,12 @@ void fileVersion(const char *path, const char *pathToStore){
 
   originalDateData *originalDateStruct = (originalDateData *) malloc (sizeof(originalDateData));
   originalDateStruct = dateReturn(originalDate);
-  char *destinationPath = destinationFinder(originalDateStruct->year, originalDateStruct->month, pathToStore);
+
+  char *destinationPath = destinationFinder(originalDateStruct->year, originalDateStruct->month, pathToStore, typeOfFile(path));
  
   transfer(path, destinationPath);
   
   return;
-
-  // cout << "originalYear   : " << originalDateStruct->year   << endl;
-  // cout << "originalMonth  : " << originalDateStruct->month  << endl;
-  // cout << "originalDay    : " << originalDateStruct->day    << endl;
-  // cout << "originalHour   : " << originalDateStruct->hour   << endl;
-  // cout << "originalMinute : " << originalDateStruct->minute << endl;
-  // cout << "originalSecond : " << originalDateStruct->second << endl;
 
 }
 
