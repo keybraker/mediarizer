@@ -106,6 +106,11 @@ path, so that you can handle it manually.
 * v1.0.0: 12 August 2017: Full jpeg release with the help of [easyexif](http://owl.phy.queensu.ca/~phil/exiftool/)
 * v0.1.0: 9  August 2017: Creation.
 
+## Future Improvements and features 
+1. Threads
+2. support for more files
+3. gps location organization
+
 ## Authors
 * **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
 
