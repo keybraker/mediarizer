@@ -63,42 +63,42 @@ string dateOfCreation(const char *path){
   string fileDate;
 
   if(fileType.compare("JPEG\n") == 0){
-    cout << "(jpeg) ";
+    cout << "(JPG) ";
     strcpy(cmd, "exiftool -CreateDate ");
     strcat(cmd, path);
     fileDate = exec(cmd); 
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("PNG\n") == 0){
-    cout << "(png)  ";
+    cout << "(PNG) ";
     strcpy(cmd, "exiftool -CreateDate ");
     strcat(cmd, path);
     fileDate = exec(cmd);
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("AVI\n") == 0){
-    cout << "(avi)  ";
+    cout << "(AVI) ";
     strcpy(cmd, "exiftool -DateTimeOriginal ");
     strcat(cmd, path);
     fileDate = exec(cmd);
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("MOV\n") == 0){
-    cout << "(mov)  ";
+    cout << "(MOV) ";
     strcpy(cmd, "exiftool -CreateDate ");
     strcat(cmd, path);
     fileDate = exec(cmd);
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("WMV\n") == 0){
-    cout << "(wmv)  ";
+    cout << "(WMV) ";
     strcpy(cmd, "exiftool -CreationDate ");
     strcat(cmd, path);
     fileDate = exec(cmd);
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("MP4\n") == 0){
-    cout << "(mp4)  ";
+    cout << "(MP4) ";
     strcpy(cmd, "exiftool -CreateDate ");
     strcat(cmd, path);
     fileDate = exec(cmd);
@@ -330,12 +330,12 @@ void folderVersion(const char *path, const char *pathToStore){
   string jpegOMP = ".mp4";
   string jpegTMP = ".MP4";
 
-  size_t foundOJ = 0, foundTJ = 0;
-  size_t foundOP = 0, foundTP = 0;
-  size_t foundOA = 0, foundTA = 0;
-  size_t foundOM = 0, foundTM = 0;
-  size_t foundOW = 0, foundTW = 0;
-  size_t foundOMP = 0, foundTMP = 0;
+  size_t foundOJ, foundTJ;
+  size_t foundOP, foundTP;
+  size_t foundOA, foundTA;
+  size_t foundOM, foundTM;
+  size_t foundOW, foundTW;
+  size_t foundOMP, foundTMP;
 
   char* imagePath   = (char*) malloc (32768 * sizeof(char));
   char* unknownPath = (char*) malloc (32768 * sizeof(char));
@@ -361,6 +361,7 @@ void folderVersion(const char *path, const char *pathToStore){
       foundTM = dirFile.find(jpegTM);
       foundOW = dirFile.find(jpegOW);
       foundTW = dirFile.find(jpegTW);
+      foundOMP = dirFile.find(jpegOMP);
       foundTMP = dirFile.find(jpegTMP);
 
       strcat(unknownPath, dir->d_name);
@@ -390,8 +391,7 @@ void folderVersion(const char *path, const char *pathToStore){
         strcpy(imagePath, path);
         strcat(imagePath, "/");
 
-      }else if(!isRegularFile(unknownPath) 
-        && (dirFile.find('.') == std::string::npos)){
+      }else if(!isRegularFile(unknownPath) && (dirFile.find('.') == string::npos)){
         folderVersion(unknownPath, pathToStore);
 
       }
