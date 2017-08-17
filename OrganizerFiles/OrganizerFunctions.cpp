@@ -232,9 +232,6 @@ char *destinationFinder(int year, int month, const char *pathToStore, bool type)
       strcat(destinationPathFolder, "/videos");      
     }
 
-    printf(" >>>> destinationPath = %s\n", destinationPath);
-    printf(" >>>> destinationPathFolder = %s\n", destinationPathFolder);
-
     if(!dirEx(destinationPath))
       system(destinationPathFolder);
 
@@ -308,9 +305,6 @@ char *destinationFinder(int year, int month, const char *pathToStore, bool type)
     strcat(destinationPath, "/videos");      
     strcat(destinationPathFolder, "/videos");      
   }
-
-  printf(" >>>> destinationPath = %s\n", destinationPath);
-  printf(" >>>> destinationPathFolder = %s\n", destinationPathFolder);
 
   if(!dirEx(destinationPath))
     system(destinationPathFolder);
