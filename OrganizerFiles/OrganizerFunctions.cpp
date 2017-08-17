@@ -54,8 +54,9 @@ int transfer(const char *source, const char *dest){
 string dateOfCreation(const char *path){
 
   char* cmd = (char *) malloc (32768 * sizeof(char));
-  strcpy(cmd, "exiftool -FileType ");
+  strcpy(cmd, "exiftool -FileType \"");
   strcat(cmd, path);
+  strcat(cmd, "\"");
 
   string fileType = exec(cmd);
   fileType = fileType.substr(34,fileType.length());
@@ -64,44 +65,56 @@ string dateOfCreation(const char *path){
 
   if(fileType.compare("JPEG\n") == 0){
     cout << "(JPG) ";
-    strcpy(cmd, "exiftool -CreateDate ");
+    strcpy(cmd, "exiftool -CreateDate \"");
     strcat(cmd, path);
-    fileDate = exec(cmd); 
+    strcat(cmd, "\"");
+    fileDate = exec(cmd);
+
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("PNG\n") == 0){
     cout << "(PNG) ";
-    strcpy(cmd, "exiftool -CreateDate ");
+    strcpy(cmd, "exiftool -CreateDate \"");
     strcat(cmd, path);
+    strcat(cmd, "\"");
     fileDate = exec(cmd);
+
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("AVI\n") == 0){
     cout << "(AVI) ";
-    strcpy(cmd, "exiftool -DateTimeOriginal ");
+    strcpy(cmd, "exiftool -DateTimeOriginal \"");
     strcat(cmd, path);
+    strcat(cmd, "\"");
     fileDate = exec(cmd);
+
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("MOV\n") == 0){
     cout << "(MOV) ";
-    strcpy(cmd, "exiftool -CreateDate ");
+    strcpy(cmd, "exiftool -CreateDate \"");
     strcat(cmd, path);
+    strcat(cmd, "\"");
     fileDate = exec(cmd);
+
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("WMV\n") == 0){
     cout << "(WMV) ";
-    strcpy(cmd, "exiftool -CreationDate ");
+    strcpy(cmd, "exiftool -CreationDate \"");
     strcat(cmd, path);
+    strcat(cmd, "\"");
     fileDate = exec(cmd);
+
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("MP4\n") == 0){
     cout << "(MP4) ";
-    strcpy(cmd, "exiftool -CreateDate ");
+    strcpy(cmd, "exiftool -CreateDate \"");
     strcat(cmd, path);
+    strcat(cmd, "\"");
     fileDate = exec(cmd);
+
     return fileDate.substr(34,fileDate.length());
 
   }else{
