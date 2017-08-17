@@ -3,21 +3,21 @@ Organises a folder of images in a chronological order ( Only jpeg )
 
 ## How does it work 
 ```text
-make  |---------------| ./jpegOrganizer /picture.jpg /desPath  |------------------| 
-----> | jpegOrganizer |--------------------------------------> | organised photos | 
-      |---------------| ./jpegOrganizer /folderPath /desPath   | in year/month    | 
-                                                               |------------------| 
+make  |----------------| ./mediaOrganizer /picture.jpg /desPath  |------------------| 
+----> | mediaOrganizer |---------------------------------------> | organised photos | 
+      |----------------| ./mediaOrganizer /folderPath /desPath   | in year/month    | 
+                                                                 |------------------| 
 ```
 
 ## Why use Picture Organiser
-* Organises photos super fast, the only limit is your hardware
+* Organises photos extremply fast, the only limitation is your hardware
 * Cleans your photos from duplicates
 * Lightweight and runs everywhere
 
 ## Installation Guide
 Clone this repository with ( or download zip ):
 ```
-git clone https://github.com/keybraker/jpeg-Organizer.git
+git clone https://github.com/keybraker/Media-Organizer.git
 ```
 
 ## Usage Guide
@@ -29,7 +29,7 @@ This is the heart of the program and the essential tool that helped create this 
 
 ##### 2. Open a terminal window and cd to cloned project
 ```
-cd .../jpeg-Organizer
+cd .../Media-Organizer 
 ```
 
 ##### 3. To compile the program just type:
@@ -39,11 +39,11 @@ make
 
 ##### 4. You can run the program in two ways, a single picture mode and a folder mode. The single picture only organises this one picture and to do that just type:
 ```
-./jpegOrganizer /path/picture.jpg /destinationPath
+./mediaOrganizer /path/picture.jpg /destinationPath
 ```
 If you want to organise all the picture in a folder, and the folders in them, just type :
 ```
-./jpegOrganizer /path/folder /destinationPath
+./mediaOrganizer /path/folder /destinationPath
 ```
 
 ## Coping Files
@@ -55,9 +55,7 @@ created called ``` corruptedFiles ``` in which every corrupted files is listed w
 path, so that you can handle it manually.
 
 ## Cleaning
-* To clean the program type ``` make clean ``` in ``` /jpeg-Organizer ```
-* To clean the organized folders type ``` make clean ``` in ``` /photosOrganized ```
-  ( but be careful to delete the folders when pictures are stored there )
+* To clean the program type ``` make clean ``` in ``` /media-Organizer ```
 
 ## Photo file support list 
 * jpeg ✔︎
