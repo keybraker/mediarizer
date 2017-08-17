@@ -8,7 +8,7 @@ make  |----------------| ./mediaOrganizer /picture.jpg /desPath  |--------------
       |----------------| ./mediaOrganizer /folderPath /desPath   | in year/month    | 
                                                                  |------------------| 
 ```
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrgaanizerDisplay.jpg)
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplay.jpg)
 
 ## Why use Picture Organiser
 * Organises photos extremply fast, the only limitation is your hardware
