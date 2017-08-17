@@ -1,6 +1,5 @@
 # Media Organizer 
 Organises all your media in a chronological order.
-(see file type support beneath)
 
 ## How does it work 
 ```text
