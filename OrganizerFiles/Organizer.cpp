@@ -61,7 +61,8 @@ int main(int argc, char *argv[]) {
           printf("Please consider using one of the following:\n\n");
           printf("Category:\n---------\n");
           printf(" -photos -> for photo organization only\n");
-          printf(" -video -> for video organization only\n\n");
+          printf(" -video -> for video organization only\n");
+          printf(" ( Attention: These modes can only be used solely )\n\n");
           printf("File type:\n----------\n");
           printf(" -jpg -> for jpg organization only\n");
           printf(" -png -> for png organization only\n");
