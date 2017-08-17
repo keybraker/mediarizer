@@ -83,4 +83,4 @@ path, so that you can handle it manually.
 * Phil Harvey with the exeptional [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/)
 
 ## License
-* [FREE SOFTWARE](http://www.gnu.org/philosophy/free-sw.html)
+* [Free Software](http://www.gnu.org/philosophy/free-sw.html)
