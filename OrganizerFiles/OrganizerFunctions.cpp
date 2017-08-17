@@ -176,7 +176,6 @@ bool dirEx(const char* directory){
     closedir(dir);
     return true;
   }
-
   return false;
 
 }
@@ -213,6 +212,7 @@ char *destinationFinder(int year, int month, const char *pathToStore){
       system(destinationPathFolder);
 
     return destinationPath;
+    
   }
 
   switch(month) {

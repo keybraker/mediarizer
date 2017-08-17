@@ -19,6 +19,7 @@ struct originalDateData{
   int hour;
   int minute;
   int second;
+  
 };
 
 int transfer (char *source, char *dest);
