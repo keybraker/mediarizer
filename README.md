@@ -50,11 +50,14 @@ Flags can only be used in the end of the command in whatever order you wish.
 ```
 ./mediaOrganizer /path/picture.jpg /destinationPath -mp4 -jpg
 ```
-will only copy jpg and mp4 files
+will only copy jpg and mp4 files.
 ```
 ./mediaOrganizer /path/picture.jpg /destinationPath -photo
 ```
-will only copy photos not videos
+will only copy photos not videos.
+
+~~```./mediaOrganizer /path/picture.jpg /destinationPath -photo -jpg```~~ **! this is _NOT_ valid.**
+
 ##### Category:
  * -photo : for photo organization only
  * -video : for video organization only
