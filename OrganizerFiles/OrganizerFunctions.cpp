@@ -205,9 +205,11 @@ bool dirEx(const char* directory){
 char *destinationFinder(int year, int month, const char *pathToStore, bool type){
   
   char *destinationPath = (char *) malloc (32768 * sizeof(char));
+  char *destinationPathToExec = (char *) malloc (32768 * sizeof(char));
   char *destinationPathFolder = (char *) malloc (32768 * sizeof(char));
+  char *destinationPathFolderToExec = (char *) malloc (32768 * sizeof(char));
 
-  strcpy(destinationPathFolder, "mkdir ");
+  strcpy(destinationPathFolder, "mkdir \"");
   strcat(destinationPathFolder, pathToStore);
   strcat(destinationPathFolder, "/");
 
@@ -223,15 +225,21 @@ char *destinationFinder(int year, int month, const char *pathToStore, bool type)
     strcat(destinationPathFolder, yearStr);
     strcat(destinationPathFolder, "/");
 
+    strcpy(destinationPathFolderToExec, destinationPathFolder);
+    strcat(destinationPathFolderToExec, "\"");
+
     if(!dirEx(destinationPath))
-      system(destinationPathFolder);
+      system(destinationPathFolderToExec);
 
   }else{
     strcat(destinationPath, "unknownDate"); // peritti apla gia to fainestai
     strcat(destinationPathFolder, destinationPath);
 
+    strcpy(destinationPathFolderToExec, destinationPathFolder);
+    strcat(destinationPathFolderToExec, "\"");
+
     if(!dirEx(destinationPath))
-      system(destinationPathFolder);
+      system(destinationPathFolderToExec);
 
     if(type){
       strcat(destinationPath, "/photos");
@@ -241,10 +249,17 @@ char *destinationFinder(int year, int month, const char *pathToStore, bool type)
       strcat(destinationPathFolder, "/videos");      
     }
 
-    if(!dirEx(destinationPath))
-      system(destinationPathFolder);
+    strcpy(destinationPathFolderToExec, destinationPathFolder);
+    strcat(destinationPathFolderToExec, "\"");
 
-    return destinationPath;
+    if(!dirEx(destinationPath))
+      system(destinationPathFolderToExec);
+
+    strcpy(destinationPathToExec, "\"");
+    strcat(destinationPathToExec, destinationPath);
+    strcat(destinationPathToExec, "\"");
+
+    return destinationPathToExec;
     
   }
 
@@ -304,8 +319,11 @@ char *destinationFinder(int year, int month, const char *pathToStore, bool type)
       break;
   }
 
+  strcpy(destinationPathFolderToExec, destinationPathFolder);
+  strcat(destinationPathFolderToExec, "\"");
+
   if(!dirEx(destinationPath))
-    system(destinationPathFolder);
+    system(destinationPathFolderToExec);
 
   if(type){
     strcat(destinationPath, "/photos");
@@ -315,10 +333,17 @@ char *destinationFinder(int year, int month, const char *pathToStore, bool type)
     strcat(destinationPathFolder, "/videos");      
   }
 
-  if(!dirEx(destinationPath))
-    system(destinationPathFolder);
+  strcpy(destinationPathFolderToExec, destinationPathFolder);
+  strcat(destinationPathFolderToExec, "\"");
 
-  return destinationPath;
+  if(!dirEx(destinationPath))
+    system(destinationPathFolderToExec);
+
+  strcpy(destinationPathToExec, "\"");
+  strcat(destinationPathToExec, destinationPath);
+  strcat(destinationPathToExec, "\"");
+
+  return destinationPathToExec;
 
 }
 
