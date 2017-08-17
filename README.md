@@ -49,17 +49,17 @@ If you want to organise all the picture in a folder, and the folders in them, ju
 
 ## Arguments
 ##### Category ( not currently supported ):
- * -photo  -> for photo organization only
- * -video  -> for video organization only
+ * -photo : for photo organization only
+ * -video : for video organization only
 
 ##### File type:
- * -jpg    -> for jpg organization only
- * -png    -> for png organization only
- * -avi    -> for avi organization only
- * -mov    -> for mov organization only
- * -wmv    -> for wmv organization only
- * -mp4    -> for mp4 organization only
- * -mts    -> for mts organization only
+ * -jpg : for jpg organization only
+ * -png : for png organization only
+ * -avi : for avi organization only
+ * -mov : for mov organization only
+ * -wmv : for wmv organization only
+ * -mp4 : for mp4 organization only
+ * -mts : for mts organization only
 
 ( You can use multiple flags, in order to transfer only the selected file types )
 
@@ -87,6 +87,7 @@ path, so that you can handle it manually.
 
 ## Release History
 
+* v1.1.2: 18 August 2017: Added -flags for a more controlled organisation.
 * v1.1.1: 17 August 2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
 * v1.1.0: 17 August 2017: Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool.
 						  Basically everyfile is supported, implementations,
