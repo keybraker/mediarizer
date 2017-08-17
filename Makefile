@@ -1,16 +1,18 @@
 CXX=g++
 CXXFLAGS=-O2 -pedantic -Wall -Wextra -ansi -std=c++11
 
-all: jpegOrganizer
+############################################################################################################################################
+# NORMAL VERSION
 
-exif.o: jpegOrganizerFiles/exif.cpp
-	$(CXX) $(CXXFLAGS) -c jpegOrganizerFiles/exif.cpp
+all: Organizer
 
-jpegOrganizer: exif.o jpegOrganizerFiles/jpegOrganizer.cpp
-	$(CXX) $(CXXFLAGS) -o jpegOrganizer exif.o jpegOrganizerFiles/jpegOrganizer.cpp jpegOrganizerFiles/jpegOrganizerFunctions.cpp
+Organizer: OrganizerFiles/Organizer.cpp
+	$(CXX) $(CXXFLAGS) -o Organizer OrganizerFiles/Organizer.cpp OrganizerFiles/OrganizerFunctions.cpp
 
 run:
-	./jpegOrganizer /Users/Keybraker/github
+	./Organizer /Users/Keybraker/github
 
+############################################################################################################################################
+# CLEANING
 clean:
-	rm -f *.o jpegOrganizer jpegOrganizer.exe corruptedFiles.txt
+	rm -f *.o Organizer Organizer.exe corruptedFiles.txt

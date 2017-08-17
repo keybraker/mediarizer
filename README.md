@@ -22,18 +22,22 @@ git clone https://github.com/keybraker/jpeg-Organizer.git
 
 ## Usage Guide
 
+##### 1. Install ExifTool by Phil Harvey
+Download and install from here [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/).
+This program may very well be the best exif parser in the world (nj)
+This is the heart of the program and the essential tool that helped create this project.
 
-##### 1. Open a terminal window and cd to cloned project
+##### 2. Open a terminal window and cd to cloned project
 ```
 cd .../jpeg-Organizer
 ```
 
-##### 2. To compile the program just type:
+##### 3. To compile the program just type:
 ```
 make 
 ```
 
-##### 3. You can run the program in two ways, a single picture mode and a folder mode. The single picture only organises this one picture and to do that just type:
+##### 4. You can run the program in two ways, a single picture mode and a folder mode. The single picture only organises this one picture and to do that just type:
 ```
 ./jpegOrganizer /path/picture.jpg /destinationPath
 ```
@@ -57,25 +61,28 @@ path, so that you can handle it manually.
 
 ## Photo file support list 
 * jpeg ✔︎
-* png ( to be added )
+* png ✔︎
 * tiff ( to be added )
 
 ## Video file support list 
-* avi ( to be added )
-* mp4 ( to be added )
-* wmv ( to be added )
-* mov ( to be added )
+* avi ✔︎
+* mp4 ✔
+* wmv ✔︎
+* mov ✔︎
 
 ## Release History
 
-* v1.0.0: 12 August 2017: Full jpeg release !
-* v0.1.0: 9 August 2017: Creation.
+* v1.1.0: 17 August 2017: Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool.
+						  Basically everyfile is supported, implementations,
+						  are on the way !
+* v1.0.0: 12 August 2017: Full jpeg release with the help of [easyexif](http://owl.phy.queensu.ca/~phil/exiftool/)
+* v0.1.0: 9  August 2017: Creation.
 
 ## Authors
 * **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
 
 ## Acknowledgments
-* mayanklahiri with the exeptional project:  [easyexif](https://github.com/mayanklahiri/easyexif)
+* Phil Harvey with the exeptional [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/)
 
 ## License
 * [FREE SOFTWARE](http://www.gnu.org/philosophy/free-sw.html)

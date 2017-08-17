@@ -26,7 +26,7 @@ string dateOfCreation (const char *path);
 int isRegularFile (const char *path);
 originalDateData *dateReturn(string originalDate);
 char *destinationFinder(int year, int month, const char *pathToStore);
-void jpegVersion (const char *path, const char *pathToStore);
+void fileVersion (const char *path, const char *pathToStore);
 void folderVersion (const char *path, const char *pathToStore);
 
 #endif

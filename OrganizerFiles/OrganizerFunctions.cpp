@@ -1,5 +1,4 @@
-#include "jpegOrganizer.h"
-#include "exif.h"
+#include "Organizer.h"
 #include <string>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -11,12 +10,30 @@
 #include <cassert>
 #include <fcntl.h>
 #include <errno.h>
+#include <cstdio>
+#include <memory>
+#include <stdexcept>
+#include <array>
 
 #define ACR   "\x1b[31m"
 #define ACG   "\x1b[32m"
 #define ACRE  "\x1b[0m"
 
 using namespace std;
+
+string exec(const char* cmd) {
+    
+    array<char, 128> buffer;
+    string result;
+    shared_ptr<FILE> pipe(popen(cmd, "r"), pclose);
+    if (!pipe) throw std::runtime_error("popen() failed!");
+    while (!feof(pipe.get())) {
+        if (fgets(buffer.data(), 128, pipe.get()) != nullptr)
+            result += buffer.data();
+    }
+    return result;
+
+}
 
 int transfer(const char *source, const char *dest){
 
@@ -36,34 +53,61 @@ int transfer(const char *source, const char *dest){
 
 string dateOfCreation(const char *path){
 
-  // Read the JPEG file into a buffer
-  FILE *fp = fopen(path, "rb");
-  if (!fp) {
-    printf("Can't open file.\n");
-    return string(); // EMPTY STRING
-  }
-  fseek(fp, 0, SEEK_END);
-  unsigned long fsize = ftell(fp);
-  rewind(fp);
-  unsigned char *buf = new unsigned char[fsize];
-  if (fread(buf, 1, fsize, fp) != fsize) {
-    printf("Can't read file.\n");
-    delete[] buf;
-    return string(); // EMPTY STRING
-  }
-  fclose(fp);
+  char* cmd = (char *) malloc (32768 * sizeof(char));
+  strcpy(cmd, "exiftool -FileType ");
+  strcat(cmd, path);
 
-  // Parse EXIF
-  easyexif::EXIFInfo result;
-  int code = result.parseFrom(buf, fsize);
-  delete[] buf;
-  if (code) {
-    printf("Error parsing EXIF: code %d\n", code);
-    return string(); // EMPTY STRING
-  }
+  string fileType = exec(cmd);
+  fileType = fileType.substr(34,fileType.length());
 
-  // Dump EXIF information
-  return result.DateTimeOriginal.c_str();
+  string fileDate;
+
+  if(fileType.compare("JPEG\n") == 0){
+    cout << "(jpeg) ";
+    strcpy(cmd, "exiftool -CreateDate ");
+    strcat(cmd, path);
+    fileDate = exec(cmd); 
+    return fileDate.substr(34,fileDate.length());
+
+  }else if(fileType.compare("PNG\n") == 0){
+    cout << "(png)  ";
+    strcpy(cmd, "exiftool -CreateDate ");
+    strcat(cmd, path);
+    fileDate = exec(cmd);
+    return fileDate.substr(34,fileDate.length());
+
+  }else if(fileType.compare("AVI\n") == 0){
+    cout << "(avi)  ";
+    strcpy(cmd, "exiftool -DateTimeOriginal ");
+    strcat(cmd, path);
+    fileDate = exec(cmd);
+    return fileDate.substr(34,fileDate.length());
+
+  }else if(fileType.compare("MOV\n") == 0){
+    cout << "(mov)  ";
+    strcpy(cmd, "exiftool -CreateDate ");
+    strcat(cmd, path);
+    fileDate = exec(cmd);
+    return fileDate.substr(34,fileDate.length());
+
+  }else if(fileType.compare("WMV\n") == 0){
+    cout << "(wmv)  ";
+    strcpy(cmd, "exiftool -CreationDate ");
+    strcat(cmd, path);
+    fileDate = exec(cmd);
+    return fileDate.substr(34,fileDate.length());
+
+  }else if(fileType.compare("MP4\n") == 0){
+    cout << "(mp4)  ";
+    strcpy(cmd, "exiftool -CreateDate ");
+    strcat(cmd, path);
+    fileDate = exec(cmd);
+    return fileDate.substr(34,fileDate.length());
+
+  }else{
+    return string(); // empty string
+
+  }
   
 }
 
@@ -234,7 +278,7 @@ char *destinationFinder(int year, int month, const char *pathToStore){
 
 }
 
-void jpegVersion(const char *path, const char *pathToStore){
+void fileVersion(const char *path, const char *pathToStore){
 
   string originalDate = dateOfCreation(path);
   
@@ -273,11 +317,25 @@ void folderVersion(const char *path, const char *pathToStore){
   d = opendir(path);
   
   string dirFile;
-  string jpegO = ".jpg";
-  string jpegT = ".JPG";
+  string jpegOJ = ".jpg";
+  string jpegTJ = ".JPG";
+  string jpegOP = ".png";
+  string jpegTP = ".PNG";
+  string jpegOA = ".avi";
+  string jpegTA = ".AVI";
+  string jpegOM = ".mov";
+  string jpegTM = ".MOV";  
+  string jpegOW = ".wmv";
+  string jpegTW = ".WMV";
+  string jpegOMP = ".mp4";
+  string jpegTMP = ".MP4";
 
-  size_t foundO;
-  size_t foundT;
+  size_t foundOJ = 0, foundTJ = 0;
+  size_t foundOP = 0, foundTP = 0;
+  size_t foundOA = 0, foundTA = 0;
+  size_t foundOM = 0, foundTM = 0;
+  size_t foundOW = 0, foundTW = 0;
+  size_t foundOMP = 0, foundTMP = 0;
 
   char* imagePath   = (char*) malloc (32768 * sizeof(char));
   char* unknownPath = (char*) malloc (32768 * sizeof(char));
@@ -293,31 +351,47 @@ void folderVersion(const char *path, const char *pathToStore){
     while ((dir = readdir(d)) != NULL){
 
       dirFile = dir->d_name;
-      foundO = dirFile.find(jpegO);
-      foundT = dirFile.find(jpegT);
+      foundOJ = dirFile.find(jpegOJ);
+      foundTJ = dirFile.find(jpegTJ);
+      foundOP = dirFile.find(jpegOP);
+      foundTP = dirFile.find(jpegTP);
+      foundOA = dirFile.find(jpegOA);
+      foundTA = dirFile.find(jpegTA);
+      foundOM = dirFile.find(jpegOM);
+      foundTM = dirFile.find(jpegTM);
+      foundOW = dirFile.find(jpegOW);
+      foundTW = dirFile.find(jpegTW);
+      foundTMP = dirFile.find(jpegTMP);
 
       strcat(unknownPath, dir->d_name);
 
-      if (foundO != string::npos || foundT != string::npos){
+      if (foundOJ != string::npos || foundTJ != string::npos 
+        || foundOP != string::npos || foundTP != string::npos 
+        || foundOA != string::npos || foundTA != string::npos 
+        || foundOM != string::npos || foundTM != string::npos 
+        || foundOW != string::npos || foundTW != string::npos 
+        || foundOMP != string::npos || foundTMP != string::npos ){
 
         strcat(imagePath, dir->d_name);
 
         int length = (int) strlen(imagePath);
         for(int i = 0; i < length; i++){
-          if(imagePath[i] == '.' && i+1 <= length && imagePath[i+1] == '_'){
+          if(imagePath[i] == '.' 
+            && i+1 <= length 
+            && (imagePath[i+1] == '_' || imagePath[i+1] == 'D')){
             j = 0; break; 
           }
         }
 
         if(j)
-          jpegVersion(imagePath, pathToStore);
-        
+          fileVersion(imagePath, pathToStore);
 
         j = 1;
         strcpy(imagePath, path);
         strcat(imagePath, "/");
 
-      }else if(!isRegularFile(unknownPath) && (dirFile.find('.') == std::string::npos)){
+      }else if(!isRegularFile(unknownPath) 
+        && (dirFile.find('.') == std::string::npos)){
         folderVersion(unknownPath, pathToStore);
 
       }
