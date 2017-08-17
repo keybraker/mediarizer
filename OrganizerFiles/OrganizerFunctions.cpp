@@ -117,6 +117,15 @@ string dateOfCreation(const char *path){
 
     return fileDate.substr(34,fileDate.length());
 
+  }else if(fileType.compare("M2TS\n") == 0){
+    cout << "(M2TS) ";
+    strcpy(cmd, "exiftool -DateTimeOriginal \"");
+    strcat(cmd, path);
+    strcat(cmd, "\"");
+    fileDate = exec(cmd);
+
+    return fileDate.substr(34,fileDate.length());
+
   }else{
     return string(); // empty string
 
@@ -341,6 +350,48 @@ bool typeOfFile(const char* path){
   }else if(fileType.compare("MP4\n") == 0){
     return false;
 
+  }else if(fileType.compare("M2TS\n") == 0){
+    return false;
+
+  }else{
+    return -1;
+
+  }
+
+}
+
+int typeOfFileInt(const char* path){
+
+  char* cmdtwo = (char *) malloc (32768 * sizeof(char));
+  strcpy(cmdtwo, "exiftool -FileType \"");
+  strcat(cmdtwo, path);
+  strcat(cmdtwo, "\"");
+
+  string fileTypeTwo = exec(cmdtwo);
+
+  fileTypeTwo = fileTypeTwo.substr(34,fileTypeTwo.length());
+
+  if(fileTypeTwo.compare("JPEG\n") == 0){
+    return 0;
+
+  }else if(fileTypeTwo.compare("PNG\n") == 0){
+    return 1;
+
+  }else if(fileTypeTwo.compare("AVI\n") == 0){
+    return 2;
+
+  }else if(fileTypeTwo.compare("MOV\n") == 0){
+    return 3;
+
+  }else if(fileTypeTwo.compare("WMV\n") == 0){
+    return 4;
+
+  }else if(fileTypeTwo.compare("MP4\n") == 0){
+    return 5;
+
+  }else if(fileTypeTwo.compare("M2TS\n") == 0){
+    return 6;
+
   }else{
     return -1;
 
@@ -373,7 +424,16 @@ void fileVersion(const char *path, const char *pathToStore){
 
 }
 
-void folderVersion(const char *path, const char *pathToStore){
+void folderVersion(const char *path, const char *pathToStore, int *arg){
+
+  bool isArgFree = true;
+
+  for(int i = 0; i < 7; i++){
+    if(arg[i] != -1){
+      isArgFree = false;
+      break;
+    }
+  }
 
   int j = 1;
   DIR           *d;
@@ -393,6 +453,8 @@ void folderVersion(const char *path, const char *pathToStore){
   string jpegTW = ".WMV";
   string jpegOMP = ".mp4";
   string jpegTMP = ".MP4";
+  string jpegOMT = ".mts";
+  string jpegTMT = ".MTS";
 
   size_t foundOJ, foundTJ;
   size_t foundOP, foundTP;
@@ -400,6 +462,7 @@ void folderVersion(const char *path, const char *pathToStore){
   size_t foundOM, foundTM;
   size_t foundOW, foundTW;
   size_t foundOMP, foundTMP;
+  size_t foundOMT, foundTMT;
 
   char* imagePath   = (char*) malloc (32768 * sizeof(char));
   char* unknownPath = (char*) malloc (32768 * sizeof(char));
@@ -427,6 +490,8 @@ void folderVersion(const char *path, const char *pathToStore){
       foundTW = dirFile.find(jpegTW);
       foundOMP = dirFile.find(jpegOMP);
       foundTMP = dirFile.find(jpegTMP);
+      foundOMT = dirFile.find(jpegOMT);
+      foundTMT = dirFile.find(jpegTMT);
 
       strcat(unknownPath, dir->d_name);
 
@@ -435,7 +500,8 @@ void folderVersion(const char *path, const char *pathToStore){
         || foundOA != string::npos || foundTA != string::npos 
         || foundOM != string::npos || foundTM != string::npos 
         || foundOW != string::npos || foundTW != string::npos 
-        || foundOMP != string::npos || foundTMP != string::npos ){
+        || foundOMP != string::npos || foundTMP != string::npos 
+        || foundOMT != string::npos || foundTMT != string::npos ){
 
         strcat(imagePath, dir->d_name);
 
@@ -448,15 +514,21 @@ void folderVersion(const char *path, const char *pathToStore){
           }
         }
 
-        if(j)
-          fileVersion(imagePath, pathToStore);
+        string stringer;
 
+        if(j){
+          if(isArgFree){
+            fileVersion(imagePath, pathToStore);
+          }else if(arg[typeOfFileInt(imagePath)] == 1){
+            fileVersion(imagePath, pathToStore);
+          }
+        }
         j = 1;
         strcpy(imagePath, path);
         strcat(imagePath, "/");
 
       }else if(!isRegularFile(unknownPath) && (dirFile.find('.') == string::npos)){
-        folderVersion(unknownPath, pathToStore);
+        folderVersion(unknownPath, pathToStore, arg);
 
       }
 

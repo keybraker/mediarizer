@@ -27,8 +27,9 @@ string dateOfCreation (const char *path);
 int isRegularFile (const char *path);
 originalDateData *dateReturn(string originalDate);
 bool typeOfFile(const char* path);
+int typeOfFileInt(const char* path);
 char *destinationFinder(int year, int month, const char *pathToStore);
 void fileVersion (const char *path, const char *pathToStore);
-void folderVersion (const char *path, const char *pathToStore);
+void folderVersion(const char *path, const char *pathToStore, int *arg);
 
 #endif

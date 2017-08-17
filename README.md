@@ -47,6 +47,22 @@ If you want to organise all the picture in a folder, and the folders in them, ju
 ./mediaOrganizer /path/folder /destinationPath
 ```
 
+## Arguments
+##### Category:
+ -photos -> for photo organization only
+ -video -> for video organization only
+
+##### File type:
+ -jpg -> for jpg organization only
+ -png -> for png organization only
+ -avi -> for avi organization only
+ -mov -> for mov organization only
+ -wmv -> for wmv organization only
+ -mp4 -> for mp4 organization only
+ -mts -> for mts organization only
+
+( You can use multiple flags, in order to transfer only the selected file types)
+
 ## Coping Files
 Photos are only copied once, so cleaning is done as-well !
 
@@ -67,6 +83,7 @@ path, so that you can handle it manually.
 * mov
 * wmv
 * mp4
+* m2ts
 
 ## Release History
 
