@@ -1,4 +1,4 @@
-#include "Organizer.h"
+#include "organizer.h"
 #include <string>
 #include <sys/types.h>
 #include <sys/stat.h>

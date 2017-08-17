@@ -62,13 +62,12 @@ path, so that you can handle it manually.
 ## Photo file support list 
 * jpeg ✔︎
 * png ✔︎
-* tiff ( to be added )
 
 ## Video file support list 
 * avi ✔︎
-* mp4 ✔
-* wmv ✔︎
 * mov ✔︎
+* wmv ✔︎
+* mp4 ✔
 
 ## Release History
 

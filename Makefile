@@ -4,15 +4,15 @@ CXXFLAGS=-O2 -pedantic -Wall -Wextra -ansi -std=c++11
 ############################################################################################################################################
 # NORMAL VERSION
 
-all: Organizer
+all: organizer
 
-Organizer: OrganizerFiles/Organizer.cpp
-	$(CXX) $(CXXFLAGS) -o Organizer OrganizerFiles/Organizer.cpp OrganizerFiles/OrganizerFunctions.cpp
+organizer: organizerFiles/organizer.cpp
+	$(CXX) $(CXXFLAGS) -o organizer organizerFiles/organizer.cpp organizerFiles/organizerFunctions.cpp
 
 run:
-	./Organizer /Users/Keybraker/github
+	./organizer /Users/Keybraker/github
 
 ############################################################################################################################################
 # CLEANING
 clean:
-	rm -f *.o Organizer Organizer.exe corruptedFiles.txt
+	rm -f *.o organizer organizer.exe corruptedFiles.txt
