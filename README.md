@@ -104,6 +104,7 @@ path, so that you can handle it manually.
 
 ## Release History
 
+* v1.5.0: 18 August 2017: Added duplication deletion.
 * v1.1.2: 18 August 2017: Added -flags for a more controlled organisation.
 * v1.1.1: 17 August 2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
 * v1.1.0: 17 August 2017: Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool.

@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
       printf("THEIR NAME IS THE SAME EXCEPT FOR A SLIGHT\n");
       printf("VARIATION LIKE 'IMG.JPG' AND 'IMG (2).JPG', THE\n");
       printf("PHOTO WITH THE LONGER NAME WILL BE DELETED.\n");
-      printf("THERE IS A SLIGHT CHANCE THAT THE ALGORITHM MAY.\n");
+      printf("THERE IS A SLIGHT CHANCE THAT THE ALGORITHM MAY,\n");
       printf("DELETE A WRONG FILE BUT THE CHANCES ARE MINIMAL TO NONE.\n\n" ACRE);
 
       duplicateVersion(argv[2]);
