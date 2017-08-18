@@ -21,21 +21,33 @@
 
 using namespace std;
 
-string exec(const char* cmd) {
+int detailed = -1;
+
+void detailedFile(const char* string){
+
+  if(detailed){
+    FILE *detFile = fopen("detailedTransfer.txt", "a");
+    if(detFile == NULL){ printf("Error while opening file.\n"); }
+    fprintf(detFile,"%s\n",string);
+  }
+
+}
+
+string exec(const char* cmd) { detailedFile("exec"); detailedFile("⬇︎");
     
-    array<char, 128> buffer;
+    array<char, 32768> buffer;
     string result;
     shared_ptr<FILE> pipe(popen(cmd, "r"), pclose);
     if (!pipe) throw std::runtime_error("popen() failed!");
     while (!feof(pipe.get())) {
-        if (fgets(buffer.data(), 128, pipe.get()) != nullptr)
+        if (fgets(buffer.data(), 32768, pipe.get()) != nullptr)
             result += buffer.data();
     }
     return result;
 
 }
 
-int transfer(const char *source, const char *dest){
+int transfer(const char *source, const char *dest){ detailedFile("transfer"); detailedFile("⬇︎");
 
   char* transfer = (char*) malloc (32768 * sizeof(char));
 
@@ -44,14 +56,17 @@ int transfer(const char *source, const char *dest){
   strcat(transfer, "\" ");
   strcat(transfer, dest);
 
-  printf("> %s\n", transfer);
   system(transfer);
+
+  printf("> %s\n", transfer);
+  detailedFile(transfer);
+  detailedFile("\n===========");
 
   return 0;
 
 }
 
-string dateOfCreation(const char *path){
+string dateOfCreation(const char *path){ detailedFile("dateOfCreation"); detailedFile("⬇︎");
 
   char* cmd = (char *) malloc (32768 * sizeof(char));
   strcpy(cmd, "exiftool -FileType \"");
@@ -64,7 +79,7 @@ string dateOfCreation(const char *path){
   string fileDate;
 
   if(fileType.compare("JPEG\n") == 0){
-    cout << "(JPG) ";
+    cout << "(JPG)  ";
     strcpy(cmd, "exiftool -CreateDate \"");
     strcat(cmd, path);
     strcat(cmd, "\"");
@@ -73,7 +88,7 @@ string dateOfCreation(const char *path){
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("PNG\n") == 0){
-    cout << "(PNG) ";
+    cout << "(PNG)  ";
     strcpy(cmd, "exiftool -CreateDate \"");
     strcat(cmd, path);
     strcat(cmd, "\"");
@@ -82,7 +97,7 @@ string dateOfCreation(const char *path){
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("AVI\n") == 0){
-    cout << "(AVI) ";
+    cout << "(AVI)  ";
     strcpy(cmd, "exiftool -DateTimeOriginal \"");
     strcat(cmd, path);
     strcat(cmd, "\"");
@@ -91,7 +106,7 @@ string dateOfCreation(const char *path){
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("MOV\n") == 0){
-    cout << "(MOV) ";
+    cout << "(MOV)  ";
     strcpy(cmd, "exiftool -CreateDate \"");
     strcat(cmd, path);
     strcat(cmd, "\"");
@@ -100,7 +115,7 @@ string dateOfCreation(const char *path){
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("WMV\n") == 0){
-    cout << "(WMV) ";
+    cout << "(WMV)  ";
     strcpy(cmd, "exiftool -CreationDate \"");
     strcat(cmd, path);
     strcat(cmd, "\"");
@@ -109,7 +124,7 @@ string dateOfCreation(const char *path){
     return fileDate.substr(34,fileDate.length());
 
   }else if(fileType.compare("MP4\n") == 0){
-    cout << "(MP4) ";
+    cout << "(MP4)  ";
     strcpy(cmd, "exiftool -CreateDate \"");
     strcat(cmd, path);
     strcat(cmd, "\"");
@@ -133,7 +148,7 @@ string dateOfCreation(const char *path){
   
 }
 
-int isRegularFile(const char *path){
+int isRegularFile(const char *path){ detailedFile("isRegularFile"); detailedFile("⬇︎");
 
     struct stat path_stat;
     stat(path, &path_stat);
@@ -141,7 +156,7 @@ int isRegularFile(const char *path){
 
 }
 
-originalDateData *dateReturn(string originalDate){
+originalDateData *dateReturn(string originalDate){ detailedFile("dateReturn"); detailedFile("⬇︎");
 
   string originalYear   ;
   string originalMonth  ; 
@@ -191,7 +206,7 @@ originalDateData *dateReturn(string originalDate){
 
 }
 
-bool dirEx(const char* directory){
+bool dirEx(const char* directory){ detailedFile("dirEx"); detailedFile("⬇︎");
     
   DIR* dir = opendir(directory);
   if (dir) {
@@ -202,11 +217,11 @@ bool dirEx(const char* directory){
 
 }
 
-char *destinationFinder(int year, int month, const char *pathToStore, bool type){
+char *destinationFinder(int year, int month, const char *pathToStore, bool type){ detailedFile("destinationFinder"); detailedFile("⬇︎");
   
-  char *destinationPath = (char *) malloc (32768 * sizeof(char));
-  char *destinationPathToExec = (char *) malloc (32768 * sizeof(char));
-  char *destinationPathFolder = (char *) malloc (32768 * sizeof(char));
+  char *destinationPath             = (char *) malloc (32768 * sizeof(char));
+  char *destinationPathToExec       = (char *) malloc (32768 * sizeof(char));
+  char *destinationPathFolder       = (char *) malloc (32768 * sizeof(char));
   char *destinationPathFolderToExec = (char *) malloc (32768 * sizeof(char));
 
   strcpy(destinationPathFolder, "mkdir \"");
@@ -347,7 +362,7 @@ char *destinationFinder(int year, int month, const char *pathToStore, bool type)
 
 }
 
-bool typeOfFile(const char* path){
+bool typeOfFile(const char* path){ detailedFile("typeOfFile"); detailedFile("⬇︎");
 
   char* cmd = (char *) malloc (32768 * sizeof(char));
   strcpy(cmd, "exiftool -FileType \"");
@@ -385,36 +400,36 @@ bool typeOfFile(const char* path){
 
 }
 
-int typeOfFileInt(const char* path){
+int typeOfFileInt(const char* path){ detailedFile("typeOfFileInt"); detailedFile("⬇︎");
 
-  char* cmdtwo = (char *) malloc (32768 * sizeof(char));
-  strcpy(cmdtwo, "exiftool -FileType \"");
-  strcat(cmdtwo, path);
-  strcat(cmdtwo, "\"");
+  char* cmd = (char *) malloc (32768 * sizeof(char));
+  strcpy(cmd, "exiftool -FileType \"");
+  strcat(cmd, path);
+  strcat(cmd, "\"");
 
-  string fileTypeTwo = exec(cmdtwo);
+  string fileType = exec(cmd);
 
-  fileTypeTwo = fileTypeTwo.substr(34,fileTypeTwo.length());
+  fileType = fileType.substr(34,fileType.length());
 
-  if(fileTypeTwo.compare("JPEG\n") == 0){
+  if(fileType.compare("JPEG\n") == 0){
     return 0;
 
-  }else if(fileTypeTwo.compare("PNG\n") == 0){
+  }else if(fileType.compare("PNG\n") == 0){
     return 1;
 
-  }else if(fileTypeTwo.compare("AVI\n") == 0){
+  }else if(fileType.compare("AVI\n") == 0){
     return 2;
 
-  }else if(fileTypeTwo.compare("MOV\n") == 0){
+  }else if(fileType.compare("MOV\n") == 0){
     return 3;
 
-  }else if(fileTypeTwo.compare("WMV\n") == 0){
+  }else if(fileType.compare("WMV\n") == 0){
     return 4;
 
-  }else if(fileTypeTwo.compare("MP4\n") == 0){
+  }else if(fileType.compare("MP4\n") == 0){
     return 5;
 
-  }else if(fileTypeTwo.compare("M2TS\n") == 0){
+  }else if(fileType.compare("M2TS\n") == 0){
     return 6;
 
   }else{
@@ -424,14 +439,14 @@ int typeOfFileInt(const char* path){
 
 }
 
-void fileVersion(const char *path, const char *pathToStore){
+void fileVersion(const char *path, const char *pathToStore){ detailedFile("fileVersion"); detailedFile("⬇︎");
 
   string originalDate = dateOfCreation(path);
   
   if(originalDate.empty()){ 
     
     FILE *corruptedFiles = fopen("corruptedFiles.txt", "a");
-    if(corruptedFiles == NULL){printf("Error while opening file.\n");}
+    if(corruptedFiles == NULL){ printf("Error while opening file.\n"); }
     fprintf(corruptedFiles,"%s\n",path);            
 
     return;
@@ -449,9 +464,11 @@ void fileVersion(const char *path, const char *pathToStore){
 
 }
 
-void folderVersion(const char *path, const char *pathToStore, int *arg){
-
+void folderVersion(const char *path, const char *pathToStore, int *arg){ detailedFile("folderVersion"); detailedFile("⬇︎");
+  
   bool isArgFree = true, photoOnly = false, videoOnly = false;
+
+  if(arg[7]){ detailed = 1; }
 
   if(arg[0] == 2){ photoOnly = true; }
   if(arg[0] == 3){ videoOnly = true; }
@@ -492,8 +509,9 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
   size_t foundOMP, foundTMP;
   size_t foundOMT, foundTMT;
 
-  char* imagePath   = (char*) malloc (32768 * sizeof(char));
-  char* unknownPath = (char*) malloc (32768 * sizeof(char));
+  char* imagePath       = (char*) malloc (32768 * sizeof(char));
+  char* imagePathFinal  = (char*) malloc (32768 * sizeof(char));
+  char* unknownPath     = (char*) malloc (32768 * sizeof(char));
 
   strcpy(imagePath, path);
   strcat(imagePath, "/");
@@ -542,27 +560,30 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
           }
         }
 
-        string stringer;
+        strcpy(imagePathFinal, path);
+        strcat(imagePathFinal, "/");
+        strcat(imagePathFinal, imagePath);
 
         if(j){
           if(photoOnly){
-            if(typeOfFile(imagePath))
-              fileVersion(imagePath, pathToStore);
+            if(typeOfFile(imagePathFinal))
+              fileVersion(imagePathFinal, pathToStore);
 
           }else if(videoOnly){
-            if(!typeOfFile(imagePath))
-              fileVersion(imagePath, pathToStore);
+            if(!typeOfFile(imagePathFinal))
+              fileVersion(imagePathFinal, pathToStore);
 
           }else{
             if(isArgFree){
-              fileVersion(imagePath, pathToStore);
-            }else if(arg[typeOfFileInt(imagePath)] == 1){
-              fileVersion(imagePath, pathToStore);
+              fileVersion(imagePathFinal, pathToStore);
+            }else if(arg[typeOfFileInt(imagePathFinal)] == 1){
+              fileVersion(imagePathFinal, pathToStore);
             }
 
           }
           
         }
+
         j = 1;
         strcpy(imagePath, path);
         strcat(imagePath, "/");
@@ -571,6 +592,10 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
         folderVersion(unknownPath, pathToStore, arg);
 
       }
+
+      imagePath       = (char*) malloc (32768 * sizeof(char));
+      imagePathFinal  = (char*) malloc (32768 * sizeof(char));
+      unknownPath     = (char*) malloc (32768 * sizeof(char));
 
       strcpy(unknownPath, path);
       strcat(unknownPath, "/");
@@ -582,4 +607,8 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
     
   }
   
+}
+
+void duplicateVersion(const char *path){ detailedFile("duplicateVersion"); detailedFile("⬇︎");
+  printf("DUPLICATE FOLDER: %s\n", path);
 }

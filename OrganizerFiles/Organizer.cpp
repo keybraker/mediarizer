@@ -9,34 +9,53 @@ int main(int argc, char *argv[]) {
 
   if (argc == 3) {
     
-    if(isRegularFile(argv[1]) == 1){ // This means that the first path is a file
-      if(isRegularFile(argv[2]) == 0){ // This means that the second path is a folder
-        fileVersion(argv[1], argv[2]); // So now I know the path I have to put the file in
+    if(strcmp(argv[1], "-dup") == 0){
+      printf(ACG "( DUPLICATE MODE )\n\n");
+      printf(ACR "DISCLAIMER: USE WITH CAUTION!\n");
+      printf("=============================\n");
+      printf("THIS MODE LOOKS UP EVERY FILE IN A DIRECTORY\n");
+      printf("AND COMPARES THE EXIF DATA TO ALL THE OTHERS.\n");
+      printf("IF A FILE IS FOUND THAT HAS THE SAME EXIF AND\n");
+      printf("THEIR NAME IS THE SAME EXCEPT FOR A SLIGHT\n");
+      printf("VARIATION LIKE 'IMG.JPG' AND 'IMG (2).JPG', THE\n");
+      printf("PHOTO WITH THE LONGER NAME WILL BE DELETED.\n");
+      printf("THERE IS A SLIGHT CHANCE THAT THE ALGORITHM MAY.\n");
+      printf("DELETE A WRONG FILE BUT THE CHANCES ARE MINIMAL TO NONE.\n\n" ACRE);
 
-      }else{ // if second path is a file too, I cannot put a file in a file so error
-        printf(ACR "Path: ( %s ), is not a folder so pictures can't be stored there.\n" ACRE, argv[2]);
+      duplicateVersion(argv[2]);
+
+    }else{
+
+      if(isRegularFile(argv[1]) == 1){ // This means that the first path is a file
+        if(isRegularFile(argv[2]) == 0){ // This means that the second path is a folder
+          fileVersion(argv[1], argv[2]); // So now I know the path I have to put the file in
+
+        }else{ // if second path is a file too, I cannot put a file in a file so error
+          printf(ACR "Path: ( %s ), is not a folder so pictures can't be stored there.\n" ACRE, argv[2]);
+
+        }
+        return 0;
+
+      }else{ // This means that the first path is a folder
+        int arg[8] = {-1, -1, -1, -1, -1, -1, -1, -1};
+        int *argp = arg;
+
+        if(isRegularFile(argv[2]) == 0){ // This means that the second path is a folder
+          folderVersion(argv[1], argv[2], argp); // So now I know the path I have to put, all the files in the folder
+
+        }else{ // if second path is a file too, I cannot put a file in a file so error
+          printf(ACR "Path: ( %s ), is not a folder so pictures can't be stored there.\n" ACRE, argv[2]);
+          
+        }
+        return 0;
 
       }
-      return 0;
-
-    }else{ // This means that the first path is a folder
-      int arg[7] = {-1, -1, -1, -1, -1, -1, -1};
-      int *argp = arg;
-
-      if(isRegularFile(argv[2]) == 0){ // This means that the second path is a folder
-        folderVersion(argv[1], argv[2], argp); // So now I know the path I have to put, all the files in the folder
-
-      }else{ // if second path is a file too, I cannot put a file in a file so error
-        printf(ACR "Path: ( %s ), is not a folder so pictures can't be stored there.\n" ACRE, argv[2]);
-        
-      }
-      return 0;
 
     }
 
   }else if (argc > 3 && argc < 10) {
 
-    int arg[7] = {-1, -1, -1, -1, -1, -1, -1};
+    int arg[8] = {-1, -1, -1, -1, -1, -1, -1, -1};
     int *argp = arg;
     
     if(argc == 4 && strcmp(argv[3], "-photo") == 0){
@@ -56,6 +75,7 @@ int main(int argc, char *argv[]) {
         }else if(strcmp(argv[i+3], "-wmv") == 0){ arg[4] = 1;
         }else if(strcmp(argv[i+3], "-mp4") == 0){ arg[5] = 1;
         }else if(strcmp(argv[i+3], "-mts") == 0){ arg[6] = 1;
+        }else if(strcmp(argv[i+3], "-det") == 0){ arg[7] = 1;
         }else{
           printf("%s: is an unrecognizable argument.\n", argv[i+3]);
           printf("Please consider using one of the following:\n\n");

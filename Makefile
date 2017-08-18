@@ -12,4 +12,4 @@ organizer: OrganizerFiles/Organizer.cpp
 ############################################################################################################################################
 # CLEANING
 clean:
-	rm -f *.o mediaOrganizer mediaOrganizer.exe corruptedFiles.txt
+	rm -f *.o mediaOrganizer mediaOrganizer.exe corruptedFiles.txt detailedTransfer.txt

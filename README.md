@@ -59,18 +59,24 @@ will only copy photos not videos.
 ~~```./mediaOrganizer /path/picture.jpg /destinationPath -photo -jpg```~~ **! this is _NOT_ valid.**
 
 ##### Category:
- * -photo : for photo organization only
- * -video : for video organization only
-   ( Attention: These modes can only be used solely )
+ * -photo : _for photo organization only_
+ * -video : _for video organization only_
+   **( Attention: These modes can only be used solely )**
 
 ##### File type:
- * -jpg : for jpg organization only
- * -png : for png organization only
- * -avi : for avi organization only
- * -mov : for mov organization only
- * -wmv : for wmv organization only
- * -mp4 : for mp4 organization only
- * -mts : for mts organization only
+ * -jpg : _for jpg organization only_
+ * -png : _for png organization only_
+ * -avi : _for avi organization only_
+ * -mov : _for mov organization only_
+ * -wmv : _for wmv organization only_
+ * -mp4 : _for mp4 organization only_
+ * -mts : _for mts organization only_
+
+##### Information:
+ * -det : for a detailed list of executions in a txt format ( detailedTransfer.txt )
+
+##### Mode:
+ * -dup : duplicate mode deletes duplicate with diffrent names
 
 ( You can use multiple flags, in order to transfer only the selected file types )
 
