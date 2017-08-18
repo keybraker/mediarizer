@@ -10,9 +10,10 @@ int main(int argc, char *argv[]) {
   if (argc == 3) {
     
     if(strcmp(argv[1], "-dup") == 0){
-      printf(ACG "( DUPLICATE MODE )\n\n");
-      printf(ACR "DISCLAIMER: USE WITH CAUTION!\n");
-      printf("=============================\n");
+      printf(ACG "( DUPLICATE MODE ) ~ BETA\n\n");
+      printf(ACR "DISCLAIMER: USE WITH CAUTION! PLEASE BACKUP ALL YOUR FILES \n");
+      printf("BEFORE PROCCEDING TO CLEANUP DUPLICATES\n");
+      printf("=======================================\n");
       printf("THIS MODE LOOKS UP EVERY FILE IN A DIRECTORY\n");
       printf("AND COMPARES THE EXIF DATA TO ALL THE OTHERS.\n");
       printf("IF A FILE IS FOUND THAT HAS THE SAME EXIF AND\n");
@@ -22,7 +23,12 @@ int main(int argc, char *argv[]) {
       printf("THERE IS A SLIGHT CHANCE THAT THE ALGORITHM MAY,\n");
       printf("DELETE A WRONG FILE BUT THE CHANCES ARE MINIMAL TO NONE.\n\n" ACRE);
 
-      duplicateVersion(argv[2]);
+      if(!isRegularFile(argv[2])){
+        duplicateVersion(argv[2]);
+      }else{
+        printf(ACR "Duplicate Cleaner: can only be used in folders.\n");
+        printf("( %s , is not a directory )" ACRE, argv[2]);
+      }
 
     }else{
 

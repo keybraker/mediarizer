@@ -47,13 +47,13 @@ If you want to organise all the picture in a folder, and the folders in them, ju
 
 ## Flags
 Flags can only be used in the end of the command in whatever order you wish.
-```
-./mediaOrganizer /path/picture.jpg /destinationPath -mp4 -jpg
-```
+```./mediaOrganizer /path/picture.jpg /destinationPath -mp4 -jpg```
 will only copy jpg and mp4 files.
-```
-./mediaOrganizer /path/picture.jpg /destinationPath -photo
-```
+
+```./mediaOrganizer /path/picture.jpg /destinationPath -photo```
+will only copy photos not videos.
+
+```./mediaOrganizer -dup /Path```
 will only copy photos not videos.
 
 ~~```./mediaOrganizer /path/picture.jpg /destinationPath -photo -jpg```~~ **! this is _NOT_ valid.**
