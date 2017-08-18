@@ -1,10 +1,10 @@
 /*****************************************************************
-  jpegOrganizer.h  -- A simple ISO C++ library to parse basic EXIF
-                        information from a JPEG file.
+  Organizer.h  -- A simple ISO C++ library to organize and delete
+  				  duplicate media files.
 */
 
-#ifndef __JPEGORGANIZER_H
-#define __JPEGORGANIZER_H
+#ifndef __ORGANIZER_H
+#define __ORGANIZER_H
 
 #include <string>
 
