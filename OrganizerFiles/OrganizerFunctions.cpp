@@ -610,5 +610,5 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){ detaile
 }
 
 void duplicateVersion(const char *path){ detailedFile("duplicateVersion"); detailedFile("⬇︎");
-  printf("DUPLICATE FOLDER: %s\n", path);
+  printf("DUPLICATE FOLDER:  %s\n", path);
 }
