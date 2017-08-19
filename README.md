@@ -16,11 +16,11 @@ make  |----------------| ./mediaOrganizer /picture.jpg /desPath  |--------------
 * Lightweight and runs everywhere
 
 ## Installation Guide
-Clone this repository with ( or download zip ):
+#### Clone this repository with ( or download zip ):
 ```
 git clone https://github.com/keybraker/Media-Organizer.git
 ```
-##### Install ExifTool by Phil Harvey
+#### Install ExifTool by Phil Harvey
 Download and install from here [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/).
  <br />This program may very well be the best exif parser in the world (nj).
  <br />This is the heart of the program and the essential tool that helped create this project.
@@ -36,11 +36,13 @@ cd .../Media-Organizer
 make 
 ```
 
-##### 3. You can run the program in two ways, a single picture mode and a folder mode. The single picture only organises this one picture and to do that just type:
+##### 3. Run the program:
+<br />
+#### Single image mode: Organises the one picture or video given to it.
 ```
 ./mediaOrganizer /path/picture.jpg /destinationPath
 ```
-If you want to organise all the picture in a folder, and the folders in them, just type :
+#### Folder mode: Organises all the pictures and videos in a folder, and the folders in it.
 ```
 ./mediaOrganizer /path/folder /destinationPath
 ```
