@@ -22,8 +22,8 @@ git clone https://github.com/keybraker/Media-Organizer.git
 ```
 ##### Install ExifTool by Phil Harvey
 Download and install from here [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/).
-This program may very well be the best exif parser in the world (nj)
-This is the heart of the program and the essential tool that helped create this project.
+ <br />This program may very well be the best exif parser in the world (nj).
+ <br />This is the heart of the program and the essential tool that helped create this project.
 
 ## Usage Guide
 ##### 1. Open a terminal window and cd to cloned project
@@ -47,23 +47,26 @@ If you want to organise all the picture in a folder, and the folders in them, ju
 
 ## Flags
 Flags can only be used in the end of the command in whatever order you wish.
-```./mediaOrganizer /path/picture.jpg /destinationPath -mp4 -jpg```
-will only copy jpg and mp4 files.
+<br />Except for ```-dup```, that works only in the beginning.
+<br />
+<br />```./mediaOrganizer /path/picture.jpg /destinationPath -mp4 -jpg```
+<br />will only copy jpg and mp4 files.
 
-```./mediaOrganizer /path/picture.jpg /destinationPath -photo```
-will only copy photos not videos.
+<br />```./mediaOrganizer /path/picture.jpg /destinationPath -photo```
+<br />will only copy photos not videos.
 
-```./mediaOrganizer -dup /Path```
-will only copy photos not videos.
+<br />```./mediaOrganizer -dup /Path```
+<br />duplicates will be deleted.
 
-~~```./mediaOrganizer /path/picture.jpg /destinationPath -photo -jpg```~~ **! this is _NOT_ valid.**
+<br />~~```./mediaOrganizer /path/picture.jpg /destinationPath -photo -jpg```
+<br />~~ **! this is _NOT_ valid.**
 
 ##### Category:
  * -photo : _for photo organization only_
  * -video : _for video organization only_
-   **( Attention: These modes can only be used solely )**
+ <br />**( Attention: These modes can only be used solely )**
 
-##### File type:**( You can use multiple flags, in order to transfer only the selected file types )**
+##### File type:
  * -jpg : _for jpg organization only_
  * -png : _for png organization only_
  * -avi : _for avi organization only_
@@ -71,20 +74,23 @@ will only copy photos not videos.
  * -wmv : _for wmv organization only_
  * -mp4 : _for mp4 organization only_
  * -mts : _for mts organization only_
+<br />**( You can use multiple flags, in order to transfer only the selected file types )**
 
-##### Information:**( You can use multiple flags, in order to transfer only the selected file types )**
+##### Information:
  * -det : for a detailed list of executions in a txt format ( detailedTransfer.txt )
+<br />**( You can use multiple flags, in order to transfer only the selected file types )**
 
 ##### Mode:
- * -dup : duplicate mode deletes duplicate with diffrent names **( duplication cleaning is still in _BETA_ please _back up your files_ before attempting use with _caution_ and _on your own risk_ )**
+ * -dup : duplicate mode deletes duplicate with diffrent names
+ <br />**( duplication cleaning is still in _BETA_ please _back up your files_ before attempting use with _caution_ and _on your own risk_ )**
 
 ## Coping Files
 Photos are only copied once, so cleaning is done as-well !
 
 ## Corrupted files
 All corrupted jpeg files are not being copied. If even one file is copputed, a txt file is
-created called ``` corruptedFiles ``` in which every corrupted files is listed wby its full
-path, so that you can handle it manually.
+ <br />created called ``` corruptedFiles ``` in which every corrupted files is listed wby its full
+ <br />path, so that you can handle it manually.
 
 ## Cleaning
 * To clean the program type ``` make clean ``` in ``` /Media-Organizer ```
