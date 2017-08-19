@@ -63,7 +63,7 @@ will only copy photos not videos.
  * -video : _for video organization only_
    **( Attention: These modes can only be used solely )**
 
-##### File type:
+##### File type:**( You can use multiple flags, in order to transfer only the selected file types )**
  * -jpg : _for jpg organization only_
  * -png : _for png organization only_
  * -avi : _for avi organization only_
@@ -72,13 +72,11 @@ will only copy photos not videos.
  * -mp4 : _for mp4 organization only_
  * -mts : _for mts organization only_
 
-##### Information:
+##### Information:**( You can use multiple flags, in order to transfer only the selected file types )**
  * -det : for a detailed list of executions in a txt format ( detailedTransfer.txt )
 
 ##### Mode:
- * -dup : duplicate mode deletes duplicate with diffrent names
-
-( You can use multiple flags, in order to transfer only the selected file types )
+ * -dup : duplicate mode deletes duplicate with diffrent names **( duplication cleaning is still in _BETA_ please _back up your files_ before attempting use with _caution_ and _on your own risk_ )**
 
 ## Coping Files
 Photos are only copied once, so cleaning is done as-well !
