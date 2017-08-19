@@ -26,23 +26,22 @@ Download and install from here [ExifTool](http://owl.phy.queensu.ca/~phil/exifto
  <br />This is the heart of the program and the essential tool that helped create this project.
 
 ## Usage Guide
-##### 1. Open a terminal window and cd to cloned project
+#### 1. Open a terminal window and cd to cloned project
 ```
 cd .../Media-Organizer 
 ```
 
-##### 2. To compile the program just type:
+#### 2. To compile the program just type:
 ```
 make 
 ```
 
-##### 3. Run the program:
-<br />
-#### Single image mode: Organises the one picture or video given to it.
+#### 3. Run the program:
+##### Single image mode: Organises the one picture or video given to it.
 ```
 ./mediaOrganizer /path/picture.jpg /destinationPath
 ```
-#### Folder mode: Organises all the pictures and videos in a folder, and the folders in it.
+##### Folder mode: Organises all the pictures and videos in a folder, and the folders in it.
 ```
 ./mediaOrganizer /path/folder /destinationPath
 ```
@@ -110,7 +109,7 @@ All corrupted jpeg files are not being copied. If even one file is copputed, a t
 
 ## Release History
 
-* v1.5.0: 18 August 2017: Added duplication deletion.
+* v1.5.0: 19 August 2017: Added duplication deletion.
 * v1.1.2: 18 August 2017: Added -flags for a more controlled organisation.
 * v1.1.1: 17 August 2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
 * v1.1.0: 17 August 2017: Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool.
