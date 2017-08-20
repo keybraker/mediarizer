@@ -75,18 +75,18 @@ _Output:_
 ## Flags
 Flags can only be used in the end of the command in whatever order you wish.
 <br />Except for ```-dup```, that works only in the beginning.
-<br />
-<br />```./mediaOrganizer /path/picture.jpg /path/to/store/folder -mp4 -jpg```
+
+```./mediaOrganizer /path/picture.jpg /path/to/store/folder -mp4 -jpg```
 <br />will only copy jpg and mp4 files.
 
-<br />```./mediaOrganizer /path/picture.jpg /path/to/store/folder -photo```
+```./mediaOrganizer /path/picture.jpg /path/to/store/folder -photo```
 <br />will only copy photos not videos.
 
-<br />```./mediaOrganizer -dup /Path```
+```./mediaOrganizer -dup /Path```
 <br />duplicates will be deleted.
 
-<br />~~```./mediaOrganizer /path/picture.jpg /path/to/store/folder -photo -jpg```
-<br />~~ **! this is _NOT_ valid.**
+~~```./mediaOrganizer /path/picture.jpg /path/to/store/folder -photo -jpg```~~
+<br /> **! this is _NOT_ valid.**
 
 ##### Category:
  * -photo : _for photo organization only_
