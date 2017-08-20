@@ -92,8 +92,6 @@ _Output:_
 <br />**_( These is achieved in one run of the program )_**
 
 ## Flags
-
-#### Flag List
 ##### Category:
  * -photo : _for photo organization only_
  * -video : _for video organization only_
@@ -115,7 +113,7 @@ _Output:_
  * -dup : _duplicate mode deletes duplicate with diffrent names_
  <br />**( Duplication cleaning is fully funcitonal, but please _back up your files_ before attempting to use it. _Run at your own risk_ )**
 
-#### Flag Examples
+#### Flag Examples:
 ##### Flags can be put in any order you wish even in the middle of the directories, like this:
 ```./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder -png```
 <br />is the same as,<br />
