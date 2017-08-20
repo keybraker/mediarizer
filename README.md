@@ -98,7 +98,7 @@ Flags can only be used in the end of the command in whatever order you wish.
 
 ##### Mode:
  * -dup : duplicate mode deletes duplicate with diffrent names
- <br />**( Duplication cleaning is fully funcitonal, but please _back up your files_ before attempting to use it. Run at your own risk_ )**
+ <br />**( Duplication cleaning is fully funcitonal, but please _back up your files_ before attempting to use it. _Run at your own risk_ )**
 
 ## Coping Files
 Photos are copied to the new path if date information is available. 
