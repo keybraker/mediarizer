@@ -54,13 +54,14 @@ make
 ./mediaOrganizer -dup /path/folder
 ```
 _Output:_
-<br /> > > It is a file and is not hidden
-<br />> > > The names are equal except for a slight variation
-<br />> > > > The sizes are the same
-<br />> > > > > The dates of creation are the same
-<br />> > > > > > The resolutions are the same
-<br />> > > > > > > rm -rf "/videos/videowemv copy.wmv" ( DELETED )
-
+```
+> > It is a file and is not hidden
+> > > The names are equal except for a slight variation
+> > > > The sizes are the same
+> > > > > The dates of creation are the same
+> > > > > > The resolutions are the same
+> > > > > > > rm -rf "/videos/videowemv copy.wmv" ( DELETED )
+```
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplayDuplicate.jpg)
 <br />**_( These is achieved in one run of the program )_**
 
