@@ -11,7 +11,7 @@ make       |----------------| ./mediaOrganizer /picture.jpg /desPath            
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplay.jpg)
 <br />**_( These is achieved in one run of the program )_**
 
-## Why use Media Organiser
+## Why use Media Organizer
 * Organises photos / videos extremly fast, the only limitation is your hardware
 * Cleans your library from duplicates
 * Lightweight and runs everywhere
