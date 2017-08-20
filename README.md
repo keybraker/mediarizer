@@ -3,10 +3,10 @@ Organises all your media in a chronological order.
 
 ## How does it work 
 ```text
-make  |----------------| ./mediaOrganizer /picture.jpg /desPath  |------------------| 
-----> | mediaOrganizer |---------------------------------------> | organised photos | 
-      |----------------| ./mediaOrganizer /folderPath /desPath   | in year/month    | 
-                                                                 |------------------| 
+make      |----------------| ./mediaOrganizer /picture.jpg /desPath            |------------------| 
+--------> | mediaOrganizer |-------------------------------------------------> | organised photos | 
+      	  |----------------| ./mediaOrganizer /folderPath /desPath             | in year/month    | 
+                                                        	               |------------------| 
 ```
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplay.jpg)
 <br />**_( These is achieved in one run of the program )_**
@@ -54,12 +54,12 @@ make
 ./mediaOrganizer -dup /path/folder
 ```
 _Output:_
-> >It is a file and is not hidden
-> > > The names are equal except for a slight variation
-> > > > The sizes are the same
-> > > > > The dates of creation are the same
-> > > > > > The resolutions are the same
-> > > > > > => rm -rf "/videos/videowemv copy.wmv" ( DELETED )
+<br /> > > It is a file and is not hidden
+<br />> > > The names are equal except for a slight variation
+<br />> > > > The sizes are the same
+<br />> > > > > The dates of creation are the same
+<br />> > > > > > The resolutions are the same
+<br />> > > > > > > rm -rf "/videos/videowemv copy.wmv" ( DELETED )
 
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplayDuplicate.jpg)
 <br />**_( These is achieved in one run of the program )_**
@@ -121,7 +121,7 @@ All corrupted jpeg files are not being copied. If even one file is copputed, a t
 
 ## Release History
 
-* v1.5.0: 20 August 2017: Fully functional duplication deletion.
+* v1.6.0: 20 August 2017: Fully functional duplication deletion.
 * v1.5.0: 19 August 2017: Added duplication deletion.
 * v1.1.2: 18 August 2017: Added -flags for a more controlled organisation.
 * v1.1.1: 17 August 2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
