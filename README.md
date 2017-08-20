@@ -17,11 +17,11 @@ make  |----------------| ./mediaOrganizer /picture.jpg /desPath  |--------------
 * Lightweight and runs everywhere
 
 ## Installation Guide
-#### Clone this repository with ( or download zip ):
+#### 1. Clone this repository with ( or download zip ):
 ```
 git clone https://github.com/keybraker/Media-Organizer.git
 ```
-#### Install ExifTool by Phil Harvey
+#### 2. Install ExifTool by Phil Harvey
 Download and install from here [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/).
  <br />This program may very well be the best exif parser in the world (nj).
  <br />This is the heart of the program and the essential tool that helped create this project.
@@ -46,6 +46,7 @@ make
 ```
 ./mediaOrganizer /path/folder /destinationPath
 ```
+###### Photos are copied to the new path if date information is available. <br />Same photos with same names, from diffrent folders are not being copied.
 ##### Duplicate mode: Deletes all duplicate pictures and videos in a folder, and the folders in it.
 ```
 ./mediaOrganizer -dup /path/folder
@@ -65,16 +66,16 @@ _Output:_
 Flags can only be used in the end of the command in whatever order you wish.
 <br />Except for ```-dup```, that works only in the beginning.
 <br />
-<br />```./mediaOrganizer /path/picture.jpg /destinationPath -mp4 -jpg```
+<br />```./mediaOrganizer /path/picture.jpg /path/to/store/folder -mp4 -jpg```
 <br />will only copy jpg and mp4 files.
 
-<br />```./mediaOrganizer /path/picture.jpg /destinationPath -photo```
+<br />```./mediaOrganizer /path/picture.jpg /path/to/store/folder -photo```
 <br />will only copy photos not videos.
 
 <br />```./mediaOrganizer -dup /Path```
 <br />duplicates will be deleted.
 
-<br />~~```./mediaOrganizer /path/picture.jpg /destinationPath -photo -jpg```
+<br />~~```./mediaOrganizer /path/picture.jpg /path/to/store/folder -photo -jpg```
 <br />~~ **! this is _NOT_ valid.**
 
 ##### Category:
@@ -99,10 +100,6 @@ Flags can only be used in the end of the command in whatever order you wish.
 ##### Mode:
  * -dup : duplicate mode deletes duplicate with diffrent names
  <br />**( Duplication cleaning is fully funcitonal, but please _back up your files_ before attempting to use it. _Run at your own risk_ )**
-
-## Coping Files
-Photos are copied to the new path if date information is available. 
-<br />Same photos with same names, from diffrent folders are not being copied.
 
 ## Corrupted files
 All corrupted jpeg files are not being copied. If even one file is copputed, a txt file is
