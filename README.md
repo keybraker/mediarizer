@@ -9,6 +9,7 @@ make  |----------------| ./mediaOrganizer /picture.jpg /desPath  |--------------
                                                                  |------------------| 
 ```
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplay.jpg)
+<br />**_( These is achieved in one run of the program )_**
 
 ## Why use Media Organiser
 * Organises photos / videos extremly fast, the only limitation is your hardware
@@ -57,6 +58,9 @@ _Output:_
 > > > > > > The resolutions are the same
 > > > > > > => rm -rf "/videos/videowemv copy.wmv" ( DELETED )
 
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplayDuplicate.jpg)
+<br />**_( These is achieved in one run of the program )_**
+
 ## Flags
 Flags can only be used in the end of the command in whatever order you wish.
 <br />Except for ```-dup```, that works only in the beginning.
@@ -94,7 +98,7 @@ Flags can only be used in the end of the command in whatever order you wish.
 
 ##### Mode:
  * -dup : duplicate mode deletes duplicate with diffrent names
- <br />**( duplication cleaning is out of _BETA_ but please _back up your files_ before attempting use with _caution_ and _on your own risk_ )**
+ <br />**( Duplication cleaning is fully funcitonal, but please _back up your files_ before attempting to use it. Run at your own risk_ )**
 
 ## Coping Files
 Photos are copied to the new path if date information is available. 
