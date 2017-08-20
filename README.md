@@ -1,5 +1,24 @@
 # Media Organizer 
 Organises all your media in a chronological order.
+```
+`7MMM.     ,MMF'             `7MM    db           
+  MMMb    dPMM                 MM                 
+  M YM   ,M MM  .gP"Ya    ,M""bMM  `7MM   ,6"Yb.  
+  M  Mb  M' MM ,M'   Yb ,AP    MM    MM  8)   MM  
+  M  YM.P'  MM 8M"""""" 8MI    MM    MM   ,pm9MM  
+  M  `YM'   MM YM.    , `Mb    MM    MM  8M   MM  
+.JML. `'  .JMML.`Mbmmd'  `Wbmd"MML..JMML.`Moo9^Yo.
+                                                      ,,                          
+   .g8""8q.                                           db                          
+ .dP'    `YM.                                                                     
+ dM'      `MM `7Mb,od8 .P"Ybmmm ,6"Yb.  `7MMpMMMb.  `7MM  M"""MMV .gP"Ya `7Mb,od8 
+ MM        MM   MM' "':MI  I8  8)   MM    MM    MM    MM  '  AMV ,M'   Yb  MM' "' 
+ MM.      ,MP   MM     WmmmP"   ,pm9MM    MM    MM    MM    AMV  8M""""""  MM     
+ `Mb.    ,dP'   MM    8M       8M   MM    MM    MM    MM   AMV  ,YM.    ,  MM     
+   `"bmmd"'   .JMML.   YMMMMMb `Moo9^Yo..JMML  JMML..JMML.AMMmmmM `Mbmmd'.JMML.   
+                      6'     dP                                                   
+                      Ybmmmd'                                                     
+```
 
 ## How does it work 
 ```text
@@ -8,12 +27,12 @@ make       |----------------| ./mediaOrganizer /picture.jpg /path/to/store      
       	   |----------------| ./mediaOrganizer /path/folder /path/to/store      | in year/month    | 
                     |                                        	                |------------------| 
                     |
-		            |         ./mediaOrganizer -dup /path/to/store              |------------------| 
+                    |         ./mediaOrganizer -dup /path/to/store              |------------------| 
                     \---------------------------------------------------------> | duplicate free   | 
       	                                                                        | folders          | 
                                                             	                |------------------| 
 ```
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplay.jpg)
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/MediaOrganizerDisplay.jpg)
 <br />**_( These is achieved in one run of the program )_**
 
 ## Why use Media Organizer
@@ -69,29 +88,35 @@ _Output:_
 > > > > > > The resolutions are the same
 > > > > > > > rm -rf "/videos/videowemv copy.wmv" ( DELETED )
 ```
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplayDuplicate.jpg)
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/MediaOrganizerDisplayDuplicate.jpg)
 <br />**_( These is achieved in one run of the program )_**
 
 ## Flags
-Flags can only be used in the end of the command in whatever order you wish.
-<br />Except for ```-dup```, that works only in the beginning.
+Flags can be put in any order you wish even in the middle of the directories, like this:
+```./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder -png```
+is the same with,
+```./mediaOrganizer /path/source/folder /path/to/store/folder -mp4 -jpg -png```
 
-```./mediaOrganizer /path/picture.jpg /path/to/store/folder -mp4 -jpg```
-<br /># will only copy jpg and mp4 files.
+```./mediaOrganizer -mp4 -jpg /path/source/folder /path/to/store/folder```
+or
+```./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder```
+<br />will only copy jpg and mp4 files.
 
-```./mediaOrganizer /path/picture.jpg /path/to/store/folder -photo```
-<br /># will only copy photos not videos.
+```./mediaOrganizer /path/source/folder /path/to/store/folder -photo```
+<br />will only copy photos not videos.
 
-```./mediaOrganizer -dup /Path```
-<br /># duplicates will be deleted.
+```./mediaOrganizer -dup /path/source/folder```
+<br />duplicates will be deleted.
 
-~~```./mediaOrganizer /path/picture.jpg /path/to/store/folder -photo -jpg```~~
-<br /># **! this is _NOT_ valid.**
+~~```./mediaOrganizer -dup /path/picture.jpg /path/to/store/folder -jpg```~~
+<br />**! this is _NOT_ valid because -dup can only be used alone.**
+
+~~```./mediaOrganizer -video /path/picture.jpg /path/to/store/folder -jpg```~~
+<br />**! only _videos_ will be copied.**
 
 ##### Category:
  * -photo : _for photo organization only_
  * -video : _for video organization only_
- <br />**( Attention: These modes can only be used solely )**
 
 ##### File type:
  * -jpg : _for jpg organization only_
@@ -105,7 +130,6 @@ Flags can only be used in the end of the command in whatever order you wish.
 
 ##### Information:
  * -det : _for a detailed list of executions in a txt format_ ( detailedTransfer.txt )
-<br />**( You can use multiple flags, in order to transfer only the selected file types )**
 
 ##### Mode:
  * -dup : _duplicate mode deletes duplicate with diffrent names_
