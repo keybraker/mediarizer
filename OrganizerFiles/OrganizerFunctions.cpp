@@ -2,7 +2,35 @@
 
 using namespace std;
 
-int detailed = -1;
+int detailed = -1,
+    hundredP = -1,
+    currentP = 0;
+
+int hundredPercent(const char* path){
+
+  char *cmd = (char *) malloc (128 * sizeof(char));
+
+  strcpy(cmd, "find \"");
+  strcat(cmd, path);
+  strcat(cmd, "\" -type f | wc -l");
+
+  return (stoi(exec(cmd)));
+
+}
+
+void percentige(){
+
+  currentP += 1;
+
+  if(((currentP*100)/(hundredP^2)) > 100){
+    printf(ACY "\r/----------------------------------[%3d%%]----------------------------------\\" ACRE, 100);
+    printf("\n");
+  }else{
+    printf(ACY "\r/----------------------------------[%3d%%]----------------------------------\\" ACRE, ((currentP*100) / (hundredP^2)));
+    printf("\n");
+  }
+
+}
 
 void detailedFile(const char* string){
 
@@ -153,10 +181,10 @@ string dateOfCreation(const char *path){
 
 int isRegularFile(const char *path){ 
   detailedFile("isRegularFile"); detailedFile("⬇︎");
-    
-    struct stat path_stat;
-    stat(path, &path_stat);
-    return S_ISREG(path_stat.st_mode);
+
+  struct stat path_stat;
+  stat(path, &path_stat);
+  return S_ISREG(path_stat.st_mode);
 
 }
 
@@ -491,6 +519,8 @@ void fileVersion(const char *path, const char *pathToStore){
 void folderVersion(const char *path, const char *pathToStore, int *arg){ 
   detailedFile("folderVersion"); detailedFile("⬇︎");
 
+  hundredP = hundredPercent(path);
+
   bool  isArgFree = true, 
         photoOnly = false,
         videoOnly = false;
@@ -634,6 +664,9 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
 void duplicateVersion(const char *path){ 
   detailedFile("duplicateVersion"); detailedFile("with path:"); detailedFile(path); detailedFile("⬇︎");
 
+  if(hundredP == -1)
+    hundredP = hundredPercent(path);
+
   int j = 1;
   DIR *d;
   struct dirent *dir;
@@ -696,7 +729,7 @@ void duplicateCleaner(const char *master, const char *path, int type){
   strcpy(imagePath,  path); strcat(imagePath,  "/");
 
   if (d) {
-    
+    percentige();
     printf("> MASTER : %s, COMPARED TO, %s .\n",masterPath, path);
 
     while ((dir = readdir(d)) != NULL){
@@ -848,8 +881,6 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
 }
 
 
-
-//
 
 
 

@@ -95,8 +95,8 @@ if(argc > 2){
 }
 
 int sum = 0;
-for(int i = 0; i < 10; i++){ sum += arg[i]; }
-if(arg[10] == 1 && sum != arg[10]){
+for(int i = 0; i < 11; i++){ if(arg[i] == 1)   sum += arg[i]; }
+  if(arg[10] == 1 && sum != arg[10]){
   printf(ACR "-dup can only be used solely, with a directory not file.\n" ACRE);
   return -1;
 

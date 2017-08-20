@@ -43,7 +43,11 @@ struct originalDateData{
   
 };
 
+int hundredPercent(const char* path);
+void percentige();
+
 void detailedFile(const char* string);
+string exec(const char* cmd);
 int transfer (char *source, char *dest);
 
 string dateOfCreation (const char *path);
