@@ -92,28 +92,8 @@ _Output:_
 <br />**_( These is achieved in one run of the program )_**
 
 ## Flags
-#### Flags can be put in any order you wish even in the middle of the directories, like this:
-```./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder -png```
-<br />is the same as,<br />
-```./mediaOrganizer /path/source/folder /path/to/store/folder -mp4 -jpg -png```
 
-#### will only copy jpg and mp4 files.
-```./mediaOrganizer -mp4 -jpg /path/source/folder /path/to/store/folder```
-<br />is the same as,<br />
-```./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder```
-
-#### will only copy photos not videos.
-```./mediaOrganizer /path/source/folder /path/to/store/folder -photo```
-
-#### duplicates will be deleted.
-```./mediaOrganizer -dup /path/source/folder```
-
-#### **! only _videos_ will be copied.**
-```./mediaOrganizer -video /path/picture.jpg /path/to/store/folder -jpg```
-
-#### **! this is _NOT_ valid because -dup can only be used alone.**
-~~```./mediaOrganizer -dup /path/picture.jpg /path/to/store/folder -jpg```~~
-
+#### Flag List
 ##### Category:
  * -photo : _for photo organization only_
  * -video : _for video organization only_
@@ -134,6 +114,29 @@ _Output:_
 ##### Mode:
  * -dup : _duplicate mode deletes duplicate with diffrent names_
  <br />**( Duplication cleaning is fully funcitonal, but please _back up your files_ before attempting to use it. _Run at your own risk_ )**
+
+#### Flag Examples
+##### Flags can be put in any order you wish even in the middle of the directories, like this:
+```./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder -png```
+<br />is the same as,<br />
+```./mediaOrganizer /path/source/folder /path/to/store/folder -mp4 -jpg -png```
+
+##### will only copy jpg and mp4 files.
+```./mediaOrganizer -mp4 -jpg /path/source/folder /path/to/store/folder```
+<br />is the same as,<br />
+```./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder```
+
+##### will only copy photos not videos.
+```./mediaOrganizer /path/source/folder /path/to/store/folder -photo```
+
+##### duplicates will be deleted.
+```./mediaOrganizer -dup /path/source/folder```
+
+##### **! only _videos_ will be copied.**
+```./mediaOrganizer -video /path/picture.jpg /path/to/store/folder -jpg```
+
+##### **! this is _NOT_ valid because -dup can only be used alone.**
+~~```./mediaOrganizer -dup /path/picture.jpg /path/to/store/folder -jpg```~~
 
 ## Corrupted files or Unsupported files
 All corrupted or unsupported files are not being copied. If even one file is copputed or unsupported, a txt file is created called ``` corruptedFiles ```, in which every corrupted or unsupported file is listed by its full path, so that you can handle it manually.
