@@ -120,7 +120,7 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
   printf("VARIATION LIKE 'IMG.JPG' AND 'IMG (2).JPG', THE\n");
   printf("PHOTO WITH THE LONGER NAME WILL BE DELETED.\n");
   printf("THERE IS A SLIGHT CHANCE THAT THE ALGORITHM MAY,\n");
-  printf("DELETE A WRONG FILE BUT THE CHANCES ARE MINIMAL TO NONE.\n\n" ACRE);
+  printf("DELETE A WRONG FILE BUT THE CHANCES ARE MINIMAL TO NONE. \n\n" ACRE);
 
   string answer;
   cout << "Proceed on your own risk (y/n): ";
