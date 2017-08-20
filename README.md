@@ -3,10 +3,10 @@ Organises all your media in a chronological order.
 
 ## How does it work 
 ```text
-make      |----------------| ./mediaOrganizer /picture.jpg /desPath            |------------------| 
---------> | mediaOrganizer |-------------------------------------------------> | organised photos | 
-      	  |----------------| ./mediaOrganizer /folderPath /desPath             | in year/month    | 
-                                                        	               |------------------| 
+make       |----------------| ./mediaOrganizer /picture.jpg /desPath            |------------------| 
+---------> | mediaOrganizer |-------------------------------------------------> | organised photos | 
+      	   |----------------| ./mediaOrganizer /folderPath /desPath             | in year/month    | 
+                                                            	                |------------------| 
 ```
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplay.jpg)
 <br />**_( These is achieved in one run of the program )_**
