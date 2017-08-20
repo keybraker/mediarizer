@@ -38,16 +38,18 @@ make
 ```
 
 #### 3. Run the program:
-##### Single image mode: Organises the one picture or video given to it.
+##### a. Single image mode: Organises the one picture or video given to it.
 ```
 ./mediaOrganizer /path/picture.jpg /destinationPath
 ```
-##### Folder mode: Organises all the pictures and videos in a folder, and the folders in it.
+##### b. Folder mode: Organises all the pictures and videos in a folder, and the folders in it.
 ```
 ./mediaOrganizer /path/folder /destinationPath
 ```
 ###### Photos are copied to the new path if date information is available. <br />Same photos with same names, from diffrent folders are not being copied.
-##### Duplicate mode: Deletes all duplicate pictures and videos in a folder, and the folders in it.
+###### To clean the program type ``` make clean ``` in ``` /Media-Organizer ```
+
+##### c. Duplicate mode: Deletes all duplicate pictures and videos in a folder, and the folders in it.
 ```
 ./mediaOrganizer -dup /path/folder
 ```
@@ -105,9 +107,6 @@ Flags can only be used in the end of the command in whatever order you wish.
 All corrupted jpeg files are not being copied. If even one file is copputed, a txt file is
  <br />created called ``` corruptedFiles ``` in which every corrupted files is listed wby its full
  <br />path, so that you can handle it manually.
-
-## Cleaning
-* To clean the program type ``` make clean ``` in ``` /Media-Organizer ```
 
 ## Photo file support list 
 * jpeg
