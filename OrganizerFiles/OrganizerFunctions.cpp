@@ -17,8 +17,8 @@ void detailedFile(const char* string){
 
 }
 
-string exec(const char* cmd) { detailedFile("exec"); 
-detailedFile("⬇︎");
+string exec(const char* cmd) { 
+  detailedFile("exec"); detailedFile("⬇︎");
     
     array<char, 32768> buffer;
     string result;
@@ -648,7 +648,7 @@ void duplicateVersion(const char *path){
       strcpy(imagePath, path); strcat(imagePath, "/"); strcat(imagePath, dir->d_name);
 
       if(!isRegularFile(imagePath) && (dirFile.find('.') == string::npos)){
-        printf("GOING IN %s\n", imagePath);
+        printf("> GOING IN %s\n", imagePath);
         duplicateVersion(imagePath);
 
       }else if ( typeOfFileInt(imagePath) != -1 ){ 
@@ -664,7 +664,8 @@ void duplicateVersion(const char *path){
         }
         
         if(j)
-          duplicateCleaner(dir->d_name, path, typeOfFileInt(imagePath));
+          if(strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )))
+            duplicateCleaner(dir->d_name, path, typeOfFileInt(imagePath));
 
       }
 
@@ -693,7 +694,7 @@ void duplicateCleaner(const char *master, const char *path, int type){
 
   if (d) {
     
-    printf("> MASTER : %s, COMPARED TO, %s.\n",masterPath, path);
+    printf("> MASTER : %s, COMPARED TO, %s .\n",masterPath, path);
 
     while ((dir = readdir(d)) != NULL){
 
@@ -703,38 +704,39 @@ void duplicateCleaner(const char *master, const char *path, int type){
       if(strcmp(dir->d_name, master) != 0){ 
 
         if ( type == typeOfFileInt(imagePath) ){ 
-          
-          duplicateCleanerExecution(masterPath, imagePath);
+
+          if ( strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )  ) )
+            duplicateCleanerExecution(masterPath, imagePath);
 
         }else if ( type == typeOfFileInt(imagePath) ){ 
 
-          strcat(imagePath, dir->d_name);
-          duplicateCleanerExecution(masterPath, imagePath);
+          if ( strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )  ) )
+            duplicateCleanerExecution(masterPath, imagePath);
 
         }else if ( type == typeOfFileInt(imagePath) ){ 
 
-          strcat(imagePath, dir->d_name);
-          duplicateCleanerExecution(masterPath, imagePath);
+          if ( strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )  ) )
+            duplicateCleanerExecution(masterPath, imagePath);
 
         }else if ( type == typeOfFileInt(imagePath) ){ 
 
-          strcat(imagePath, dir->d_name);
-          duplicateCleanerExecution(masterPath, imagePath);
+          if ( strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )  ) )
+            duplicateCleanerExecution(masterPath, imagePath);
 
         }else if ( type == typeOfFileInt(imagePath) ){ 
 
-          strcat(imagePath, dir->d_name);
-          duplicateCleanerExecution(masterPath, imagePath);
+          if ( strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )  ) )
+            duplicateCleanerExecution(masterPath, imagePath);
 
         }else if ( type == typeOfFileInt(imagePath) ){ 
 
-          strcat(imagePath, dir->d_name);
-          duplicateCleanerExecution(masterPath, imagePath);
+          if ( strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )  ) )
+            duplicateCleanerExecution(masterPath, imagePath);
 
         }else if ( type == typeOfFileInt(imagePath) ){
 
-          strcat(imagePath, dir->d_name);
-          duplicateCleanerExecution(masterPath, imagePath);
+          if ( strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )  ) )
+            duplicateCleanerExecution(masterPath, imagePath);
 
         }
 
@@ -765,28 +767,28 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
   strcpy(cmdThree,  "exiftool -ImageSize \"");  strcat(cmdThree,  imagePathMaster);     strcat(cmdThree, "\""); 
   strcpy(cmdFour,   "exiftool -ImageSize \"");  strcat(cmdFour,   imagePathCandidate);  strcat(cmdFour, "\""); 
 
-  printf("> MASTER FILE : %s, CANDIDATE FILE, %s.\n",imagePathMaster, imagePathCandidate);
+  printf("> MASTER FILE : %s, CANDIDATE FILE, %s .\n",imagePathMaster, imagePathCandidate);
 
   if( isRegularFile(imagePathCandidate) ){ 
-    printf(ACG "> > It is a file and is not hidden\n" ACRE);
+    printf(ACG "> > It is a file.\n" ACRE);
     // is file and is not hidden 
       
       if( exec(cmdOne).compare(exec(cmdTwo)) == 0){ 
-        printf(ACG "> > > > The sizes are the same\n" ACRE);
+        printf(ACG "> > > > The sizes are the same.\n" ACRE);
         // sizes are the same
 
         if( !dateOfCreation(imagePathMaster).empty() 
           && !dateOfCreation(imagePathCandidate).empty() 
           && dateOfCreation(imagePathMaster).compare(dateOfCreation(imagePathCandidate)) == 0){  
-          printf(ACG "> > > > > The dates of creation are the same\n" ACRE);
+          printf(ACG "> > > > > The dates of creation are the same.\n" ACRE);
           // dates of creation are the same
 
           if( exec(cmdThree).compare(exec(cmdFour)) == 0){  
-            printf(ACG "> > > > > > The resolutions are the same\n" ACRE);
+            printf(ACG "> > > > > > The resolutions are the same.\n" ACRE);
             // resolutions are the same
 
             if( strcmp(imagePathMaster, imagePathCandidate) > 0){ 
-            printf(ACG "> > > The names are equal except for a slight variation\n" ACRE);
+            printf(ACG "> > > The names are equal except for a slight variation.\n" ACRE);
             // the names are equal except for a slight variation
 
               char* rmcmd = (char*) malloc (65536 * sizeof(char));
@@ -801,7 +803,7 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
               detailedFile("\n===========");
 
               printf(ACG "> > > > > > => ");
-              printf(ACBO "%s ( DELETED )\n\n" ACRE, rmcmd);
+              printf(ACBO "%s ( DELETED ).\n\n" ACRE, rmcmd);
               return ;
 
             }else{
@@ -818,25 +820,25 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
               detailedFile("\n===========");
 
               printf(ACG "> > > > > > => ");
-              printf(ACBO "%s ( DELETED )\n\n" ACRE, rmcmd);
+              printf(ACBO "%s ( DELETED ).\n\n" ACRE, rmcmd);
               return ;
 
             }
 
           }
-          printf(ACR "> > > > > > The resolutions are the NOT same\n" ACRE);
+          printf(ACR "> > > > > > The resolutions are the NOT same.\n" ACRE);
           cout << endl << endl;
           return ;
         }
-        printf(ACR "> > > > > The dates of creation are NOT the same\n" ACRE);
+        printf(ACR "> > > > > The dates of creation are NOT the same.\n" ACRE);
         cout << endl << endl;
         return ;
       }
-      printf(ACR "> > > > The sizes are NOT the same\n" ACRE);
+      printf(ACR "> > > > The sizes are NOT the same.\n" ACRE);
       cout << endl << endl;
       return ;
     }
-    printf(ACR "> > It is NOT a file and is hidden\n" ACRE);
+    printf(ACR "> > It is NOT a file.\n" ACRE);
     cout << endl << endl;
     return ;
 
