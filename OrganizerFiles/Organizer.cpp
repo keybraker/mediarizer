@@ -1,5 +1,4 @@
 #include "Organizer.h"
-#include <stdio.h>
 
 #define ACR   "\x1b[31m"
 #define ACG   "\x1b[32m"
@@ -23,11 +22,19 @@ int main(int argc, char *argv[]) {
       printf("THERE IS A SLIGHT CHANCE THAT THE ALGORITHM MAY,\n");
       printf("DELETE A WRONG FILE BUT THE CHANCES ARE MINIMAL TO NONE.\n\n" ACRE);
 
-      if(!isRegularFile(argv[2])){
-        duplicateVersion(argv[2]);
-      }else{
-        printf(ACR "Duplicate Cleaner: can only be used in folders.\n");
-        printf("( %s , is not a directory )" ACRE, argv[2]);
+      string answer;
+      cout << "Proceed on your own risk (y/n): ";
+      cin  >> answer;
+
+      if(answer.compare("y") == 0){
+ 
+        if(!isRegularFile(argv[2])){
+          duplicateVersion(argv[2]);
+        }else{
+          printf(ACR "Duplicate Cleaner: can only be used in folders.\n");
+          printf("( %s , is not a directory )" ACRE, argv[2]);
+        }
+
       }
 
     }else{

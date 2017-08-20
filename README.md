@@ -45,6 +45,17 @@ make
 ```
 ./mediaOrganizer /path/folder /destinationPath
 ```
+##### Duplicate mode: Deletes all duplicate pictures and videos in a folder, and the folders in it.
+```
+./mediaOrganizer -dup /path/folder
+```
+_Output:_
+> >It is a file and is not hidden
+> > > The names are equal except for a slight variation
+> > > > The sizes are the same
+> > > > > The dates of creation are the same
+> > > > > > The resolutions are the same
+> > > > > > => rm -rf "/videos/videowemv copy.wmv" ( DELETED )
 
 ## Flags
 Flags can only be used in the end of the command in whatever order you wish.
@@ -83,10 +94,11 @@ Flags can only be used in the end of the command in whatever order you wish.
 
 ##### Mode:
  * -dup : duplicate mode deletes duplicate with diffrent names
- <br />**( duplication cleaning is still in _BETA_ please _back up your files_ before attempting use with _caution_ and _on your own risk_ )**
+ <br />**( duplication cleaning is out of _BETA_ but please _back up your files_ before attempting use with _caution_ and _on your own risk_ )**
 
 ## Coping Files
-Photos are only copied once, so cleaning is done as-well !
+Photos are copied to the new path if date information is available. 
+<br />Same photos with same names, from diffrent folders are not being copied.
 
 ## Corrupted files
 All corrupted jpeg files are not being copied. If even one file is copputed, a txt file is
@@ -109,6 +121,7 @@ All corrupted jpeg files are not being copied. If even one file is copputed, a t
 
 ## Release History
 
+* v1.5.0: 20 August 2017: Fully functional duplication deletion.
 * v1.5.0: 19 August 2017: Added duplication deletion.
 * v1.1.2: 18 August 2017: Added -flags for a more controlled organisation.
 * v1.1.1: 17 August 2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
