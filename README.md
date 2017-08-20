@@ -92,13 +92,13 @@ _Output:_
 <br />**_( These is achieved in one run of the program )_**
 
 ## Flags
-Flags can be put in any order you wish even in the middle of the directories, like this:
 ```./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder -png```
-is the same with,
+<br />is the same as,<br />
 ```./mediaOrganizer /path/source/folder /path/to/store/folder -mp4 -jpg -png```
+<br />Flags can be put in any order you wish even in the middle of the directories, like this:
 
 ```./mediaOrganizer -mp4 -jpg /path/source/folder /path/to/store/folder```
-or
+<br />is the same as,<br />
 ```./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder```
 <br />will only copy jpg and mp4 files.
 
