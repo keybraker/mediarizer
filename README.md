@@ -28,8 +28,8 @@ git clone https://github.com/keybraker/Media-Organizer.git
 ```
 #### 2. Install ExifTool by Phil Harvey
 Download and install from here [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/).
- <br />This program may very well be the best exif parser in the world (nj).
- <br />This is the heart of the program and the essential tool that helped create this project.
+<br />This program may very well be the best exif parser in the world (nj).
+<br />This is the heart of the program and the essential tool that helped create this project.
 
 ## Usage Guide
 #### 1. Open a terminal window and cd to cloned project
@@ -58,7 +58,7 @@ make
 ```
 ./mediaOrganizer -dup /path/folder
 ```
-###### Better run duplicate mode after organizing. It may be more cpu and time consuming but you can guarantee a fully, free of duplicates library !
+###### Better run duplicate mode after organizing. It may be more cpu and time consuming but you can guarantee a fully, free of duplicates library due to the siple fact that duplicate files are only searched in current folder.
 
 _Output:_
 ```
@@ -77,16 +77,16 @@ Flags can only be used in the end of the command in whatever order you wish.
 <br />Except for ```-dup```, that works only in the beginning.
 
 ```./mediaOrganizer /path/picture.jpg /path/to/store/folder -mp4 -jpg```
-<br />will only copy jpg and mp4 files.
+<br /># will only copy jpg and mp4 files.
 
 ```./mediaOrganizer /path/picture.jpg /path/to/store/folder -photo```
-<br />will only copy photos not videos.
+<br /># will only copy photos not videos.
 
 ```./mediaOrganizer -dup /Path```
-<br />duplicates will be deleted.
+<br /># duplicates will be deleted.
 
 ~~```./mediaOrganizer /path/picture.jpg /path/to/store/folder -photo -jpg```~~
-<br /> **! this is _NOT_ valid.**
+<br /># **! this is _NOT_ valid.**
 
 ##### Category:
  * -photo : _for photo organization only_
@@ -104,17 +104,15 @@ Flags can only be used in the end of the command in whatever order you wish.
 <br />**( You can use multiple flags, in order to transfer only the selected file types )**
 
 ##### Information:
- * -det : for a detailed list of executions in a txt format ( detailedTransfer.txt )
+ * -det : _for a detailed list of executions in a txt format_ ( detailedTransfer.txt )
 <br />**( You can use multiple flags, in order to transfer only the selected file types )**
 
 ##### Mode:
- * -dup : duplicate mode deletes duplicate with diffrent names
+ * -dup : _duplicate mode deletes duplicate with diffrent names_
  <br />**( Duplication cleaning is fully funcitonal, but please _back up your files_ before attempting to use it. _Run at your own risk_ )**
 
-## Corrupted files
-All corrupted jpeg files are not being copied. If even one file is copputed, a txt file is
- <br />created called ``` corruptedFiles ``` in which every corrupted files is listed wby its full
- <br />path, so that you can handle it manually.
+## Corrupted files or Unsupported files
+All corrupted or unsupported files are not being copied. If even one file is copputed or unsupported, a txt file is created called ``` corruptedFiles ```, in which every corrupted or unsupported file is listed by its full path, so that you can handle it manually.
 
 ## Photo file support list 
 * jpeg
