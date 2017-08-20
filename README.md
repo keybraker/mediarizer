@@ -3,9 +3,14 @@ Organises all your media in a chronological order.
 
 ## How does it work 
 ```text
-make       |----------------| ./mediaOrganizer /picture.jpg /desPath            |------------------| 
+make       |----------------| ./mediaOrganizer /picture.jpg /path/to/store      |------------------| 
 ---------> | mediaOrganizer |-------------------------------------------------> | organised photos | 
-      	   |----------------| ./mediaOrganizer /folderPath /desPath             | in year/month    | 
+      	   |----------------| ./mediaOrganizer /path/folder /path/to/store      | in year/month    | 
+                    |                                        	                |------------------| 
+                    |
+		    |         ./mediaOrganizer -dup /path/to/store              |------------------| 
+                    \---------------------------------------------------------> | duplicate free   | 
+      	                                                                        | folders          | 
                                                             	                |------------------| 
 ```
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplay.jpg)
@@ -53,6 +58,8 @@ make
 ```
 ./mediaOrganizer -dup /path/folder
 ```
+###### Better run duplicate mode after organizing. It may be more cpu and time consuming but you can guarantee a fully, free of duplicates library !
+
 _Output:_
 ```
 > > It is a file and is not hidden
