@@ -49,7 +49,7 @@ int transfer(const char *source, const char *dest){
 
   system(transfer);
 
-  printf("> %s\n", transfer);
+  printf(ACG "> %s\n" ACRE, transfer);
   detailedFile(transfer);
   detailedFile("\n===========");
 
@@ -490,16 +490,16 @@ void fileVersion(const char *path, const char *pathToStore){
 
 void folderVersion(const char *path, const char *pathToStore, int *arg){ 
   detailedFile("folderVersion"); detailedFile("⬇︎");
-  
+
   bool  isArgFree = true, 
         photoOnly = false,
         videoOnly = false;
 
   if(arg[7] == 1){ detailed  = 1; }
-  if(arg[0] == 2){ photoOnly = true; }
-  if(arg[0] == 3){ videoOnly = true; }
+  if(arg[8] == 1){ photoOnly = true; }
+  if(arg[9] == 1){ videoOnly = true; }
 
-  for(int i = 0; i < 7; i++){
+  for(int i = 0; i < 9; i++){
     if(arg[i] != -1){
       isArgFree = false;
       break;
@@ -584,7 +584,10 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
         strcat(imagePathFinal, imagePath);
 
         if(j){
-          if(photoOnly){
+          if(photoOnly && videoOnly){
+            fileVersion(imagePathFinal, pathToStore);
+
+          }else if(photoOnly){
             if(typeOfFile(imagePathFinal))
               fileVersion(imagePathFinal, pathToStore);
 

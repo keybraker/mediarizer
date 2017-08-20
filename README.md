@@ -1,6 +1,7 @@
 # Media Organizer 
 Organises all your media in a chronological order.
 
+
 ## How does it work 
 ```text
 make       |----------------| ./mediaOrganizer /picture.jpg /path/to/store      |------------------| 
