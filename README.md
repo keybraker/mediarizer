@@ -14,7 +14,7 @@ make       |----------------| ./mediaOrganizer /picture.jpg /path/to/store      
       	                                                                        | folders          | 
                                                             	                |------------------| 
 ```
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplay.jpg)
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/MediaOrganizerDisplay.jpg)
 <br />**_( These is achieved in one run of the program )_**
 
 ## Why use Media Organizer
@@ -70,7 +70,7 @@ _Output:_
 > > > > > > The resolutions are the same
 > > > > > > > rm -rf "/videos/videowemv copy.wmv" ( DELETED )
 ```
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/MediaOrganizerDisplayDuplicate.jpg)
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/MediaOrganizerDisplayDuplicate.jpg)
 <br />**_( These is achieved in one run of the program )_**
 
 ## Flags
