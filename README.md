@@ -19,7 +19,6 @@ Organises all your media in a chronological order.
                       6'     dP                                                   
                       Ybmmmd'                                                     
 ```
-***
 
 ## How it works
 ```text
@@ -37,11 +36,11 @@ make       |----------------| ./mediaOrganizer /media.file /path/to/store       
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/MediaOrganizerDisplay.jpg)
 <br />**_( These is achieved in one run of the program )_**
 
-***
 Why use Media Organizer:
 * Organises photos / videos extremly fast, the only limitation is your hardware
 * Cleans your library from duplicates
 * Lightweight and runs everywhere
+***
 
 ## Installation Guide
 #### 1. Clone this repository with ( or download zip ):
