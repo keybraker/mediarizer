@@ -179,8 +179,8 @@ All corrupted or unsupported files are not being copied. If even one file is cop
 
 ## Future Improvements and features 
 1. Threads
-2. support for more files
-3. gps location organization
+2. Support for more files
+3. GPS location organization
 
 ## Authors
 * **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
