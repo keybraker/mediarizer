@@ -126,7 +126,7 @@ is the same as,
 ```
 ./mediaOrganizer /path/source/folder /path/to/store/folder -mp4 -jpg -png
 ```
-
+***
 ##### Will only copy jpg and mp4 files:
 ```
 ./mediaOrganizer -mp4 -jpg /path/source/folder /path/to/store/folder
@@ -135,26 +135,26 @@ is the same as,
 ```
 ./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder
 ```
-
+***
 ##### Will only copy photos not videos:
 ```
 ./mediaOrganizer /path/source/folder /path/to/store/folder -photo
 ```
-
+***
 ##### Duplicates will be deleted:
 ```
 ./mediaOrganizer -dup /path/source/folder
 ```
-
+***
 ##### **! Only _videos_ will be copied:**
 ```
 ./mediaOrganizer -video /path/media.file /path/to/store/folder -jpg
 ```
-
+***
 ##### **! This is _NOT_ valid because -dup can only be used alone:**
 ~~```./mediaOrganizer -dup /path/media.file /path/to/store/folder -jpg```~~
-
-## file support list 
+***
+## File support list 
 ### Photos: 
 * jpeg
 * png
