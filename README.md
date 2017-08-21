@@ -189,8 +189,7 @@ Future Improvements and features:
 2. Support for more files
 3. GPS location organization
 
-## Acknowledgments
-* Phil Harvey with the exeptional [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/)
+Acknowledgments - **Phil Harvey** with the exeptional [**ExifTool**](http://owl.phy.queensu.ca/~phil/exiftool/)
 
 ***
 Author - **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
