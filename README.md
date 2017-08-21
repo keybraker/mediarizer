@@ -117,25 +117,39 @@ _Output:_
 
 #### Flag Use Examples:
 ##### Flags can be put in any order you wish even in the middle of the directories, like this:
-```./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder -png```
-<br />is the same as,<br />
-```./mediaOrganizer /path/source/folder /path/to/store/folder -mp4 -jpg -png```
+```
+./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder -png
+```
+is the same as,
+```
+./mediaOrganizer /path/source/folder /path/to/store/folder -mp4 -jpg -png
+```
 
-##### will only copy jpg and mp4 files.
-```./mediaOrganizer -mp4 -jpg /path/source/folder /path/to/store/folder```
-<br />is the same as,<br />
-```./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder```
+##### Will only copy jpg and mp4 files:
+```
+./mediaOrganizer -mp4 -jpg /path/source/folder /path/to/store/folder
+```
+is the same as,
+```
+./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder
+```
 
-##### will only copy photos not videos.
-```./mediaOrganizer /path/source/folder /path/to/store/folder -photo```
+##### Will only copy photos not videos:
+```
+./mediaOrganizer /path/source/folder /path/to/store/folder -photo
+```
 
-##### duplicates will be deleted.
-```./mediaOrganizer -dup /path/source/folder```
+##### Duplicates will be deleted:
+```
+./mediaOrganizer -dup /path/source/folder
+```
 
-##### **! only _videos_ will be copied.**
-```./mediaOrganizer -video /path/media.file /path/to/store/folder -jpg```
+##### **! Only _videos_ will be copied:**
+```
+./mediaOrganizer -video /path/media.file /path/to/store/folder -jpg
+```
 
-##### **! this is _NOT_ valid because -dup can only be used alone.**
+##### **! This is _NOT_ valid because -dup can only be used alone:**
 ~~```./mediaOrganizer -dup /path/media.file /path/to/store/folder -jpg```~~
 
 ## Corrupted files or Unsupported files
@@ -166,8 +180,8 @@ All corrupted or unsupported files are not being copied. If even one file is cop
 
 ## Future Improvements and features 
 1. Threads
-2. support for more files
-3. gps location organization
+2. Support for more files
+3. GPS location organization
 
 ## Authors
 * **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
