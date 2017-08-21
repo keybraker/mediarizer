@@ -18,6 +18,7 @@ int hundredPercent(const char* path){
 
 }
 
+
 void percentige(){
 
   currentP += 1;

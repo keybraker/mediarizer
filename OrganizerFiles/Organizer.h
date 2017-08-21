@@ -69,3 +69,4 @@ void duplicateCleaner(const char *master, const char *path, int type);
 void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePathCandidate);
 
 #endif
+
