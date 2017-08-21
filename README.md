@@ -116,8 +116,6 @@ _Duplicate Mode Output:_
 
 ##### Mode:
  * -dup : _duplicate mode deletes duplicate with diffrent names_
- <br />**( Duplication cleaning is fully funcitonal, but please _back up your files_ before attempting to use it.**
- <br />**_Run at your own risk_ )**
 
 #### Flag Use Examples:
 ##### Flags can be put in any order you wish even in the middle of the directories, like this:
