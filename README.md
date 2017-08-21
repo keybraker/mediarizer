@@ -107,6 +107,7 @@ _Output:_
 <br />**( You can use multiple flags, in order to transfer only the selected file types )**
 
 ##### Informative:
+ * -hlp : _Media Organizer User Guide_ 
  * -det : _for a detailed list of executions in a txt format_ ( detailedTransfer.txt )
 
 ##### Mode:

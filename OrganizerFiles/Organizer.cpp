@@ -1,16 +1,16 @@
 #include "Organizer.h"
 
-void help(){
+void hlp(){
 
   printf("\nThere are three modes to choose from:\n");
   printf("=====================================\n\n");
   printf("1) File Mode\n   ---------\n");
-    printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n");
+    printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n\n");
 
   printf("2) Folder Mode\n   -----------\n");
-    printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
+    printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n\n");
 
-  printf("3) Duplication Cleaning Mode\n   -----------------------\n");
+  printf("3) Duplication Cleaning Mode\n   -------------------------\n");
     printf(" ./mediaOrganizer -dup /source/path/folder\n\n");
 
   printf("Flags:\n======\n\n");
@@ -28,6 +28,7 @@ void help(){
   printf(" -mts:    for mts organization only.\n\n");
 
   printf(" Informative\n -----------\n");
+  printf(" -hlp:    Media Organizer User Guide.\n"); 
   printf(" -det:    for a detailed list of executions in a txt format ( detailedTransfer.txt ).\n\n"); 
 
   printf(" Mode\n ----\n");
@@ -44,8 +45,8 @@ int main(int argc, char *argv[]) {
 int arg[11] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 int *argp = arg;
 char *sourcePath = NULL, *destPath = NULL, *filePath = NULL;   
-if(argc == 2 && !strcmp(argv[1], "-help")){
-  help();
+if(argc == 2 && !strcmp(argv[1], "-hlp")){
+  hlp();
   return 1;
 
 }else if(argc > 2){
@@ -85,8 +86,8 @@ if(argc == 2 && !strcmp(argv[1], "-help")){
     }else if(!strcmp(argv[i], "-dup")){ 
       arg[10] = 1;
 
-    }else if(!strcmp(argv[i], "-help")){
-      help();
+    }else if(!strcmp(argv[i], "-hlp")){
+      hlp();
       return -1;
 
     }else if(argv[i][0] == '-'){
@@ -105,7 +106,8 @@ if(argc == 2 && !strcmp(argv[1], "-help")){
       printf(" -mp4:    for mp4 organization only.\n");
       printf(" -mts:    for mts organization only.\n\n");
 
-      printf(" Informative\n -----------\n");
+      printf(" Informative\n -----------\n"); 
+      printf(" -hlp:    Media Organizer User Guide.\n"); 
       printf(" -det:    for a detailed list of executions in a txt format ( detailedTransfer.txt ).\n\n"); 
 
       printf(" Mode\n ----\n");
@@ -127,7 +129,7 @@ if(argc == 2 && !strcmp(argv[1], "-help")){
           printf(ACR "Media Organizer Usage Guide:\n");
           printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n");
           printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
-          printf(" for more information use -help\n" ACRE);
+          printf(" for more information use -hlp\n" ACRE);
           return -1;
 
         }
@@ -146,7 +148,7 @@ if(argc == 2 && !strcmp(argv[1], "-help")){
           printf(ACR "Media Organizer Usage Guide:\n");
           printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n");
           printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
-          printf(" for more information use -help\n" ACRE);
+          printf(" for more information use -hlp\n" ACRE);
           return -1;
 
         }
@@ -161,7 +163,7 @@ if(argc == 2 && !strcmp(argv[1], "-help")){
   printf(ACR "Media Organizer Usage Guide:\n");
   printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n");
   printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
-  printf(" for more information use -help\n" ACRE);
+  printf(" for more information use -hlp\n" ACRE);
   return -1;
 
 }
@@ -183,7 +185,7 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
       printf("Media Organizer Usage Guide:\n");
       printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n");
       printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
-      printf(" for more information use -help\n" ACRE);
+      printf(" for more information use -hlp\n" ACRE);
       return -1;
     }
   }else{
@@ -191,7 +193,7 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
     printf("Media Organizer Usage Guide:\n");
       printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n");
       printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
-      printf(" for more information use -help\n" ACRE);
+      printf(" for more information use -hlp\n" ACRE);
       return -1;
   }
 
@@ -204,7 +206,7 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
       printf("Media Organizer Usage Guide:\n");
       printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n");
       printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
-      printf(" for more information use -help\n" ACRE);
+      printf(" for more information use -hlp\n" ACRE);
       return -1;
     }
   }else{
@@ -212,7 +214,7 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
     printf("Media Organizer Usage Guide:\n");
       printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n");
       printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
-      printf(" for more information use -help\n" ACRE);
+      printf(" for more information use -hlp\n" ACRE);
       return -1;
   }
 
@@ -242,7 +244,7 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
   printf(ACR "Media Organizer Usage Guide:\n");
   printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n");
   printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
-  printf(" for more information use -help\n" ACRE);
+  printf(" for more information use -hlp\n" ACRE);
   return -1;
 
 }
