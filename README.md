@@ -33,7 +33,6 @@ make       |----------------| ./mediaOrganizer /media.file /path/to/store       
       	                                                                        | folders          | 
                                                             	                |------------------| 
 ```
-***
 
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/MediaOrganizerDisplay.jpg)
 <br />**_( These is achieved in one run of the program )_**
@@ -81,12 +80,14 @@ make
 ```
 ./mediaOrganizer -dup /path/folder
 ```
+***
 
 ###### Photos are copied to the new path if date information is available. <br />Same photos with same names, from diffrent folders are not being copied.
 ###### To clean the program type ``` make clean ``` in ``` /Media-Organizer ```
 ###### All corrupted or unsupported files are not being copied. If even one file is copputed or unsupported, a txt file is created called ``` corruptedFiles ```, in which every corrupted or unsupported file is listed by its full path, so that you can handle it manually.
 
 ###### Better run duplicate mode after organizing. It may be more cpu and time consuming but you can guarantee a fully, free of duplicates library due to the siple fact that duplicate files are only searched in current folder.
+***
 
 _Duplicate Mode Output:_
 ```
