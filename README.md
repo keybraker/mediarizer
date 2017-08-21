@@ -28,7 +28,7 @@ make       |----------------| ./mediaOrganizer /media.file /path/to/store       
       	   |----------------| ./mediaOrganizer /path/folder /path/to/store      | in year/month    | 
                     |                                        	                |------------------| 
                     |
-                    |         ./mediaOrganizer -dup /path/to/store              |------------------| 
+                    |         ./mediaOrganizer -dup /path/folder                |------------------| 
                     \---------------------------------------------------------> | duplicate free   | 
       	                                                                        | folders          | 
                                                             	                |------------------| 
