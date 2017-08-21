@@ -108,6 +108,7 @@ _Output:_
 
 ##### Informative:
  * -hlp : _Media Organizer User Guide_ 
+ * -vrs:  _Version_
  * -det : _for a detailed list of executions in a txt format_ ( detailedTransfer.txt )
 
 ##### Mode:

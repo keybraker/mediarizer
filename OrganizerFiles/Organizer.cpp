@@ -28,8 +28,10 @@ void hlp(){
   printf(" -mts:    for mts organization only.\n\n");
 
   printf(" Informative\n -----------\n");
-  printf(" -hlp:    Media Organizer User Guide.\n"); 
-  printf(" -det:    for a detailed list of executions in a txt format ( detailedTransfer.txt ).\n\n"); 
+  printf(" -hlp:    for the Media Organizer User Guide.\n"); 
+  printf(" -vrs:    for version information.\n"); 
+  printf(" -det:    for a detailed list of executions in a\n");
+  printf("           txt format ( detailedTransfer.txt ).\n\n");  
 
   printf(" Mode\n ----\n");
   printf(" -dup:    for deletion of duplicates with diffrent names.\n\n"); 
@@ -47,6 +49,13 @@ int *argp = arg;
 char *sourcePath = NULL, *destPath = NULL, *filePath = NULL;   
 if(argc == 2 && !strcmp(argv[1], "-hlp")){
   hlp();
+  return 1;
+
+}else if(argc == 2 && !strcmp(argv[1], "-vrs")){
+  printf("Media Organiser Version: 1.6.0\n");;
+  printf("A project by Keybraker (https://github.com/keybraker)\n");
+  printf("GNU License: https://www.gnu.org/philosophy/free-sw.html\n\n");;
+  printf("All rights reserved copyrights © 2017\n");;
   return 1;
 
 }else if(argc > 2){
@@ -90,6 +99,13 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
       hlp();
       return -1;
 
+    }else if(!strcmp(argv[i], "-vrs")){
+      printf("Media Organiser Version: 1.6.0\n");;
+      printf("A project by Keybraker (https://github.com/keybraker)\n");
+      printf("GNU License: https://www.gnu.org/philosophy/free-sw.html\n\n");;
+      printf("All rights reserved copyrights © 2017\n");;
+      return 1;
+
     }else if(argv[i][0] == '-'){
       printf(ACR "%s: is an unrecognizable argument.\n", argv[i]);
       printf("Please consider using one of the following:\n\n");
@@ -107,8 +123,10 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
       printf(" -mts:    for mts organization only.\n\n");
 
       printf(" Informative\n -----------\n"); 
-      printf(" -hlp:    Media Organizer User Guide.\n"); 
-      printf(" -det:    for a detailed list of executions in a txt format ( detailedTransfer.txt ).\n\n"); 
+      printf(" -hlp:    for the Media Organizer User Guide.\n"); 
+      printf(" -vrs:    for version information.\n"); 
+      printf(" -det:    for a detailed list of executions in a\n");
+      printf("           txt format ( detailedTransfer.txt ).\n\n"); 
 
       printf(" Mode\n ----\n");
       printf(" -dup:    for deletion of duplicates with diffrent names.\n\n");   
