@@ -82,7 +82,7 @@ make
 
 ###### Better run duplicate mode after organizing. It may be more cpu and time consuming but you can guarantee a fully, free of duplicates library due to the siple fact that duplicate files are only searched in current folder.
 
-_Output:_
+_Duplicate Mode Output:_
 ```
 > > It is a file and is not hidden
 > > > The names are equal except for a slight variation
@@ -116,7 +116,8 @@ _Output:_
 
 ##### Mode:
  * -dup : _duplicate mode deletes duplicate with diffrent names_
- <br />**( Duplication cleaning is fully funcitonal, but please _back up your files_ before attempting to use it. _Run at your own risk_ )**
+ <br />**( Duplication cleaning is fully funcitonal, but please _back up your files_ before attempting to use it.**
+ <br />**_Run at your own risk_ )**
 
 #### Flag Use Examples:
 ##### Flags can be put in any order you wish even in the middle of the directories, like this:
@@ -179,19 +180,19 @@ is the same as,
 * v1.0.0: 12 August 2017: Full jpeg release with the help of [easyexif](http://owl.phy.queensu.ca/~phil/exiftool/)
 * v0.1.0: 9  August 2017: Creation.
 
-## Acknowledgments
-* Phil Harvey with the exeptional [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/)
-
 ***
 Future Improvements and features:
 1. Threads
 2. Support for more files
 3. GPS location organization
 
+## Acknowledgments
+* Phil Harvey with the exeptional [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/)
+
 ***
 Authors - **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
 
 ***
-Copyright ©️ 2017 [Media Organizer](https://github.com/keybraker/Media-Organizer) - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)
+Copyright © 2017 [Media Organizer](https://github.com/keybraker/Media-Organizer) - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)
 
 
