@@ -21,6 +21,7 @@
 #include <memory>
 #include <stdexcept>
 #include <array>
+#include <sys/stat.h>
 
 #define ACBO  "\033[1m"
 #define ACR   "\x1b[31m"
@@ -43,6 +44,8 @@ struct originalDateData{
   
 };
 
+void help();
+////////////////////////////////////
 int hundredPercent(const char* path);
 void percentige();
 
@@ -51,7 +54,8 @@ string exec(const char* cmd);
 int transfer (char *source, char *dest);
 
 string dateOfCreation (const char *path);
-int isRegularFile (const char *path);
+bool isDir(const char* path);
+int isFile (const char *path);
 originalDateData *dateReturn(string originalDate);
 
 bool typeOfFile(const char* path);

@@ -22,7 +22,7 @@ Organises all your media in a chronological order.
 
 ## How does it work 
 ```text
-make       |----------------| ./mediaOrganizer /picture.jpg /path/to/store      |------------------| 
+make       |----------------| ./mediaOrganizer /media.file /path/to/store       |------------------| 
 ---------> | mediaOrganizer |-------------------------------------------------> | organised photos | 
       	   |----------------| ./mediaOrganizer /path/folder /path/to/store      | in year/month    | 
                     |                                        	                |------------------| 
@@ -64,11 +64,11 @@ make
 #### 3. Run the program:
 ##### a. Single image mode: Organises the one picture or video given to it.
 ```
-./mediaOrganizer /path/picture.jpg /destinationPath
+./mediaOrganizer /path/media.file /path/to/store/folder
 ```
 ##### b. Folder mode: Organises all the pictures and videos in a folder, and the folders in it.
 ```
-./mediaOrganizer /path/folder /destinationPath
+./mediaOrganizer /path/folder /path/to/store/folder
 ```
 ###### Photos are copied to the new path if date information is available. <br />Same photos with same names, from diffrent folders are not being copied.
 ###### To clean the program type ``` make clean ``` in ``` /Media-Organizer ```
@@ -106,7 +106,7 @@ _Output:_
  * -mts : _for mts organization only_
 <br />**( You can use multiple flags, in order to transfer only the selected file types )**
 
-##### Information:
+##### Informative:
  * -det : _for a detailed list of executions in a txt format_ ( detailedTransfer.txt )
 
 ##### Mode:
@@ -131,10 +131,10 @@ _Output:_
 ```./mediaOrganizer -dup /path/source/folder```
 
 ##### **! only _videos_ will be copied.**
-```./mediaOrganizer -video /path/picture.jpg /path/to/store/folder -jpg```
+```./mediaOrganizer -video /path/media.file /path/to/store/folder -jpg```
 
 ##### **! this is _NOT_ valid because -dup can only be used alone.**
-~~```./mediaOrganizer -dup /path/picture.jpg /path/to/store/folder -jpg```~~
+~~```./mediaOrganizer -dup /path/media.file /path/to/store/folder -jpg```~~
 
 ## Corrupted files or Unsupported files
 All corrupted or unsupported files are not being copied. If even one file is copputed or unsupported, a txt file is created called ``` corruptedFiles ```, in which every corrupted or unsupported file is listed by its full path, so that you can handle it manually.

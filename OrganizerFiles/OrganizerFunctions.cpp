@@ -179,8 +179,18 @@ string dateOfCreation(const char *path){
     
 }
 
-int isRegularFile(const char *path){ 
-  detailedFile("isRegularFile"); detailedFile("⬇︎");
+bool isDir(const char* path) {
+  
+  struct stat sb;
+  if (stat(path, &sb) == 0 && S_ISDIR(sb.st_mode))
+    return true;
+
+  return false;
+
+}
+
+int isFile(const char *path){ 
+  detailedFile("isFile"); detailedFile("⬇︎");
 
   struct stat path_stat;
   stat(path, &path_stat);
@@ -640,7 +650,7 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
         strcpy(imagePath, path);
         strcat(imagePath, "/");
 
-      }else if(!isRegularFile(unknownPath) && (dirFile.find('.') == string::npos)){
+      }else if(!isFile(unknownPath) && (dirFile.find('.') == string::npos)){
         folderVersion(unknownPath, pathToStore, arg);
 
       }
@@ -683,7 +693,7 @@ void duplicateVersion(const char *path){
       dirFile = dir->d_name;
       strcpy(imagePath, path); strcat(imagePath, "/"); strcat(imagePath, dir->d_name);
 
-      if(!isRegularFile(imagePath) && (dirFile.find('.') == string::npos)){
+      if(!isFile(imagePath) && (dirFile.find('.') == string::npos)){
         printf("> GOING IN %s\n", imagePath);
         duplicateVersion(imagePath);
 
@@ -805,7 +815,7 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
 
   printf("> MASTER FILE : %s, CANDIDATE FILE, %s .\n",imagePathMaster, imagePathCandidate);
 
-  if( isRegularFile(imagePathCandidate) ){ 
+  if( isFile(imagePathCandidate) ){ 
     printf(ACG "> > It is a file.\n" ACRE);
     // is file and is not hidden 
       
