@@ -1,4 +1,4 @@
-# Media Organizer 
+# [Media Organizer](https://github.com/keybraker/Media-Organizer)
 Organises all your media in a chronological order.
 ```
 `7MMM.     ,MMF'             `7MM    db           
@@ -20,7 +20,7 @@ Organises all your media in a chronological order.
                       Ybmmmd'                                                     
 ```
 
-## How does it work 
+## How it works
 ```text
 make       |----------------| ./mediaOrganizer /media.file /path/to/store       |------------------| 
 ---------> | mediaOrganizer |-------------------------------------------------> | organised photos | 
@@ -35,7 +35,8 @@ make       |----------------| ./mediaOrganizer /media.file /path/to/store       
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/MediaOrganizerDisplay.jpg)
 <br />**_( These is achieved in one run of the program )_**
 
-## Why use Media Organizer
+***
+Why use Media Organizer:
 * Organises photos / videos extremly fast, the only limitation is your hardware
 * Cleans your library from duplicates
 * Lightweight and runs everywhere
@@ -70,13 +71,15 @@ make
 ```
 ./mediaOrganizer /path/folder /path/to/store/folder
 ```
-###### Photos are copied to the new path if date information is available. <br />Same photos with same names, from diffrent folders are not being copied.
-###### To clean the program type ``` make clean ``` in ``` /Media-Organizer ```
-
 ##### c. Duplicate mode: Deletes all duplicate pictures and videos in a folder, and the folders in it.
 ```
 ./mediaOrganizer -dup /path/folder
 ```
+
+###### Photos are copied to the new path if date information is available. <br />Same photos with same names, from diffrent folders are not being copied.
+###### To clean the program type ``` make clean ``` in ``` /Media-Organizer ```
+###### All corrupted or unsupported files are not being copied. If even one file is copputed or unsupported, a txt file is created called ``` corruptedFiles ```, in which every corrupted or unsupported file is listed by its full path, so that you can handle it manually.
+
 ###### Better run duplicate mode after organizing. It may be more cpu and time consuming but you can guarantee a fully, free of duplicates library due to the siple fact that duplicate files are only searched in current folder.
 
 _Output:_
@@ -152,14 +155,12 @@ is the same as,
 ##### **! This is _NOT_ valid because -dup can only be used alone:**
 ~~```./mediaOrganizer -dup /path/media.file /path/to/store/folder -jpg```~~
 
-## Corrupted files or Unsupported files
-All corrupted or unsupported files are not being copied. If even one file is copputed or unsupported, a txt file is created called ``` corruptedFiles ```, in which every corrupted or unsupported file is listed by its full path, so that you can handle it manually.
-
-## Photo file support list 
+## file support list 
+### Photos: 
 * jpeg
 * png
 
-## Video file support list 
+### Videos: 
 * avi
 * mov
 * wmv
@@ -178,18 +179,19 @@ All corrupted or unsupported files are not being copied. If even one file is cop
 * v1.0.0: 12 August 2017: Full jpeg release with the help of [easyexif](http://owl.phy.queensu.ca/~phil/exiftool/)
 * v0.1.0: 9  August 2017: Creation.
 
-## Future Improvements and features 
+## Acknowledgments
+* Phil Harvey with the exeptional [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/)
+
+***
+Future Improvements and features:
 1. Threads
 2. Support for more files
 3. GPS location organization
 
-## Authors
-* **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
+***
+Authors - **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
 
-## Acknowledgments
-* Phil Harvey with the exeptional [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/)
-
-## License
-* [Free Software](http://www.gnu.org/philosophy/free-sw.html)
+***
+Copyright ©️ 2017 [Media Organizer](https://github.com/keybraker/Media-Organizer) - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)
 
 
