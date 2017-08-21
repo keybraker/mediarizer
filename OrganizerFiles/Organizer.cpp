@@ -56,7 +56,7 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
   printf("Media Organiser Version: 1.6.0\n");;
   printf("A project by Keybraker (https://github.com/keybraker)\n");
   printf("GNU License: https://www.gnu.org/philosophy/free-sw.html\n\n");;
-  printf("All rights reserved copyrights © 2017\n");;
+  printf("Copyrights © Keybraker 2017, All rights reserved\n");;
   return 1;
 
 }else if(argc > 2){
@@ -104,7 +104,7 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
       printf("Media Organiser Version: 1.6.0\n");;
       printf("A project by Keybraker (https://github.com/keybraker)\n");
       printf("GNU License: https://www.gnu.org/philosophy/free-sw.html\n\n");;
-      printf("All rights reserved copyrights © 2017\n");;
+      printf("Copyrights © Keybraker 2017, All rights reserved\n");;
       return 1;
 
     }else if(argv[i][0] == '-'){
