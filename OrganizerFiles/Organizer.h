@@ -1,5 +1,5 @@
-/*****************************************************************
-  Organizer.h  -- A simple ISO C++ library to organize and delete
+/*************************************************************
+  Organizer.h  -- A simple C++ library to organize and delete
   				  duplicate media files.
 */
 
@@ -47,9 +47,12 @@ struct originalDateData{
 void help();
 ////////////////////////////////////
 int hundredPercent(const char* path);
-void percentige();
+void percentige(int version);
 
 void detailedFile(const char* string);
+void folderSigning(const char* string, int version);
+bool folderAlreadyOrganized(const char* string, int version);
+
 string exec(const char* cmd);
 int transfer (char *source, char *dest);
 

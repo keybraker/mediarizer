@@ -18,31 +18,86 @@ int hundredPercent(const char* path){
 
 }
 
-
-void percentige(){
+void percentige(int version){
 
   currentP += 1;
 
-  if(((currentP*100)/(hundredP^2)) > 100){
-    printf(ACY "\r/----------------------------------[%3d%%]----------------------------------\\" ACRE, 100);
-    printf("\n");
+  if(version == 1){
+    if(((currentP*100)/(hundredP)) > 100){
+      printf(ACY "\r-----------------------------------------------------------[%3d%%]-----------------------------------------------------------\n" ACRE, 100);
+    }else{
+      printf(ACY "\r-----------------------------------------------------------[%3d%%]-----------------------------------------------------------\n" ACRE, ((currentP*100) / (hundredP)));
+    }
   }else{
-    printf(ACY "\r/----------------------------------[%3d%%]----------------------------------\\" ACRE, ((currentP*100) / (hundredP^2)));
-    printf("\n");
+    if(((currentP*100)/(hundredP^2)) > 100){
+      printf(ACY "\r-----------------------------------------------------------[%3d%%]-----------------------------------------------------------\n" ACRE, 100);
+    }else{
+      printf(ACY "\r-----------------------------------------------------------[%3d%%]-----------------------------------------------------------\n" ACRE, ((currentP*100) / (hundredP^2)));
+    }
   }
 
 }
 
 void detailedFile(const char* string){
 
-  // printf("%s > ", string);
-  return;
-
+  return ;
   if(detailed){
     FILE *detFile = fopen("detailedTransfer.txt", "a");
     if(detFile == NULL){ printf("Error while opening file.\n"); }
-    fprintf(detFile,"%s\n",string);
+    fprintf(detFile, "%s ", string);
   }
+
+}
+
+void folderSigning(const char* string, int version){
+
+  if(version == 1){
+    FILE *folderSigning = fopen("folderSigning.txt", "a");
+    if(folderSigning == NULL){ printf("Error while opening file.\n"); }
+    fprintf(folderSigning, "%s\n", string);
+  }else{
+    FILE *folderSigningDuplicate = fopen("folderSigningDuplicate.txt", "a");
+    if(folderSigningDuplicate == NULL){ printf("Error while opening file.\n"); }
+    fprintf(folderSigningDuplicate, "%s\n", string);
+  }
+
+}
+
+bool folderAlreadyOrganized(const char* string, int version){
+
+  if(version == 1){
+    FILE* file = fopen("folderSigning.txt", "r");
+    if(file == NULL) return 0;
+    char line[256];
+
+    while (fgets(line, sizeof(line), file)) {
+      if(strlen(line) != 0){
+        line[strlen(line) - 1] = 0;
+        if(!strcmp(line, string)){
+          return 1;
+        }
+      }
+    }
+
+    fclose(file);
+  }else{
+    FILE* file = fopen("folderSigningDuplicate.txt", "r");
+    if(file == NULL) return 0;
+    char line[256];
+
+    while (fgets(line, sizeof(line), file)) {
+      if(strlen(line) != 0){
+        line[strlen(line) - 1] = 0;
+        if(!strcmp(line, string)){
+          return 1;
+        }
+      }
+    }
+
+    fclose(file);
+  }
+
+  return 0;
 
 }
 
@@ -503,7 +558,7 @@ int typeOfFileInt(const char* path){
 
 void fileVersion(const char *path, const char *pathToStore){ 
   detailedFile("fileVersion"); detailedFile("⬇︎");
-
+  percentige(1);
   string originalDate = dateOfCreation(path);
   
   if(originalDate.empty()){ 
@@ -530,7 +585,20 @@ void fileVersion(const char *path, const char *pathToStore){
 void folderVersion(const char *path, const char *pathToStore, int *arg){ 
   detailedFile("folderVersion"); detailedFile("⬇︎");
 
-  hundredP = hundredPercent(path);
+  if(folderAlreadyOrganized(path, 1)){
+    currentP += hundredPercent(path);
+    printf(ACY "Path: %s, has already been organised.\n", path);
+    printf(    "If you wish to organise it again, please ");
+    printf(    "delete the path reference from folderSigning.txt\n" ACRE);
+    return;
+  }
+
+  if(hundredP == -1){
+    hundredP = hundredPercent(path);
+  }else{
+    hundredP -= 1;
+  }
+  
 
   bool  isArgFree = true, 
         photoOnly = false,
@@ -666,6 +734,9 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
     }
 
     closedir(d);
+    printf(ACY ">> Path %s, signed.\n" ACRE, path);
+    folderSigning(path, 1);
+
     return ;
     
   }
@@ -675,10 +746,21 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
 void duplicateVersion(const char *path){ 
   detailedFile("duplicateVersion"); detailedFile("with path:"); detailedFile(path); detailedFile("⬇︎");
 
-  if(hundredP == -1)
-    hundredP = hundredPercent(path);
+  if(folderAlreadyOrganized(path, 2)){
+    currentP += hundredPercent(path);
+    printf(ACY "Path: %s, has already been searched and cleaned for duplicates.\n", path);
+    printf(    "If you wish to organise it again, please ");
+    printf(    "delete the path reference from folderSigningDuplicated.txt\n" ACRE);
+    return;
+  }
 
-  int j = 1;
+  if(hundredP == -1){
+    hundredP = hundredPercent(path);
+  }else{
+    hundredP -= 1;
+  }
+
+  int j = 1, length = 0;
   DIR *d;
   struct dirent *dir;
   d = opendir(path);
@@ -688,19 +770,19 @@ void duplicateVersion(const char *path){
   char* imagePath = (char*) malloc (32768 * sizeof(char));
   
   if (d) {
-    
+
     while ((dir = readdir(d)) != NULL){
 
       dirFile = dir->d_name;
       strcpy(imagePath, path); strcat(imagePath, "/"); strcat(imagePath, dir->d_name);
 
       if(!isFile(imagePath) && (dirFile.find('.') == string::npos)){
-        printf("> GOING IN %s\n", imagePath);
+        printf(ACG "> GOING IN %s\n" ACRE, imagePath);
         duplicateVersion(imagePath);
 
       }else if ( typeOfFileInt(imagePath) != -1 ){ 
 
-        int length = (int) strlen (dir->d_name);
+        length = (int) strlen (dir->d_name);
         for( int i = 0; i < length; i++){
           if( dir->d_name[i] == '.' 
             && i+1 <= length 
@@ -709,7 +791,7 @@ void duplicateVersion(const char *path){
             j = 0; break; 
           }
         }
-        
+
         if(j)
           if(strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )))
             duplicateCleaner(dir->d_name, path, typeOfFileInt(imagePath));
@@ -717,9 +799,13 @@ void duplicateVersion(const char *path){
       }
 
       j = 1;
+      length = 0;
     }
 
     closedir(d);
+    printf(ACY ">> Path %s, signed.\n" ACRE, path);
+    folderSigning(path, 2);
+
     return ;
     
   }
@@ -729,6 +815,7 @@ void duplicateVersion(const char *path){
 void duplicateCleaner(const char *master, const char *path, int type){ 
   detailedFile("duplicateCleaner"); detailedFile("⬇︎");
 
+  int j = 1, length = 0;
   DIR *d;
   struct dirent *dir;
   d = opendir(path);
@@ -740,15 +827,25 @@ void duplicateCleaner(const char *master, const char *path, int type){
   strcpy(imagePath,  path); strcat(imagePath,  "/");
 
   if (d) {
-    percentige();
-    printf("> MASTER : %s, COMPARED TO, %s .\n",masterPath, path);
+    percentige(2);
+    printf(ACG "> MASTER : %s, COMPARED TO, %s\n" ACRE,masterPath, path);
 
     while ((dir = readdir(d)) != NULL){
 
       strcpy(masterPath, path); strcat(masterPath, "/"); strcat(masterPath, master);
       strcpy(imagePath,  path); strcat(imagePath,  "/"); strcat(imagePath, dir->d_name);
 
-      if(strcmp(dir->d_name, master) != 0){ 
+      length = (int) strlen (path);
+      for( int i = 0; i < length; i++){
+        if( path[i] == '.' 
+          && i+1 <= length 
+          && (path[i+1] == '_' 
+          || path[i+1] == 'D') ){
+          j = 0; break; 
+        }
+      }
+
+      if(j && strcmp(dir->d_name, master) != 0){ 
 
         if ( type == typeOfFileInt(imagePath) ){ 
 
@@ -791,7 +888,8 @@ void duplicateCleaner(const char *master, const char *path, int type){
 
       strcpy(imagePath, path); strcat(imagePath, "/");
       strcpy(masterPath, path); strcat(masterPath, "/");
-
+      j = 1;
+      length = 0;
     }
 
     closedir(d);
@@ -814,28 +912,28 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
   strcpy(cmdThree,  "exiftool -ImageSize \"");  strcat(cmdThree,  imagePathMaster);     strcat(cmdThree, "\""); 
   strcpy(cmdFour,   "exiftool -ImageSize \"");  strcat(cmdFour,   imagePathCandidate);  strcat(cmdFour, "\""); 
 
-  printf("> MASTER FILE : %s, CANDIDATE FILE, %s .\n",imagePathMaster, imagePathCandidate);
+  printf(ACG "> MASTER FILE : %s, CANDIDATE FILE, %s\n" ACRE, imagePathMaster, imagePathCandidate);
 
   if( isFile(imagePathCandidate) ){ 
-    printf(ACG "> > It is a file.\n" ACRE);
+    printf(ACY "> > It is a file.\n" ACRE);
     // is file and is not hidden 
       
       if( exec(cmdOne).compare(exec(cmdTwo)) == 0){ 
-        printf(ACG "> > > > The sizes are the same.\n" ACRE);
+        printf(ACY "> > > > The sizes are the same.\n" ACRE);
         // sizes are the same
 
         if( !dateOfCreation(imagePathMaster).empty() 
           && !dateOfCreation(imagePathCandidate).empty() 
           && dateOfCreation(imagePathMaster).compare(dateOfCreation(imagePathCandidate)) == 0){  
-          printf(ACG "> > > > > The dates of creation are the same.\n" ACRE);
+          printf(ACY "> > > > > The dates of creation are the same.\n" ACRE);
           // dates of creation are the same
 
           if( exec(cmdThree).compare(exec(cmdFour)) == 0){  
-            printf(ACG "> > > > > > The resolutions are the same.\n" ACRE);
+            printf(ACY "> > > > > > The resolutions are the same.\n" ACRE);
             // resolutions are the same
 
             if( strcmp(imagePathMaster, imagePathCandidate) > 0){ 
-            printf(ACG "> > > The names are equal except for a slight variation.\n" ACRE);
+            printf(ACY "> > > The names are equal except for a slight variation.\n" ACRE);
             // the names are equal except for a slight variation
 
               char* rmcmd = (char*) malloc (65536 * sizeof(char));
@@ -849,7 +947,7 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
               detailedFile(rmcmd);
               detailedFile("\n===========");
 
-              printf(ACG "> > > > > > => ");
+              printf(ACY "> > > > > > => ");
               printf(ACBO "%s ( DELETED ).\n\n" ACRE, rmcmd);
               return ;
 
@@ -866,7 +964,7 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
               detailedFile(rmcmd);
               detailedFile("\n===========");
 
-              printf(ACG "> > > > > > => ");
+              printf(ACY "> > > > > > => ");
               printf(ACBO "%s ( DELETED ).\n\n" ACRE, rmcmd);
               return ;
 
@@ -874,19 +972,15 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
 
           }
           printf(ACR "> > > > > > The resolutions are the NOT same.\n" ACRE);
-          cout << endl << endl;
           return ;
         }
         printf(ACR "> > > > > The dates of creation are NOT the same.\n" ACRE);
-        cout << endl << endl;
         return ;
       }
       printf(ACR "> > > > The sizes are NOT the same.\n" ACRE);
-      cout << endl << endl;
       return ;
     }
     printf(ACR "> > It is NOT a file.\n" ACRE);
-    cout << endl << endl;
     return ;
 
 }

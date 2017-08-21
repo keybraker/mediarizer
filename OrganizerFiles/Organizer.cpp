@@ -210,10 +210,10 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
   }else{
     printf(ACR "%s is not a path to a file.\n\n", filePath);
     printf("Media Organizer Usage Guide:\n");
-      printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n");
-      printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
-      printf(" for more information use -hlp\n" ACRE);
-      return -1;
+    printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n");
+    printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
+    printf(" for more information use -hlp\n" ACRE);
+    return -1;
   }
 
 }else if(filePath == NULL && sourcePath != NULL && destPath != NULL){ // folder version initiation
@@ -231,13 +231,13 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
   }else{
     printf(ACR "%s is not a path to a folder.\n\n", sourcePath);
     printf("Media Organizer Usage Guide:\n");
-      printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n");
-      printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
-      printf(" for more information use -hlp\n" ACRE);
-      return -1;
+    printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n");
+    printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
+    printf(" for more information use -hlp\n" ACRE);
+    return -1;
   }
 
-}else if(filePath == NULL && sourcePath != NULL && destPath == NULL && arg[10] == 1){
+}else if(filePath == NULL && sourcePath != NULL && destPath == NULL && arg[10] == 1){ // duplicate version initiation
   printf(ACG "# DUPLICATE MODE\n\n");
   printf(ACR "DISCLAIMER: USE WITH CAUTION! PLEASE BACKUP ALL YOUR FILES \n");
   printf("BEFORE PROCCEDING TO CLEANUP DUPLICATES\n");
