@@ -190,7 +190,7 @@ Future Improvements and features:
 * Phil Harvey with the exeptional [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/)
 
 ***
-Authors - **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
+Author - **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
 
 ***
 Copyright © 2017 [Media Organizer](https://github.com/keybraker/Media-Organizer) - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)
