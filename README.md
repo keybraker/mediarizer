@@ -19,6 +19,7 @@ Organises all your media in a chronological order.
                       6'     dP                                                   
                       Ybmmmd'                                                     
 ```
+***
 
 ## How it works
 ```text
@@ -32,6 +33,8 @@ make       |----------------| ./mediaOrganizer /media.file /path/to/store       
       	                                                                        | folders          | 
                                                             	                |------------------| 
 ```
+***
+
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/MediaOrganizerDisplay.jpg)
 <br />**_( These is achieved in one run of the program )_**
 
@@ -46,6 +49,7 @@ Why use Media Organizer:
 ```
 git clone https://github.com/keybraker/Media-Organizer.git
 ```
+***
 #### 2. Install ExifTool by Phil Harvey
 Download and install from here [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/).
 <br />This program may very well be the best exif parser in the world (nj).
@@ -56,11 +60,13 @@ Download and install from here [ExifTool](http://owl.phy.queensu.ca/~phil/exifto
 ```
 cd .../Media-Organizer 
 ```
+***
 
 #### 2. To compile the program just type:
 ```
 make 
 ```
+***
 
 #### 3. Run the program:
 ##### a. Single image mode: Organises the one picture or video given to it.
