@@ -2,9 +2,12 @@
 
 using namespace std;
 
+#define SPACING 110
+
 int     detailed = -1,
         hundredP = -1,
-        currentP = 0;
+        currentP = 0,
+        deleteMode = 0;
 float   currentSize = 0;
 
 int hundredPercent(const char* path){
@@ -54,14 +57,14 @@ void detailedFile(const char* string){
 void folderSigning(const char* path, int version){ 
 
   if(version == 1){
-    printf(ACY "%-20s%-5s%-1s%-100s%-1s  organized and signed.\n" ACRE, "", "> path:", "[ ", path, " ]");
+    printf(ACY "%-20s%-5s%-1s%-121s%-1s  organized and signed.\n" ACRE, "", "> dir  ", "[ ", path, " ]");
     //printf(ACY ">> Path %s, organized and signed.\n" ACRE, path);
     FILE *folderSigning = fopen("folderSigning.txt", "a");
     if(folderSigning == NULL){ printf("Error while opening file.\n"); }
     fprintf(folderSigning, "%s\n", path);
     fclose(folderSigning);
   }else{
-    printf(ACY "%-20s%-1s%-100s%-1s cleaned and signed.\n" ACRE, "> path:", "[ ", path, " ]");
+    printf(ACY "%-20s%-1s%-121s%-1s cleaned and signed.\n" ACRE, "> dir", "[ ", path, " ]");
     //printf(ACY ">> Path %s, cleaned and signed.\n" ACRE, path);
     FILE *folderSigningDuplicate = fopen("folderSigningDuplicate.txt", "a");
     if(folderSigningDuplicate == NULL){ printf("Error while opening file.\n"); }
@@ -149,8 +152,9 @@ int transfer(const char *source, const char *dest){
   }
 
   char* transfer = (char*) malloc (32768 * sizeof(char));
+  char* rmcmd = (char*) malloc (32768 * sizeof(char));
 
-  /*******************************/
+  /****COPY THE SOURCE TO DESTINATION*******************/
   strcpy(transfer, "sudo cp \"");
   strcat(transfer, source);
   strcat(transfer, "\" ");
@@ -158,13 +162,24 @@ int transfer(const char *source, const char *dest){
 
   system(transfer);
 
+  /****DELETE THE SOURCE FILE***************************/
+  if(deleteMode) {
+    strcpy(rmcmd, "rm -rf \"");
+    strcat(rmcmd, source);
+    strcat(rmcmd, "\"");
+
+    exec(rmcmd);
+  }
   /*******************************/
   string destEdit = dest;
   destEdit = destEdit.substr(0, destEdit.length() - 1);
   destEdit = destEdit.substr(1).append(destEdit.substr(0,1));
   destEdit = destEdit.substr(0, destEdit.length() - 1);
 
-  printf(ACG "> copy %-1s%-100s%-3s%-3s%-1s%-100s%-1s\n" ACRE, "[ ", source, " ]", "to", "[ ", destEdit.c_str(), " ]");
+  printf(ACG "> copy %-1s%-121s%-3s%-3s%-23s%-5s%-1s%-121s%-1s\n" ACRE, "[ ", source, " ]", "-\\", "\n", "'--> ", "[ ", destEdit.c_str(), " ] -/");
+  if(deleteMode){  
+    printf(ACG "%-20s%-7s%-1s%-121s%-3s\n" ACRE, "", "> rm", "[ ", source, " ]");
+  }
   detailedFile(transfer);
   detailedFile("\n===========");
 
@@ -639,6 +654,7 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
   if(arg[7] == 1){ detailed  = 1; }
   if(arg[8] == 1){ photoOnly = true; }
   if(arg[9] == 1){ videoOnly = true; }
+  if(arg[11] == 1){ deleteMode = 1; }
 
   for(int i = 0; i < 9; i++){
     if(arg[i] != -1){
@@ -808,7 +824,7 @@ void duplicateVersion(const char *path){
       strcpy(imagePath, path); strcat(imagePath, "/"); strcat(imagePath, dir->d_name);
 
       if(!isFile(imagePath) && (dirFile.find('.') == string::npos)){
-        printf(ACG "%-20s%-1s%-100s%-1s\n" ACRE, "> going to path:", "[ ", imagePath, " ]");
+        printf(ACG "%-20s%-1s%-121s%-1s\n" ACRE, "> going to path:", "[ ", imagePath, " ]");
         duplicateVersion(imagePath);
 
       }else if ( typeOfFileInt(imagePath) != -1 ){ 
@@ -857,7 +873,7 @@ void duplicateCleaner(const char *master, const char *path, int type){
   strcpy(imagePath,  path); strcat(imagePath,  "/");
 
   if (d) {
-    printf(ACG "%-20s%-1s%-100s%-1s%-3s%-1s%-20s%-1s\n" ACRE, "> info check for:", "[ ", masterPath, " ]", " and ", "[ ", path, " ]");
+    printf(ACG "%-20s%-1s%-121s%-1s%-3s%-1s%-20s%-1s\n" ACRE, "> info check for:", "[ ", masterPath, " ]", " and ", "[ ", path, " ]");
 
     while ((dir = readdir(d)) != NULL){
 
@@ -941,7 +957,7 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
   strcpy(cmdThree,  "exiftool -ImageSize \"");  strcat(cmdThree,  imagePathMaster);     strcat(cmdThree, "\""); 
   strcpy(cmdFour,   "exiftool -ImageSize \"");  strcat(cmdFour,   imagePathCandidate);  strcat(cmdFour, "\""); 
 
-  printf(ACG "%-20s%-1s%-100s%-1s%-3s%-1s%-20s%-1s\n" ACRE, "> double check for:", "[ ", imagePathMaster, " ]", " and ", "[ ", imagePathCandidate, " ]");
+  printf(ACG "%-20s%-1s%-121s%-1s%-3s%-1s%-20s%-1s\n" ACRE, "> double check for:", "[ ", imagePathMaster, " ]", " and ", "[ ", imagePathCandidate, " ]");
 
   if( isFile(imagePathCandidate) ){ 
     printf(ACG "%-20s" ACRE, "> |-is file.");

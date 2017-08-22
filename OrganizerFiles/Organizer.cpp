@@ -35,7 +35,8 @@ void hlp(){
   printf("           txt format ( detailedTransfer.txt ).\n\n");  
 
   printf(" Mode\n ----\n");
-  printf(" -dup:    for deletion of duplicates with diffrent names.\n\n"); 
+  printf(" -dup:    for deletion of duplicates with diffrent names.\n"); 
+  printf(" -del:    for deletion of source files.\n\n"); 
 
   printf("( Using multiple flags will enhance your selection. \n");
   printf("  flags can be inserted anywhere, but the paths \n");
@@ -45,7 +46,7 @@ void hlp(){
 
 int main(int argc, char *argv[]) {
 
-int arg[11] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+int arg[12] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 int *argp = arg;
 char *sourcePath = NULL, *destPath = NULL, *filePath = NULL;   
 if(argc == 2 && !strcmp(argv[1], "-hlp")){
@@ -100,6 +101,9 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
       hlp();
       return -1;
 
+    }else if(!strcmp(argv[i], "-del")){
+      arg[11] = 1;
+
     }else if(!strcmp(argv[i], "-vrs")){
       printf("Media Organiser Version: 1.7.0\n");;
       printf("A project by Keybraker (https://github.com/keybraker)\n");
@@ -130,7 +134,8 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
       printf("           txt format ( detailedTransfer.txt ).\n\n"); 
 
       printf(" Mode\n ----\n");
-      printf(" -dup:    for deletion of duplicates with diffrent names.\n\n");   
+      printf(" -dup:    for deletion of duplicates with diffrent names.\n");   
+      printf(" -del:    for deletion of source files.\n\n"); 
 
       printf("( Using multiple flags will enhance your selection.\n");
       printf("  flags can be inserted anywhere, but the paths\n");
