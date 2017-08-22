@@ -57,14 +57,14 @@ void detailedFile(const char* string){
 void folderSigning(const char* path, int version){ 
 
   if(version == 1){
-    printf(ACY "%-20s%-5s%-1s%-121s%-1s  organized and signed.\n" ACRE, "", "> dir  ", "[ ", path, " ]");
+    printf(ACY "%-20s%-5s%-1s%-121s%-1s  organized and signed.\n" ACRE, "", "> directory", "[ ", path, " ]");
     //printf(ACY ">> Path %s, organized and signed.\n" ACRE, path);
     FILE *folderSigning = fopen("folderSigning.txt", "a");
     if(folderSigning == NULL){ printf("Error while opening file.\n"); }
     fprintf(folderSigning, "%s\n", path);
     fclose(folderSigning);
   }else{
-    printf(ACY "%-20s%-1s%-121s%-1s cleaned and signed.\n" ACRE, "> dir", "[ ", path, " ]");
+    printf(ACY "%-20s%-1s%-121s%-1s cleaned and signed.\n" ACRE, "> directory", "[ ", path, " ]");
     //printf(ACY ">> Path %s, cleaned and signed.\n" ACRE, path);
     FILE *folderSigningDuplicate = fopen("folderSigningDuplicate.txt", "a");
     if(folderSigningDuplicate == NULL){ printf("Error while opening file.\n"); }
@@ -873,7 +873,7 @@ void duplicateCleaner(const char *master, const char *path, int type){
   strcpy(imagePath,  path); strcat(imagePath,  "/");
 
   if (d) {
-    printf(ACG "%-20s%-1s%-121s%-1s%-3s%-1s%-20s%-1s\n" ACRE, "> info check for:", "[ ", masterPath, " ]", " and ", "[ ", path, " ]");
+    printf(ACG "%-20s%-1s%-121s%-3s%-3s%-3s%-10s%-1s%-121s%-1s\n" ACRE, "> info check for:", "[ ", masterPath, " ]", "-\\", "\n", " '--------------> ", "[ ", path, " ] -/");
 
     while ((dir = readdir(d)) != NULL){
 
@@ -957,7 +957,7 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
   strcpy(cmdThree,  "exiftool -ImageSize \"");  strcat(cmdThree,  imagePathMaster);     strcat(cmdThree, "\""); 
   strcpy(cmdFour,   "exiftool -ImageSize \"");  strcat(cmdFour,   imagePathCandidate);  strcat(cmdFour, "\""); 
 
-  printf(ACG "%-20s%-1s%-121s%-1s%-3s%-1s%-20s%-1s\n" ACRE, "> double check for:", "[ ", imagePathMaster, " ]", " and ", "[ ", imagePathCandidate, " ]");
+  printf(ACG "%-20s%-1s%-121s%-3s%-3s%-3s%-10s%-1s%-121s%-1s\n" ACRE, "> double check for:", "[ ", imagePathMaster, " ]", "-\\", "\n", " '--------------> ", "[ ", imagePathCandidate, " ] -/");
 
   if( isFile(imagePathCandidate) ){ 
     printf(ACG "%-20s" ACRE, "> |-is file.");
