@@ -34,9 +34,9 @@ void percentige(int version){
     }
   }else{
     if(((currentP * 100)/(hundredP^2)) > 100){
-      printf(ACY "\r[%3d%%][- %-9f Mb]" ACRE, 100, currentSize);
+      printf(ACY "\r%-19s [%3d%%][- %-9f Mb]\n" ACRE, "", 100, currentSize);
     }else{
-      printf(ACY "\r[%3d%%][- %-9f Mb]" ACRE, ((currentP*100) / (hundredP^2)), currentSize);
+      printf(ACY "\r%-19s [%3d%%][- %-9f Mb]\n" ACRE, "", ((currentP*100) / (hundredP^2)), currentSize);
     }
   }
 
@@ -57,14 +57,14 @@ void detailedFile(const char* string){
 void folderSigning(const char* path, int version){ 
 
   if(version == 1){
-    printf(ACY "%-20s%-5s%-1s%-121s%-1s  organized and signed.\n" ACRE, "", "> directory", "[ ", path, " ]");
+    printf(ACY "%-20s%-5s%-1s%-121s%-1s  has been organized and signed.\n" ACRE, "", "> directory", "[ ", path, " ]");
     //printf(ACY ">> Path %s, organized and signed.\n" ACRE, path);
     FILE *folderSigning = fopen("folderSigning.txt", "a");
     if(folderSigning == NULL){ printf("Error while opening file.\n"); }
     fprintf(folderSigning, "%s\n", path);
     fclose(folderSigning);
   }else{
-    printf(ACY "%-20s%-1s%-121s%-1s cleaned and signed.\n" ACRE, "> directory", "[ ", path, " ]");
+    printf(ACY "%-20s%-1s%-121s%-1s has been cleaned and signed.\n" ACRE, "> the directory:", "[ ", path, " ]");
     //printf(ACY ">> Path %s, cleaned and signed.\n" ACRE, path);
     FILE *folderSigningDuplicate = fopen("folderSigningDuplicate.txt", "a");
     if(folderSigningDuplicate == NULL){ printf("Error while opening file.\n"); }
@@ -873,6 +873,7 @@ void duplicateCleaner(const char *master, const char *path, int type){
   strcpy(imagePath,  path); strcat(imagePath,  "/");
 
   if (d) {
+    percentige(2);
     printf(ACG "%-20s%-1s%-121s%-3s%-3s%-3s%-10s%-1s%-121s%-1s\n" ACRE, "> info check for:", "[ ", masterPath, " ]", "-\\", "\n", " '--------------> ", "[ ", path, " ] -/");
 
     while ((dir = readdir(d)) != NULL){
