@@ -53,7 +53,7 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
   return 1;
 
 }else if(argc == 2 && !strcmp(argv[1], "-vrs")){
-  printf("Media Organiser Version: 1.6.0\n");;
+  printf("Media Organiser Version: 1.7.0\n");;
   printf("A project by Keybraker (https://github.com/keybraker)\n");
   printf("GNU License: https://www.gnu.org/philosophy/free-sw.html\n\n");;
   printf("Copyrights © Keybraker 2017, All rights reserved\n");;
@@ -101,7 +101,7 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
       return -1;
 
     }else if(!strcmp(argv[i], "-vrs")){
-      printf("Media Organiser Version: 1.6.0\n");;
+      printf("Media Organiser Version: 1.7.0\n");;
       printf("A project by Keybraker (https://github.com/keybraker)\n");
       printf("GNU License: https://www.gnu.org/philosophy/free-sw.html\n\n");;
       printf("Copyrights © Keybraker 2017, All rights reserved\n");;

@@ -172,6 +172,7 @@ is the same as,
 
 ## Release History
 
+* v1.7.0: 22 August 2017: Memory added, for stop and restart.
 * v1.6.0: 20 August 2017: Fully functional duplication deletion.
 * v1.5.0: 19 August 2017: Added duplication deletion.
 * v1.1.2: 18 August 2017: Added -flags for a more controlled organisation.
