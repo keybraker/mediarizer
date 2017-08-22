@@ -46,6 +46,7 @@ void detailedFile(const char* string){
     FILE *detFile = fopen("detailedTransfer.txt", "a");
     if(detFile == NULL){ printf("Error while opening file.\n"); }
     fprintf(detFile, "%s ", string);
+    fclose(detFile);
   }
 
 }
@@ -58,14 +59,14 @@ void folderSigning(const char* path, int version){
     FILE *folderSigning = fopen("folderSigning.txt", "a");
     if(folderSigning == NULL){ printf("Error while opening file.\n"); }
     fprintf(folderSigning, "%s\n", path);
-
+    fclose(folderSigning);
   }else{
     printf(ACY "%-20s%-1s%-100s%-1s cleaned and signed.\n" ACRE, "> path:", "[ ", path, " ]");
     //printf(ACY ">> Path %s, cleaned and signed.\n" ACRE, path);
     FILE *folderSigningDuplicate = fopen("folderSigningDuplicate.txt", "a");
     if(folderSigningDuplicate == NULL){ printf("Error while opening file.\n"); }
     fprintf(folderSigningDuplicate, "%s\n", path);
-
+    fclose(folderSigningDuplicate);
   }
 
 }
@@ -111,20 +112,20 @@ bool folderAlreadyOrganized(const char* string, int version){
 string exec(const char* cmd) { 
   detailedFile("exec"); detailedFile("⬇︎");
     
-    array<char, 32768> buffer;
-    string result;
-    shared_ptr<FILE> pipe(popen(cmd, "r"), pclose);
-    //if (!pipe) throw runtime_error("popen() failed!");
-    if (!pipe){
-      printf("popen() failed!");
-      return string();
-    }
-    while (!feof(pipe.get())) {
-        if (fgets(buffer.data(), 32768, pipe.get()) != nullptr)
-            result += buffer.data();
-    }
-    
-    return result;
+  array<char, 32768> buffer;
+  string result;
+  shared_ptr<FILE> pipe(popen(cmd, "r"), pclose);
+  //if (!pipe) throw runtime_error("popen() failed!");
+  if (!pipe){
+    printf("popen() failed!");
+    return string();
+  }
+  while (!feof(pipe.get())) {
+      if (fgets(buffer.data(), 32768, pipe.get()) != nullptr)
+          result += buffer.data();
+  }
+  
+  return result;
 
 }
 
@@ -597,7 +598,7 @@ void fileVersion(const char *path, const char *pathToStore){
     FILE *corruptedFiles = fopen("corruptedFiles.txt", "a");
     if(corruptedFiles == NULL){ printf("Error while opening file.\n"); }
     fprintf(corruptedFiles,"%s\n",path);            
-
+    fclose(corruptedFiles);
     return;
 
   }
