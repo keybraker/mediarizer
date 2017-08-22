@@ -67,7 +67,7 @@ char *destinationFinder(int year, int month, const char *pathToStore);
 
 void fileVersion (const char *path, const char *pathToStore);
 void folderVersion(const char *path, const char *pathToStore, int *arg);
-void duplicateVersion(const char *path);
+void duplicateVersion(const char *path, int xtrm);
 void duplicateCleaner(const char *master, const char *path, int type);
 void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePathCandidate);
 

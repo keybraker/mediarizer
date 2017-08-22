@@ -35,7 +35,8 @@ void hlp(){
   printf("           txt format ( detailedTransfer.txt ).\n\n");  
 
   printf(" Mode\n ----\n");
-  printf(" -dup:    for deletion of duplicates with diffrent names.\n"); 
+  printf(" -dup:    for deletion of duplicates with similar names. (fast)\n"); 
+  printf(" -dux:    for deletion of duplicates with diffrent names. (slow)\n"); 
   printf(" -del:    for deletion of source files.\n\n"); 
 
   printf("( Using multiple flags will enhance your selection. \n");
@@ -46,9 +47,10 @@ void hlp(){
 
 int main(int argc, char *argv[]) {
 
-int arg[12] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+int arg[13] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 int *argp = arg;
-char *sourcePath = NULL, *destPath = NULL, *filePath = NULL;   
+char *sourcePath = NULL, *destPath = NULL, *filePath = NULL;  
+
 if(argc == 2 && !strcmp(argv[1], "-hlp")){
   hlp();
   return 1;
@@ -97,6 +99,9 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
     }else if(!strcmp(argv[i], "-dup")){ 
       arg[10] = 1;
 
+    }else if(!strcmp(argv[i], "-dux")){ 
+      arg[12] = 1;
+
     }else if(!strcmp(argv[i], "-hlp")){
       hlp();
       return -1;
@@ -135,6 +140,7 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
 
       printf(" Mode\n ----\n");
       printf(" -dup:    for deletion of duplicates with diffrent names.\n");   
+      printf(" -dux:    for deletion of duplicates with diffrent names. (slow)\n"); 
       printf(" -del:    for deletion of source files.\n\n"); 
 
       printf("( Using multiple flags will enhance your selection.\n");
@@ -261,7 +267,29 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
   cin  >> answer;
 
   if(answer.compare("y") == 0){
-    duplicateVersion(sourcePath);
+    duplicateVersion(sourcePath, 0);
+  }
+
+}else if(filePath == NULL && sourcePath != NULL && destPath == NULL && arg[12] == 1){ // duplicate Xtreme version initiation
+  printf(ACG "# DUPLICATE MODE EXTREME\n\n");
+  printf(ACR "DISCLAIMER: USE WITH CAUTION! PLEASE BACKUP ALL YOUR FILES \n");
+  printf("BEFORE PROCCEDING TO CLEANUP DUPLICATES\n");
+  printf("=======================================\n");
+  printf("THIS MODE LOOKS UP EVERY FILE IN A DIRECTORY\n");
+  printf("AND COMPARES THE EXIF DATA TO ALL THE OTHERS.\n");
+  printf("IF A FILE IS FOUND THAT HAS THE SAME EXIF AND\n");
+  printf("THEIR NAME IS THE SAME EXCEPT FOR A SLIGHT\n");
+  printf("VARIATION LIKE 'IMG.JPG' AND 'IMG (2).JPG', THE\n");
+  printf("PHOTO WITH THE LONGER NAME WILL BE DELETED.\n");
+  printf("THERE IS A SLIGHT CHANCE THAT THE ALGORITHM MAY,\n");
+  printf("DELETE A WRONG FILE BUT THE CHANCES ARE MINIMAL TO NONE. \n\n" ACRE);
+
+  string answer;
+  cout << "Proceed on your own risk (y/n): ";
+  cin  >> answer;
+
+  if(answer.compare("y") == 0){
+    duplicateVersion(sourcePath, 1);
   }
 
 }else{

@@ -7,7 +7,8 @@ using namespace std;
 int     detailed = -1,
         hundredP = -1,
         currentP = 0,
-        deleteMode = 0;
+        deleteMode = 0,
+        duplicateSimple = 1;
 float   currentSize = 0;
 
 int hundredPercent(const char* path){
@@ -790,8 +791,10 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
   
 }
 
-void duplicateVersion(const char *path){ 
+void duplicateVersion(const char *path, int xtrm){ 
   detailedFile("duplicateVersion"); detailedFile("with path:"); detailedFile(path); detailedFile("⬇︎");
+
+  if(xtrm) duplicateSimple =0;
 
   if(folderAlreadyOrganized(path, 2)){
     currentP += hundredPercent(path);
@@ -825,7 +828,7 @@ void duplicateVersion(const char *path){
 
       if(!isFile(imagePath) && (dirFile.find('.') == string::npos)){
         printf(ACG "%-20s%-1s%-121s%-1s\n" ACRE, "> going to path:", "[ ", imagePath, " ]");
-        duplicateVersion(imagePath);
+        duplicateVersion(imagePath, xtrm);
 
       }else if ( typeOfFileInt(imagePath) != -1 ){ 
 
@@ -960,7 +963,78 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
 
   printf(ACG "%-20s%-1s%-121s%-3s%-3s%-3s%-10s%-1s%-121s%-1s\n" ACRE, "> double check for:", "[ ", imagePathMaster, " ]", "-\\", "\n", " '--------------> ", "[ ", imagePathCandidate, " ] -/");
 
-  if( isFile(imagePathCandidate) ){ 
+  if(duplicateSimple){ // first check is name check so that it is very fast but only looks at similar names
+
+    if( strlen(imagePathMaster) <= strlen(imagePathCandidate) && strncmp(imagePathMaster, imagePathCandidate, strlen(imagePathMaster)-5) == 0){ 
+      printf(ACG "\n%-20s" ACRE, "> |-similar name.");
+      // the names are equal except for a slight variation
+
+      if( isFile(imagePathCandidate) ){ 
+        printf(ACG "%-20s" ACRE, "> |-is file.");
+        // is file and is not hidden 
+          
+          if( exec(cmdOne).compare(exec(cmdTwo)) == 0){ 
+            printf(ACG "\n%-20s" ACRE, "> |-same size.");
+            // sizes are the same
+
+            if( !dateOfCreation(imagePathMaster).empty() 
+              && !dateOfCreation(imagePathCandidate).empty() 
+              && dateOfCreation(imagePathMaster).compare(dateOfCreation(imagePathCandidate)) == 0){  
+              printf(ACG "\n%-20s" ACRE, "> |-same date.");
+              // dates of creation are the same
+
+              if( exec(cmdThree).compare(exec(cmdFour)) == 0){  
+                printf(ACG "\n%-20s" ACRE, "> |-same res.");
+                // resolutions are the same
+
+                char* rmcmd = (char*) malloc (65536 * sizeof(char));
+                
+                strcpy(rmcmd, "rm -rf \"");
+                strcat(rmcmd, imagePathCandidate);
+                strcat(rmcmd, "\"");
+
+                exec(rmcmd);
+
+                detailedFile(rmcmd);
+                detailedFile("\n===========");
+
+                printf(ACG "\n> \\-%s ( DELETED ).\n\n" ACRE, rmcmd);
+
+                // ADDING SIZE DELETED
+                char* cmd = (char*) malloc (32768 * sizeof(char));
+                strcpy(cmd, "exiftool -FileSize \""); strcat(cmd, imagePathMaster); strcat(cmd, "\"");
+                
+                string fileSize;
+                fileSize = exec(cmd);
+                if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'k'){
+                  currentSize += stoi(fileSize.substr(34, fileSize.length()))/1024;
+
+                }else if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'M'){
+                  currentSize += stoi(fileSize.substr(34, fileSize.length()));
+
+                }else{
+                  currentSize += stoi(fileSize.substr(34, fileSize.length()))*1024;
+                }
+
+                return ;
+
+              }
+              printf(ACR "> The resolutions are the NOT same.\n" ACRE);
+              return ;
+            }
+            printf(ACR "> The dates of creation are NOT the same.\n" ACRE);
+            return ;
+          }
+          printf(ACR "> The sizes are NOT the same.\n" ACRE);
+          return ;
+        }
+        printf(ACR "> It is NOT a file.\n" ACRE);
+        return ;
+      }
+
+} else { // thorough check for every file
+
+   if( isFile(imagePathCandidate) ){ 
     printf(ACG "%-20s" ACRE, "> |-is file.");
     // is file and is not hidden 
       
@@ -1061,6 +1135,7 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
     }
     printf(ACR "> It is NOT a file.\n" ACRE);
     return ;
+  }
 
 }
 
