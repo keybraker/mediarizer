@@ -88,12 +88,11 @@ make
 
 _Duplicate Mode Output:_
 ```
-> > It is a file and is not hidden
-> > > The names are equal except for a slight variation
-> > > > The sizes are the same
-> > > > > The dates of creation are the same
-> > > > > > The resolutions are the same
-> > > > > > > rm -rf "/videos/videowemv copy.wmv" ( DELETED )
+> |-is file.        
+> |-same size.      
+> |-same date.      
+> |-same res.       
+> \-rm -rf "/path/to/file.type" ( DELETED ).
 ```
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/MediaOrganizerDisplayDuplicate.jpg)
 <br />**_( These is achieved in one run of the program )_**
