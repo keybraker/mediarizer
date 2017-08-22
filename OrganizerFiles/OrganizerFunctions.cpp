@@ -2,9 +2,10 @@
 
 using namespace std;
 
-int detailed = -1,
-    hundredP = -1,
-    currentP = 0;
+int     detailed = -1,
+        hundredP = -1,
+        currentP = 0;
+float   currentSize = 0;
 
 int hundredPercent(const char* path){
 
@@ -23,16 +24,16 @@ void percentige(int version){
   currentP += 1;
 
   if(version == 1){
-    if(((currentP*100)/(hundredP)) > 100){
-      printf(ACY "\r-----------------------------------------------------------[%3d%%]-----------------------------------------------------------\n" ACRE, 100);
+    if(((currentP * 100)/(hundredP)) > 100){
+      printf(ACY "\r[%3d%%][%-9f Mb]" ACRE, 100, currentSize);
     }else{
-      printf(ACY "\r-----------------------------------------------------------[%3d%%]-----------------------------------------------------------\n" ACRE, ((currentP*100) / (hundredP)));
+      printf(ACY "\r[%3d%%][%-9f Mb]" ACRE, ((currentP*100) / (hundredP)), currentSize);
     }
   }else{
-    if(((currentP*100)/(hundredP^2)) > 100){
-      printf(ACY "\r-----------------------------------------------------------[%3d%%]-----------------------------------------------------------\n" ACRE, 100);
+    if(((currentP * 100)/(hundredP^2)) > 100){
+      printf(ACY "\r[%3d%%][- %-9f Mb]" ACRE, 100, currentSize);
     }else{
-      printf(ACY "\r-----------------------------------------------------------[%3d%%]-----------------------------------------------------------\n" ACRE, ((currentP*100) / (hundredP^2)));
+      printf(ACY "\r[%3d%%][- %-9f Mb]" ACRE, ((currentP*100) / (hundredP^2)), currentSize);
     }
   }
 
@@ -49,16 +50,22 @@ void detailedFile(const char* string){
 
 }
 
-void folderSigning(const char* string, int version){
+void folderSigning(const char* path, int version){ 
 
   if(version == 1){
+    printf(ACY "%-20s%-5s%-1s%-100s%-1s  organized and signed.\n" ACRE, "", "> path:", "[ ", path, " ]");
+    //printf(ACY ">> Path %s, organized and signed.\n" ACRE, path);
     FILE *folderSigning = fopen("folderSigning.txt", "a");
     if(folderSigning == NULL){ printf("Error while opening file.\n"); }
-    fprintf(folderSigning, "%s\n", string);
+    fprintf(folderSigning, "%s\n", path);
+
   }else{
+    printf(ACY "%-20s%-1s%-100s%-1s cleaned and signed.\n" ACRE, "> path:", "[ ", path, " ]");
+    //printf(ACY ">> Path %s, cleaned and signed.\n" ACRE, path);
     FILE *folderSigningDuplicate = fopen("folderSigningDuplicate.txt", "a");
     if(folderSigningDuplicate == NULL){ printf("Error while opening file.\n"); }
-    fprintf(folderSigningDuplicate, "%s\n", string);
+    fprintf(folderSigningDuplicate, "%s\n", path);
+
   }
 
 }
@@ -124,8 +131,25 @@ string exec(const char* cmd) {
 int transfer(const char *source, const char *dest){ 
   detailedFile("transfer"); detailedFile("⬇︎");
 
+  // ADDING SIZE TRANSFERED
+  char* cmd = (char*) malloc (32768 * sizeof(char));
+  strcpy(cmd, "exiftool -FileSize \""); strcat(cmd, source); strcat(cmd, "\"");
+  
+  string fileSize;
+  fileSize = exec(cmd);
+  if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'k'){
+    currentSize += stof(fileSize.substr(34, fileSize.length()))/1024;
+
+  }else if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'M'){
+    currentSize += stof(fileSize.substr(34, fileSize.length()));
+
+  }else{
+    currentSize += stof(fileSize.substr(34, fileSize.length()))*1024;
+  }
+
   char* transfer = (char*) malloc (32768 * sizeof(char));
 
+  /*******************************/
   strcpy(transfer, "sudo cp \"");
   strcat(transfer, source);
   strcat(transfer, "\" ");
@@ -133,7 +157,13 @@ int transfer(const char *source, const char *dest){
 
   system(transfer);
 
-  printf(ACG "> %s\n" ACRE, transfer);
+  /*******************************/
+  string destEdit = dest;
+  destEdit = destEdit.substr(0, destEdit.length() - 1);
+  destEdit = destEdit.substr(1).append(destEdit.substr(0,1));
+  destEdit = destEdit.substr(0, destEdit.length() - 1);
+
+  printf(ACG "> copy %-1s%-100s%-3s%-3s%-1s%-100s%-1s\n" ACRE, "[ ", source, " ]", "to", "[ ", destEdit.c_str(), " ]");
   detailedFile(transfer);
   detailedFile("\n===========");
 
@@ -152,7 +182,7 @@ string dateOfCreation(const char *path){
   string fileType = exec(cmd);
 
   if(!fileType.empty()){
-    fileType = fileType.substr(34,fileType.length());
+    fileType = fileType.substr(34, fileType.length());
   }else{
     return string();
   }
@@ -167,7 +197,7 @@ string dateOfCreation(const char *path){
     fileDate = exec(cmd);
 
     if(!fileDate.empty())    
-      return fileDate.substr(34,fileDate.length());
+      return fileDate.substr(34, fileDate.length());
 
   }else if(fileType.compare("PNG\n") == 0){
     // cout << "(PNG)  ";
@@ -177,7 +207,7 @@ string dateOfCreation(const char *path){
     fileDate = exec(cmd);
 
     if(!fileDate.empty())
-      return fileDate.substr(34,fileDate.length());
+      return fileDate.substr(34, fileDate.length());
 
   }else if(fileType.compare("AVI\n") == 0){
     // cout << "(AVI)  ";
@@ -187,7 +217,7 @@ string dateOfCreation(const char *path){
     fileDate = exec(cmd);
 
     if(!fileDate.empty())
-      return fileDate.substr(34,fileDate.length());
+      return fileDate.substr(34, fileDate.length());
 
   }else if(fileType.compare("MOV\n") == 0){
     // cout << "(MOV)  ";
@@ -197,7 +227,7 @@ string dateOfCreation(const char *path){
     fileDate = exec(cmd);
 
     if(!fileDate.empty())
-      return fileDate.substr(34,fileDate.length());
+      return fileDate.substr(34, fileDate.length());
 
   }else if(fileType.compare("WMV\n") == 0){
     // cout << "(WMV)  ";
@@ -207,7 +237,7 @@ string dateOfCreation(const char *path){
     fileDate = exec(cmd);
 
     if(!fileDate.empty())
-      return fileDate.substr(34,fileDate.length());
+      return fileDate.substr(34, fileDate.length());
 
   }else if(fileType.compare("MP4\n") == 0){
     // cout << "(MP4)  ";
@@ -217,7 +247,7 @@ string dateOfCreation(const char *path){
     fileDate = exec(cmd);
 
     if(!fileDate.empty())    
-      return fileDate.substr(34,fileDate.length());
+      return fileDate.substr(34, fileDate.length());
 
   }else if(fileType.compare("M2TS\n") == 0){
     // cout << "(M2TS) ";
@@ -227,7 +257,7 @@ string dateOfCreation(const char *path){
     fileDate = exec(cmd);
 
     if(!fileDate.empty())
-      return fileDate.substr(34,fileDate.length());
+      return fileDate.substr(34, fileDate.length());
 
   }
 
@@ -558,6 +588,7 @@ int typeOfFileInt(const char* path){
 
 void fileVersion(const char *path, const char *pathToStore){ 
   detailedFile("fileVersion"); detailedFile("⬇︎");
+  
   percentige(1);
   string originalDate = dateOfCreation(path);
   
@@ -734,7 +765,6 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
     }
 
     closedir(d);
-    printf(ACY ">> Path %s, signed.\n" ACRE, path);
     folderSigning(path, 1);
 
     return ;
@@ -777,7 +807,7 @@ void duplicateVersion(const char *path){
       strcpy(imagePath, path); strcat(imagePath, "/"); strcat(imagePath, dir->d_name);
 
       if(!isFile(imagePath) && (dirFile.find('.') == string::npos)){
-        printf(ACG "> GOING IN %s\n" ACRE, imagePath);
+        printf(ACG "%-20s%-1s%-100s%-1s\n" ACRE, "> going to path:", "[ ", imagePath, " ]");
         duplicateVersion(imagePath);
 
       }else if ( typeOfFileInt(imagePath) != -1 ){ 
@@ -803,7 +833,6 @@ void duplicateVersion(const char *path){
     }
 
     closedir(d);
-    printf(ACY ">> Path %s, signed.\n" ACRE, path);
     folderSigning(path, 2);
 
     return ;
@@ -827,8 +856,7 @@ void duplicateCleaner(const char *master, const char *path, int type){
   strcpy(imagePath,  path); strcat(imagePath,  "/");
 
   if (d) {
-    percentige(2);
-    printf(ACG "> MASTER : %s, COMPARED TO, %s\n" ACRE,masterPath, path);
+    printf(ACG "%-20s%-1s%-100s%-1s%-3s%-1s%-20s%-1s\n" ACRE, "> info check for:", "[ ", masterPath, " ]", " and ", "[ ", path, " ]");
 
     while ((dir = readdir(d)) != NULL){
 
@@ -912,28 +940,28 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
   strcpy(cmdThree,  "exiftool -ImageSize \"");  strcat(cmdThree,  imagePathMaster);     strcat(cmdThree, "\""); 
   strcpy(cmdFour,   "exiftool -ImageSize \"");  strcat(cmdFour,   imagePathCandidate);  strcat(cmdFour, "\""); 
 
-  printf(ACG "> MASTER FILE : %s, CANDIDATE FILE, %s\n" ACRE, imagePathMaster, imagePathCandidate);
+  printf(ACG "%-20s%-1s%-100s%-1s%-3s%-1s%-20s%-1s\n" ACRE, "> double check for:", "[ ", imagePathMaster, " ]", " and ", "[ ", imagePathCandidate, " ]");
 
   if( isFile(imagePathCandidate) ){ 
-    printf(ACY "> > It is a file.\n" ACRE);
+    printf(ACG "%-20s" ACRE, "> |-is file.");
     // is file and is not hidden 
       
       if( exec(cmdOne).compare(exec(cmdTwo)) == 0){ 
-        printf(ACY "> > > > The sizes are the same.\n" ACRE);
+        printf(ACG "\n%-20s" ACRE, "> |-same size.");
         // sizes are the same
 
         if( !dateOfCreation(imagePathMaster).empty() 
           && !dateOfCreation(imagePathCandidate).empty() 
           && dateOfCreation(imagePathMaster).compare(dateOfCreation(imagePathCandidate)) == 0){  
-          printf(ACY "> > > > > The dates of creation are the same.\n" ACRE);
+          printf(ACG "\n%-20s" ACRE, "> |-same date.");
           // dates of creation are the same
 
           if( exec(cmdThree).compare(exec(cmdFour)) == 0){  
-            printf(ACY "> > > > > > The resolutions are the same.\n" ACRE);
+            printf(ACG "\n%-20s" ACRE, "> |-same res.");
             // resolutions are the same
 
             if( strcmp(imagePathMaster, imagePathCandidate) > 0){ 
-            printf(ACY "> > > The names are equal except for a slight variation.\n" ACRE);
+            printf(ACG "\n%-20s" ACRE, "> |-similar name.");
             // the names are equal except for a slight variation
 
               char* rmcmd = (char*) malloc (65536 * sizeof(char));
@@ -947,8 +975,24 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
               detailedFile(rmcmd);
               detailedFile("\n===========");
 
-              printf(ACY "> > > > > > => ");
-              printf(ACBO "%s ( DELETED ).\n\n" ACRE, rmcmd);
+              printf(ACG "\n> \\-%s ( DELETED ).\n\n" ACRE, rmcmd);
+
+              // ADDING SIZE DELETED
+              char* cmd = (char*) malloc (32768 * sizeof(char));
+              strcpy(cmd, "exiftool -FileSize \""); strcat(cmd, imagePathMaster); strcat(cmd, "\"");
+              
+              string fileSize;
+              fileSize = exec(cmd);
+              if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'k'){
+                currentSize += stoi(fileSize.substr(34, fileSize.length()))/1024;
+
+              }else if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'M'){
+                currentSize += stoi(fileSize.substr(34, fileSize.length()));
+
+              }else{
+                currentSize += stoi(fileSize.substr(34, fileSize.length()))*1024;
+              }
+
               return ;
 
             }else{
@@ -964,23 +1008,40 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
               detailedFile(rmcmd);
               detailedFile("\n===========");
 
-              printf(ACY "> > > > > > => ");
-              printf(ACBO "%s ( DELETED ).\n\n" ACRE, rmcmd);
+              printf(ACG "\n> \\-%s ( DELETED ).\n\n" ACRE, rmcmd);
+
+
+              // ADDING SIZE DELETED
+              char* cmd = (char*) malloc (32768 * sizeof(char));
+              strcpy(cmd, "exiftool -FileSize \""); strcat(cmd, imagePathCandidate); strcat(cmd, "\"");
+              
+              string fileSize;
+              fileSize = exec(cmd);
+              if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'k'){
+                currentSize += stoi(fileSize.substr(34, fileSize.length()))/1024;
+
+              }else if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'M'){
+                currentSize += stoi(fileSize.substr(34, fileSize.length()));
+
+              }else{
+                currentSize += stoi(fileSize.substr(34, fileSize.length()))*1024;
+              }
+
               return ;
 
             }
 
           }
-          printf(ACR "> > > > > > The resolutions are the NOT same.\n" ACRE);
+          printf(ACR "> The resolutions are the NOT same.\n" ACRE);
           return ;
         }
-        printf(ACR "> > > > > The dates of creation are NOT the same.\n" ACRE);
+        printf(ACR "> The dates of creation are NOT the same.\n" ACRE);
         return ;
       }
-      printf(ACR "> > > > The sizes are NOT the same.\n" ACRE);
+      printf(ACR "> The sizes are NOT the same.\n" ACRE);
       return ;
     }
-    printf(ACR "> > It is NOT a file.\n" ACRE);
+    printf(ACR "> It is NOT a file.\n" ACRE);
     return ;
 
 }
