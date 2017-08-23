@@ -29,15 +29,15 @@ void percentige(int version){
 
   if(version == 1){
     if(((currentP * 100)/(hundredP)) > 100){
-      printf(ACY "\r[%3d%%][%-9f Mb]" ACRE, 100, currentSize);
+      printf(ACY "\r[%3d%%][%-10f Mb]" ACRE, 100, currentSize);
     }else{
-      printf(ACY "\r[%3d%%][%-9f Mb]" ACRE, ((currentP*100) / (hundredP)), currentSize);
+      printf(ACY "\r[%3d%%][%-10f Mb]" ACRE, ((currentP*100) / (hundredP)), currentSize);
     }
   }else{
     if(((currentP * 100)/(hundredP^2)) > 100){
-      printf(ACY "\r%-19s [%3d%%][- %-9f Mb]\n" ACRE, "", 100, currentSize);
+      printf(ACY "\r%-19s [%3d%%][- %-10f Mb]\n" ACRE, "", 100, currentSize);
     }else{
-      printf(ACY "\r%-19s [%3d%%][- %-9f Mb]\n" ACRE, "", ((currentP*100) / (hundredP^2)), currentSize);
+      printf(ACY "\r%-19s [%3d%%][- %-10f Mb]\n" ACRE, "", ((currentP*100) / (hundredP^2)), currentSize);
     }
   }
 
@@ -58,14 +58,14 @@ void detailedFile(const char* string){
 void folderSigning(const char* path, int version){ 
 
   if(version == 1){
-    printf(ACY "%-20s%-5s%-1s%-121s%-1s  has been organized and signed.\n" ACRE, "", "> directory", "[ ", path, " ]");
+    printf(ACY "%-5s%-1s%-121s%-1s\n" ACRE, "> sign ", "[ ", path, " ]"); //"> organized & signed"
     //printf(ACY ">> Path %s, organized and signed.\n" ACRE, path);
     FILE *folderSigning = fopen("folderSigning.txt", "a");
     if(folderSigning == NULL){ printf("Error while opening file.\n"); }
     fprintf(folderSigning, "%s\n", path);
     fclose(folderSigning);
   }else{
-    printf(ACY "%-20s%-1s%-121s%-1s has been cleaned and signed.\n" ACRE, "> the directory:", "[ ", path, " ]");
+    printf(ACY "%-20s%-1s%-121s%-1s\n" ACRE, "> cleaned & signed:", "[ ", path, " ]");
     //printf(ACY ">> Path %s, cleaned and signed.\n" ACRE, path);
     FILE *folderSigningDuplicate = fopen("folderSigningDuplicate.txt", "a");
     if(folderSigningDuplicate == NULL){ printf("Error while opening file.\n"); }
@@ -171,13 +171,13 @@ int transfer(const char *source, const char *dest){
 
     exec(rmcmd);
   }
-  /*******************************/
+  /*****************************************************/
   string destEdit = dest;
   destEdit = destEdit.substr(0, destEdit.length() - 1);
   destEdit = destEdit.substr(1).append(destEdit.substr(0,1));
   destEdit = destEdit.substr(0, destEdit.length() - 1);
 
-  printf(ACG "> copy %-1s%-121s%-3s%-3s%-23s%-5s%-1s%-121s%-1s\n" ACRE, "[ ", source, " ]", "-\\", "\n", "'--> ", "[ ", destEdit.c_str(), " ] -/");
+  printf(ACG "> copy %-1s%-121s%-3s%-3s%-23s%-6s%-1s%-121s%-1s\n" ACRE, "[ ", source, " ]", "-\\", "\n", " '--> ", "[ ", destEdit.c_str(), " ] -/");
   if(deleteMode){  
     printf(ACG "%-20s%-7s%-1s%-121s%-3s\n" ACRE, "", "> rm", "[ ", source, " ]");
   }
@@ -605,7 +605,7 @@ int typeOfFileInt(const char* path){
 
 void fileVersion(const char *path, const char *pathToStore){ 
   detailedFile("fileVersion"); detailedFile("⬇︎");
-  
+  hundredP = 1;
   percentige(1);
   string originalDate = dateOfCreation(path);
   

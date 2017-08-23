@@ -22,6 +22,7 @@
 #include <stdexcept>
 #include <array>
 #include <sys/stat.h>
+#include <time.h>   
 
 #define ACBO  "\033[1m"
 #define ACR   "\x1b[31m"

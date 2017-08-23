@@ -209,7 +209,12 @@ for(int i = 0; i < 11; i++){ if(arg[i] == 1)   sum += arg[i]; }
 if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version initiation
   if(isFile(filePath) == 1){
     if(isDir(destPath) == 1){
+      clock_t t1 = clock(); 
       fileVersion(filePath, destPath);
+      clock_t t2 = clock(); 
+      float diff = ((float)(t2 - t1) / 1000000.0F ) * 1000; 
+      printf(ACY "\r[%-5f%-9s]\n" ACRE, diff, " millisecs");
+
     }else{
       printf(ACR "%s is not a path to a folder.\n\n", destPath);
       printf("Media Organizer Usage Guide:\n");
@@ -217,7 +222,9 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
       printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
       printf(" for more information use -hlp\n" ACRE);
       return -1;
+
     }
+
   }else{
     printf(ACR "%s is not a path to a file.\n\n", filePath);
     printf("Media Organizer Usage Guide:\n");
@@ -225,12 +232,18 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
     printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
     printf(" for more information use -hlp\n" ACRE);
     return -1;
+
   }
 
 }else if(filePath == NULL && sourcePath != NULL && destPath != NULL){ // folder version initiation
   if(isDir(sourcePath) == 1){
     if(isDir(destPath) == 1){
+      clock_t t1 = clock(); 
       folderVersion(sourcePath, destPath, argp); 
+      clock_t t2 = clock(); 
+      float diff = ((float)(t2 - t1) / 1000000.0F ) * 1000; 
+      printf(ACY "\r[%-5f%-9s]\n" ACRE, diff, " millisecs");
+
     }else{
       printf(ACR "%s is not a path to a folder.\n\n", destPath);
       printf("Media Organizer Usage Guide:\n");
@@ -238,7 +251,9 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
       printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
       printf(" for more information use -hlp\n" ACRE);
       return -1;
+
     }
+
   }else{
     printf(ACR "%s is not a path to a folder.\n\n", sourcePath);
     printf("Media Organizer Usage Guide:\n");
@@ -246,10 +261,11 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
     printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n");
     printf(" for more information use -hlp\n" ACRE);
     return -1;
+
   }
 
 }else if(filePath == NULL && sourcePath != NULL && destPath == NULL && arg[10] == 1){ // duplicate version initiation
-  printf(ACG "# DUPLICATE MODE\n\n");
+  printf(ACG "# DUPLICATE MODE NORMAL\n\n");
   printf(ACR "DISCLAIMER: USE WITH CAUTION! PLEASE BACKUP ALL YOUR FILES \n");
   printf("BEFORE PROCCEDING TO CLEANUP DUPLICATES\n");
   printf("=======================================\n");
@@ -268,6 +284,7 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
 
   if(answer.compare("y") == 0){
     duplicateVersion(sourcePath, 0);
+
   }
 
 }else if(filePath == NULL && sourcePath != NULL && destPath == NULL && arg[12] == 1){ // duplicate Xtreme version initiation
@@ -275,6 +292,7 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
   printf(ACR "DISCLAIMER: USE WITH CAUTION! PLEASE BACKUP ALL YOUR FILES \n");
   printf("BEFORE PROCCEDING TO CLEANUP DUPLICATES\n");
   printf("=======================================\n");
+  
   printf("THIS MODE LOOKS UP EVERY FILE IN A DIRECTORY\n");
   printf("AND COMPARES THE EXIF DATA TO ALL THE OTHERS.\n");
   printf("IF A FILE IS FOUND THAT HAS THE SAME EXIF AND\n");
