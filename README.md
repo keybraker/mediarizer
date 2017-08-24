@@ -92,7 +92,7 @@ _Duplicate Mode Output:_
 > |-same size.      
 > |-same date.      
 > |-same res.       
-> \-rm -rf "/path/to/file.type" ( DELETED ).
+> '-rm -rf "/path/to/file.type" ( DELETED ).
 ```
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/MediaOrganizerDisplayDuplicate.jpg)
 <br />**_( These is achieved in one run of the program )_**
