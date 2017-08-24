@@ -29,16 +29,34 @@ void percentige(int version){
 
   if(version == 1){
     if(((currentP * 100)/(hundredP)) > 100){
-      printf(ACY "\r[%3d%%][%-10f Mb]" ACRE, 100, currentSize);
+      if(currentSize < 1024){
+        printf(ACY "\r[%3d%%][%7d Mb]" ACRE, 100, (int) currentSize);
+      }else{
+        printf(ACY "\r[%3d%%][%7.2f Gb]" ACRE, 100, (float) currentSize / 1024);
+      }
     }else{
-      printf(ACY "\r[%3d%%][%-10f Mb]" ACRE, ((currentP*100) / (hundredP)), currentSize);
+      if(currentSize < 1024){
+        printf(ACY "\r[%3d%%][%7d Mb]" ACRE, ((currentP*100) / (hundredP)), (int) currentSize);
+      }else{
+        printf(ACY "\r[%3d%%][%7.2f Gb]" ACRE, ((currentP*100) / (hundredP)), (float) currentSize / 1024);
+      }
     }
+
   }else{
     if(((currentP * 100)/(hundredP^2)) > 100){
-      printf(ACY "\r%-19s [%3d%%][- %-10f Mb]\n" ACRE, "", 100, currentSize);
+      if(currentSize < 1024){
+        printf(ACY "\r%-19s [%3d%%][- %7d Mb]\n" ACRE, "", 100, (int) currentSize);
+      }else{
+        printf(ACY "\r%-19s [%3d%%][- %7.2f Gb]\n" ACRE, "", 100, (float) currentSize / 1024);
+      }
     }else{
-      printf(ACY "\r%-19s [%3d%%][- %-10f Mb]\n" ACRE, "", ((currentP*100) / (hundredP^2)), currentSize);
+      if(currentSize < 1024){
+        printf(ACY "\r%-19s [%3d%%][- %7d Mb]\n" ACRE, "", ((currentP*100) / (hundredP^2)), (int) currentSize);
+      }else{
+        printf(ACY "\r%-19s [%3d%%][- %7.2f Gb]\n" ACRE, "", ((currentP*100) / (hundredP^2)), (float) currentSize / 1024);
+      }
     }
+
   }
 
 }
@@ -150,6 +168,7 @@ int transfer(const char *source, const char *dest){
 
   }else{
     currentSize += stof(fileSize.substr(34, fileSize.length()))*1024;
+    
   }
 
   char* transfer = (char*) malloc (32768 * sizeof(char));
@@ -177,7 +196,7 @@ int transfer(const char *source, const char *dest){
   destEdit = destEdit.substr(1).append(destEdit.substr(0,1));
   destEdit = destEdit.substr(0, destEdit.length() - 1);
 
-  printf(ACG "> copy %-1s%-121s%-3s%-3s%-23s%-6s%-1s%-121s%-1s\n" ACRE, "[ ", source, " ]", "-\\", "\n", " '--> ", "[ ", destEdit.c_str(), " ] -/");
+  printf(ACG "> copy %-1s%-121s%-3s%-3s%-20s%-6s%-1s%-109s%-1s\n" ACRE, "[ ", source, " ]", "-\\", "\n", " '--> ", "[ ", destEdit.c_str(), " ] -/");
   if(deleteMode){  
     printf(ACG "%-20s%-7s%-1s%-121s%-3s\n" ACRE, "", "> rm", "[ ", source, " ]");
   }
@@ -605,7 +624,9 @@ int typeOfFileInt(const char* path){
 
 void fileVersion(const char *path, const char *pathToStore){ 
   detailedFile("fileVersion"); detailedFile("⬇︎");
-  hundredP = 1;
+
+  if(hundredP == -1){ hundredP = 1; }
+
   percentige(1);
   string originalDate = dateOfCreation(path);
   
@@ -643,11 +664,12 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
 
   if(hundredP == -1){
     hundredP = hundredPercent(path);
-  }else{
-    hundredP -= 1;
   }
-  
 
+  // else{
+  //   hundredP -= 1;
+  // }
+  
   bool  isArgFree = true, 
         photoOnly = false,
         videoOnly = false;
@@ -1032,7 +1054,7 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
         return ;
       }
 
-} else { // thorough check for every file
+  } else { // thorough check for every file
 
    if( isFile(imagePathCandidate) ){ 
     printf(ACG "%-20s" ACRE, "> |-is file.");

@@ -209,11 +209,14 @@ for(int i = 0; i < 11; i++){ if(arg[i] == 1)   sum += arg[i]; }
 if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version initiation
   if(isFile(filePath) == 1){
     if(isDir(destPath) == 1){
-      clock_t t1 = clock(); 
+      time_t start = time(0);
       fileVersion(filePath, destPath);
-      clock_t t2 = clock(); 
-      float diff = ((float)(t2 - t1) / 1000000.0F ) * 1000; 
-      printf(ACY "\r[%-5f%-9s]\n" ACRE, diff, " millisecs");
+      double seconds_since_start = difftime( time(0), start);
+      if(seconds_since_start < 60){
+      printf(ACY "\r[%-5f%-7s]\n" ACRE, seconds_since_start, " seconds");        
+      }else{  
+        printf(ACY "\r[%-5d%-7s]\n" ACRE, (int) seconds_since_start / 60, " minutes");
+      }
 
     }else{
       printf(ACR "%s is not a path to a folder.\n\n", destPath);
@@ -238,11 +241,14 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
 }else if(filePath == NULL && sourcePath != NULL && destPath != NULL){ // folder version initiation
   if(isDir(sourcePath) == 1){
     if(isDir(destPath) == 1){
-      clock_t t1 = clock(); 
+      time_t start = time(0);
       folderVersion(sourcePath, destPath, argp); 
-      clock_t t2 = clock(); 
-      float diff = ((float)(t2 - t1) / 1000000.0F ) * 1000; 
-      printf(ACY "\r[%-5f%-9s]\n" ACRE, diff, " millisecs");
+      double seconds_since_start = difftime( time(0), start);
+      if(seconds_since_start < 60){
+      printf(ACY "\r[%-5f%-7s]\n" ACRE, seconds_since_start, " seconds");
+      }else{  
+        printf(ACY "\r[%-5d%-7s]\n" ACRE, (int) seconds_since_start / 60, " minutes");
+      }
 
     }else{
       printf(ACR "%s is not a path to a folder.\n\n", destPath);
@@ -283,7 +289,14 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
   cin  >> answer;
 
   if(answer.compare("y") == 0){
+    time_t start = time(0);
     duplicateVersion(sourcePath, 0);
+    double seconds_since_start = difftime( time(0), start);
+    if(seconds_since_start < 60){
+      printf(ACY "\r[%-5f%-7s]\n" ACRE, seconds_since_start, " seconds");
+    }else{  
+      printf(ACY "\r[%-5d%-7s]\n" ACRE, (int) seconds_since_start / 60, " minutes");
+    }     
 
   }
 
@@ -307,7 +320,15 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
   cin  >> answer;
 
   if(answer.compare("y") == 0){
+    time_t start = time(0);
     duplicateVersion(sourcePath, 1);
+    double seconds_since_start = difftime( time(0), start);
+    if(seconds_since_start < 60){
+      printf(ACY "\r[%-5f%-7s]\n" ACRE, seconds_since_start, " seconds");
+    }else{  
+      printf(ACY "\r[%-5d%-7s]\n" ACRE, (int) seconds_since_start / 60, " minutes");
+    }   
+
   }
 
 }else{
