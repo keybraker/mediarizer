@@ -48,7 +48,7 @@ struct originalDateData{
 void help();
 ////////////////////////////////////
 int hundredPercent(const char* path);
-void percentige(int version);
+void percentige();
 
 void detailedFile(const char* string);
 void folderSigning(const char* string, int version);
