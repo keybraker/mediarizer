@@ -207,7 +207,6 @@ for(int i = 0; i < 11; i++){ if(arg[i] == 1)   sum += arg[i]; }
 
 if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version initiation
   if(isFile(filePath) == 1){
-    cout << "filepath = " << filePath << " (" << isFile(filePath) << " )" << endl;
     if(isDir(destPath) == 1){
       printf(ACY "\r[prc%%][total size]> exec\n------------------------\n\n");
 
@@ -244,7 +243,6 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
 
 }else if(filePath == NULL && sourcePath != NULL && destPath != NULL){ // folder version initiation
   if(isDir(sourcePath) == 1){
-    cout << "sourcePath = " << sourcePath << " (" << isDir(sourcePath) << " )" << endl;
     if(isDir(destPath) == 1){
       printf(ACY "\r[prc%%][total size]> exec\n------------------------\n\n");
       time_t start = time(0);
