@@ -1,18 +1,17 @@
 #include "Organizer.h"
 
-
 void hlp(){
 
   printf("\nThere are three modes to choose from:\n");
   printf("=====================================\n\n");
   printf("1) File Mode\n   ---------\n");
-    printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n\n");
+  printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n\n");
 
   printf("2) Folder Mode\n   -----------\n");
-    printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n\n");
+  printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n\n");
 
   printf("3) Duplication Cleaning Mode\n   -------------------------\n");
-    printf(" ./mediaOrganizer -dup /source/path/folder\n\n");
+  printf(" ./mediaOrganizer -dup /source/path/folder\n\n");
 
   printf("Flags:\n======\n\n");
   printf(" Category\n --------\n");
@@ -244,7 +243,6 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
   if(isDir(sourcePath) == 1){
     if(isDir(destPath) == 1){
       printf(ACY "\r[prc%%][total size]> exec\n------------------------\n\n");
-
       time_t start = time(0);
       folderVersion(sourcePath, destPath, argp); 
       double seconds_since_start = difftime( time(0), start);

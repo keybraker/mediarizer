@@ -6,7 +6,8 @@
 #ifndef __ORGANIZER_H
 #define __ORGANIZER_H
 
-#include <string>
+
+#include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -55,11 +56,11 @@ void folderSigning(const char* string, int version);
 bool folderAlreadyOrganized(const char* string, int version);
 
 string exec(const char* cmd);
-int transfer (char *source, char *dest);
+int transfer(char *source, char *dest);
 
 string dateOfCreation (const char *path);
 bool isDir(const char* path);
-int isFile (const char *path);
+int isFile(const char *path);
 originalDateData *dateReturn(string originalDate);
 
 bool typeOfFile(const char* path);

@@ -142,19 +142,6 @@ int transfer(const char *source, const char *dest){
   char* cmd = (char*) malloc (32768 * sizeof(char));
   strcpy(cmd, "exiftool -FileSize \""); strcat(cmd, source); strcat(cmd, "\"");
   
-  string fileSize;
-  fileSize = exec(cmd);
-  if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'k'){
-    currentSize += stof(fileSize.substr(34, fileSize.length()))/1024;
-
-  }else if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'M'){
-    currentSize += stof(fileSize.substr(34, fileSize.length()));
-
-  }else{
-    currentSize += stof(fileSize.substr(34, fileSize.length()))*1024;
-    
-  }
-
   char* transfer = (char*) malloc (32768 * sizeof(char));
   char* rmcmd = (char*) malloc (32768 * sizeof(char));
 
@@ -181,12 +168,24 @@ int transfer(const char *source, const char *dest){
   destEdit = destEdit.substr(0, destEdit.length() - 1);
 
   printf(ACG "> copy %-1s%-50s\n" ACRE, "[ ", source);
-  printf(ACG "%-20s%-4s%-1s%-50s\n" ACRE, "", "'--> ", "[ ", dest);
+  printf(ACG "%-20s%-4s%-1s%-50s\n" ACRE, "", "'--> ", "[ ", destEdit.c_str());
+
   if(deleteMode){  
     printf(ACG "%-20s%-7s%-1s%-50s\n" ACRE, "", "> rm", "[ ", source);
   }
-  detailedFile(transfer);
-  detailedFile("\n===========");
+
+  string fileSize;
+  fileSize = exec(cmd);
+  if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'k'){
+    currentSize += stof(fileSize.substr(34, fileSize.length()))/1024;
+
+  }else if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'M'){
+    currentSize += stof(fileSize.substr(34, fileSize.length()));
+
+  }else{
+    currentSize += stof(fileSize.substr(34, fileSize.length()))*1024;
+    
+  }
 
   return 0;
 
@@ -637,6 +636,14 @@ void fileVersion(const char *path, const char *pathToStore){
   percentige();
   string originalDate = dateOfCreation(path);
   
+  // char* existance = (char*) malloc (32768 * sizeof(char));
+
+  // if(!isFile(existance)){ // if file already exists 
+  //   printf(ACG "> exst %-1s" ACRE, "[ "); %-50s\n
+  //   printf(ACG "%-50s\n" ACRE, existance);
+  //   return 0;
+  // }
+
   if(originalDate.empty()){ 
     
     printf(ACR "> crpt %-1s%-50s\n" ACRE, "[ ", path);
