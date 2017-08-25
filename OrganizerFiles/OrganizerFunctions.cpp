@@ -181,7 +181,7 @@ int transfer(const char *source, const char *dest){
   destEdit = destEdit.substr(0, destEdit.length() - 1);
 
   printf(ACG "> copy %-1s%-50s\n" ACRE, "[ ", source);
-  printf(ACG "%-20s%-4s%-1s%-50s\n" ACRE, "", "'--> ", "[ ", source);
+  printf(ACG "%-20s%-4s%-1s%-50s\n" ACRE, "", "'--> ", "[ ", dest);
   if(deleteMode){  
     printf(ACG "%-20s%-7s%-1s%-50s\n" ACRE, "", "> rm", "[ ", source);
   }
@@ -217,8 +217,19 @@ string dateOfCreation(const char *path){
     strcat(cmd, "\"");
     fileDate = exec(cmd);
 
-    if(!fileDate.empty())    
+    if(!fileDate.empty()){
       return fileDate.substr(34, fileDate.length());
+
+    }else{
+      strcpy(cmd, "exiftool -ProfileDateTime \"");
+      strcat(cmd, path);
+      strcat(cmd, "\"");
+      fileDate = exec(cmd);
+
+      if(!fileDate.empty())
+        return fileDate.substr(34, fileDate.length());
+      
+    }
 
   }else if(fileType.compare("PNG\n") == 0){
     // cout << "(PNG)  ";
@@ -239,7 +250,6 @@ string dateOfCreation(const char *path){
       if(!fileDate.empty())
         return fileDate.substr(34, fileDate.length());
       
-
     }
 
   }else if(fileType.compare("AVI\n") == 0){
