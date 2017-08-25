@@ -635,14 +635,6 @@ void fileVersion(const char *path, const char *pathToStore){
 
   percentige();
   string originalDate = dateOfCreation(path);
-  
-  // char* existance = (char*) malloc (32768 * sizeof(char));
-
-  // if(!isFile(existance)){ // if file already exists 
-  //   printf(ACG "> exst %-1s" ACRE, "[ "); %-50s\n
-  //   printf(ACG "%-50s\n" ACRE, existance);
-  //   return 0;
-  // }
 
   if(originalDate.empty()){ 
     
@@ -659,7 +651,28 @@ void fileVersion(const char *path, const char *pathToStore){
   originalDateStruct = dateReturn(originalDate);
 
   char *destinationPath = destinationFinder(originalDateStruct->year, originalDateStruct->month, pathToStore, typeOfFile(path));
- 
+
+  /*******************************CHECKING IF FILE ALREADY EXISTS*******************************/
+  int ctr;
+  for(int i = 0; i < (int) strlen(path); i++)
+    if(path[i] == '/') ctr = i;
+  
+  string begin = path, final, existance; 
+  final = begin.substr (ctr, strlen(path));
+  begin = destinationPath;
+  begin = begin.substr(0, begin.length() - 1);
+  begin = begin.substr(1).append(begin.substr(0,1));
+  begin = begin.substr(0, begin.length() - 1);
+  existance = begin + final;
+
+  if(isFile(existance.c_str())){ // if file already exists 
+    printf(ACG "> exst %-1s", "[ ");
+    printf(ACG "%-50s\n" ACRE, existance.c_str());
+    return;
+
+  }
+  /*********************************************************************************************/
+
   transfer(path, destinationPath);
   
   return;

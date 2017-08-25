@@ -6,7 +6,6 @@
 #ifndef __ORGANIZER_H
 #define __ORGANIZER_H
 
-
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -24,6 +23,9 @@
 #include <array>
 #include <sys/stat.h>
 #include <time.h>   
+#include <sys/stat.h>
+#include <unistd.h>
+#include <string>
 
 #define ACBO  "\033[1m"
 #define ACR   "\x1b[31m"
@@ -63,9 +65,10 @@ bool isDir(const char* path);
 int isFile(const char *path);
 originalDateData *dateReturn(string originalDate);
 
+char *destinationFinder(int year, int month, const char *pathToStore);
 bool typeOfFile(const char* path);
 int typeOfFileInt(const char* path);
-char *destinationFinder(int year, int month, const char *pathToStore);
+inline bool existance(const string& name);
 
 void fileVersion (const char *path, const char *pathToStore);
 void folderVersion(const char *path, const char *pathToStore, int *arg);
