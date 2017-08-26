@@ -62,11 +62,15 @@ make
 ```
 ***
 
-###### Photos are copied to the new path if date information is available. <br />Same photos with same names, from diffrent folders are not being copied.
-###### To clean the program type ``` make clean ``` in ``` /Media-Organizer ```
-###### All corrupted or unsupported files are not being copied. If even one file is copputed or unsupported, a txt file is created called ``` corruptedFiles ```, in which every corrupted or unsupported file is listed by its full path, so that you can handle it manually.
-###### Better run duplicate mode after organizing. It may be more cpu and time consuming but you can guarantee a fully, free of duplicates library due to the siple fact that duplicate files are only searched in current folder.
-###### Keep in mind that duplicate mode is in its early stages of production so better use it in small folders. Works best when you have already used media organizer and than done some more organizing of events due to making folders smaller.
+> Photos are copied to the new path if date information is available. <br />Same photos with same names, from diffrent folders are not being copied.
+
+> To clean the program type ``` make clean ``` in ``` /Media-Organizer ```.
+
+> All corrupted or unsupported files are not being copied. If even one file is copputed or unsupported, a txt file is created called ``` corruptedFiles ```, in which every corrupted or unsupported file is listed by its full path, so that you can handle it manually.
+
+> Better run duplicate mode after organizing. It may be more cpu and time consuming but you can guarantee a fully, free of duplicates library due to the siple fact that duplicate files are only searched in current folder.
+
+> Keep in mind that duplicate mode is in its early stages of production so better use it in small folders. Works best when you have already used media organizer and than done some more organizing of events due to making folders smaller.
 ***
 
 _Duplicate Mode Output:_
