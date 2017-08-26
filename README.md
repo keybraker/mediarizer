@@ -115,7 +115,7 @@ Category       | Explanation
 -dup   (mode)  | _duplicate mode deletes duplicate with diffrent names_
 -del   (mode)  | _deletion mode deletes all source files keeping only the copys in destination path_
 
-* ** You can use multiple flags, in order to transfer only the selected file types **
+* **You can use multiple flags, in order to transfer only the selected file types**
 ***
 #### Flag Use Examples:
 ##### Flags can be put in any order you wish even in the middle of the directories, like this:
