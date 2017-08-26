@@ -1,24 +1,7 @@
-# [Media Organizer](https://github.com/keybraker/Media-Organizer)
+# [Mediarizer](https://github.com/keybraker/Media-Organizer)
 Organises all your media in a chronological order.
-```
-`7MMM.     ,MMF'             `7MM    db           
-  MMMb    dPMM                 MM                 
-  M YM   ,M MM  .gP"Ya    ,M""bMM  `7MM   ,6"Yb.  
-  M  Mb  M' MM ,M'   Yb ,AP    MM    MM  8)   MM  
-  M  YM.P'  MM 8M"""""" 8MI    MM    MM   ,pm9MM  
-  M  `YM'   MM YM.    , `Mb    MM    MM  8M   MM  
-.JML. `'  .JMML.`Mbmmd'  `Wbmd"MML..JMML.`Moo9^Yo.
-                                                      ,,                          
-   .g8""8q.                                           db                          
- .dP'    `YM.                                                                     
- dM'      `MM `7Mb,od8 .P"Ybmmm ,6"Yb.  `7MMpMMMb.  `7MM  M"""MMV .gP"Ya `7Mb,od8 
- MM        MM   MM' "':MI  I8  8)   MM    MM    MM    MM  '  AMV ,M'   Yb  MM' "' 
- MM.      ,MP   MM     WmmmP"   ,pm9MM    MM    MM    MM    AMV  8M""""""  MM     
- `Mb.    ,dP'   MM    8M       8M   MM    MM    MM    MM   AMV  ,YM.    ,  MM     
-   `"bmmd"'   .JMML.   YMMMMMb `Moo9^Yo..JMML  JMML..JMML.AMMmmmM `Mbmmd'.JMML.   
-                      6'     dP                                                   
-                      Ybmmmd'                                                     
-```
+
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediaorganizerlogo.jpg)
 
 ## How it works
 ```text
