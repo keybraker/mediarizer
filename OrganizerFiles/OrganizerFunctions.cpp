@@ -42,7 +42,6 @@ void percentige(){
     }
   }
 
-
 }
 
 void detailedFile(const char* string){
@@ -422,36 +421,6 @@ char *destinationFinder(int year, int month, const char *pathToStore, bool type)
     if(!dirEx(destinationPath))
       system(destinationPathFolderToExec);
 
-  }else{
-    strcat(destinationPath, "unknownDate"); // peritti apla gia to fainestai
-    strcat(destinationPathFolder, destinationPath);
-
-    strcpy(destinationPathFolderToExec, destinationPathFolder);
-    strcat(destinationPathFolderToExec, "\"");
-
-    if(!dirEx(destinationPath))
-      system(destinationPathFolderToExec);
-
-    if(type){
-      strcat(destinationPath, "/photos");
-      strcat(destinationPathFolder, "/photos");
-    }else{
-      strcat(destinationPath, "/videos");      
-      strcat(destinationPathFolder, "/videos");      
-    }
-
-    strcpy(destinationPathFolderToExec, destinationPathFolder);
-    strcat(destinationPathFolderToExec, "\"");
-
-    if(!dirEx(destinationPath))
-      system(destinationPathFolderToExec);
-
-    strcpy(destinationPathToExec, "\"");
-    strcat(destinationPathToExec, destinationPath);
-    strcat(destinationPathToExec, "\"");
-
-    return destinationPathToExec;
-    
   }
 
   switch(month) {
@@ -643,6 +612,48 @@ void fileVersion(const char *path, const char *pathToStore){
     if(corruptedFiles == NULL){ printf("Error while opening file.\n"); }
     fprintf(corruptedFiles,"%s\n",path);            
     fclose(corruptedFiles);
+
+    char *destinationPath = (char *) malloc (32768 * sizeof(char));
+
+    strcpy(destinationPath, "mkdir \"");
+    strcat(destinationPath, pathToStore);
+    strcat(destinationPath, "/unknown\"");
+
+    if(!dirEx(destinationPath))
+      system(destinationPath);
+
+    if(typeOfFile(path)){
+      strcpy(destinationPath, "mkdir \"");
+      strcat(destinationPath, pathToStore);
+      strcat(destinationPath, "/unknown/photos\"");
+
+      if(!dirEx(destinationPath))
+        system(destinationPath);
+
+      strcpy(destinationPath, "\"");
+      strcat(destinationPath, pathToStore);
+      strcat(destinationPath, "/unknown/photos\"");
+      
+      percentige();
+      transfer(path, destinationPath);
+
+    }else{
+      strcpy(destinationPath, "mkdir \"");
+      strcat(destinationPath, pathToStore);
+      strcat(destinationPath, "/unknown/videos\"");     
+
+      if(!dirEx(destinationPath))
+        system(destinationPath);
+
+      strcpy(destinationPath, "\"");
+      strcat(destinationPath, pathToStore);
+      strcat(destinationPath, "/unknown/photos\"");
+
+      percentige();
+      transfer(path, destinationPath);
+
+    }
+
     return;
 
   }
