@@ -98,28 +98,24 @@ _Duplicate Mode Output:_
 <br />**_( These is achieved in one run of the program )_**
 
 ## Flags
-##### Category:
- * -photo : _for photo organization only_
- * -video : _for video organization only_
+Category       | Explanation
+-------------- | -------------
+-photo (cat)   | _for photo organization only_
+-video (cat)   | _for video organization only_
+-jpg   (file)  | _for jpg organization only_
+-png   (file)  | _for png organization only_
+-avi   (file)  | _for avi organization only_
+-mov   (file)  | _for mov organization only_
+-wmv   (file)  | _for wmv organization only_
+-mp4   (file)  | _for mp4 organization only_
+-mts   (file)  | _for mts organization only_
+-hlp   (info)  | _for Media Organizer User Guide_
+-vrs   (info)  | _for Version infromation_
+-det   (info)  | _for a  detailed list of executions in a txt format_ ( detailedTransfer.txt )
+-dup   (mode)  | _duplicate mode deletes duplicate with diffrent names_
+-del   (mode)  | _deletion mode deletes all source files keeping only the copys in destination path_
 
-##### File type:
- * -jpg : _for jpg organization only_
- * -png : _for png organization only_
- * -avi : _for avi organization only_
- * -mov : _for mov organization only_
- * -wmv : _for wmv organization only_
- * -mp4 : _for mp4 organization only_
- * -mts : _for mts organization only_
 <br />**( You can use multiple flags, in order to transfer only the selected file types )**
-
-##### Informative:
- * -hlp : _Media Organizer User Guide_ 
- * -vrs:  _Version_
- * -det : _for a detailed list of executions in a txt format_ ( detailedTransfer.txt )
-
-##### Mode:
- * -dup : _duplicate mode deletes duplicate with diffrent names_
- * -del : _deletion mode deletes all source files keeping only the copys in destination path_
 
 #### Flag Use Examples:
 ##### Flags can be put in any order you wish even in the middle of the directories, like this:
