@@ -39,7 +39,7 @@ Download and install from here [ExifTool](http://owl.phy.queensu.ca/~phil/exifto
 ## Usage Guide
 #### 1. Open a terminal window and cd to cloned project
 ```
-cd .../Media-Organizer 
+cd .../Mediarizer
 ```
 
 #### 2. To compile the program just type:
