@@ -1,7 +1,7 @@
 # [Mediarizer](https://github.com/keybraker/Media-Organizer)
 Organises all your media in a chronological order.
 
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediaorganizerlogo.jpg)
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerLogo.png)
 
 ## How it works
 ```text
@@ -16,7 +16,7 @@ make       |----------------| ./mediaOrganizer /media.file /path/to/store       
                                                             	                |------------------| 
 ```
 
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/MediaOrganizerDisplay.jpg)
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDisplay.jpg)
 <br />**_( These is achieved in one run of the program )_**
 
 Why use Media Organizer:
@@ -77,7 +77,7 @@ _Duplicate Mode Output:_
 > |-same res.       
 > '-rm -rf "/path/to/file.type" ( deleted ).
 ```
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/MediaOrganizerDisplayDuplicate.jpg)
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDuplicate.jpg)
 <br />**_( These is achieved in one run of the program )_**
 
 ## Flags
