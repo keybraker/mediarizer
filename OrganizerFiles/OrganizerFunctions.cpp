@@ -615,20 +615,29 @@ void fileVersion(const char *path, const char *pathToStore){
 
     char *destinationPath = (char *) malloc (32768 * sizeof(char));
 
-    strcpy(destinationPath, "mkdir \"");
-    strcat(destinationPath, pathToStore);
-    strcat(destinationPath, "/unknown\"");
+    strcpy(destinationPath, pathToStore);
+    strcat(destinationPath, "/unknown");
 
-    if(!dirEx(destinationPath))
-      system(destinationPath);
-
-    if(typeOfFile(path)){
+    if(!dirEx(destinationPath)){
       strcpy(destinationPath, "mkdir \"");
       strcat(destinationPath, pathToStore);
-      strcat(destinationPath, "/unknown/photos\"");
+      strcat(destinationPath, "/unknown\"");
 
-      if(!dirEx(destinationPath))
+      system(destinationPath);
+    }
+
+    if(typeOfFile(path)){
+
+      strcpy(destinationPath, pathToStore);
+      strcat(destinationPath, "/unknown/photos");
+
+      if(!dirEx(destinationPath)){
+        strcpy(destinationPath, "mkdir \"");
+        strcat(destinationPath, pathToStore);
+        strcat(destinationPath, "/unknown/photos\"");
+
         system(destinationPath);
+      }
 
       strcpy(destinationPath, "\"");
       strcat(destinationPath, pathToStore);
@@ -638,16 +647,21 @@ void fileVersion(const char *path, const char *pathToStore){
       transfer(path, destinationPath);
 
     }else{
-      strcpy(destinationPath, "mkdir \"");
-      strcat(destinationPath, pathToStore);
-      strcat(destinationPath, "/unknown/videos\"");     
 
-      if(!dirEx(destinationPath))
+      strcpy(destinationPath, pathToStore);
+      strcat(destinationPath, "/unknown/videos");
+
+      if(!dirEx(destinationPath)){
+        strcpy(destinationPath, "mkdir \"");
+        strcat(destinationPath, pathToStore);
+        strcat(destinationPath, "/unknown/vidoes\"");
+
         system(destinationPath);
+      }
 
       strcpy(destinationPath, "\"");
       strcat(destinationPath, pathToStore);
-      strcat(destinationPath, "/unknown/photos\"");
+      strcat(destinationPath, "/unknown/videos\"");
 
       percentige();
       transfer(path, destinationPath);
