@@ -28,7 +28,7 @@ Why use Media Organizer:
 ## Installation Guide
 #### 1. Clone this repository with ( or download zip ):
 ```
-git clone https://github.com/keybraker/Media-Organizer.git
+git clone https://github.com/keybraker/Mediarizer.git
 ```
 
 #### 2. Install ExifTool by Phil Harvey
