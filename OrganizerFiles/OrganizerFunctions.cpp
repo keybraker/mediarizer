@@ -654,7 +654,7 @@ void fileVersion(const char *path, const char *pathToStore){
       if(!dirEx(destinationPath)){
         strcpy(destinationPath, "mkdir \"");
         strcat(destinationPath, pathToStore);
-        strcat(destinationPath, "/unknown/vidoes\"");
+        strcat(destinationPath, "/unknown/videos\"");
 
         system(destinationPath);
       }
