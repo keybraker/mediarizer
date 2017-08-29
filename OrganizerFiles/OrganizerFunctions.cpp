@@ -1061,15 +1061,16 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
               strcat(rmcmd, imagePathCandidate);
               strcat(rmcmd, "\"");
 
-              // string answer;
-              // cout << endl << "About to delete: " << imagePathCandidate << " , to approve, press y: " ;
-              // cin >> answer;
-              // if(answer == "y"){
-              //   exec(rmcmd);
-              // }else{
-              //   cout << "didn't rm" << endl;
-              // }
-              exec(rmcmd);
+              string answer;
+              cout << endl << "About to delete: " << imagePathCandidate << " , to approve, press y: " ;
+              cin >> answer;
+              if(answer == "y"){
+                exec(rmcmd);
+              }else{
+                cout << "didn't rm" << endl;
+              }
+              
+              // exec(rmcmd);
 
               detailedFile(rmcmd);
               detailedFile("\n===========");
