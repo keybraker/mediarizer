@@ -26,6 +26,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string>
+#include <pthread.h>
 
 #define ACBO  "\033[1m"
 #define ACR   "\x1b[31m"
@@ -37,6 +38,13 @@
 using namespace std;
 
 typedef struct originalDateData originalDateData;
+typedef struct threader threader;
+
+struct threader{
+	const char *source;
+	const char *dest;
+
+};
 
 struct originalDateData{
   int year;
@@ -58,7 +66,7 @@ void folderSigning(const char* string, int version);
 bool folderAlreadyOrganized(const char* string, int version);
 
 string exec(const char* cmd);
-int transfer(char *source, char *dest);
+void *transfer(threader *threaderer);
 
 string dateOfCreation (const char *path);
 bool isDir(const char* path);

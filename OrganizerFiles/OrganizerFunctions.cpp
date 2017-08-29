@@ -952,10 +952,6 @@ void duplicateCleaner(const char *master, const char *path, int type){
   strcpy(imagePath,  path); strcat(imagePath,  "/");
 
   if (d) {
-    percentige();
-    printf(ACG "%-20s%-1s%-50s\n" ACRE, "> info check for:", "[ ", masterPath);
-    printf(ACG "%-20s%-18s%-1s%-50s\n" ACRE, "", " '--------------> ", "[ ", path);
-
     while ((dir = readdir(d)) != NULL){
 
       strcpy(masterPath, path); strcat(masterPath, "/"); strcat(masterPath, master);
@@ -972,6 +968,10 @@ void duplicateCleaner(const char *master, const char *path, int type){
       }
 
       if(j && strcmp(dir->d_name, master) != 0){ 
+
+        percentige();
+        printf(ACG "%-20s%-1s%-50s\n" ACRE, "> info check for:", "[ ", masterPath);
+        printf(ACG "%-20s%-18s%-1s%-50s\n" ACRE, "", " '--------------> ", "[ ", path);
 
         if ( type == typeOfFileInt(imagePath) ){ 
 
@@ -1031,15 +1031,11 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
   
   //currentP += 1; if currentP += hundredPercent(path); didnt exist in duplicateCleaner
 
-  char* cmdOne    = (char*) malloc (65536 * sizeof(char));
-  char* cmdTwo    = (char*) malloc (65536 * sizeof(char));
-  char* cmdThree  = (char*) malloc (65536 * sizeof(char));
-  char* cmdFour   = (char*) malloc (65536 * sizeof(char));
+  char* cmdOne    = (char*) malloc (8096 * sizeof(char));
+  char* cmdTwo    = (char*) malloc (8096 * sizeof(char));
 
-  strcpy(cmdOne,    "exiftool -FileSize \"");   strcat(cmdOne,    imagePathMaster);     strcat(cmdOne, "\""); 
-  strcpy(cmdTwo,    "exiftool -FileSize \"");   strcat(cmdTwo,    imagePathCandidate);  strcat(cmdTwo, "\""); 
-  strcpy(cmdThree,  "exiftool -ImageSize \"");  strcat(cmdThree,  imagePathMaster);     strcat(cmdThree, "\""); 
-  strcpy(cmdFour,   "exiftool -ImageSize \"");  strcat(cmdFour,   imagePathCandidate);  strcat(cmdFour, "\""); 
+  strcpy(cmdOne,  "exiftool -FileSize -ImageSize -BrightnessValue -ThumbnailImage \""); strcat(cmdOne, imagePathMaster);     strcat(cmdOne, "\""); 
+  strcpy(cmdTwo,  "exiftool -FileSize -ImageSize -BrightnessValue -ThumbnailImage \""); strcat(cmdTwo, imagePathCandidate);  strcat(cmdTwo, "\""); 
 
   percentige();
   printf(ACG "%-20s%-1s%-50s\n" ACRE, "> double check for:", "[ ", imagePathMaster);
@@ -1053,140 +1049,65 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
 
       if( isFile(imagePathCandidate) ){ 
         printf(ACG "\n%-38s%-20s" ACRE, "", "|--is file.");
-        // is file and is not hidden 
-          
+        // is file and is not hidden
+
           if( exec(cmdOne).compare(exec(cmdTwo)) == 0){ 
-            printf(ACG "\n%-38s%-20s" ACRE, "", "|--same size.");
+            printf(ACG "\n%-38s%-20s" ACRE, "", "|--same check.");
             // sizes are the same
 
-            if( !dateOfCreation(imagePathMaster).empty() 
-              && !dateOfCreation(imagePathCandidate).empty() 
-              && dateOfCreation(imagePathMaster).compare(dateOfCreation(imagePathCandidate)) == 0){  
-              printf(ACG "\n%-38s%-20s" ACRE, "", "|--same date.");
-              // dates of creation are the same
+              char* rmcmd = (char*) malloc (8096 * sizeof(char));
+              
+              strcpy(rmcmd, "rm -rf \"");
+              strcat(rmcmd, imagePathCandidate);
+              strcat(rmcmd, "\"");
 
-              if( exec(cmdThree).compare(exec(cmdFour)) == 0){  
-                printf(ACG "\n%-38s%-20s" ACRE, "", "|--same res.");
-                // resolutions are the same
+              // string answer;
+              // cout << endl << "About to delete: " << imagePathCandidate << " , to approve, press y: " ;
+              // cin >> answer;
+              // if(answer == "y"){
+              //   exec(rmcmd);
+              // }else{
+              //   cout << "didn't rm" << endl;
+              // }
+              exec(rmcmd);
 
-                char* rmcmd = (char*) malloc (65536 * sizeof(char));
-                
-                strcpy(rmcmd, "rm -rf \"");
-                strcat(rmcmd, imagePathCandidate);
-                strcat(rmcmd, "\"");
+              detailedFile(rmcmd);
+              detailedFile("\n===========");
 
-                exec(rmcmd);
+              printf(ACG "\n%-38s'--%s ( deleted ).\n\n" ACRE, "", rmcmd);
 
-                detailedFile(rmcmd);
-                detailedFile("\n===========");
+              // ADDING SIZE DELETED
+              char* cmd = (char*) malloc (32768 * sizeof(char));
+              strcpy(cmd, "exiftool -FileSize \""); strcat(cmd, imagePathMaster); strcat(cmd, "\"");
+              
+              string fileSize;
+              fileSize = exec(cmd);
 
-                printf(ACG "\n%-38s'--%s ( deleted ).\n\n" ACRE, "", rmcmd);
+              if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'k'){
+                currentSize += stof(fileSize.substr(34, fileSize.length()))/1024;
 
-                // ADDING SIZE DELETED
-                char* cmd = (char*) malloc (32768 * sizeof(char));
-                strcpy(cmd, "exiftool -FileSize \""); strcat(cmd, imagePathMaster); strcat(cmd, "\"");
-                
-                string fileSize;
-                fileSize = exec(cmd);
+              }else if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'M'){
+                currentSize += stof(fileSize.substr(34, fileSize.length()));
 
-                cout << "fileSize = " << fileSize;
-
-                if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'k'){
-                  currentSize += stof(fileSize.substr(34, fileSize.length()))/1024;
-
-                }else if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'M'){
-                  currentSize += stof(fileSize.substr(34, fileSize.length()));
-
-                }else{
-                  currentSize += stof(fileSize.substr(34, fileSize.length()))*1024;
-                }
-
-                return ;
-
+              }else{
+                currentSize += stof(fileSize.substr(34, fileSize.length()))*1024;
               }
-              printf(ACR "\n%-38s'--the resolutions are the NOT same.\n\n" ACRE, "");
+
               return ;
+
             }
-            printf(ACR "\n%-38s'--the dates of creation are NOT the same.\n\n" ACRE, "");
+            printf(ACR "\n%-38s'--the check NOT true.\n\n" ACRE, "");
             return ;
           }
-          printf(ACR "\n%-38s'--the sizes are NOT the same.\n\n" ACRE, "");
+          printf(ACR "\n%-38s'--it is NOT a file.\n\n" ACRE, "");
           return ;
         }
-        printf(ACR "\n%-38s'--it is NOT a file.\n\n" ACRE, "");
+        printf(ACR "%-38s'--names are not similar.\n\n" ACRE, "");
         return ;
-      }
 
   } else { // thoroughly check for every file
 
-    if( strcmp(imagePathMaster, imagePathCandidate) < 0){ 
-      printf(ACG "%-38s%-20s" ACRE, "", "|--smaller name.");
-      // the names are equal except for a slight variation
-
-      if( isFile(imagePathCandidate) ){ 
-      printf(ACG "\n%-38s%-20s" ACRE, "", "|--is file.");
-      // is file and is not hidden 
-        
-        if( exec(cmdOne).compare(exec(cmdTwo)) == 0){ 
-          printf(ACG "\n%-38s%-20s" ACRE, "", "|--same size.");
-          // sizes are the same
-
-          if( !dateOfCreation(imagePathMaster).empty() 
-            && !dateOfCreation(imagePathCandidate).empty() 
-            && dateOfCreation(imagePathMaster).compare(dateOfCreation(imagePathCandidate)) == 0){  
-            printf(ACG "\n%-38s%-20s" ACRE, "", "|--same date.");
-            // dates of creation are the same
-
-            if( exec(cmdThree).compare(exec(cmdFour)) == 0){  
-              printf(ACG "\n%-38s%-20s" ACRE, "", "|--same res.");
-              // resolutions are the same
-
-                char* rmcmd = (char*) malloc (65536 * sizeof(char));
-                
-                strcpy(rmcmd, "rm -rf \"");
-                strcat(rmcmd, imagePathCandidate);
-                strcat(rmcmd, "\"");
-
-                exec(rmcmd);
-
-                detailedFile(rmcmd);
-                detailedFile("\n===========");
-
-                printf(ACG "\n%-38s'--%s ( deleted ).\n\n" ACRE, "", rmcmd);
-
-                // ADDING SIZE DELETED
-                char* cmd = (char*) malloc (32768 * sizeof(char));
-                strcpy(cmd, "exiftool -FileSize \""); strcat(cmd, imagePathMaster); strcat(cmd, "\"");
-                
-                string fileSize;
-                fileSize = exec(cmd);
-                if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'k'){
-                  currentSize += stof(fileSize.substr(34, fileSize.length()))/1024;
-
-                }else if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'M'){
-                  currentSize += stof(fileSize.substr(34, fileSize.length()));
-
-                }else{
-                  currentSize += stof(fileSize.substr(34, fileSize.length()))*1024;
-                }
-
-                return ;
-
-            }
-            printf(ACR "\n%-38s'--the resolutions are the NOT same.\n\n" ACRE, "");
-            return ;
-          }
-          printf(ACR "\n%-38s'--the dates of creation are NOT the same.\n\n" ACRE, "");
-          return ;
-        }
-        printf(ACR "\n%-38s'--the sizes are NOT the same.\n\n" ACRE, "");
-        return ;
-      }
-      printf(ACR "\n%-38s'--it is NOT a file.\n\n" ACRE, "");
-      return ;
-    }
-    printf(ACR "%-38s'--name is NOT smaller.\n\n" ACRE, "");
-    return ;
+    
   }
 
 }

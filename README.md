@@ -98,11 +98,13 @@ Category | Explanation
 -mts   	 | _for mts organization only_
 -hlp   	 | _for Media Organizer User Guide_
 -vrs   	 | _for Version infromation_
--det   	 | _for a  detailed list of executions in a txt format_ ( detailedTransfer.txt )
--dup   	 | _duplicate mode deletes duplicate with diffrent names_
+-det   	 | _for a  detailed list of executions in a txt format_ (detailedTransfer.txt)
+-dup   	 | _duplicate mode deletes duplicate with diffrent names (use with caution)_
+-dux   	 | _duplicate mode deletes duplicate with completly diffrent names (not currently working)_
 -del   	 | _deletion mode deletes all source files keeping only the copys in destination path_
 
 * **You can use multiple flags, in order to transfer only the selected file types**
+
 ***
 #### Flag Use Examples:
 ##### Flags can be put in any order you wish even in the middle of the directories, like this:
@@ -141,6 +143,7 @@ is the same as,
 ##### **! This is _NOT_ valid because -dup can only be used alone:**
 ~~```./mediaOrganizer -dup /path/media.file /path/to/store/folder -jpg```~~
 ***
+
 ## File support list 
 ### Photos: 
 * jpeg
