@@ -33,7 +33,7 @@ void hlp(){
 
   printf(" Mode\n ----\n");
   printf(" -dup:    for deletion of duplicates file check and then delete (caution)\n");   
-  printf(" -dux:    for deletion of duplicates as they are found (caution)\n"); 
+  printf(" -dux:    for deletion of duplicates with completly diffrent as they are found (caution)\n"); 
   printf(" -del:    for deletion of source files.\n\n"); 
 
   printf("( Using multiple flags will enhance your selection. \n");
@@ -135,7 +135,7 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
 
       printf(" Mode\n ----\n");
       printf(" -dup:    for deletion of duplicates file check and then delete (caution)\n");   
-      printf(" -dux:    for deletion of duplicates as they are found (caution)\n"); 
+      printf(" -dux:    for deletion of duplicates with completly diffrent as they are found (caution)\n"); 
       printf(" -del:    for deletion of source files.\n\n"); 
 
       printf("( Using multiple flags will enhance your selection.\n");

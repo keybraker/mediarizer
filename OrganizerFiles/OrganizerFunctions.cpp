@@ -1124,7 +1124,7 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
 
   } else { // thoroughly check for every file
 
-    if( strlen(imagePathMaster) <= strlen(imagePathCandidate) && strncmp(imagePathMaster, imagePathCandidate, strlen(imagePathMaster)-5) == 0){ 
+    if( strcmp(imagePathMaster, imagePathCandidate) < 0){ 
       printf(ACG "%-38s%-20s" ACRE, "", "|--similar name.");
       // the names are equal except for a slight variation
 
