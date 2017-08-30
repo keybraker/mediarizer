@@ -43,12 +43,34 @@ void percentige(){
 
 }
 
-void duplicateFound(const char* string, const char* string2){
+int duplicateFoundChecker(const char* string){
+
+  FILE *dupFile = fopen("duplicatesToDelete.txt", "r");
+  if(dupFile == NULL) return 0;
+
+  char line[256];
+  while (fgets(line, sizeof(line), dupFile)) {
+    if(strlen(line) != 0){
+      line[strlen(line) - 1] = 0;
+      if(!strcmp(line, string)){
+        fclose(dupFile);
+        return 1;
+      }
+    }
+  }
+
+  fclose(dupFile);
+  return 0;
+
+}
+
+void duplicateFound(const char* string){
+  
+  if(duplicateFoundChecker(string)) return;
 
   FILE *dupFile = fopen("duplicatesToDelete.txt", "a");
   if(dupFile == NULL){ printf("Error while opening file.\n"); }
   fprintf(dupFile, "%s\n", string);
-  fprintf(dupFile, "%s (saved)\n", string2);
   fclose(dupFile);
 
 }
@@ -59,27 +81,20 @@ void duplicateRmer(void){
   if(dupFile == NULL) return;
   char line[256];
 
-  int i = 1;
   while (fgets(line, sizeof(line), dupFile)) {
     if(strlen(line) != 0){
+      line[strlen(line) - 1] = 0;
+      char* rmcmd = (char*) malloc (8096 * sizeof(char));
+              
+      strcpy(rmcmd, "rm -rf \"");
+      strcat(rmcmd, line);
+      strcat(rmcmd, "\"");
 
-      if(i == 1){
-        line[strlen(line) - 1] = 0;
-        char* rmcmd = (char*) malloc (8096 * sizeof(char));
-                
-        strcpy(rmcmd, "rm -rf \"");
-        strcat(rmcmd, line);
-        strcat(rmcmd, "\"");
-
-        exec(rmcmd);
-        
-        printf(ACG "%-38s%-20s\n" ACRE, " deleting file ... ", rmcmd);
-
-      }
+      exec(rmcmd);
+      
+      printf(ACG "%-38s%-20s\n" ACRE, " deleting file ... ", rmcmd);
 
     }
-    i++;
-    if(i == 3) i = 1;
   }
   fclose(dupFile);
 
@@ -113,12 +128,13 @@ bool folderAlreadyOrganized(const char* string, int version){
   if(version == 1){
     FILE* file = fopen("folderSigning.txt", "r");
     if(file == NULL) return 0;
+    
     char line[256];
-
     while (fgets(line, sizeof(line), file)) {
       if(strlen(line) != 0){
         line[strlen(line) - 1] = 0;
         if(!strcmp(line, string)){
+          fclose(file);
           return 1;
         }
       }
@@ -134,6 +150,7 @@ bool folderAlreadyOrganized(const char* string, int version){
       if(strlen(line) != 0){
         line[strlen(line) - 1] = 0;
         if(!strcmp(line, string)){
+          fclose(file);
           return 1;
         }
       }
@@ -1089,7 +1106,7 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
               
               // exec(rmcmd);
 
-              duplicateFound(imagePathCandidate, imagePathMaster);
+              duplicateFound(imagePathCandidate);
 
               printf(ACG "\n%-38s'--%s ( stored for deletion ).\n\n" ACRE, "", rmcmd);
 

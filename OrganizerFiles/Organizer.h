@@ -61,8 +61,10 @@ void help();
 int hundredPercent(const char* path);
 void percentige();
 
-void duplicateFound(const char* string, const char* string2);
+int duplicateFoundChecker(const char* string);
+void duplicateFound(const char* string);
 void duplicateRmer(void);
+
 void folderSigning(const char* string, int version);
 bool folderAlreadyOrganized(const char* string, int version);
 
