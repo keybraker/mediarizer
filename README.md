@@ -100,7 +100,7 @@ Category | Explanation
 -vrs   	 | _for Version infromation_
 -dup   	 | _duplicate mode stores duplicates in file duplicatesToDelete.txt and than askes you to check the duplicates and delete them (use with caution)_
 -dux   	 | _duplicate mode extreme deletes duplicates when it finds them, faster than normal verison but the machine will keep the file with the smallest ASCII name (use with caution)_
--del   	 | _deletion mode deletes all source files keeping only the copys in destination path_
+-del   	 | _deletion mode deletes all source files keeping only the copies in destination path_
 
 * **You can use multiple flags, in order to transfer only the selected file types**
 
