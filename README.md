@@ -98,9 +98,10 @@ Category | Explanation
 -mts   	 | _for mts organization only_
 -hlp   	 | _for Media Organizer User Guide_
 -vrs   	 | _for Version infromation_
--det   	 | _for a  detailed list of executions in a txt format_ (detailedTransfer.txt)
--dup   	 | _duplicate mode deletes duplicate with diffrent names (use with caution)_
--dux   	 | _duplicate mode deletes duplicate with completly diffrent names (not currently working)_
+-dup   	 | _duplicate mode stores duplicates in file duplicatesToDelete.txt_
+		 | _and than askes you to check the duplicates and delete them (use with caution)_
+-dux   	 | _duplicate mode deletes duplicate when it finds the faster than normal verison_
+		 | _but the machine will decide what last copy will be (use with caution)_
 -del   	 | _deletion mode deletes all source files keeping only the copys in destination path_
 
 * **You can use multiple flags, in order to transfer only the selected file types**

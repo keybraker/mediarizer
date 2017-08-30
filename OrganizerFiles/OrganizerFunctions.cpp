@@ -43,6 +43,51 @@ void percentige(){
 
 }
 
+void duplicateFound(const char* string, const char* string2){
+
+  FILE *dupFile = fopen("duplicatesToDelete.txt", "a");
+  if(dupFile == NULL){ printf("Error while opening file.\n"); }
+  fprintf(dupFile, "%s\n", string);
+  fprintf(dupFile, "%s (saved)\n", string2);
+  fclose(dupFile);
+
+}
+
+void duplicateRmer(void){
+
+  FILE* dupFile = fopen("duplicatesToDelete.txt", "r");
+  if(dupFile == NULL) return;
+  char line[256];
+
+  int i = 1;
+  while (fgets(line, sizeof(line), dupFile)) {
+    if(strlen(line) != 0){
+
+      if(i == 1){
+        line[strlen(line) - 1] = 0;
+        char* rmcmd = (char*) malloc (8096 * sizeof(char));
+                
+        strcpy(rmcmd, "rm -rf \"");
+        strcat(rmcmd, line);
+        strcat(rmcmd, "\"");
+
+        exec(rmcmd);
+        
+        printf(ACG "%-38s%-20s\n" ACRE, " deleting file ... ", rmcmd);
+
+      }
+
+    }
+    i++;
+    if(i == 3) i = 1;
+  }
+  fclose(dupFile);
+
+  exec("rm -rf duplicatesToDelete.txt");
+  printf(ACG "%-38s%-20s\n" ACRE, "", "rm -rf duplicatesToDelete.txt");
+
+}
+
 void folderSigning(const char* path, int version){ 
 
   if(version == 1){
@@ -78,8 +123,8 @@ bool folderAlreadyOrganized(const char* string, int version){
         }
       }
     }
-
     fclose(file);
+
   }else{
     FILE* file = fopen("folderSigningDuplicate.txt", "r");
     if(file == NULL) return 0;
@@ -93,8 +138,8 @@ bool folderAlreadyOrganized(const char* string, int version){
         }
       }
     }
-
     fclose(file);
+
   }
 
   return 0;
@@ -1033,18 +1078,20 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
               strcat(rmcmd, imagePathCandidate);
               strcat(rmcmd, "\"");
 
-              string answer;
-              cout << endl << "About to delete: " << imagePathCandidate << " , to approve, press y: " ;
-              cin >> answer;
-              if(answer == "y"){
-                exec(rmcmd);
-              }else{
-                cout << "didn't rm" << endl;
-              }
+              // string answer;
+              // cout << endl << "About to delete: " << imagePathCandidate << " , to approve, press y: " ;
+              // cin >> answer;
+              // if(answer == "y"){
+              //   exec(rmcmd);
+              // }else{
+              //   cout << "didn't rm" << endl;
+              // }
               
               // exec(rmcmd);
 
-              printf(ACG "\n%-38s'--%s ( deleted ).\n\n" ACRE, "", rmcmd);
+              duplicateFound(imagePathCandidate, imagePathMaster);
+
+              printf(ACG "\n%-38s'--%s ( stored for deletion ).\n\n" ACRE, "", rmcmd);
 
               // ADDING SIZE DELETED
               char* cmd = (char*) malloc (32768 * sizeof(char));
@@ -1077,7 +1124,66 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
 
   } else { // thoroughly check for every file
 
-    
+    if( strlen(imagePathMaster) <= strlen(imagePathCandidate) && strncmp(imagePathMaster, imagePathCandidate, strlen(imagePathMaster)-5) == 0){ 
+      printf(ACG "%-38s%-20s" ACRE, "", "|--similar name.");
+      // the names are equal except for a slight variation
+
+      if( isFile(imagePathCandidate) ){ 
+        printf(ACG "\n%-38s%-20s" ACRE, "", "|--is file.");
+        // is file and is not hidden
+
+        if( exec(cmdOne).compare(exec(cmdTwo)) == 0){ 
+          printf(ACG "\n%-38s%-20s" ACRE, "", "|--same check.");
+          // sizes are the same
+
+          char* rmcmd = (char*) malloc (8096 * sizeof(char));
+          
+          strcpy(rmcmd, "rm -rf \"");
+          strcat(rmcmd, imagePathCandidate);
+          strcat(rmcmd, "\"");
+
+          // string answer;
+          // cout << endl << "About to delete: " << imagePathCandidate << " , to approve, press y: " ;
+          // cin >> answer;
+          // if(answer == "y"){
+          //   exec(rmcmd);
+          // }else{
+          //   cout << "didn't rm" << endl;
+          // }
+          
+          exec(rmcmd);
+
+          printf(ACG "\n%-38s'--%s ( stored for deletion ).\n\n" ACRE, "", rmcmd);
+
+          // ADDING SIZE DELETED
+          char* cmd = (char*) malloc (32768 * sizeof(char));
+          strcpy(cmd, "exiftool -FileSize \""); strcat(cmd, imagePathMaster); strcat(cmd, "\"");
+          
+          string fileSize;
+          fileSize = exec(cmd);
+
+          if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'k'){
+            currentSize += stof(fileSize.substr(34, fileSize.length()))/1024;
+
+          }else if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'M'){
+            currentSize += stof(fileSize.substr(34, fileSize.length()));
+
+          }else{
+            currentSize += stof(fileSize.substr(34, fileSize.length()))*1024;
+          }
+
+          return ;
+
+        }
+        printf(ACR "\n%-38s'--the check NOT true.\n\n" ACRE, "");
+        return ;
+      }
+      printf(ACR "\n%-38s'--it is NOT a file.\n\n" ACRE, "");
+      return ;
+    }
+    printf(ACR "%-38s'--names are not similar.\n\n" ACRE, "");
+    return ;
+
   }
 
 }

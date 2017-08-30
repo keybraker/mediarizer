@@ -32,8 +32,8 @@ void hlp(){
   printf(" -vrs:    for version information.\n\n");  
 
   printf(" Mode\n ----\n");
-  printf(" -dup:    for deletion of duplicates with similar names. (fast)\n"); 
-  printf(" -dux:    for deletion of duplicates with diffrent names. (slow)\n"); 
+  printf(" -dup:    for deletion of duplicates file check and then delete (caution)\n");   
+  printf(" -dux:    for deletion of duplicates as they are found (caution)\n"); 
   printf(" -del:    for deletion of source files.\n\n"); 
 
   printf("( Using multiple flags will enhance your selection. \n");
@@ -134,8 +134,8 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
       printf(" -vrs:    for version information.\n\n"); 
 
       printf(" Mode\n ----\n");
-      printf(" -dup:    for deletion of duplicates with diffrent names.\n");   
-      printf(" -dux:    for deletion of duplicates with diffrent names. (slow)\n"); 
+      printf(" -dup:    for deletion of duplicates file check and then delete (caution)\n");   
+      printf(" -dux:    for deletion of duplicates as they are found (caution)\n"); 
       printf(" -del:    for deletion of source files.\n\n"); 
 
       printf("( Using multiple flags will enhance your selection.\n");
@@ -301,6 +301,16 @@ if(filePath != NULL && sourcePath == NULL && destPath != NULL ){ // file version
     }else{  
       printf(ACY "\r[%-8.2f%-7s]> execution time\n" ACRE, seconds_since_start / 60, " minutes");
     }     
+
+    answer = "n";
+    printf(ACR "\nAll detected duplicates are stored in duplicatesToDelete.txt,\n");
+    printf("first there is the one to be deleted and bellow that file that\n");
+    printf("will be spared. If you want to save a file delete it, and its\n");
+    printf("partner file and procced. (y/n): " ACRE);
+    cin  >> answer;
+    if(answer.compare("y") == 0){
+      duplicateRmer();
+    }
 
   }
 
