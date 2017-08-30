@@ -79,7 +79,7 @@ _Duplicate Mode Output:_
 > |-same size.      
 > |-same date.      
 > |-same res.       
-> '-rm -rf "/path/to/file.type" ( deleted ).
+> '-rm -rf "/path/to/file.type" ( stored for deletion ).
 ```
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDuplicate.jpg)
 <br />**_( These is achieved in one run of the program )_**
@@ -98,10 +98,8 @@ Category | Explanation
 -mts   	 | _for mts organization only_
 -hlp   	 | _for Media Organizer User Guide_
 -vrs   	 | _for Version infromation_
--dup   	 | _duplicate mode stores duplicates in file duplicatesToDelete.txt_
-		 | _and than askes you to check the duplicates and delete them (use with caution)_
--dux   	 | _duplicate mode deletes duplicate when it finds them, faster than normal verison_
-		 | _but the machine will keep the name smallest name (use with caution)_
+-dup   	 | _duplicate mode stores duplicates in file duplicatesToDelete.txt and than askes you to check the duplicates and delete them (use with caution)_
+-dux   	 | _duplicate mode extreme deletes duplicates when it finds them, faster than normal verison but the machine will keep the file with the smallest ASCII name (use with caution)_
 -del   	 | _deletion mode deletes all source files keeping only the copys in destination path_
 
 * **You can use multiple flags, in order to transfer only the selected file types**
