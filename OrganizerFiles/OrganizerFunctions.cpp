@@ -4,8 +4,7 @@ using namespace std;
 
 #define SPACING 110
 
-int     detailed = -1,
-        hundredP = -1,
+int     hundredP = -1,
         currentP = 0,
         deleteMode = 0,
         duplicateSimple = 1,
@@ -40,18 +39,6 @@ void percentige(){
     }else{
       printf(ACY "\r[%3d%%][%7.2f Gb]" ACRE, ((currentP*100) / (hundredP)), (float) currentSize / 1024);
     }
-  }
-
-}
-
-void detailedFile(const char* string){
-
-  return ;
-  if(detailed){
-    FILE *detFile = fopen("detailedTransfer.txt", "a");
-    if(detFile == NULL){ printf("Error while opening file.\n"); }
-    fprintf(detFile, "%s ", string);
-    fclose(detFile);
   }
 
 }
@@ -115,7 +102,6 @@ bool folderAlreadyOrganized(const char* string, int version){
 }
 
 string exec(const char* cmd) { 
-  detailedFile("exec"); detailedFile("⬇︎");
     
   array<char, 32768> buffer;
   string result;
@@ -135,7 +121,6 @@ string exec(const char* cmd) {
 }
 
 int transfer(const char *source, const char *dest){ 
-  detailedFile("transfer"); detailedFile("⬇︎");
 
   // ADDING SIZE TRANSFERED
   char* cmd = (char*) malloc (32768 * sizeof(char));
@@ -191,7 +176,6 @@ int transfer(const char *source, const char *dest){
 }
 
 string dateOfCreation(const char *path){ 
-  detailedFile("dateOfCreation"); detailedFile("⬇︎");
   
   char* cmd = (char *) malloc (32768 * sizeof(char));
   strcpy(cmd, "exiftool -FileType \"");
@@ -317,7 +301,6 @@ bool isDir(const char* path) {
 }
 
 int isFile(const char *path){ 
-  detailedFile("isFile"); detailedFile("⬇︎");
 
   struct stat path_stat;
   stat(path, &path_stat);
@@ -326,7 +309,6 @@ int isFile(const char *path){
 }
 
 originalDateData *dateReturn(string originalDate){ 
-  detailedFile("dateReturn"); detailedFile("⬇︎");
   
   if(originalDate.empty())
     return NULL;
@@ -380,7 +362,6 @@ originalDateData *dateReturn(string originalDate){
 }
 
 bool dirEx(const char* directory){ 
-  detailedFile("dirEx"); detailedFile("⬇︎");
     
   DIR* dir = opendir(directory);
   if (dir) {
@@ -392,7 +373,6 @@ bool dirEx(const char* directory){
 }
 
 char *destinationFinder(int year, int month, const char *pathToStore, bool type){ 
-  detailedFile("destinationFinder"); detailedFile("⬇︎");
   
   char *destinationPath             = (char *) malloc (32768 * sizeof(char));
   char *destinationPathToExec       = (char *) malloc (32768 * sizeof(char));
@@ -508,7 +488,6 @@ char *destinationFinder(int year, int month, const char *pathToStore, bool type)
 }
 
 bool typeOfFile(const char* path){ 
-  detailedFile("typeOfFile"); detailedFile("⬇︎");
 
   char* cmd = (char *) malloc (32768 * sizeof(char));
   strcpy(cmd, "exiftool -FileType \"");
@@ -551,7 +530,6 @@ bool typeOfFile(const char* path){
 }
 
 int typeOfFileInt(const char* path){ 
-  detailedFile("typeOfFileInt"); detailedFile("⬇︎");
 
   return 0; 
 
@@ -598,7 +576,6 @@ int typeOfFileInt(const char* path){
 }
 
 void fileVersion(const char *path, const char *pathToStore){ 
-  detailedFile("fileVersion"); detailedFile("⬇︎");
 
   if(hundredP == -1){ hundredP = 1; }
 
@@ -705,7 +682,6 @@ void fileVersion(const char *path, const char *pathToStore){
 }
 
 void folderVersion(const char *path, const char *pathToStore, int *arg){ 
-  detailedFile("folderVersion"); detailedFile("⬇︎");
 
   if(folderAlreadyOrganized(path, 1)){
     currentP += hundredPercent(path);
@@ -727,7 +703,6 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
         photoOnly = false,
         videoOnly = false;
 
-  if(arg[7] == 1){ detailed  = 1; }
   if(arg[8] == 1){ photoOnly = true; }
   if(arg[9] == 1){ videoOnly = true; }
   if(arg[11] == 1){ deleteMode = 1; }
@@ -867,7 +842,6 @@ void folderVersion(const char *path, const char *pathToStore, int *arg){
 }
 
 void duplicateVersion(const char *path, int xtrm){ 
-  detailedFile("duplicateVersion"); detailedFile("with path:"); detailedFile(path); detailedFile("⬇︎");
 
   if(xtrm) duplicateSimple = 0;
 
@@ -938,7 +912,6 @@ void duplicateVersion(const char *path, int xtrm){
 }
 
 void duplicateCleaner(const char *master, const char *path, int type){ 
-  detailedFile("duplicateCleaner"); detailedFile("⬇︎");
 
   int j = 1, length = 0;
   DIR *d;
@@ -1027,7 +1000,6 @@ void duplicateCleaner(const char *master, const char *path, int type){
 }
 
 void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePathCandidate){ 
-  detailedFile("duplicateCleanerExecution"); detailedFile("⬇︎");
   
   //currentP += 1; if currentP += hundredPercent(path); didnt exist in duplicateCleaner
 
@@ -1071,9 +1043,6 @@ void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePat
               }
               
               // exec(rmcmd);
-
-              detailedFile(rmcmd);
-              detailedFile("\n===========");
 
               printf(ACG "\n%-38s'--%s ( deleted ).\n\n" ACRE, "", rmcmd);
 

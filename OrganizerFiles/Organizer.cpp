@@ -29,9 +29,7 @@ void hlp(){
 
   printf(" Informative\n -----------\n");
   printf(" -hlp:    for the Media Organizer User Guide.\n"); 
-  printf(" -vrs:    for version information.\n"); 
-  printf(" -det:    for a detailed list of executions in a\n");
-  printf("           txt format ( detailedTransfer.txt ).\n\n");  
+  printf(" -vrs:    for version information.\n\n");  
 
   printf(" Mode\n ----\n");
   printf(" -dup:    for deletion of duplicates with similar names. (fast)\n"); 
@@ -86,8 +84,8 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
     }else if(!strcmp(argv[i], "-mts")){
       arg[6] = 1;
 
-    }else if(!strcmp(argv[i], "-det")){ 
-      arg[7] = 1;
+    //}else if(!strcmp(argv[i], "-det")){ 
+      //arg[7] = 1;
 
     }else if(!strcmp(argv[i], "-photo")){ 
       arg[8] = 1;
@@ -133,9 +131,7 @@ if(argc == 2 && !strcmp(argv[1], "-hlp")){
 
       printf(" Informative\n -----------\n"); 
       printf(" -hlp:    for the Media Organizer User Guide.\n"); 
-      printf(" -vrs:    for version information.\n"); 
-      printf(" -det:    for a detailed list of executions in a\n");
-      printf("           txt format ( detailedTransfer.txt ).\n\n"); 
+      printf(" -vrs:    for version information.\n\n"); 
 
       printf(" Mode\n ----\n");
       printf(" -dup:    for deletion of duplicates with diffrent names.\n");   
