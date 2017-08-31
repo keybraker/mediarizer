@@ -5,12 +5,12 @@ Organises all your media in a chronological order.
 
 ## How it works
 ```text
-make       |----------------| ./mediaOrganizer /media.file /path/to/store       |------------------| 
----------> | mediaOrganizer |-------------------------------------------------> | organised photos | 
-      	   |----------------| ./mediaOrganizer /path/folder /path/to/store      | in year/month    | 
+make       |----------------| ./mediarizer /media.file /path/to/store           |------------------| 
+---------> |   mediarizer   |-------------------------------------------------> | organised photos | 
+      	   |----------------| ./mediarizer /path/folder /path/to/store          | in year/month    | 
                     |                                        	                |------------------| 
                     |
-                    |         ./mediaOrganizer -dup /path/folder                |------------------| 
+                    |         ./mediarizer -dup /path/folder                    |------------------| 
                     \---------------------------------------------------------> | duplicate free   | 
       	                                                                        | folders          | 
                                                             	                |------------------| 
@@ -50,21 +50,21 @@ make
 #### 3. Run the program:
 ##### a. Single image mode: Organises the one picture or video given to it.
 ```
-./mediaOrganizer /path/media.file /path/to/store/folder
+./mediarizer /path/media.file /path/to/store/folder
 ```
 ##### b. Folder mode: Organises all the pictures and videos in a folder, and the folders in it.
 ```
-./mediaOrganizer /path/folder /path/to/store/folder
+./mediarizer /path/folder /path/to/store/folder
 ```
 ##### c. Duplicate mode: Deletes all duplicate pictures and videos in a folder, and the folders in it.
 ```
-./mediaOrganizer -dup /path/folder
+./mediarizer -dup /path/folder
 ```
 ***
 
 > Photos are copied to the new path if date information is available. <br />Same photos with same names, from diffrent folders are not being copied.
 
-> To clean the program type ``` make clean ``` in ``` /Media-Organizer ```.
+> To clean the program type ``` make clean ``` in ``` /mediarizer ```.
 
 > All corrupted or unsupported files are not being copied. If even one file is copputed or unsupported, a txt file is created called ``` corruptedFiles ```, in which every corrupted or unsupported file is listed by its full path, so that you can handle it manually.
 
@@ -108,39 +108,39 @@ Category | Explanation
 #### Flag Use Examples:
 ##### Flags can be put in any order you wish even in the middle of the directories, like this:
 ```
-./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder -png
+./mediarizer -mp4 /path/source/folder -jpg /path/to/store/folder -png
 ```
 is the same as,
 ```
-./mediaOrganizer /path/source/folder /path/to/store/folder -mp4 -jpg -png
+./mediarizer /path/source/folder /path/to/store/folder -mp4 -jpg -png
 ```
 ***
 ##### Will only copy jpg and mp4 files:
 ```
-./mediaOrganizer -mp4 -jpg /path/source/folder /path/to/store/folder
+./mediarizer -mp4 -jpg /path/source/folder /path/to/store/folder
 ```
 is the same as,
 ```
-./mediaOrganizer -mp4 /path/source/folder -jpg /path/to/store/folder
+./mediarizer -mp4 /path/source/folder -jpg /path/to/store/folder
 ```
 ***
 ##### Will only copy photos not videos:
 ```
-./mediaOrganizer /path/source/folder /path/to/store/folder -photo
+./mediarizer /path/source/folder /path/to/store/folder -photo
 ```
 ***
 ##### Duplicates will be deleted:
 ```
-./mediaOrganizer -dup /path/source/folder
+./mediarizer -dup /path/source/folder
 ```
 ***
 ##### **! Only _videos_ will be copied:**
 ```
-./mediaOrganizer -video /path/media.file /path/to/store/folder -jpg
+./mediarizer -video /path/media.file /path/to/store/folder -jpg
 ```
 ***
 ##### **! This is _NOT_ valid because -dup can only be used alone:**
-~~```./mediaOrganizer -dup /path/media.file /path/to/store/folder -jpg```~~
+~~```./mediarizer -dup /path/media.file /path/to/store/folder -jpg```~~
 ***
 
 ## File support list 
