@@ -56,7 +56,7 @@ make
 ```
 ./mediarizer /path/folder /path/to/store/folder
 ```
-##### c. Duplicate mode: Deletes all duplicate pictures and videos in a folder, and the folders in it.
+##### c. Duplicate mode (BETA): Deletes all duplicate pictures and videos in a folder, and the folders in it.
 ```
 ./mediarizer -dup /path/folder
 ```
@@ -98,8 +98,8 @@ Category | Explanation
 -mts   	 | _for mts organization only_
 -hlp   	 | _for Media Organizer User Guide_
 -vrs   	 | _for Version infromation_
--dup   	 | _duplicate mode stores duplicates in file duplicatesToDelete.txt and than askes you to check the duplicates and delete them (use with caution)_
--dux   	 | _duplicate mode extreme deletes duplicates when it finds them, faster than normal verison but the machine will keep the file with the smallest ASCII name (use with caution)_
+-dup   	 | _(BETA) duplicate mode stores duplicates in file duplicatesToDelete.txt and than askes you to check the duplicates and delete them (use with caution)_
+-dux   	 | _(BETA) duplicate mode extreme deletes duplicates when it finds them, faster than normal verison but the machine will keep the file with the smallest ASCII name (use with caution)_
 -del   	 | _deletion mode deletes all source files keeping only the copies in destination path_
 
 * **You can use multiple flags, in order to transfer only the selected file types**
@@ -158,7 +158,7 @@ is the same as,
 ## Release History
 
 * v1.7.0: 22 August 2017: Memory added, for stop and restart.
-* v1.6.0: 20 August 2017: Fully functional duplication deletion.
+* v1.6.0: 20 August 2017: Fully functional duplication deletion (BETA).
 * v1.5.0: 19 August 2017: Added duplication deletion.
 * v1.1.2: 18 August 2017: Added -flags for a more controlled organisation.
 * v1.1.1: 17 August 2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
