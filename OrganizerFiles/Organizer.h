@@ -61,9 +61,7 @@ void help();
 int hundredPercent(const char* path);
 void percentige();
 
-int duplicateFoundChecker(const char* string);
-void duplicateFound(const char* string);
-void duplicateRmer(void);
+
 
 void folderSigning(const char* string, int version);
 bool folderAlreadyOrganized(const char* string, int version);
@@ -83,6 +81,10 @@ inline bool existance(const string& name);
 
 void fileVersion (const char *path, const char *pathToStore);
 void folderVersion(const char *path, const char *pathToStore, int *arg);
+
+int  duplicateFoundChecker(const char* string);
+void duplicateFound(const char* string);
+void duplicateRmer(void);
 void duplicateVersion(const char *path, int xtrm);
 void duplicateCleaner(const char *master, const char *path, int type);
 void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePathCandidate);
