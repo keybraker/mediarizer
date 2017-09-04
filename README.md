@@ -155,7 +155,7 @@ is the same as,
 * mp4
 * m2ts
 
-**IF YOU HAVE ANY PROBLEM FILL FREE TO WRITE AN ISSUE AND I WILL GET BACK TO YOU AS SOON AS POSIBLE.** ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
+**IF YOU HAVE ANY PROBLEM FEEL FREE TO WRITE AN ISSUE AND I WILL GET BACK TO YOU AS SOON AS POSIBLE.** ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
 
 ## Release History
 
