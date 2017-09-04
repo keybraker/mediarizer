@@ -155,6 +155,8 @@ is the same as,
 * mp4
 * m2ts
 
+**IF YOU HAVE ANY PROBLEM FILL FREE TO WRITE AN ISSUE AND I WILL GET BACK TO YOU AS SOON AS POSIBLE.** ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
+
 ## Release History
 
 * v1.7.0: 22 August 2017: Memory added, for stop and restart.
