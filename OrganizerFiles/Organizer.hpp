@@ -6,9 +6,7 @@
 #ifndef __ORGANIZER_H
 #define __ORGANIZER_H
 
-#include <string.h>
 #include <sys/types.h>
-#include <sys/stat.h>
 #include <unistd.h>
 #include <dirent.h> 
 #include <stdio.h>
@@ -21,12 +19,16 @@
 #include <memory>
 #include <stdexcept>
 #include <array>
-#include <sys/stat.h>
 #include <time.h>   
 #include <sys/stat.h>
-#include <unistd.h>
 #include <string>
 #include <pthread.h>
+#include <iomanip>
+#include <stdlib.h>
+#include <ctime>
+
+#include <pthread.h>
+#include "thpool.hpp"
 
 #define ACBO  "\033[1m"
 #define ACR   "\x1b[31m"
