@@ -27,9 +27,6 @@
 #include <stdlib.h>
 #include <ctime>
 
-#include <pthread.h>
-#include "thpool.hpp"
-
 #define ACBO  "\033[1m"
 #define ACR   "\x1b[31m"
 #define ACG   "\x1b[32m"
