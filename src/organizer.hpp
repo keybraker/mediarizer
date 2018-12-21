@@ -27,8 +27,19 @@
 #include <stdlib.h>
 #include <ctime>
 
-#include <pthread.h>
-#include "thpool.hpp"
+#define a_c_r   "\x1b[31m"
+#define a_c_g   "\x1b[32m"
+#define a_c_y   "\x1b[33m"
+#define a_c_b   "\x1b[34m"
+#define a_c_m   "\x1b[35m"
+#define a_c_c   "\x1b[36m"
+#define a_c_re    "\x1b[0m"
+#define under   "\e[4m"
+#define under_re  "\e[0m"
+#define italic    "\e[3m"
+#define italic_re "\e[0m"
+#define bold    "\e[1m"
+#define bold_re   "\e[0m"
 
 #define ACBO  "\033[1m"
 #define ACR   "\x1b[31m"
@@ -38,6 +49,22 @@
 #define ACRE  "\x1b[0m"
 
 using namespace std;
+
+#define exit_err(FILE, LINE, ERR) \
+{ \
+  fprintf(stderr, a_c_r "ERROR: %-30s" a_c_re " | [%-20s, %-5d]\n", ERR, FILE, LINE); \
+  exit(EXIT_FAILURE); \
+}
+
+#define prnt_scs(FILE, LINE, MSG) \
+{ \
+  fprintf(stdout, "SUCCS: " a_c_g "%-30s" a_c_re " | [%-20s, %-5d]\n", MSG, FILE, LINE); \
+}
+
+#define prnt_inf(FILE, LINE, MSG) \
+{ \
+  fprintf(stdout, "MESSG: " a_c_y "%-30s" a_c_re " | [%-20s, %-5d]\n", MSG, FILE, LINE); \
+}
 
 typedef struct originalDateData originalDateData;
 typedef struct threader threader;
