@@ -4,18 +4,17 @@ using namespace std;
 
 #define SPACING 110
 
-int
-	hundredP = -1,
-		currentP = 0,
-		deleteMode = 0,
-		duplicateSimple = 1,
-		singlePresisionFiles = -1;
-float   currentSize = 0;
+int	hundredP = -1,
+	currentP = 0,
+	deleteMode = 0,
+	duplicateSimple = 1,
+	singlePresisionFiles = -1;
+
+float	currentSize = 0;
 
 int
 hundredPercent(const char* path)
 {
-
 	char *cmd = (char *) malloc (128 * sizeof(char));
 
 	strcpy(cmd, "find \"");
@@ -23,7 +22,6 @@ hundredPercent(const char* path)
 	strcat(cmd, "\" -type f | wc -l");
 
 	return (stoi(exec(cmd)));
-
 }
 
 void
@@ -33,19 +31,33 @@ percentige()
 
 	if(((currentP * 100)/(hundredP)) > 100)
 	{
-	if(currentSize < 1024)
-	{
-		printf(ACY "\r[%3d%%][%7.2f Mb]" ACRE, 100, (float) currentSize);
-	}else{
-		printf(ACY "\r[%3d%%][%7.2f Gb]" ACRE, 100, (float) currentSize / 1024);
+		if(currentSize < 1024)
+		{
+			printf(ACY "\r[%3d%%][%7.2f Mb]" ACRE,
+				100,
+				(float) currentSize);
+		}
+		else
+		{
+			printf(ACY "\r[%3d%%][%7.2f Gb]" ACRE,
+				100,
+				(float) currentSize / 1024);
+		}
 	}
-	}else{
-	if(currentSize < 1024)
+	else
 	{
-		printf(ACY "\r[%3d%%][%7.2f Mb]" ACRE, ((currentP*100) / (hundredP)), (float) currentSize);
-	}else{
-		printf(ACY "\r[%3d%%][%7.2f Gb]" ACRE, ((currentP*100) / (hundredP)), (float) currentSize / 1024);
-	}
+		if(currentSize < 1024)
+		{
+			printf(ACY "\r[%3d%%][%7.2f Mb]" ACRE,
+				((currentP*100) / (hundredP)),
+				(float) currentSize);
+		}
+		else
+		{
+			printf(ACY "\r[%3d%%][%7.2f Gb]" ACRE,
+				((currentP*100) / (hundredP)),
+				(float) currentSize / 1024);
+		}
 	}
 }
 
@@ -117,13 +129,14 @@ duplicateRmer(void)
 void
 folderSigning(const char* path, int version)
 {
+	return; //todelete
 	if(version == 1)
 	{
-		printf(ACY "%-22s%-1s%-50s\n" ACRE, "[----organized---]> sign ", "[ ", path); 
+		printf(ACY "%-22s%-1s%-50s\n" ACRE, "[----organized---]> sign ", "[ ", path);
 		//"> organized & signed"
 		//printf(ACY ">> Path %s, organized and signed.\n" ACRE, path);
 		FILE *folderSigning = fopen("folderSigning.txt", "a");
-		if(folderSigning == NULL) 
+		if(folderSigning == NULL)
 			printf("Error while opening file.\n");
 		fprintf(folderSigning, "%s\n", path);
 		fclose(folderSigning);
@@ -133,14 +146,15 @@ folderSigning(const char* path, int version)
 		printf(ACY "%-37s%-1s%-121s\n" ACRE, "[-----cleaned----]> signed path: ", "[ ", path);
 		//printf(ACY ">> Path %s, cleaned and signed.\n" ACRE, path);
 		FILE *folderSigningDuplicate = fopen("folderSigningDuplicate.txt", "a");
-		if(folderSigningDuplicate == NULL) 
+		if(folderSigningDuplicate == NULL)
 			printf("Error while opening file.\n");
 		fprintf(folderSigningDuplicate, "%s\n", path);
 		fclose(folderSigningDuplicate);
 	}
 }
 
-bool folderAlreadyOrganized(const char* string, int version)
+bool
+folderAlreadyOrganized(const char* string, int version)
 {
 	if(version == 1)
 	{
@@ -152,12 +166,12 @@ bool folderAlreadyOrganized(const char* string, int version)
 		{
 			if(strlen(line) != 0)
 			{
-			line[strlen(line) - 1] = 0;
-			if(!strcmp(line, string))
-			{
-				fclose(file);
-				return 1;
-			}
+				line[strlen(line) - 1] = 0;
+				if(!strcmp(line, string))
+				{
+					fclose(file);
+					return 1;
+				}
 			}
 		}
 		fclose(file);
@@ -187,8 +201,9 @@ bool folderAlreadyOrganized(const char* string, int version)
 	return 0;
 }
 
-string exec(const char* cmd)
-{   
+string
+exec(const char* cmd)
+{  
 	array<char, 32768> buffer;
 	string result;
 	shared_ptr<FILE> pipe(popen(cmd, "r"), pclose);
@@ -210,7 +225,6 @@ string exec(const char* cmd)
 int
 transfer(const char *source, const char *dest)
 {
-
 	// ADDING SIZE TRANSFERED
 	char* cmd = (char*) malloc (32768 * sizeof(char));
 	strcpy(cmd, "exiftool -FileSize \""); strcat(cmd, source); strcat(cmd, "\"");
@@ -224,18 +238,26 @@ transfer(const char *source, const char *dest)
 	strcat(transfer, "\" ");
 	strcat(transfer, dest);
 
-	system(transfer);
+	if(system(transfer))
+	{
+		prnt_scs(__FILE__, __LINE__, transfer);
+	}
+	else
+	{
+		prnt_scs(__FILE__, __LINE__, transfer);
+	}
 
 	/****DELETE THE SOURCE FILE***************************/
 	if(deleteMode)
 	{
-	strcpy(rmcmd, "rm -rf \"");
-	strcat(rmcmd, source);
-	strcat(rmcmd, "\"");
+		strcpy(rmcmd, "rm -rf \"");
+		strcat(rmcmd, source);
+		strcat(rmcmd, "\"");
 
-	exec(rmcmd);
+		exec(rmcmd);
 	}
 	/*****************************************************/
+
 	string destEdit = dest;
 	destEdit = destEdit.substr(0, destEdit.length() - 1);
 	destEdit = destEdit.substr(1).append(destEdit.substr(0,1));
@@ -244,29 +266,33 @@ transfer(const char *source, const char *dest)
 	printf(ACG "> copy %-1s%-50s\n" ACRE, "[ ", source);
 	printf(ACG "%-20s%-4s%-1s%-50s\n" ACRE, "", "'--> ", "[ ", destEdit.c_str());
 	cout << flush;
-	if(deleteMode) {  
-	printf(ACG "%-20s%-7s%-1s%-50s\n" ACRE, "", "> rm", "[ ", source);
+
+	if(deleteMode)
+	{ 
+		printf(ACG "%-20s%-7s%-1s%-50s\n" ACRE, "", "> rm", "[ ", source);
 	}
 
 	string fileSize;
 	fileSize = exec(cmd);
+
 	if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'k')
 	{
-	currentSize += stof(fileSize.substr(34, fileSize.length()))/1024;
-
-	}else if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'M')
+		currentSize += stof(fileSize.substr(34, fileSize.length()))/1024;
+	}
+	else if(fileSize.c_str()[strlen(fileSize.c_str())-3] == 'M')
 	{
-	currentSize += stof(fileSize.substr(34, fileSize.length()));
-
-	}else{
-	currentSize += stof(fileSize.substr(34, fileSize.length()))*1024;
-	
+		currentSize += stof(fileSize.substr(34, fileSize.length()));
+	}
+	else
+	{
+		currentSize += stof(fileSize.substr(34, fileSize.length()))*1024;
 	}
 
 	return 0;
 }
 
-string dateOfCreation(const char *path)
+string
+dateOfCreation(const char *path)
 {
 	
 	char* cmd = (char *) malloc (32768 * sizeof(char));
@@ -278,207 +304,202 @@ string dateOfCreation(const char *path)
 
 	if(!fileType.empty())
 	{
-	fileType = fileType.substr(34, fileType.length());
-	}else{
-	return string();
+		fileType = fileType.substr(34, fileType.length());
+	}
+	else
+	{
+		return string();
 	}
 
 	string fileDate;
 
 	if(fileType.compare("JPEG\n") == 0)
 	{
-	// cout << "(JPG)  ";
-	strcpy(cmd, "exiftool -CreateDate \"");
-	strcat(cmd, path);
-	strcat(cmd, "\"");
-	fileDate = exec(cmd);
-
-	if(!fileDate.empty())
-	{
-		return fileDate.substr(34, fileDate.length());
-
-	}else{
-		strcpy(cmd, "exiftool -ProfileDateTime \"");
+		// cout << "(JPG)  ";
+		strcpy(cmd, "exiftool -CreateDate \"");
 		strcat(cmd, path);
 		strcat(cmd, "\"");
 		fileDate = exec(cmd);
 
 		if(!fileDate.empty())
-		return fileDate.substr(34, fileDate.length());
+		{
+			return fileDate.substr(34, fileDate.length());
+		}
+		else
+		{
+			strcpy(cmd, "exiftool -ProfileDateTime \"");
+			strcat(cmd, path);
+			strcat(cmd, "\"");
+			fileDate = exec(cmd);
+
+			if(!fileDate.empty())
+				return fileDate.substr(34, fileDate.length());
+		}
+
+		}
+		else if(fileType.compare("PNG\n") == 0)
+		{
+			// cout << "(PNG)  ";
+			strcpy(cmd, "exiftool -CreateDate \"");
+			strcat(cmd, path);
+			strcat(cmd, "\"");
+			fileDate = exec(cmd);
 		
+			if(!fileDate.empty())
+			{
+				return fileDate.substr(34, fileDate.length());
+			}
+			else
+			{
+				strcpy(cmd, "exiftool -ProfileDateTime \"");
+				strcat(cmd, path);
+				strcat(cmd, "\"");
+				fileDate = exec(cmd);
+
+				if(!fileDate.empty())
+					return fileDate.substr(34, fileDate.length());
+			}
+
 	}
-
-	}else if(fileType.compare("PNG\n") == 0)
+	else if(fileType.compare("AVI\n") == 0)
 	{
-	// cout << "(PNG)  ";
-	strcpy(cmd, "exiftool -CreateDate \"");
-	strcat(cmd, path);
-	strcat(cmd, "\"");
-	fileDate = exec(cmd);
- 
-	if(!fileDate.empty())
-	{
-		return fileDate.substr(34, fileDate.length());
-
-	}else{
-		strcpy(cmd, "exiftool -ProfileDateTime \"");
+		// cout << "(AVI)  ";
+		strcpy(cmd, "exiftool -DateTimeOriginal \"");
 		strcat(cmd, path);
 		strcat(cmd, "\"");
 		fileDate = exec(cmd);
 
 		if(!fileDate.empty())
-		return fileDate.substr(34, fileDate.length());
-		
-	}
-
-	}else if(fileType.compare("AVI\n") == 0)
-	{
-	// cout << "(AVI)  ";
-	strcpy(cmd, "exiftool -DateTimeOriginal \"");
-	strcat(cmd, path);
-	strcat(cmd, "\"");
-	fileDate = exec(cmd);
-
-	if(!fileDate.empty())
-		return fileDate.substr(34, fileDate.length());
-
-	}else if(fileType.compare("MOV\n") == 0)
-	{
-	// cout << "(MOV)  ";
-	strcpy(cmd, "exiftool -CreateDate \"");
-	strcat(cmd, path);
-	strcat(cmd, "\"");
-	fileDate = exec(cmd);
-
-	if(!fileDate.empty())
-		return fileDate.substr(34, fileDate.length());
-
-	}else if(fileType.compare("WMV\n") == 0)
-	{
-	// cout << "(WMV)  ";
-	strcpy(cmd, "exiftool -CreationDate \"");
-	strcat(cmd, path);
-	strcat(cmd, "\"");
-	fileDate = exec(cmd);
-
-	if(!fileDate.empty())
-		return fileDate.substr(34, fileDate.length());
-
-	}else if(fileType.compare("MP4\n") == 0)
-	{
-	// cout << "(MP4)  ";
-	strcpy(cmd, "exiftool -CreateDate \"");
-	strcat(cmd, path);
-	strcat(cmd, "\"");
-	fileDate = exec(cmd);
-
-	if(!fileDate.empty())    
-		return fileDate.substr(34, fileDate.length());
-
-	}else if(fileType.compare("M2TS\n") == 0)
-	{
-	// cout << "(M2TS) ";
-	strcpy(cmd, "exiftool -DateTimeOriginal \"");
-	strcat(cmd, path);
-	strcat(cmd, "\"");
-	fileDate = exec(cmd);
-
-	if(!fileDate.empty())
-		return fileDate.substr(34, fileDate.length());
+			return fileDate.substr(34, fileDate.length());
 
 	}
+	else if(fileType.compare("MOV\n") == 0)
+	{
+		// cout << "(MOV)  ";
+		strcpy(cmd, "exiftool -CreateDate \"");
+		strcat(cmd, path);
+		strcat(cmd, "\"");
+		fileDate = exec(cmd);
 
+		if(!fileDate.empty())
+			return fileDate.substr(34, fileDate.length());
+	}
+	else if(fileType.compare("WMV\n") == 0)
+	{
+		// cout << "(WMV)  ";
+		strcpy(cmd, "exiftool -CreationDate \"");
+		strcat(cmd, path);
+		strcat(cmd, "\"");
+		fileDate = exec(cmd);
+
+		if(!fileDate.empty())
+			return fileDate.substr(34, fileDate.length());
+
+	}
+	else if(fileType.compare("MP4\n") == 0)
+	{
+		// cout << "(MP4)  ";
+		strcpy(cmd, "exiftool -CreateDate \"");
+		strcat(cmd, path);
+		strcat(cmd, "\"");
+		fileDate = exec(cmd);
+
+		if(!fileDate.empty())   
+			return fileDate.substr(34, fileDate.length());
+	}
+	else if(fileType.compare("M2TS\n") == 0)
+	{
+		// cout << "(M2TS) ";
+		strcpy(cmd, "exiftool -DateTimeOriginal \"");
+		strcat(cmd, path);
+		strcat(cmd, "\"");
+		fileDate = exec(cmd);
+
+		if(!fileDate.empty())
+			return fileDate.substr(34, fileDate.length());
+	}
 	return string(); // empty string
-	
 }
 
 bool isDir(const char* path)
 {
-	
 	struct stat sb;
 	if (stat(path, &sb) == 0 && S_ISDIR(sb.st_mode))
-	return true;
-
+		return true;
 	return false;
-
 }
 
 int
 isFile(const char *path)
 {
-
 	struct stat path_stat;
 	stat(path, &path_stat);
 	return S_ISREG(path_stat.st_mode);
-
 }
 
 originalDateData *
 dateReturn(string originalDate)
 {
-	
 	if(originalDate.empty())
-	return NULL;
+		return NULL;
 
-	string originalYear   ;
-	string originalMonth  ; 
-	string originalDay    ; 
-	string originalHour   ; 
-	string originalMinute ; 
-	string originalSecond ;
+	string originalYear,
+		originalMonth,
+		originalDay,
+		originalHour,
+		originalMinute,
+		originalSecond;
 
 	string div = ":";
 	string divt = " ";
 	size_t pos = 0;
 	
-	pos = originalDate.find(div);  
+	pos = originalDate.find(div); 
 	originalYear = originalDate.substr(0, pos);
 	originalDate.erase(0, pos + div.length());
 
-	pos = originalDate.find(div);  
+	pos = originalDate.find(div); 
 	originalMonth = originalDate.substr(0, pos);
 	originalDate.erase(0, pos + div.length());
 
-	pos = originalDate.find(divt);  
+	pos = originalDate.find(divt); 
 	originalDay = originalDate.substr(0, pos);
 	originalDate.erase(0, pos + divt.length());
 
-	pos = originalDate.find(div);  
+	pos = originalDate.find(div); 
 	originalHour = originalDate.substr(0, pos);
 	originalDate.erase(0, pos + div.length());
 
-	pos = originalDate.find(div);  
+	pos = originalDate.find(div); 
 	originalMinute = originalDate.substr(0, pos);
 	originalDate.erase(0, pos + div.length());
 	
-	pos = originalDate.find(div);  
+	pos = originalDate.find(div); 
 	originalSecond = originalDate.substr(0, pos);
 	originalDate.erase(0, pos + div.length());
 	
 	originalDateData *origin = (originalDateData *) malloc (sizeof(originalDateData));
 
 	origin->year   = atoi  (originalYear.c_str());
-	origin->month  = atoi  (originalMonth.c_str()); 
-	origin->day    = atoi  (originalDay.c_str()); 
-	origin->hour   = atoi  (originalHour.c_str()); 
+	origin->month  = atoi  (originalMonth.c_str());
+	origin->day    = atoi  (originalDay.c_str());
+	origin->hour   = atoi  (originalHour.c_str());
 	origin->minute = atoi  (originalMinute.c_str());
 	origin->second = atoi  (originalSecond.c_str());
 
 	return origin;
-
 }
 
 bool dirEx(const char* directory)
 {
-	
 	DIR* dir = opendir(directory);
 	if (dir)
 	{
-	closedir(dir);
-	return true;
+		closedir(dir);
+		return true;
 	}
-	return false;
 
+	return false;
 }
 
 char *destinationFinder(int year, int month, const char *pathToStore, bool type)
@@ -498,20 +519,28 @@ char *destinationFinder(int year, int month, const char *pathToStore, bool type)
 
 	if(year >= 1989 && year <= 2040)
 	{
-	char yearStr[12];
-	sprintf(yearStr, "%d", year);
+		char yearStr[12];
+		sprintf(yearStr, "%d", year);
 
-	strcat(destinationPath, yearStr);
-	strcat(destinationPath, "/");
-	strcat(destinationPathFolder, yearStr);
-	strcat(destinationPathFolder, "/");
+		strcat(destinationPath, yearStr);
+		strcat(destinationPath, "/");
+		strcat(destinationPathFolder, yearStr);
+		strcat(destinationPathFolder, "/");
 
-	strcpy(destinationPathFolderToExec, destinationPathFolder);
-	strcat(destinationPathFolderToExec, "\"");
+		strcpy(destinationPathFolderToExec, destinationPathFolder);
+		strcat(destinationPathFolderToExec, "\"");
 
-	if(!dirEx(destinationPath))
-		system(destinationPathFolderToExec);
-
+		if(!dirEx(destinationPath))
+		{
+			if(system(destinationPathFolderToExec))
+			{
+				prnt_scs(__FILE__, __LINE__, destinationPathFolderToExec);
+			}
+			else
+			{
+				prnt_scs(__FILE__, __LINE__, destinationPathFolderToExec);
+			}
+		}
 	}
 
 	switch(month)
@@ -562,7 +591,7 @@ char *destinationFinder(int year, int month, const char *pathToStore, bool type)
 		break;
 	case 12 :
 		strcat(destinationPath, "December");
-		strcat(destinationPathFolder, "December"); 
+		strcat(destinationPathFolder, "December");
 		break;
 
 	default:
@@ -575,87 +604,107 @@ char *destinationFinder(int year, int month, const char *pathToStore, bool type)
 	strcat(destinationPathFolderToExec, "\"");
 
 	if(!dirEx(destinationPath))
-	system(destinationPathFolderToExec);
+	{
+		if(system(destinationPathFolderToExec))
+		{
+			prnt_scs(__FILE__, __LINE__, destinationPathFolderToExec);
+		}
+		else
+		{
+			prnt_scs(__FILE__, __LINE__, destinationPathFolderToExec);
+		}
+	}
 
 	if(type)
 	{
-	strcat(destinationPath, "/photos");
-	strcat(destinationPathFolder, "/photos");
-	}else{
-	strcat(destinationPath, "/videos");      
-	strcat(destinationPathFolder, "/videos");      
+		strcat(destinationPath, "/photos");
+		strcat(destinationPathFolder, "/photos");
+	}
+	else
+	{
+		strcat(destinationPath, "/videos");     
+		strcat(destinationPathFolder, "/videos");     
 	}
 
 	strcpy(destinationPathFolderToExec, destinationPathFolder);
 	strcat(destinationPathFolderToExec, "\"");
 
 	if(!dirEx(destinationPath))
-	system(destinationPathFolderToExec);
+	{
+		if(system(destinationPathFolderToExec))
+		{
+			prnt_scs(__FILE__, __LINE__, destinationPathFolderToExec);
+		}
+		else
+		{
+			prnt_scs(__FILE__, __LINE__, destinationPathFolderToExec);
+		}
+	}
 
 	strcpy(destinationPathToExec, "\"");
 	strcat(destinationPathToExec, destinationPath);
 	strcat(destinationPathToExec, "\"");
 
 	return destinationPathToExec;
-
 }
 
 bool typeOfFile(const char* path)
 {
-
 	char* cmd = (char *) malloc (32768 * sizeof(char));
 	strcpy(cmd, "exiftool -FileType \"");
 	strcat(cmd, path);
 	strcat(cmd, "\"");
 
 	string fileType = exec(cmd);
+
 	if(!fileType.empty())
 	{
-	fileType = fileType.substr(34,fileType.length());
-	}else{
-	return -1;
+		fileType = fileType.substr(34,fileType.length());
+	}
+	else
+	{
+		return -1;
 	}
 
 	if(fileType.compare("JPEG\n") == 0)
 	{
-	return true;
-
-	}else if(fileType.compare("PNG\n") == 0)
+		return true;
+	}
+	else if(fileType.compare("PNG\n") == 0)
 	{
-	return true;
-
-	}else if(fileType.compare("AVI\n") == 0)
+		return true;
+	}
+	else if(fileType.compare("AVI\n") == 0)
 	{
-	return false;
-
-	}else if(fileType.compare("MOV\n") == 0)
+		return false;
+	}
+	else if(fileType.compare("MOV\n") == 0)
 	{
-	return false;
-
-	}else if(fileType.compare("WMV\n") == 0)
+		return false;
+	}
+	else if(fileType.compare("WMV\n") == 0)
 	{
-	return false;
-
-	}else if(fileType.compare("MP4\n") == 0)
+		return false;
+	}
+	else if(fileType.compare("MP4\n") == 0)
 	{
-	return false;
-
-	}else if(fileType.compare("M2TS\n") == 0)
+		return false;
+	}
+	else if(fileType.compare("M2TS\n") == 0)
 	{
-	return false;
-
-	}else{
-	return -1;
+		return false;
+	}
+	else
+	{
+		return -1;
 
 	}
-
 }
 
 int
 typeOfFileInt(const char* path)
 {
-
-	return 0; 
+	return 0;
 
 	char* cmd = (char *) malloc (128 * sizeof(char));
 	strcpy(cmd, "exiftool -FileType \"");
@@ -667,127 +716,150 @@ typeOfFileInt(const char* path)
 	if(!fileType.empty())
 	{
 	fileType = fileType.substr(34,fileType.length());
-	}else{
-	return -2;
 	}
-	cout << fileType << endl; 
+	else
+	{
+		return -2;
+	}
+	cout << fileType << endl;
 
 	if(fileType.compare("JPEG\n") == 0)
 	{
-	return 0;
-
-	}else if(fileType.compare("PNG\n") == 0)
-	{
-	return 1;
-
-	}else if(fileType.compare("AVI\n") == 0)
-	{
-	return 2;
-
-	}else if(fileType.compare("MOV\n") == 0)
-	{
-	return 3;
-
-	}else if(fileType.compare("WMV\n") == 0)
-	{
-	return 4;
-
-	}else if(fileType.compare("MP4\n") == 0)
-	{
-	return 5;
-
-	}else if(fileType.compare("M2TS\n") == 0)
-	{
-	return 6;
-
-	}else{
-	return -1;
+		return 0;
 
 	}
+	else if(fileType.compare("PNG\n") == 0)
+	{
+		return 1;
 
+	}
+	else if(fileType.compare("AVI\n") == 0)
+	{
+		return 2;
+
+	}
+	else if(fileType.compare("MOV\n") == 0)
+	{
+		return 3;
+
+	}
+	else if(fileType.compare("WMV\n") == 0)
+	{
+		return 4;
+
+	}
+	else if(fileType.compare("MP4\n") == 0)
+	{
+		return 5;
+	}
+	else if(fileType.compare("M2TS\n") == 0)
+	{
+		return 6;
+	}
+	else
+	{
+		return -1;
+	}
 }
 
 void
 fileVersion(const char *path, const char *pathToStore)
 {
-
 	if(hundredP == -1) { hundredP = 1; }
 
 	percentige();
 	string originalDate = dateOfCreation(path);
 
 	if(originalDate.empty())
- 
- {
-	
-	printf(ACR "> crpt %-1s%-50s\n" ACRE, "[ ", path);
-	cout << flush;
-	FILE *corruptedFiles = fopen("corruptedFiles.txt", "a");
-	if(corruptedFiles == NULL) { printf("Error while opening file.\n"); }
-	fprintf(corruptedFiles,"%s\n",path);            
-	fclose(corruptedFiles);
+ 	{
+		printf(ACR "> crpt %-1s%-50s\n" ACRE, "[ ", path);
+		cout << flush;
+		FILE *corruptedFiles = fopen("corruptedFiles.txt", "a");
 
-	char *destinationPath = (char *) malloc (32768 * sizeof(char));
+		if(corruptedFiles == NULL) { printf("Error while opening file.\n"); }
 
-	strcpy(destinationPath, pathToStore);
-	strcat(destinationPath, "/unknown");
+		fprintf(corruptedFiles,"%s\n",path);           
+		fclose(corruptedFiles);
 
-	if(!dirEx(destinationPath))
-	{
-		strcpy(destinationPath, "mkdir \"");
-		strcat(destinationPath, pathToStore);
-		strcat(destinationPath, "/unknown\"");
-
-		system(destinationPath);
-	}
-
-	if(typeOfFile(path))
-	{
+		char *destinationPath = (char *) malloc (32768 * sizeof(char));
 
 		strcpy(destinationPath, pathToStore);
-		strcat(destinationPath, "/unknown/photos");
+		strcat(destinationPath, "/unknown");
 
 		if(!dirEx(destinationPath))
 		{
-		strcpy(destinationPath, "mkdir \"");
-		strcat(destinationPath, pathToStore);
-		strcat(destinationPath, "/unknown/photos\"");
+			strcpy(destinationPath, "mkdir \"");
+			strcat(destinationPath, pathToStore);
+			strcat(destinationPath, "/unknown\"");
 
-		system(destinationPath);
+			if(system(destinationPath))
+			{
+				prnt_scs(__FILE__, __LINE__, destinationPath);
+			}
+			else
+			{
+				prnt_scs(__FILE__, __LINE__, destinationPath);
+			}
 		}
 
-		strcpy(destinationPath, "\"");
-		strcat(destinationPath, pathToStore);
-		strcat(destinationPath, "/unknown/photos\"");
-		
-		percentige();
-		transfer(path, destinationPath);
-
-	}else{
-
-		strcpy(destinationPath, pathToStore);
-		strcat(destinationPath, "/unknown/videos");
-
-		if(!dirEx(destinationPath))
+		if(typeOfFile(path))
 		{
-		strcpy(destinationPath, "mkdir \"");
-		strcat(destinationPath, pathToStore);
-		strcat(destinationPath, "/unknown/videos\"");
+			strcpy(destinationPath, pathToStore);
+			strcat(destinationPath, "/unknown/photos");
 
-		system(destinationPath);
+			if(!dirEx(destinationPath))
+			{
+				strcpy(destinationPath, "mkdir \"");
+				strcat(destinationPath, pathToStore);
+				strcat(destinationPath, "/unknown/photos\"");
+
+				if(system(destinationPath))
+				{
+					prnt_scs(__FILE__, __LINE__, destinationPath);
+				}
+				else
+				{
+					prnt_scs(__FILE__, __LINE__, destinationPath);
+				}
+			}
+
+			strcpy(destinationPath, "\"");
+			strcat(destinationPath, pathToStore);
+			strcat(destinationPath, "/unknown/photos\"");
+			
+			percentige();
+			transfer(path, destinationPath);
+		}
+		else
+		{
+			strcpy(destinationPath, pathToStore);
+			strcat(destinationPath, "/unknown/videos");
+
+			if(!dirEx(destinationPath))
+			{
+				strcpy(destinationPath, "mkdir \"");
+				strcat(destinationPath, pathToStore);
+				strcat(destinationPath, "/unknown/videos\"");
+
+				if(system(destinationPath))
+				{
+					prnt_scs(__FILE__, __LINE__, destinationPath);
+				}
+				else
+				{
+					prnt_scs(__FILE__, __LINE__, destinationPath);
+				}
+			}
+
+			strcpy(destinationPath, "\"");
+			strcat(destinationPath, pathToStore);
+			strcat(destinationPath, "/unknown/videos\"");
+
+			percentige();
+			transfer(path, destinationPath);
 		}
 
-		strcpy(destinationPath, "\"");
-		strcat(destinationPath, pathToStore);
-		strcat(destinationPath, "/unknown/videos\"");
-
-		percentige();
-		transfer(path, destinationPath);
-
-	}
-
-	return;
-
+		return;
 	}
 
 	originalDateData *originalDateStruct = (originalDateData *) malloc (sizeof(originalDateData));
@@ -796,12 +868,12 @@ fileVersion(const char *path, const char *pathToStore)
 	char *destinationPath = destinationFinder(originalDateStruct->year, originalDateStruct->month, pathToStore, typeOfFile(path));
 
 	/*******************************CHECKING IF FILE ALREADY EXISTS*******************************/
-	int ctr;
+	int ctr = 0;
 
 	for(int i = 0; i < (int) strlen(path); i++)
-	if(path[i] == '/') ctr = i;
+		if(path[i] == '/') ctr = i;
 	
-	string begin = path, final, existance; 
+	string begin = path, final, existance;
 	final = begin.substr (ctr, strlen(path));
 	begin = destinationPath;
 	begin = begin.substr(0, begin.length() - 1);
@@ -809,72 +881,75 @@ fileVersion(const char *path, const char *pathToStore)
 	begin = begin.substr(0, begin.length() - 1);
 	existance = begin + final;
 
-	if(isFile(existance.c_str())) { // if file already exists 
-	printf(ACG "> exst %-1s", "[ ");
-	printf(ACG "%-50s\n" ACRE, existance.c_str());
-	return;
-
+	if(isFile(existance.c_str())) // if file already exists
+	{
+		printf(ACG "> exst %-1s", "[ ");
+		printf(ACG "%-50s\n" ACRE, existance.c_str());
+		
+		return;
 	}
+	
 	/*********************************************************************************************/
 
 	transfer(path, destinationPath);
 	
 	return;
-
 }
 
 void
 folderVersion(const char *path, const char *pathToStore, int *arg)
 {
-
 	if(folderAlreadyOrganized(path, 1))
 	{
-	currentP += hundredPercent(path);
-	printf(ACY "Path: %s, has already been organised.\n", path);
-	printf(    "If you wish to organise it again, please ");
-	printf(    "delete the path reference from folderSigning.txt\n" ACRE);
-	return;
+		currentP += hundredPercent(path);
+		printf(ACY "Path: %s, has already been organised.\n", path);
+		printf(    "If you wish to organise it again, please ");
+		printf(    "delete the path reference from folderSigning.txt\n" ACRE);
+
+		return;
 	}
 
 	if(hundredP == -1)
 	{
-	hundredP = hundredPercent(path);
+		hundredP = hundredPercent(path);
 	}
 
 	// else{
 	//   hundredP -= 1;
 	// }
 	
-	bool  isArgFree = true, 
-		photoOnly = false,
-		videoOnly = false;
+	bool	isArgFree = true,
+			photoOnly = false,
+			videoOnly = false;
 
-	if(arg[8] == 1) { photoOnly = true; }
-	if(arg[9] == 1) { videoOnly = true; }
-	if(arg[11] == 1) { deleteMode = 1; }
+	if(arg[8] == 1)		{ photoOnly = true; }
+	if(arg[9] == 1)		{ videoOnly = true; }
+	if(arg[11] == 1)	{ deleteMode = 1; }
 
-	for(int i = 0; i < 9; i++)
+	for(int i=0; i<9; i++)
 	{
-	if(arg[i] != -1)
-	{
-		isArgFree = false;
-		break;
-	}
+		if(arg[i] != -1)
+		{
+			isArgFree = false;
+			break;
+		}
 	}
 
-	int j = 1;
-	DIR           *d;
-	struct dirent *dir;
+	int				j = 1;
+	DIR				*d;
+	struct dirent	*dir;
+
 	d = opendir(path);
 	
-	string dirFile,
-	jpegOJ = ".jpg",  /**/  jpegTJ = ".JPG",
-	jpegOP = ".png",  /**/  jpegTP = ".PNG",
-	jpegOA = ".avi",  /**/  jpegTA = ".AVI",
-	jpegOM = ".mov",  /**/  jpegTM = ".MOV",  
-	jpegOW = ".wmv",  /**/  jpegTW = ".WMV",
-	jpegOMP = ".mp4", /**/  jpegTMP = ".MP4",
-	jpegOMT = ".mts", /**/  jpegTMT = ".MTS";
+	string 
+		dirFile,
+		jpegOJ = ".jpg",  /**/  jpegTJ = ".JPG",
+		jpegOP = ".png",  /**/  jpegTP = ".PNG",
+		jpegOA = ".avi",  /**/  jpegTA = ".AVI",
+		jpegOM = ".mov",  /**/  jpegTM = ".MOV", 
+		jpegOW = ".wmv",  /**/  jpegTW = ".WMV",
+		jpegOMP = ".mp4", /**/  jpegTMP = ".MP4",
+		jpegOMT = ".mts", /**/  jpegTMT = ".MTS";
 
 	size_t foundOJ,   /**/  foundTJ;
 	size_t foundOP,   /**/  foundTP;
@@ -893,114 +968,111 @@ folderVersion(const char *path, const char *pathToStore, int *arg)
 
 	strcpy(unknownPath, path);
 	strcat(unknownPath, "/");
-
+	
+	prnt_inf(__FILE__, __LINE__, "PASS");
+	
 	if (d)
 	{
-	
-	while ((dir = readdir(d)) != NULL)
-	{
-
-		dirFile = dir->d_name;
-		foundOJ = dirFile.find(jpegOJ);
-		foundTJ = dirFile.find(jpegTJ);
-		foundOP = dirFile.find(jpegOP);
-		foundTP = dirFile.find(jpegTP);
-		foundOA = dirFile.find(jpegOA);
-		foundTA = dirFile.find(jpegTA);
-		foundOM = dirFile.find(jpegOM);
-		foundTM = dirFile.find(jpegTM);
-		foundOW = dirFile.find(jpegOW);
-		foundTW = dirFile.find(jpegTW);
-		foundOMP = dirFile.find(jpegOMP);
-		foundTMP = dirFile.find(jpegTMP);
-		foundOMT = dirFile.find(jpegOMT);
-		foundTMT = dirFile.find(jpegTMT);
-
-		strcat(unknownPath, dir->d_name);
-
-		if (foundOJ != string::npos || foundTJ != string::npos 
-		|| foundOP != string::npos || foundTP != string::npos 
-		|| foundOA != string::npos || foundTA != string::npos 
-		|| foundOM != string::npos || foundTM != string::npos 
-		|| foundOW != string::npos || foundTW != string::npos 
-		|| foundOMP != string::npos || foundTMP != string::npos 
-		|| foundOMT != string::npos || foundTMT != string::npos )
+		while ((dir = readdir(d)) != NULL)
 		{
+			dirFile = dir->d_name;
+			foundOJ = dirFile.find(jpegOJ);
+			foundTJ = dirFile.find(jpegTJ);
+			foundOP = dirFile.find(jpegOP);
+			foundTP = dirFile.find(jpegTP);
+			foundOA = dirFile.find(jpegOA);
+			foundTA = dirFile.find(jpegTA);
+			foundOM = dirFile.find(jpegOM);
+			foundTM = dirFile.find(jpegTM);
+			foundOW = dirFile.find(jpegOW);
+			foundTW = dirFile.find(jpegTW);
+			foundOMP = dirFile.find(jpegOMP);
+			foundTMP = dirFile.find(jpegTMP);
+			foundOMT = dirFile.find(jpegOMT);
+			foundTMT = dirFile.find(jpegTMT);
 
-		strcat(imagePath, dir->d_name);
+			strcat(unknownPath, dir->d_name);
 
-		int length = (int) strlen(imagePath);
-		for(int i = 0; i < length; i++)
-		{
-			if(imagePath[i] == '.' 
-			&& i+1 <= length 
-			&& (imagePath[i+1] == '_' || imagePath[i+1] == 'D'))
+			if (foundOJ != string::npos || foundTJ != string::npos
+				|| foundOP != string::npos || foundTP != string::npos
+				|| foundOA != string::npos || foundTA != string::npos
+				|| foundOM != string::npos || foundTM != string::npos
+				|| foundOW != string::npos || foundTW != string::npos
+				|| foundOMP != string::npos || foundTMP != string::npos
+				|| foundOMT != string::npos || foundTMT != string::npos)
 			{
-			j = 0; break; 
+				strcat(imagePath, dir->d_name);
+
+				int length = (int) strlen(imagePath);
+				for(int i = 0; i < length; i++)
+				{
+					if(imagePath[i] == '.'
+						&& i+1 <= length
+						&& (imagePath[i+1] == '_' ||
+						imagePath[i+1] == 'D'))
+					{
+						j = 0; break;
+					}
+				}
+
+				strcpy(imagePathFinal, path);
+				strcat(imagePathFinal, "/");
+				strcat(imagePathFinal, imagePath);
+
+				if(j)
+				{
+					if(photoOnly && videoOnly)
+					{
+						fileVersion(imagePathFinal, pathToStore);
+					}
+					else if(photoOnly)
+					{
+						if(typeOfFile(imagePathFinal))
+							fileVersion(imagePathFinal, pathToStore);
+					}
+					else if(videoOnly)
+					{
+						if(!typeOfFile(imagePathFinal))
+							fileVersion(imagePathFinal, pathToStore);
+					}
+					else
+					{
+						if(isArgFree)
+						{
+							fileVersion(imagePathFinal, pathToStore);
+						}
+						// check arg
+						else if(arg[typeOfFileInt(imagePathFinal)] == 1)
+						{
+							fileVersion(imagePathFinal, pathToStore);
+						}
+					}
+				}
+
+				j = 1;
+				strcpy(imagePath, path);
+				strcat(imagePath, "/");
 			}
+			else if(!isFile(unknownPath) && (dirFile.find('.') == string::npos))
+			{
+				folderVersion(unknownPath, pathToStore, arg);
+			}
+
+			imagePath       = (char*) malloc (32768 * sizeof(char));
+			imagePathFinal  = (char*) malloc (32768 * sizeof(char));
+			unknownPath     = (char*) malloc (32768 * sizeof(char));
+
+			strcpy(unknownPath, path);
+			strcat(unknownPath, "/");
 		}
 
-		strcpy(imagePathFinal, path);
-		strcat(imagePathFinal, "/");
-		strcat(imagePathFinal, imagePath);
+		closedir(d);
+		folderSigning(path, 1);
 
-		if(j)
-		{
-
-			if(photoOnly && videoOnly)
-			{
-			fileVersion(imagePathFinal, pathToStore);
-
-			}else if(photoOnly)
-			{
-			if(typeOfFile(imagePathFinal))
-				fileVersion(imagePathFinal, pathToStore);
-
-			}else if(videoOnly)
-			{
-			if(!typeOfFile(imagePathFinal))
-				fileVersion(imagePathFinal, pathToStore);
-
-			}else{
-			if(isArgFree)
-			{
-				fileVersion(imagePathFinal, pathToStore);
-			}else if(arg[typeOfFileInt(imagePathFinal)] == 1)
-			{
-				fileVersion(imagePathFinal, pathToStore);
-			}
-
-			}
-			
-		}
-
-		j = 1;
-		strcpy(imagePath, path);
-		strcat(imagePath, "/");
-
-		}else if(!isFile(unknownPath) && (dirFile.find('.') == string::npos))
-		{
-
-		folderVersion(unknownPath, pathToStore, arg);
-
-		}
-
-		imagePath       = (char*) malloc (32768 * sizeof(char));
-		imagePathFinal  = (char*) malloc (32768 * sizeof(char));
-		unknownPath     = (char*) malloc (32768 * sizeof(char));
-
-		strcpy(unknownPath, path);
-		strcat(unknownPath, "/");
-
+		return;
 	}
-
-	closedir(d);
-	folderSigning(path, 1);
 
 	return;
-	
-	}
-	
 }
 
 void
@@ -1050,18 +1122,18 @@ duplicateVersion(const char *path, int xtrm)
 		duplicateVersion(imagePath, xtrm);
 
 		}else if ( typeOfFileInt(imagePath) != -1 )
-	 
+	
 	 {
 
 		length = (int) strlen (dir->d_name);
 		for( int i = 0; i < length; i++)
 		{
-			if( dir->d_name[i] == '.' 
-			&& i+1 <= length 
-			&& (dir->d_name[i+1] == '_' 
+			if( dir->d_name[i] == '.'
+			&& i+1 <= length
+			&& (dir->d_name[i+1] == '_'
 			|| dir->d_name[i+1] == 'D') )
 			{
-			j = 0; break; 
+			j = 0; break;
 			}
 		}
 
@@ -1110,17 +1182,17 @@ duplicateCleaner(const char *master, const char *path, int type)
 		length = (int) strlen (path);
 		for( int i = 0; i < length; i++)
 		{
-		if( path[i] == '.' 
-			&& i+1 <= length 
-			&& (path[i+1] == '_' 
+		if( path[i] == '.'
+			&& i+1 <= length
+			&& (path[i+1] == '_'
 			|| path[i+1] == 'D') )
 		{
-			j = 0; break; 
+			j = 0; break;
 		}
 		}
 
 		if(j && strcmp(dir->d_name, master) != 0)
-	 
+	
 	 {
 
 		percentige();
@@ -1128,42 +1200,42 @@ duplicateCleaner(const char *master, const char *path, int type)
 		printf(ACG "%-20s%-18s%-1s%-50s\n" ACRE, "", " '--------------> ", "[ ", path);
 
 		if ( type == typeOfFileInt(imagePath) )
-		 
+		
 		 {
 
 			if ( strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )  ) )
 			duplicateCleanerExecution(masterPath, imagePath);
 
 		}else if ( type == typeOfFileInt(imagePath) )
-		 
+		
 		 {
 
 			if ( strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )  ) )
 			duplicateCleanerExecution(masterPath, imagePath);
 
 		}else if ( type == typeOfFileInt(imagePath) )
-		 
+		
 		 {
 
 			if ( strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )  ) )
 			duplicateCleanerExecution(masterPath, imagePath);
 
 		}else if ( type == typeOfFileInt(imagePath) )
-		 
+		
 		 {
 
 			if ( strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )  ) )
 			duplicateCleanerExecution(masterPath, imagePath);
 
 		}else if ( type == typeOfFileInt(imagePath) )
-		 
+		
 		 {
 
 			if ( strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )  ) )
 			duplicateCleanerExecution(masterPath, imagePath);
 
 		}else if ( type == typeOfFileInt(imagePath) )
-		 
+		
 		 {
 
 			if ( strlen(dir->d_name) > 2 || ( strlen(dir->d_name) == 1 && dir->d_name[0] != '.' ) || ( strlen(dir->d_name) == 2 && ( dir->d_name[0] != '.' || dir->d_name[1] != '.' )  ) )
@@ -1202,12 +1274,12 @@ duplicateCleanerExecution(const char* imagePathMaster, const char* imagePathCand
 	char* cmdOne    = (char*) malloc (8096 * sizeof(char));
 	char* cmdTwo    = (char*) malloc (8096 * sizeof(char));
 
-	strcpy(cmdOne,  "exiftool -FileSize -ImageSize -BrightnessValue -ThumbnailImage \""); 
-	strcat(cmdOne, imagePathMaster);     
-	strcat(cmdOne, "\""); 
-	strcpy(cmdTwo,  "exiftool -FileSize -ImageSize -BrightnessValue -ThumbnailImage \""); 
-	strcat(cmdTwo, imagePathCandidate);  
-	strcat(cmdTwo, "\""); 
+	strcpy(cmdOne,  "exiftool -FileSize -ImageSize -BrightnessValue -ThumbnailImage \"");
+	strcat(cmdOne, imagePathMaster);    
+	strcat(cmdOne, "\"");
+	strcpy(cmdTwo,  "exiftool -FileSize -ImageSize -BrightnessValue -ThumbnailImage \"");
+	strcat(cmdTwo, imagePathCandidate); 
+	strcat(cmdTwo, "\"");
 
 	percentige();
 	printf(ACG "%-20s%-1s%-50s\n" ACRE, "> double check for:", "[ ", imagePathMaster);
@@ -1302,7 +1374,7 @@ duplicateCleanerExecution(const char* imagePathMaster, const char* imagePathCand
 					strcat(rmcmd, "\"");
 
 					// string answer;
-					// cout << endl << "About to delete: " 
+					// cout << endl << "About to delete: "
 					// << imagePathCandidate << " , to approve, press y: " ;
 					// cin >> answer;
 					// if(answer == "y"){

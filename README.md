@@ -17,7 +17,7 @@ make       |----------------| ./mediarizer /media.file /path/to/store           
 ```
 
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDisplay.jpg)
-<br />**_( These is achieved in one run of the program )_**
+<br/>**_( These is achieved in one run of the program )_**
 
 Why use Media Organizer:
 * Organises photos / videos extremly fast, the only limitation is your hardware
@@ -33,8 +33,8 @@ git clone https://github.com/keybraker/Mediarizer.git
 
 #### 2. Install ExifTool by Phil Harvey
 Download and install from here [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/).
-<br />This program may very well be the best exif parser in the world (nj).
-<br />This is the heart of the program and the essential tool that helped create this project.
+<br/>This program may very well be the best exif parser in the world (nj).
+<br/>This is the heart of the program and the essential tool that helped create this project.
 
 ## Usage Guide
 #### 1. Open a terminal window and cd to cloned project
@@ -50,11 +50,11 @@ make
 #### 3. Run the program:
 ##### a. Single image mode: Organises the one picture or video given to it.
 ```
-./mediarizer /path/media.file /path/to/store/folder
+./mediarizer -i /path/media.file -o /path/to/store/folder
 ```
 ##### b. Folder mode: Organises all the pictures and videos in a folder, and the folders in it.
 ```
-./mediarizer /path/folder /path/to/store/folder
+./mediarizer -i /path/folder -o /path/to/store/folder
 ```
 ##### c. Duplicate mode (BETA): Deletes all duplicate pictures and videos in a folder, and the folders in it.
 ```
@@ -62,7 +62,7 @@ make
 ```
 ***
 
-> Photos are copied to the new path if date information is available. <br />Same photos with same names, from diffrent folders are not being copied.
+> Photos are copied to the new path if date information is available. <br/>Same photos with same names, from diffrent folders are not being copied.
 
 > To clean the program type ``` make clean ``` in ``` /mediarizer ```.
 
@@ -82,7 +82,7 @@ _Duplicate Mode Output:_
 > '-rm -rf "/path/to/file.type" ( stored for deletion ).
 ```
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDuplicate.jpg)
-<br />**_( These is achieved in one run of the program )_**
+<br/>**_( These is achieved in one run of the program )_**
 
 ## Flags
 Category | Explanation
@@ -108,30 +108,30 @@ Category | Explanation
 #### Flag Use Examples:
 ##### Flags can be put in any order you wish even in the middle of the directories, like this:
 ```
-./mediarizer -mp4 /path/source/folder -jpg /path/to/store/folder -png
+./mediarizer -mp4 -i /path/source/folder -jpg -o /path/to/store/folder -png
 ```
 is the same as,
 ```
-./mediarizer /path/source/folder /path/to/store/folder -mp4 -jpg -png
+./mediarizer -i /path/source/folder -o /path/to/store/folder -mp4 -jpg -png
 ```
 ***
 ##### Will only copy jpg and mp4 files:
 ```
-./mediarizer -mp4 -jpg /path/source/folder /path/to/store/folder
+./mediarizer -mp4 -jpg -i  /path/source/folder -o /path/to/store/folder
 ```
 is the same as,
 ```
-./mediarizer -mp4 /path/source/folder -jpg /path/to/store/folder
+./mediarizer -mp4 -i  /path/source/folder -jpg -o /path/to/store/folder
 ```
 ***
 ##### Will only copy photos not videos:
 ```
-./mediarizer /path/source/folder /path/to/store/folder -photo
+./mediarizer -i  /path/source/folder -o /path/to/store/folder -photo
 ```
 ***
 ##### Duplicates will be deleted:
 ```
-./mediarizer -dup /path/source/folder
+./mediarizer -dup -i  /path/source/folder
 ```
 ***
 ##### **! Only _videos_ will be copied:**

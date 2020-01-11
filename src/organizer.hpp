@@ -1,6 +1,6 @@
-/*************************************************************
-  Organizer.h  -- A simple C++ library to organize and delete
-  				  duplicate media files.
+/**************************************************************
+	Organizer.h		-		A simple C++ library to organize and delete
+										duplicate media files.
 */
 
 #ifndef __ORGANIZER_H
@@ -22,6 +22,7 @@
 #include <time.h>   
 #include <sys/stat.h>
 #include <string>
+#include <string.h>
 #include <pthread.h>
 #include <iomanip>
 #include <stdlib.h>
@@ -52,18 +53,18 @@ using namespace std;
 
 #define exit_err(FILE, LINE, ERR) \
 { \
-  fprintf(stderr, a_c_r "ERROR: %-30s" a_c_re " | [%-20s, %-5d]\n", ERR, FILE, LINE); \
-  exit(EXIT_FAILURE); \
+	fprintf(stderr, a_c_r "ERROR: %-30s" a_c_re " | [%-20s, %-5d]\n", ERR, FILE, LINE); \
+	exit(EXIT_FAILURE); \
 }
 
 #define prnt_scs(FILE, LINE, MSG) \
 { \
-  fprintf(stdout, "SUCCS: " a_c_g "%-30s" a_c_re " | [%-20s, %-5d]\n", MSG, FILE, LINE); \
+	fprintf(stdout, "SUCCS: " a_c_g "%-30s" a_c_re " | [%-20s, %-5d]\n", MSG, FILE, LINE); \
 }
 
 #define prnt_inf(FILE, LINE, MSG) \
 { \
-  fprintf(stdout, "MESSG: " a_c_y "%-30s" a_c_re " | [%-20s, %-5d]\n", MSG, FILE, LINE); \
+	fprintf(stdout, "MESSG: " a_c_y "%-30s" a_c_re " | [%-20s, %-5d]\n", MSG, FILE, LINE); \
 }
 
 typedef struct originalDateData originalDateData;
@@ -72,24 +73,21 @@ typedef struct threader threader;
 struct threader{
 	const char *source;
 	const char *dest;
-
 };
 
 struct originalDateData{
-  int year;
-  int month;
-  int day;
-  int hour;
-  int minute;
-  int second;
-  
+	int year;
+	int month;
+	int day;
+	int hour;
+	int minute;
+	int second;	
 };
 
 void help();
 ////////////////////////////////////
 int hundredPercent(const char* path);
 void percentige();
-
 
 
 void folderSigning(const char* string, int version);
@@ -119,4 +117,3 @@ void duplicateCleaner(const char *master, const char *path, int type);
 void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePathCandidate);
 
 #endif
-

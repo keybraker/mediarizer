@@ -6,13 +6,13 @@ hlp()
 	printf("\nThere are three modes to choose from:\n");
 	printf("=====================================\n\n");
 	printf("1) File Mode\n   ---------\n");
-	printf(" ./mediaOrganizer /path/media.file /path/to/store/folder\n\n");
+	printf(" ./mediarizer /path/media.file /path/to/store/folder\n\n");
 
 	printf("2) Folder Mode\n   -----------\n");
-	printf(" ./mediaOrganizer /source/path/folder /path/to/store/folder\n\n");
+	printf(" ./mediarizer /source/path/folder /path/to/store/folder\n\n");
 
 	printf("3) Duplication Cleaning Mode\n   -------------------------\n");
-	printf(" ./mediaOrganizer -dup /source/path/folder\n\n");
+	printf(" ./mediarizer -dup /source/path/folder\n\n");
 
 	printf("Flags:\n======\n\n");
 	printf(" Category\n --------\n");
@@ -48,21 +48,23 @@ hlp()
 
 /* Flag set by ‘--verbose’. */
 static int 
-verbose_flag, version_flag, photo_flag, video_flag,
-jpg_flag, png_flag, avi_flag, mov_flag, wmv_flag, mp4_flag, mts_flag, 
-help_flag, dup_flag, dup_dlt_flag, dlt_flag,
-input_flag, output_flag;
+	verbose_flag, version_flag, photo_flag, video_flag,
+	jpg_flag, png_flag, avi_flag, mov_flag, wmv_flag, 
+	mp4_flag, mts_flag, help_flag, dup_flag, dup_dlt_flag,
+	dlt_flag, input_flag, output_flag;
+
+int *argp = (int *)malloc(14 * sizeof(int));
 
 int main(int argc, char *argv[])
 {
-	int c, *argp = NULL;
+	int c;
 	char *src_path = NULL, *dst_path = NULL, *src_file = NULL;
 
 	while (1)
 	{
 		static struct option long_options[] =
 		{
-			{"verbose", 			no_argument,			&verbose_flag, 			1},
+			{"verbose",				no_argument,			&verbose_flag,			1},
 			{"version",				no_argument,			&version_flag,			'f'},
 			{"photo",				no_argument,			&photo_flag,			'p'},
 			{"video",				no_argument,			&video_flag,			'v'},
@@ -73,12 +75,12 @@ int main(int argc, char *argv[])
 			{"wmv",					no_argument,			&wmv_flag,				'w'},
 			{"mp4",					no_argument,			&mp4_flag,				'4'},
 			{"mts",					no_argument,			&mts_flag,				't'},
-			{"help",				no_argument,			0,						'h'},
+			{"help",				no_argument,			&help_flag,				'h'},
 			{"duplicate",			no_argument,			&dup_flag,				'u'},
 			{"dup_delete",			no_argument,			&dup_dlt_flag,			'e'},
 			{"delete",				no_argument,			&dlt_flag,				'd'},
-			{"input",				required_argument,		0,						'i'},
-			{"output",				required_argument,		0,						'o'},
+			{"input",				required_argument,		&input_flag,			'i'},
+			{"output",				required_argument,		&output_flag,			'o'},
 			{0,						0,						0,						0}
 		};
 
@@ -95,45 +97,45 @@ int main(int argc, char *argv[])
 			case 0:
 				/* If this option set a flag, do nothing else now. */
 				if (long_options[option_index].flag != 0) break;
-				printf ("option %s", long_options[option_index].name);
+					printf ("option %s", long_options[option_index].name);
 				if (optarg) printf (" with arg %s", optarg);
-				printf ("\n");
+					printf ("\n");
 				break;
 
 			case 'i':
-				printf("option -i or input with %s\n", optarg);
+				// printf("option -i or input with %s\n", optarg);
 
 				input_flag = true;
 				if(isFile(optarg))
 				{
 					src_file = strdup(optarg);
-					prnt_scs(__FILE__, __LINE__, 
-						"input destination is a valid file");
+					prnt_scs(__FILE__, __LINE__, "input destination is a valid file");
 				}
 				else if(isDir(optarg))
 				{
 					src_path = strdup(optarg);
-					prnt_scs(__FILE__, __LINE__, 
-						"input destination is a valid path");
+					prnt_scs(__FILE__, __LINE__, "input destination is a valid path");
 				}
 				else
-					exit_err(__FILE__, __LINE__, 
-						"input given is neither directory nor file");
+					exit_err(__FILE__, __LINE__, "input given is neither directory nor file");
 				break;
 
 			case 'o':
-				printf ("option -o or output %s\n", optarg);
+				// printf ("option -o or output %s\n", optarg);
 
 				output_flag = true;
-				if(isDir(optarg))
+				if(isFile(optarg))
 				{
 					dst_path = strdup(optarg);
-					prnt_scs(__FILE__, __LINE__, 
-						"output destination is valid");
+					exit_err(__FILE__, __LINE__, "output destination cannot be a file");
+				}
+				else if(isDir(optarg))
+				{
+					dst_path = strdup(optarg);
+					prnt_scs(__FILE__, __LINE__, "output destination is valid directory");
 				}
 				else
-					exit_err(__FILE__, __LINE__, 
-						"output is not a valid directory");
+					exit_err(__FILE__, __LINE__, "output is not a valid directory");
 				break;
 
 			case 'h':
@@ -151,35 +153,57 @@ int main(int argc, char *argv[])
 		}
 	}
 
+	if(jpg_flag)		argp[0]=1;	else	argp[0]=0;
+	if(png_flag)		argp[1]=1;	else	argp[0]=0;
+	if(avi_flag)		argp[2]=1;	else	argp[0]=0;
+	if(mov_flag)		argp[3]=1;	else	argp[0]=0;
+	if(wmv_flag)		argp[4]=1;	else	argp[0]=0;
+	if(mp4_flag)		argp[5]=1;	else	argp[0]=0;
+	if(mts_flag)		argp[6]=1;	else	argp[0]=0;
+	if(photo_flag)		argp[7]=1;	else	argp[0]=0;
+	if(video_flag)		argp[8]=1;	else	argp[0]=0;
+	if(dlt_flag)		argp[9]=1;	else	argp[0]=0;
+	if(dup_flag)		argp[10]=1;	else	argp[0]=0;
+	if(dup_dlt_flag)	argp[11]=1;	else	argp[0]=0;
+	if(input_flag)		argp[12]=1;	else	argp[0]=0;
+	if(output_flag)		argp[13]=1;	else	argp[0]=0;
+
+	for(int j=0;j<14;j++)
+	{
+		printf ("argp[%d]:%d\n", j, argp[j]);
+	}
 
 	if (verbose_flag) prnt_inf(__FILE__, __LINE__, "verbose flag is set");
 	if (version_flag)
 	{
-		prnt_inf(__FILE__, __LINE__, "Media Organiser Version: 1.7.0\n"
+		prnt_inf(__FILE__, __LINE__, "Media Organiser Version: 1.8.0\n"
 			"A project by Keybraker (https://github.com/keybraker)\n"
 			"GNU License: https://www.gnu.org/philosophy/free-sw.html\n\n"
 			"Copyrights © Keybraker 2017, All rights reserved\n");
 		exit(EXIT_SUCCESS);
 	}
-	if (photo_flag)		prnt_inf(__FILE__, __LINE__, "photo flag is set");
-	if (video_flag)		prnt_inf(__FILE__, __LINE__, "video flag is set");
-	if (jpg_flag)		prnt_inf(__FILE__, __LINE__, "jpg flag is set");
-	if (png_flag)		prnt_inf(__FILE__, __LINE__, "png flag is set");
-	if (avi_flag)		prnt_inf(__FILE__, __LINE__, "avi flag is set");
-	if (mov_flag)		prnt_inf(__FILE__, __LINE__, "mov flag is set");
-	if (wmv_flag)		prnt_inf(__FILE__, __LINE__, "wmv flag is set");
-	if (mp4_flag)		prnt_inf(__FILE__, __LINE__, "mp4 flag is set");
-	if (mts_flag)		prnt_inf(__FILE__, __LINE__, "mts flag is set");
-	if (dup_flag)		prnt_inf(__FILE__, __LINE__, "duplicate flag is set");
-	if (dup_dlt_flag)	prnt_inf(__FILE__, __LINE__, "dup_delete flag is set");
-	if (dlt_flag)		prnt_inf(__FILE__, __LINE__, "delete flag is set");
-	if (input_flag)		prnt_inf(__FILE__, __LINE__, "input flag is set");
-	if (output_flag)	prnt_inf(__FILE__, __LINE__, "output flag is set");
+
+	printf("\nFlag list:\n");
+
+	if(photo_flag)		prnt_inf(__FILE__, __LINE__, "photo flag: enabled");
+	if(video_flag)		prnt_inf(__FILE__, __LINE__, "video flag: enabled");
+	if(jpg_flag)		prnt_inf(__FILE__, __LINE__, "jpg flag: enabled");
+	if(png_flag)		prnt_inf(__FILE__, __LINE__, "png flag: enabled");
+	if(avi_flag)		prnt_inf(__FILE__, __LINE__, "avi flag: enabled");
+	if(mov_flag)		prnt_inf(__FILE__, __LINE__, "mov flag: enabled");
+	if(wmv_flag)		prnt_inf(__FILE__, __LINE__, "wmv flag: enabled");
+	if(mp4_flag)		prnt_inf(__FILE__, __LINE__, "mp4 flag: enabled");
+	if(mts_flag)		prnt_inf(__FILE__, __LINE__, "mts flag: enabled");
+	if(dup_flag)		prnt_inf(__FILE__, __LINE__, "duplicate flag: enabled");
+	if(dup_dlt_flag)	prnt_inf(__FILE__, __LINE__, "dup_delete flag: enabled");
+	if(dlt_flag)		prnt_inf(__FILE__, __LINE__, "delete flag: enabled");
+	if(input_flag)		prnt_inf(__FILE__, __LINE__, "input: enabled");
+	if(output_flag)		prnt_inf(__FILE__, __LINE__, "output: enabled");
 
 	/* Print any remaining command line arguments (not options). */
 	if (optind < argc)
 	{
-		printf ("non-option ARGV-elements: ");
+ 		printf ("non-option ARGV-elements: ");
 		while (optind < argc)
 			printf ("%s ", argv[optind++]);
 		putchar ('\n');
@@ -190,11 +214,13 @@ int main(int argc, char *argv[])
 	if(src_file != NULL && src_path == NULL && dst_path != NULL )
 	{ 
 		// file version initiation
+		prnt_inf(__FILE__, __LINE__, "starting file version");
 		fileVersion(src_file, dst_path);
 	}
 	else if(src_file == NULL && src_path != NULL && dst_path != NULL)
 	{ 
 		// folder version initiation
+		prnt_inf(__FILE__, __LINE__, "starting folder version");
 		folderVersion(src_path, dst_path, argp);
 	}
 	else if(src_file == NULL && src_path != NULL && dst_path == NULL /*&& arg[10] == 1*/)
@@ -244,7 +270,6 @@ int main(int argc, char *argv[])
 				duplicateRmer();
 			}
 		}
-
 	}
 	else if(src_file == NULL && src_path != NULL && dst_path == NULL /*&& arg[12] == 1*/)
 	{ // duplicate Xtreme version initiation
@@ -284,7 +309,6 @@ int main(int argc, char *argv[])
 					seconds_since_start / 60, " minutes");
 			}  
 		}
-
 	}
 
 	return 1;
