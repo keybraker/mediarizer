@@ -17,7 +17,7 @@ make       |----------------| ./mediarizer /media.file /path/to/store           
 ```
 
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDisplay.jpg)
-<br/>**_( These is achieved in one run of the program )_**
+<br/>**_( This is achieved in one run of the program )_**
 
 Why use Media Organizer:
 * Organises photos / videos extremly fast, the only limitation is your hardware
