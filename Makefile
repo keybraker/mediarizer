@@ -16,3 +16,6 @@ clean:
 	rm -f *.o mediarizer mediarizer.exe corruptedFiles.txt \
 	detailedTransfer.txt folderSigning.txt \
 	folderSigningDuplicate.txt duplicatesToDelete.txt
+
+run: organizer
+	./mediarizer -i /Users/keybraker/Desktop/developer/noteOrdered -o /Users/keybraker/Desktop/developer/ordered

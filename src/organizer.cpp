@@ -1,50 +1,48 @@
 #include "organizer.hpp"
 
-void
-hlp()
-{
-	printf("\nThere are three modes to choose from:\n");
-	printf("=====================================\n\n");
-	printf("1) File Mode\n   ---------\n");
-	printf(" ./mediarizer /path/media.file /path/to/store/folder\n\n");
-
-	printf("2) Folder Mode\n   -----------\n");
-	printf(" ./mediarizer /source/path/folder /path/to/store/folder\n\n");
-
-	printf("3) Duplication Cleaning Mode\n   -------------------------\n");
-	printf(" ./mediarizer -dup /source/path/folder\n\n");
-
-	printf("Flags:\n======\n\n");
-	printf(" Category\n --------\n");
-	printf(" -photos: for photo organization only.\n");
-	printf(" -video:  for video organization only.\n\n");
-
-	printf(" File type\n ---------\n");
-	printf(" -jpg:    for jpg organization only.\n");
-	printf(" -png:    for png organization only.\n");
-	printf(" -avi:    for avi organization only.\n");
-	printf(" -mov:    for mov organization only.\n");
-	printf(" -wmv:    for wmv organization only.\n");
-	printf(" -mp4:    for mp4 organization only.\n");
-	printf(" -mts:    for mts organization only.\n\n");
-
-	printf(" Informative\n -----------\n");
-	printf(" -hlp:    for the Media Organizer User Guide.\n");
-	printf(" -vrs:    for version information.\n\n"); 
-
-	printf(" Mode\n ----\n");
-	printf(" -dup:    for deletion of duplicates file check and then delete (caution)\n");  
-	printf(" -dux:    for deletion of duplicates with completly diffrent as they are found (caution)\n");
-	printf(" -del:    for deletion of source files.\n\n");
-
-	printf("( Using multiple flags will enhance your selection. \n");
-	printf("  flags can be inserted anywhere, but the paths \n");
-	printf("  to are always source and destination paths. ) \n\n" ACRE);
-}
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
+
+void
+hlp()
+{
+	printf("\nThere are three modes to choose from:\n"
+	"=====================================\n\n" 
+	"1) File Mode\n   ---------\n" 
+	" ./mediarizer /path/media.file /path/to/store/folder\n\n" 
+
+	"2) Folder Mode\n   -----------\n" 
+	" ./mediarizer /source/path/folder /path/to/store/folder\n\n" 
+
+	"3) Duplication Cleaning Mode\n   -------------------------\n" 
+	" ./mediarizer -dup /source/path/folder\n\n" 
+
+	"Flags:\n======\n\n" 
+	" Category\n --------\n" 
+	" -photos: for photo organization only.\n" 
+	" -video:  for video organization only.\n\n" 
+
+	" File type\n ---------\n" 
+	" -jpg:    for jpg organization only.\n" 
+	" -png:    for png organization only.\n" 
+	" -avi:    for avi organization only.\n" 
+	" -mov:    for mov organization only.\n" 
+	" -wmv:    for wmv organization only.\n" 
+	" -mp4:    for mp4 organization only.\n" 
+	" -mts:    for mts organization only.\n\n" 
+
+	" Informative\n -----------\n" 
+	" -hlp:    for the Media Organizer User Guide.\n" 
+	" -vrs:    for version information.\n\n"  
+
+	" Mode\n ----\n" 
+	" -dup:    for deletion of duplicates file check and then delete (caution)\n"   
+	" -dux:    for deletion of duplicates with completly diffrent as they are found (caution)\n" 
+	" -del:    for deletion of source files.\n\n" 
+
+	"(Multiple flags can be used. Path input and out are mandatory) \n\n" ACRE);
+}
 
 /* Flag set by ‘--verbose’. */
 static int 
@@ -53,11 +51,11 @@ static int
 	mp4_flag, mts_flag, help_flag, dup_flag, dup_dlt_flag,
 	dlt_flag, input_flag, output_flag;
 
-int *argp = (int *)malloc(14 * sizeof(int));
+int *argp = (int *) malloc (14 * sizeof(int));
 
 int main(int argc, char *argv[])
 {
-	int c;
+	int c, option_index;
 	char *src_path = NULL, *dst_path = NULL, *src_file = NULL;
 
 	while (1)
@@ -85,9 +83,9 @@ int main(int argc, char *argv[])
 		};
 
 		/* getopt_long stores the option index here. */
-		int option_index = 0;
+		option_index = 0;
 
-		c = getopt_long (argc, argv, "fpvjnamw4thuedi:o:input:", long_options, &option_index);
+		c = getopt_long(argc, argv, "fpvjnamw4thuedi:o:input:", long_options, &option_index);
 
 		/* Detect the end of the options. */
 		if (c == -1) break;
@@ -113,6 +111,7 @@ int main(int argc, char *argv[])
 				}
 				else if(isDir(optarg))
 				{
+					printf("optarg: %s\n", optarg);
 					src_path = strdup(optarg);
 					prnt_scs(__FILE__, __LINE__, "input destination is a valid path");
 				}
@@ -153,25 +152,20 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	if(jpg_flag)		argp[0]=1;	else	argp[0]=0;
-	if(png_flag)		argp[1]=1;	else	argp[0]=0;
-	if(avi_flag)		argp[2]=1;	else	argp[0]=0;
-	if(mov_flag)		argp[3]=1;	else	argp[0]=0;
-	if(wmv_flag)		argp[4]=1;	else	argp[0]=0;
-	if(mp4_flag)		argp[5]=1;	else	argp[0]=0;
-	if(mts_flag)		argp[6]=1;	else	argp[0]=0;
-	if(photo_flag)		argp[7]=1;	else	argp[0]=0;
-	if(video_flag)		argp[8]=1;	else	argp[0]=0;
-	if(dlt_flag)		argp[9]=1;	else	argp[0]=0;
-	if(dup_flag)		argp[10]=1;	else	argp[0]=0;
-	if(dup_dlt_flag)	argp[11]=1;	else	argp[0]=0;
-	if(input_flag)		argp[12]=1;	else	argp[0]=0;
-	if(output_flag)		argp[13]=1;	else	argp[0]=0;
-
-	for(int j=0;j<14;j++)
-	{
-		printf ("argp[%d]:%d\n", j, argp[j]);
-	}
+	argp[0]= jpg_flag ? 1 : 0;
+	argp[1]= png_flag ? 1 : 0;
+	argp[2]= avi_flag ? 1 : 0;
+	argp[3]= mov_flag ? 1 : 0;
+	argp[4]= wmv_flag ? 1 : 0;
+	argp[5]= mp4_flag ? 1 : 0;
+	argp[6]= mts_flag ? 1 : 0;
+	argp[7]= photo_flag ? 1 : 0;
+	argp[8]= video_flag ? 1 : 0;
+	argp[9]= dlt_flag ? 1 : 0;
+	argp[10]= dup_flag ? 1 : 0;
+	argp[11]= dup_dlt_flag ? 1 : 0;
+	argp[12]= input_flag ? 1 : 0;
+	argp[13]= output_flag ? 1 : 0;
 
 	if (verbose_flag) prnt_inf(__FILE__, __LINE__, "verbose flag is set");
 	if (version_flag)
@@ -205,13 +199,13 @@ int main(int argc, char *argv[])
 	{
  		printf ("non-option ARGV-elements: ");
 		while (optind < argc)
-			printf ("%s ", argv[optind++]);
+			printf ("?%s? ", argv[optind++]);
 		putchar ('\n');
 	}
 
 	//////////////////////////////////////////////////////////////////
-
-	if(src_file != NULL && src_path == NULL && dst_path != NULL )
+	
+	if (src_file != NULL && src_path == NULL && dst_path != NULL)
 	{ 
 		// file version initiation
 		prnt_inf(__FILE__, __LINE__, "starting file version");
@@ -310,7 +304,5 @@ int main(int argc, char *argv[])
 			}  
 		}
 	}
-
 	return 1;
-
 }
