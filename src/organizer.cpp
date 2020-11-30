@@ -1,8 +1,17 @@
-#include "organizer.hpp"
+#include "mdzr_hdr/organizer.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
+
+char *concat(const char *s1, const char *s2)
+{
+	char *result = (char *)malloc(strlen(s1) + strlen(s2) + 1); // +1 for the null-terminator
+	// in real code you would check for errors in malloc here
+	strcpy(result, s1);
+	strcat(result, s2);
+	return result;
+}
 
 void hlp()
 {
@@ -182,34 +191,20 @@ int main(int argc, char *argv[])
 
 	printf("\nFlag list:\n");
 
-	if (photo_flag)
-		prnt_inf(__FILE__, __LINE__, "photo flag: enabled");
-	if (video_flag)
-		prnt_inf(__FILE__, __LINE__, "video flag: enabled");
-	if (jpg_flag)
-		prnt_inf(__FILE__, __LINE__, "jpg flag: enabled");
-	if (png_flag)
-		prnt_inf(__FILE__, __LINE__, "png flag: enabled");
-	if (avi_flag)
-		prnt_inf(__FILE__, __LINE__, "avi flag: enabled");
-	if (mov_flag)
-		prnt_inf(__FILE__, __LINE__, "mov flag: enabled");
-	if (wmv_flag)
-		prnt_inf(__FILE__, __LINE__, "wmv flag: enabled");
-	if (mp4_flag)
-		prnt_inf(__FILE__, __LINE__, "mp4 flag: enabled");
-	if (mts_flag)
-		prnt_inf(__FILE__, __LINE__, "mts flag: enabled");
-	if (dup_flag)
-		prnt_inf(__FILE__, __LINE__, "duplicate flag: enabled");
-	if (dup_dlt_flag)
-		prnt_inf(__FILE__, __LINE__, "dup_delete flag: enabled");
-	if (dlt_flag)
-		prnt_inf(__FILE__, __LINE__, "delete flag: enabled");
-	if (input_flag)
-		prnt_inf(__FILE__, __LINE__, "input: enabled");
-	if (output_flag)
-		prnt_inf(__FILE__, __LINE__, "output: enabled");
+	prnt_inf(__FILE__, __LINE__, concat("pht flag: ", photo_flag ? "enabled" : "disabled"));
+	prnt_inf(__FILE__, __LINE__, concat("vid flag: ", video_flag ? "enabled" : "disabled"));
+	prnt_inf(__FILE__, __LINE__, concat("jpg flag: ", jpg_flag ? "enabled" : "disabled"));
+	prnt_inf(__FILE__, __LINE__, concat("png flag: ", png_flag ? "enabled" : "disabled"));
+	prnt_inf(__FILE__, __LINE__, concat("avi flag: ", avi_flag ? "enabled" : "disabled"));
+	prnt_inf(__FILE__, __LINE__, concat("mov flag: ", mov_flag ? "enabled" : "disabled"));
+	prnt_inf(__FILE__, __LINE__, concat("wmv flag: ", wmv_flag ? "enabled" : "disabled"));
+	prnt_inf(__FILE__, __LINE__, concat("mp4 flag: ", mp4_flag ? "enabled" : "disabled"));
+	prnt_inf(__FILE__, __LINE__, concat("mts flag: ", mts_flag ? "enabled" : "disabled"));
+	prnt_inf(__FILE__, __LINE__, concat("dup flag: ", dup_flag ? "enabled" : "disabled"));
+	prnt_inf(__FILE__, __LINE__, concat("dud flag: ", dup_dlt_flag ? "enabled" : "disabled"));
+	prnt_inf(__FILE__, __LINE__, concat("dlt flag: ", dlt_flag ? "enabled" : "disabled"));
+	prnt_inf(__FILE__, __LINE__, concat("input   : ", input_flag ? "given" : "missing"));
+	prnt_inf(__FILE__, __LINE__, concat("output  : ", output_flag ? "given" : "missing"));
 
 	/* Print any remaining command line arguments (not options). */
 	if (optind < argc)
@@ -225,14 +220,16 @@ int main(int argc, char *argv[])
 	if (src_file != NULL && src_path == NULL && dst_path != NULL)
 	{
 		// file version initiation
-		prnt_inf(__FILE__, __LINE__, "starting file version");
+		prnt_inf(__FILE__, __LINE__, "file version started");
 		fileVersion(src_file, dst_path);
+		prnt_inf(__FILE__, __LINE__, "file version finished");
 	}
 	else if (src_file == NULL && src_path != NULL && dst_path != NULL)
 	{
 		// folder version initiation
-		prnt_inf(__FILE__, __LINE__, "starting folder version");
+		prnt_inf(__FILE__, __LINE__, "folder version started");
 		folderVersion(src_path, dst_path, argp);
+		prnt_inf(__FILE__, __LINE__, "folder version finished");
 	}
 	else if (src_file == NULL && src_path != NULL && dst_path == NULL /*&& arg[10] == 1*/)
 	{

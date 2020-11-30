@@ -27,6 +27,9 @@
 #include <iomanip>
 #include <stdlib.h>
 #include <ctime>
+#include <iostream>
+
+#include "../exif_hdr/ExifTool.h"
 
 #define a_c_r   "\x1b[31m"
 #define a_c_g   "\x1b[32m"
