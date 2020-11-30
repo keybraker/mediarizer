@@ -54,8 +54,7 @@ void hlp()
 
 /* Flag set by ‘--verbose’. */
 static int
-	verbose_flag,
-	version_flag, photo_flag, video_flag,
+	verbose_flag, version_flag, photo_flag, video_flag,
 	jpg_flag, png_flag, avi_flag, mov_flag, wmv_flag,
 	mp4_flag, mts_flag, help_flag, dup_flag, dup_dlt_flag,
 	dlt_flag, input_flag, output_flag;
@@ -69,26 +68,25 @@ int main(int argc, char *argv[])
 
 	while (1)
 	{
-		static struct option long_options[] =
-			{
-				{"verbose", no_argument, &verbose_flag, 1},
-				{"version", no_argument, &version_flag, 'f'},
-				{"photo", no_argument, &photo_flag, 'p'},
-				{"video", no_argument, &video_flag, 'v'},
-				{"jpg", no_argument, &jpg_flag, 'j'},
-				{"png", no_argument, &png_flag, 'n'},
-				{"avi", no_argument, &avi_flag, 'a'},
-				{"mov", no_argument, &mov_flag, 'm'},
-				{"wmv", no_argument, &wmv_flag, 'w'},
-				{"mp4", no_argument, &mp4_flag, '4'},
-				{"mts", no_argument, &mts_flag, 't'},
-				{"help", no_argument, &help_flag, 'h'},
-				{"duplicate", no_argument, &dup_flag, 'u'},
-				{"dup_delete", no_argument, &dup_dlt_flag, 'e'},
-				{"delete", no_argument, &dlt_flag, 'd'},
-				{"input", required_argument, &input_flag, 'i'},
-				{"output", required_argument, &output_flag, 'o'},
-				{0, 0, 0, 0}};
+		static struct option long_options[] = {
+			{"verbose", no_argument, &verbose_flag, 1},
+			{"version", no_argument, &version_flag, 'f'},
+			{"photo", no_argument, &photo_flag, 'p'},
+			{"video", no_argument, &video_flag, 'v'},
+			{"jpg", no_argument, &jpg_flag, 'j'},
+			{"png", no_argument, &png_flag, 'n'},
+			{"avi", no_argument, &avi_flag, 'a'},
+			{"mov", no_argument, &mov_flag, 'm'},
+			{"wmv", no_argument, &wmv_flag, 'w'},
+			{"mp4", no_argument, &mp4_flag, '4'},
+			{"mts", no_argument, &mts_flag, 't'},
+			{"help", no_argument, &help_flag, 'h'},
+			{"duplicate", no_argument, &dup_flag, 'u'},
+			{"dup_delete", no_argument, &dup_dlt_flag, 'e'},
+			{"delete", no_argument, &dlt_flag, 'd'},
+			{"input", required_argument, &input_flag, 'i'},
+			{"output", required_argument, &output_flag, 'o'},
+			{0, 0, 0, 0}};
 
 		/* getopt_long stores the option index here. */
 		option_index = 0;
@@ -191,20 +189,20 @@ int main(int argc, char *argv[])
 
 	printf("\nFlag list:\n");
 
-	prnt_inf(__FILE__, __LINE__, concat("pht flag: ", photo_flag ? "enabled" : "disabled"));
-	prnt_inf(__FILE__, __LINE__, concat("vid flag: ", video_flag ? "enabled" : "disabled"));
-	prnt_inf(__FILE__, __LINE__, concat("jpg flag: ", jpg_flag ? "enabled" : "disabled"));
-	prnt_inf(__FILE__, __LINE__, concat("png flag: ", png_flag ? "enabled" : "disabled"));
-	prnt_inf(__FILE__, __LINE__, concat("avi flag: ", avi_flag ? "enabled" : "disabled"));
-	prnt_inf(__FILE__, __LINE__, concat("mov flag: ", mov_flag ? "enabled" : "disabled"));
-	prnt_inf(__FILE__, __LINE__, concat("wmv flag: ", wmv_flag ? "enabled" : "disabled"));
-	prnt_inf(__FILE__, __LINE__, concat("mp4 flag: ", mp4_flag ? "enabled" : "disabled"));
-	prnt_inf(__FILE__, __LINE__, concat("mts flag: ", mts_flag ? "enabled" : "disabled"));
-	prnt_inf(__FILE__, __LINE__, concat("dup flag: ", dup_flag ? "enabled" : "disabled"));
-	prnt_inf(__FILE__, __LINE__, concat("dud flag: ", dup_dlt_flag ? "enabled" : "disabled"));
-	prnt_inf(__FILE__, __LINE__, concat("dlt flag: ", dlt_flag ? "enabled" : "disabled"));
-	prnt_inf(__FILE__, __LINE__, concat("input   : ", input_flag ? "given" : "missing"));
-	prnt_inf(__FILE__, __LINE__, concat("output  : ", output_flag ? "given" : "missing"));
+	// prnt_inf(__FILE__, __LINE__, concat("pht flag: ", photo_flag ? "enabled" : "disabled"));
+	// prnt_inf(__FILE__, __LINE__, concat("vid flag: ", video_flag ? "enabled" : "disabled"));
+	// prnt_inf(__FILE__, __LINE__, concat("jpg flag: ", jpg_flag ? "enabled" : "disabled"));
+	// prnt_inf(__FILE__, __LINE__, concat("png flag: ", png_flag ? "enabled" : "disabled"));
+	// prnt_inf(__FILE__, __LINE__, concat("avi flag: ", avi_flag ? "enabled" : "disabled"));
+	// prnt_inf(__FILE__, __LINE__, concat("mov flag: ", mov_flag ? "enabled" : "disabled"));
+	// prnt_inf(__FILE__, __LINE__, concat("wmv flag: ", wmv_flag ? "enabled" : "disabled"));
+	// prnt_inf(__FILE__, __LINE__, concat("mp4 flag: ", mp4_flag ? "enabled" : "disabled"));
+	// prnt_inf(__FILE__, __LINE__, concat("mts flag: ", mts_flag ? "enabled" : "disabled"));
+	// prnt_inf(__FILE__, __LINE__, concat("dup flag: ", dup_flag ? "enabled" : "disabled"));
+	// prnt_inf(__FILE__, __LINE__, concat("dud flag: ", dup_dlt_flag ? "enabled" : "disabled"));
+	// prnt_inf(__FILE__, __LINE__, concat("dlt flag: ", dlt_flag ? "enabled" : "disabled"));
+	// prnt_inf(__FILE__, __LINE__, concat("input   : ", input_flag ? "given" : "missing"));
+	// prnt_inf(__FILE__, __LINE__, concat("output  : ", output_flag ? "given" : "missing"));
 
 	/* Print any remaining command line arguments (not options). */
 	if (optind < argc)
@@ -221,6 +219,8 @@ int main(int argc, char *argv[])
 	{
 		// file version initiation
 		prnt_inf(__FILE__, __LINE__, "file version started");
+		file_analyzer(src_file);
+		return 1;
 		fileVersion(src_file, dst_path);
 		prnt_inf(__FILE__, __LINE__, "file version finished");
 	}
@@ -228,6 +228,8 @@ int main(int argc, char *argv[])
 	{
 		// folder version initiation
 		prnt_inf(__FILE__, __LINE__, "folder version started");
+		file_analyzer(src_path);
+		return 1;
 		folderVersion(src_path, dst_path, argp);
 		prnt_inf(__FILE__, __LINE__, "folder version finished");
 	}

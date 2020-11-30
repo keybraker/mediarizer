@@ -28,6 +28,8 @@
 #include <stdlib.h>
 #include <ctime>
 #include <iostream>
+#include <vector>
+#include <omp.h>
 
 #include "../exif_hdr/ExifTool.h"
 
@@ -111,6 +113,7 @@ inline bool existance(const string& name);
 
 void fileVersion (const char *path, const char *pathToStore);
 void folderVersion(const char *path, const char *pathToStore, int *arg);
+void file_analyzer(char *path);
 
 int  duplicateFoundChecker(const char* string);
 void duplicateFound(const char* string);

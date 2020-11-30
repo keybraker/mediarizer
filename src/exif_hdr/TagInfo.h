@@ -20,16 +20,30 @@ struct TagInfo
     TagInfo();
     virtual ~TagInfo();
 
-    char    *group[3];  // family 0-2 group names
-    char    *name;      // tag name
-    char    *desc;      // tag description
-    char    *id;        // tag ID
-    char    *value;     // converted value
-    int     valueLen;   // length of value in bytes (not including null terminator)
-    char    *num;       // "numerical" value
-    int     numLen;     // length of numerical value
-    int     copyNum;    // copy number for this tag name
-    TagInfo *next;      // next TagInfo in linked list
+    char *group[3]; // family 0-2 group names
+    char *name;     // tag name
+    char *desc;     // tag description
+    char *id;       // tag ID
+    char *value;    // converted value
+    int valueLen;   // length of value in bytes (not including null terminator)
+    char *num;      // "numerical" value
+    int numLen;     // length of numerical value
+    int copyNum;    // copy number for this tag name
+    TagInfo *next;  // next TagInfo in linked list
+};
+
+struct PhotoInfo
+{
+    // PhotoInfo();
+    // virtual ~PhotoInfo();
+
+    char *fileName;   // tag name
+    char *fileType;   // tag description
+    char *fileSize;   // tag ID
+    char *fileRes;    // converted value
+    char *createDate; // converted value
+    char *modifyDate; // converted valu
+    PhotoInfo *next;  // next PhotoInfo in linked list
 };
 
 #endif // __TAGINFO_H__

@@ -430,7 +430,7 @@ int isFile(const char *path)
 	return S_ISREG(path_stat.st_mode);
 }
 
-originalDateData * dateReturn(string originalDate)
+originalDateData *dateReturn(string originalDate)
 {
 	if (originalDate.empty())
 		return NULL;
@@ -1405,4 +1405,129 @@ void duplicateCleanerExecution(const char *imagePathMaster, const char *imagePat
 		printf(ACR "%-38s'--names are not similar.\n\n" ACRE, "");
 		return;
 	}
+}
+
+void file_analyzer(char *path)
+{
+	cout << path << endl;
+	// create our ExifTool object
+	ExifTool *et = new ExifTool();
+	// read metadata from the image
+	TagInfo *info = et->ImageInfo(path, NULL, 5);
+
+	std::vector<PhotoInfo> photo_list;
+	if (info)
+	{
+		PhotoInfo *new_photo = (PhotoInfo *) malloc (sizeof(PhotoInfo));
+		bool first = true;
+		for (TagInfo *i = info; i; i = i->next)
+		{
+			cout << "() => " << i->name << " = " << i->value << endl;
+			if (strcmp(i->name, "fileName") == 0)
+			{
+				if (!first) {
+					photo_list.push_back(*new_photo);
+					new_photo = (PhotoInfo *)malloc(sizeof(PhotoInfo));
+				} else {
+					first = false;
+				}
+				new_photo->fileName = strdup(i->value);
+			}
+			else if (strcmp(i->name, "fileType") == 0)
+			{
+				new_photo->fileType = strdup(i->value);
+			}
+			else if (strcmp(i->name, "fileSize") == 0)
+			{
+				new_photo->fileSize = strdup(i->value);
+			}
+			else if (strcmp(i->name, "fileRes") == 0)
+			{
+				new_photo->fileRes = strdup(i->value);
+			}
+			else if (strcmp(i->name, "createDate") == 0)
+			{
+				new_photo->createDate = strdup(i->value);
+			}
+			else if (strcmp(i->name, "modifyDate") == 0)
+			{
+				new_photo->modifyDate = strdup(i->value);
+			}
+			delete info;
+		}
+		photo_list.push_back(*new_photo);
+	}
+	else if (et->LastComplete() <= 0)
+	{
+		cerr << "Error executing exiftool!" << endl;
+	}
+
+	std::cout << "kappa" << photo_list.size() << endl;
+
+	std::vector<PhotoInfo>::iterator photo;
+	for (photo = photo_list.begin(); photo != photo_list.end(); ++photo)
+	{
+		std::cout << "fileName: " << photo->fileName << endl
+				  << "fileType: " << photo->fileType << endl
+				  << "fileSize: " << photo->fileSize << endl
+				  << "fileRes: " << photo->fileRes << endl
+				  << "createDate: " << photo->createDate << endl
+				  << "modifyDate: " << photo->modifyDate << endl
+				  << endl;
+	}
+
+	// #pragma omp parallel
+	// #pragma omp single
+	// for (PhotoInfo *data : photo_list)
+	// {
+	// 	std::cout << data << endl
+	// 			  << endl;
+	// #pragma omp task firstprivate(data)
+	// #pragma omp critical(cout)
+	// std::cout << "fileName: " << data->fileName << endl
+	// 		  << "fileType: " << data->fileType << endl
+	// 		  << "fileSize: " << data->fileSize << endl
+	// 		  << "fileRes: " << data->fileRes << endl
+	// 		  << "createDate: " << data->createDate << endl
+	// 		  << "modifyDate: " << data->modifyDate << endl
+	// 		  << endl;
+	// << omp_get_thread_num() << "\n";
+	// }
+
+	/*
+	if (info)
+	{
+		int lem = 0;
+		for (TagInfo *i = info; i; i = i->next)
+		{
+			if (strcmp(i->name, "FileName") == 0)
+			{
+				lem++;
+				cout << endl;
+			}
+			cout << lem << ") " << i->name << " = " << i->value << endl;
+			cout << "  group[0] = " << (i->group[0] ? i->group[0] : "<null>") << endl; // family 0 group name
+			cout << "  group[1] = " << (i->group[1] ? i->group[1] : "<null>") << endl; // family 1 group name
+			cout << "  group[2] = " << (i->group[2] ? i->group[2] : "<null>") << endl; // family 2 group name
+			cout << "  name = " << (i->name ? i->name : "<null>") << endl;			   // tag name
+			cout << "  desc = " << (i->desc ? i->desc : "<null>") << endl;			   // tag description
+			cout << "  id = " << (i->id ? i->id : "<null>") << endl;				   // tag ID
+			cout << "  value = " << (i->value ? i->value : "<null>") << endl;		   // converted value
+			cout << "  valueLen = " << i->valueLen << endl;							   // length of value in bytes (not including null terminator)
+			cout << "  num = " << (i->num ? i->num : "<null>") << endl;				   // "numerical" value
+			cout << "  numLen = " << i->numLen << endl;								   // length of numerical value
+			cout << "  copyNum = " << i->copyNum << endl << endl; 					   // copy number for this tag name
+		}
+		// we are responsible for deleting the information when done
+		delete info;
+	}
+	*/
+	// print exiftool stderr messages
+	char *err = et->GetError();
+	if (err)
+		cerr << err;
+	// delete our ExifTool object
+	delete et;
+
+	return;
 }

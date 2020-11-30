@@ -1,8 +1,8 @@
 CPP = g++
-OPT = -g -O2 -pedantic -Wall -Wextra -std=c++11
+OPT = -g -O2 -pedantic -Wall -Wextra -std=c++11 -Xclang -fopenmp
 
 EXIF = -I exif_hdr
-MDRZ = -I mdzr_hdr
+MDRZ = -I mdzr_hdr 
 
 OBJ_EXIF = src/exif_src/ExifTool.o src/exif_src/ExifToolPipe.o src/exif_src/TagInfo.o
 HDR_EXIF = src/exif_hdr/ExifTool.h src/exif_hdr/ExifToolPipe.h src/exif_hdr/TagInfo.h
