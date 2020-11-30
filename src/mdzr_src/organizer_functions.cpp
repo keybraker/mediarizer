@@ -1418,38 +1418,48 @@ void file_analyzer(char *path)
 	std::vector<PhotoInfo> photo_list;
 	if (info)
 	{
-		PhotoInfo *new_photo = (PhotoInfo *) malloc (sizeof(PhotoInfo));
+		PhotoInfo *new_photo = (PhotoInfo *)malloc(sizeof(PhotoInfo));
 		bool first = true;
 		for (TagInfo *i = info; i; i = i->next)
 		{
 			cout << "() => " << i->name << " = " << i->value << endl;
 			if (strcmp(i->name, "fileName") == 0)
 			{
-				if (!first) {
+				if (!first)
+				{
+					prnt_inf(__FILE__, __LINE__, "perasa");
 					photo_list.push_back(*new_photo);
+					prnt_inf(__FILE__, __LINE__, "perasa");
 					new_photo = (PhotoInfo *)malloc(sizeof(PhotoInfo));
-				} else {
-					first = false;
+					prnt_inf(__FILE__, __LINE__, "perasa");
 				}
+				else
+				{
+					prnt_inf(__FILE__, __LINE__, "perasa");
+					first = false;
+					prnt_inf(__FILE__, __LINE__, "perasa");
+				}
+				prnt_inf(__FILE__, __LINE__, "perasa");
 				new_photo->fileName = strdup(i->value);
+				prnt_inf(__FILE__, __LINE__, "perasa");
 			}
-			else if (strcmp(i->name, "fileType") == 0)
+			else if (strcmp(i->name, "FileType") == 0)
 			{
 				new_photo->fileType = strdup(i->value);
 			}
-			else if (strcmp(i->name, "fileSize") == 0)
+			else if (strcmp(i->name, "FileSize") == 0)
 			{
 				new_photo->fileSize = strdup(i->value);
 			}
-			else if (strcmp(i->name, "fileRes") == 0)
+			else if (strcmp(i->name, "FileRes") == 0)
 			{
 				new_photo->fileRes = strdup(i->value);
 			}
-			else if (strcmp(i->name, "createDate") == 0)
+			else if (strcmp(i->name, "CreateDate") == 0)
 			{
 				new_photo->createDate = strdup(i->value);
 			}
-			else if (strcmp(i->name, "modifyDate") == 0)
+			else if (strcmp(i->name, "ModifyDate") == 0)
 			{
 				new_photo->modifyDate = strdup(i->value);
 			}
@@ -1462,7 +1472,7 @@ void file_analyzer(char *path)
 		cerr << "Error executing exiftool!" << endl;
 	}
 
-	std::cout << "kappa" << photo_list.size() << endl;
+	std::cout << "KEPPO me size " << photo_list.size() << endl;
 
 	std::vector<PhotoInfo>::iterator photo;
 	for (photo = photo_list.begin(); photo != photo_list.end(); ++photo)
