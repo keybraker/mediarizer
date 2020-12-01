@@ -37,13 +37,14 @@ struct PhotoInfo
     // PhotoInfo();
     // virtual ~PhotoInfo();
 
-    char *fileName;   // tag name
-    char *fileType;   // tag description
-    char *fileSize;   // tag ID
-    char *fileRes;    // converted value
-    char *createDate; // converted value
-    char *modifyDate; // converted valu
-    PhotoInfo *next;  // next PhotoInfo in linked list
+    char *fileName;         // file name
+    char *fileType;         // file type
+    char *fileSize;         // file size
+    char *fileRes;          // file resolution
+    char *source_directory; // file directory
+    char *move_directory;   // file directory
+    char *createDate;       // date created
+    char *modifyDate;       // date modified
 };
 
 #endif // __TAGINFO_H__

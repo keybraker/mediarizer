@@ -1,8 +1,8 @@
 CPP = g++
-CCFLAGS = -g -O2 -pedantic -Wall -Wextra -std=c++11 -fopenmp
+CCFLAGS = -O3 -pedantic -Wall -Wextra -std=c++1z
 
-ifeq ($(OS),Windows_NT)
-    CCFLAGS += -D WIN32
+ifeq ($(OS), Windows_NT)
+    CCFLAGS += -D WIN32 -fopenmp
     ifeq ($(PROCESSOR_ARCHITEW6432),AMD64)
         CCFLAGS += -D AMD64
     else
@@ -15,14 +15,14 @@ ifeq ($(OS),Windows_NT)
     endif
 else
     UNAME_S := $(shell uname -s)
-    ifeq ($(UNAME_S),Linux)
-        CCFLAGS += -D LINUX
+    ifeq ($(UNAME_S), Linux)
+        CCFLAGS += -D LINUX -fopenmp
     endif
-    ifeq ($(UNAME_S),Darwin)
-        CCFLAGS += -D OSX -Xclang
+    ifeq ($(UNAME_S), Darwin)
+        CCFLAGS += -D OSX -Xclang -fopenmp
     endif
     UNAME_P := $(shell uname -p)
-    ifeq ($(UNAME_P),x86_64)
+    ifeq ($(UNAME_P), x86_64)
         CCFLAGS += -D AMD64
     endif
     ifneq ($(filter %86,$(UNAME_P)),)
@@ -44,7 +44,7 @@ HDR_MDZR = src/mdzr_hdr/organizer.h
 all: organizer
 
 organizer: src/organizer.o $(OBJ_EXIF) $(OBJ_MDZR)
-	$(CPP) $(OPT) -v -o mediarizer src/organizer.o $(OBJ_EXIF) $(OBJ_MDZR)
+	$(CPP) $(CCFLAGS) -lomp -o mediarizer src/organizer.o $(OBJ_EXIF) $(OBJ_MDZR)
 
 clean:
 	rm -f mediarizer src/*.o src/exif_src/*.o src/mdzr_src/*.o \
@@ -52,7 +52,7 @@ clean:
 		folderSigningDuplicate.txt duplicatesToDelete.txt
 
 %.o: %.cpp $(HDR_EXIF)
-	$(CPP) $(OPT) $(EXIF) -o $@ -c $<
+	$(CPP) $(CCFLAGS) $(EXIF) -o $@ -c $<
 
 %.o: %.cpp $(HDR_MDZR)
-	$(CPP) $(OPT) $(MDRZ) -o $@ -c $<
+	$(CPP) $(CCFLAGS) $(MDRZ) -o $@ -c $<

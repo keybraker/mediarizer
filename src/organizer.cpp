@@ -219,7 +219,7 @@ int main(int argc, char *argv[])
 	{
 		// file version initiation
 		prnt_inf(__FILE__, __LINE__, "file version started");
-		file_analyzer(src_file);
+		file_analyzer(src_file, dst_path);
 		return 1;
 		fileVersion(src_file, dst_path);
 		prnt_inf(__FILE__, __LINE__, "file version finished");
@@ -228,95 +228,10 @@ int main(int argc, char *argv[])
 	{
 		// folder version initiation
 		prnt_inf(__FILE__, __LINE__, "folder version started");
-		file_analyzer(src_path);
+		file_analyzer(src_path, dst_path);
 		return 1;
 		folderVersion(src_path, dst_path, argp);
 		prnt_inf(__FILE__, __LINE__, "folder version finished");
-	}
-	else if (src_file == NULL && src_path != NULL && dst_path == NULL /*&& arg[10] == 1*/)
-	{
-		// duplicate version initiation
-		printf(ACG "# DUPLICATE MODE NORMAL\n\n" ACR "DISCLAIMER: USE WITH CAUTION! PLEASE BACKUP ALL YOUR FILES \n"
-				   "BEFORE PROCCEDING TO CLEANUP DUPLICATES\n"
-				   "=======================================\n"
-				   "THIS MODE LOOKS UP EVERY FILE IN A DIRECTORY\n"
-				   "AND COMPARES THE EXIF DATA TO ALL THE OTHERS.\n"
-				   "IF A FILE IS FOUND THAT HAS THE SAME EXIF AND\n"
-				   "THEIR NAME IS THE SAME EXCEPT FOR A SLIGHT\n"
-				   "VARIATION LIKE 'IMG.JPG' AND 'IMG (2).JPG', THE\n"
-				   "PHOTO WITH THE LONGER NAME WILL BE DELETED.\n"
-				   "THERE IS A SLIGHT CHANCE THAT THE ALGORITHM MAY,\n"
-				   "DELETE A WRONG FILE BUT THE CHANCES ARE MINIMAL TO NONE. \n\n" ACRE);
-
-		string answer;
-		cout << "Proceed on your own risk (y/n): ";
-		cin >> answer;
-
-		if (answer.compare("y") == 0)
-		{
-			printf(ACY "\r[prc%%][total size]> exec\n------------------------\n\n");
-
-			time_t start = time(0);
-			duplicateVersion(src_path, 0);
-			double seconds_since_start = difftime(time(0), start);
-			if (seconds_since_start < 60)
-			{
-				printf(ACY "\r[%-8.1f%-7s]> execution time\n" ACRE, seconds_since_start, " seconds");
-			}
-			else
-			{
-				printf(ACY "\r[%-8.2f%-7s]> execution time\n" ACRE, seconds_since_start / 60, " minutes");
-			}
-
-			answer = "n";
-			printf(ACR "\nAll detected duplicates are stored in duplicatesToDelete.txt,\n");
-			printf("first there is the one to be deleted and bellow that file that\n");
-			printf("will be spared. If you want to save a file delete it, and its\n");
-			printf("partner file and procced. (y/n): " ACRE);
-			cin >> answer;
-			if (answer.compare("y") == 0)
-			{
-				duplicateRmer();
-			}
-		}
-	}
-	else if (src_file == NULL && src_path != NULL && dst_path == NULL /*&& arg[12] == 1*/)
-	{ // duplicate Xtreme version initiation
-		printf(ACG "# DUPLICATE MODE EXTREME\n\n" ACR "DISCLAIMER: USE WITH CAUTION! PLEASE BACKUP ALL YOUR FILES \n"
-				   "BEFORE PROCCEDING TO CLEANUP DUPLICATES\n"
-				   "=======================================\n"
-				   "THIS MODE LOOKS UP EVERY FILE IN A DIRECTORY\n"
-				   "AND COMPARES THE EXIF DATA TO ALL THE OTHERS.\n"
-				   "IF A FILE IS FOUND THAT HAS THE SAME EXIF AND\n"
-				   "THEIR NAME IS THE SAME EXCEPT FOR A SLIGHT\n"
-				   "VARIATION LIKE 'IMG.JPG' AND 'IMG (2).JPG', THE\n"
-				   "PHOTO WITH THE LONGER NAME WILL BE DELETED.\n"
-				   "THERE IS A SLIGHT CHANCE THAT THE ALGORITHM MAY,\n"
-				   "DELETE A WRONG FILE BUT THE CHANCES ARE MINIMAL TO NONE. \n\n" ACRE);
-
-		string answer;
-		cout << "Proceed on your own risk (y/n): ";
-		cin >> answer;
-
-		if (answer.compare("y") == 0)
-		{
-			printf(ACY "\r[prc%%][total size]> "
-					   "exec\n------------------------\n\n");
-
-			time_t start = time(0);
-			duplicateVersion(src_path, 1);
-			double seconds_since_start = difftime(time(0), start);
-			if (seconds_since_start < 60)
-			{
-				printf(ACY "\r[%-8.1f%-7s]> execution time\n" ACRE,
-					   seconds_since_start, " seconds");
-			}
-			else
-			{
-				printf(ACY "\r[%-8.2f%-7s]> execution time\n" ACRE,
-					   seconds_since_start / 60, " minutes");
-			}
-		}
 	}
 	return 1;
 }
