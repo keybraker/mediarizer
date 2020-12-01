@@ -1409,7 +1409,8 @@ void duplicateCleanerExecution(const char *imagePathMaster, const char *imagePat
 
 void file_analyzer(char *path)
 {
-	cout << path << endl;
+	cout << "path: " << path << endl;
+
 	// create our ExifTool object
 	ExifTool *et = new ExifTool();
 	// read metadata from the image
@@ -1422,26 +1423,26 @@ void file_analyzer(char *path)
 		bool first = true;
 		for (TagInfo *i = info; i; i = i->next)
 		{
-			cout << "() => " << i->name << " = " << i->value << endl;
-			if (strcmp(i->name, "fileName") == 0)
+			// cout << "name: " << i->name << ", value: " << i->value << endl;
+			if (strcmp(i->name, "FileName") == 0)
 			{
 				if (!first)
 				{
-					prnt_inf(__FILE__, __LINE__, "perasa");
+					cout << __LINE__ <<  " at line";
 					photo_list.push_back(*new_photo);
-					prnt_inf(__FILE__, __LINE__, "perasa");
+					cout << __LINE__ <<  " at line";
 					new_photo = (PhotoInfo *)malloc(sizeof(PhotoInfo));
-					prnt_inf(__FILE__, __LINE__, "perasa");
+					cout << __LINE__ <<  " at line";
 				}
 				else
 				{
-					prnt_inf(__FILE__, __LINE__, "perasa");
+					cout << __LINE__ <<  " at line";
 					first = false;
-					prnt_inf(__FILE__, __LINE__, "perasa");
+					cout << __LINE__ <<  " at line";
 				}
-				prnt_inf(__FILE__, __LINE__, "perasa");
+				cout << __LINE__ <<  " at line";
 				new_photo->fileName = strdup(i->value);
-				prnt_inf(__FILE__, __LINE__, "perasa");
+				cout << __LINE__ <<  " at line";
 			}
 			else if (strcmp(i->name, "FileType") == 0)
 			{
@@ -1463,9 +1464,9 @@ void file_analyzer(char *path)
 			{
 				new_photo->modifyDate = strdup(i->value);
 			}
-			delete info;
 		}
 		photo_list.push_back(*new_photo);
+		delete info;
 	}
 	else if (et->LastComplete() <= 0)
 	{
@@ -1477,12 +1478,12 @@ void file_analyzer(char *path)
 	std::vector<PhotoInfo>::iterator photo;
 	for (photo = photo_list.begin(); photo != photo_list.end(); ++photo)
 	{
-		std::cout << "fileName: " << photo->fileName << endl
-				  << "fileType: " << photo->fileType << endl
-				  << "fileSize: " << photo->fileSize << endl
-				  << "fileRes: " << photo->fileRes << endl
-				  << "createDate: " << photo->createDate << endl
-				  << "modifyDate: " << photo->modifyDate << endl
+		std::cout << "fileName: '" << (photo->fileName ? photo->fileName : "NULL") << "'" << endl
+				  << "fileType: '" << (photo->fileType ? photo->fileType : "NULL") << "'" << endl
+				  << "fileSize: '" << (photo->fileSize ? photo->fileSize : "NULL") << "'" << endl
+				  << "fileRes: '" << (photo->fileRes ? photo->fileRes : "NULL") << "'" << endl
+				  << "createDate: '" << (photo->createDate ? photo->createDate : "NULL") << "'" << endl
+				  << "modifyDate: '" << (photo->modifyDate ? photo->modifyDate : "NULL") << "'" << endl
 				  << endl;
 	}
 

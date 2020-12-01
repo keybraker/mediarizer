@@ -187,8 +187,7 @@ int main(int argc, char *argv[])
 		exit(EXIT_SUCCESS);
 	}
 
-	printf("\nFlag list:\n");
-
+	// printf("\nFlag list:\n");
 	// prnt_inf(__FILE__, __LINE__, concat("pht flag: ", photo_flag ? "enabled" : "disabled"));
 	// prnt_inf(__FILE__, __LINE__, concat("vid flag: ", video_flag ? "enabled" : "disabled"));
 	// prnt_inf(__FILE__, __LINE__, concat("jpg flag: ", jpg_flag ? "enabled" : "disabled"));
@@ -205,6 +204,7 @@ int main(int argc, char *argv[])
 	// prnt_inf(__FILE__, __LINE__, concat("output  : ", output_flag ? "given" : "missing"));
 
 	/* Print any remaining command line arguments (not options). */
+	cout << optind << " < " << argc << endl;
 	if (optind < argc)
 	{
 		printf("non-option ARGV-elements: ");
@@ -212,7 +212,7 @@ int main(int argc, char *argv[])
 			printf("?%s? ", argv[optind++]);
 		putchar('\n');
 	}
-
+		
 	//////////////////////////////////////////////////////////////////
 
 	if (src_file != NULL && src_path == NULL && dst_path != NULL)
