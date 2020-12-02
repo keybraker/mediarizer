@@ -41,6 +41,7 @@ int ExifTool::sNoWatchdog = 0;
 // SIGPIPE handler
 static void sigPipeAction(int sig)
 {
+    if (sig) { }
     sBrokenPipe = 1;
 }
 
@@ -174,9 +175,9 @@ ExifTool::ExifTool(const char *exec, const char *arg1)
     }
 
     // create our pipes
-    pipe(to);
-    pipe(from);
-    pipe(err);
+    if(pipe(to)) { };
+    if(pipe(from)) { };
+    if(pipe(err)) { };
 
     // fork and exec exiftool
     mPid = fork();

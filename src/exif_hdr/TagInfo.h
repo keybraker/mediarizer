@@ -15,6 +15,8 @@
 #ifndef __TAGINFO_H__
 #define __TAGINFO_H__
 
+#include <string>
+
 struct TagInfo
 {
     TagInfo();
@@ -37,14 +39,14 @@ struct PhotoInfo
     // PhotoInfo();
     // virtual ~PhotoInfo();
 
-    char *fileName;         // file name
-    char *fileType;         // file type
-    char *fileSize;         // file size
-    char *fileRes;          // file resolution
-    char *source_directory; // file directory
-    char *move_directory;   // file directory
-    char *createDate;       // date created
-    char *modifyDate;       // date modified
+    char *fileName;             // file name
+    char *fileType;             // file type
+    char *fileSize;             // file size
+    char *fileRes;              // file resolution
+    char *source_directory;     // file directory
+    std::string move_directory; // file directory
+    char *createDate;           // date created
+    char *modifyDate;           // date modified
 };
 
 #endif // __TAGINFO_H__

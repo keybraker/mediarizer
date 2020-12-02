@@ -19,7 +19,7 @@ else
         CCFLAGS += -D LINUX -fopenmp
     endif
     ifeq ($(UNAME_S), Darwin)
-        CCFLAGS += -D OSX -Xclang -fopenmp
+        CCFLAGS += -D OSX -Xclang -fopenmp -lomp 
     endif
     UNAME_P := $(shell uname -p)
     ifeq ($(UNAME_P), x86_64)
@@ -44,7 +44,7 @@ HDR_MDZR = src/mdzr_hdr/organizer.h
 all: organizer
 
 organizer: src/organizer.o $(OBJ_EXIF) $(OBJ_MDZR)
-	$(CPP) $(CCFLAGS) -lomp -o mediarizer src/organizer.o $(OBJ_EXIF) $(OBJ_MDZR)
+	$(CPP) $(CCFLAGS) -o mediarizer src/organizer.o $(OBJ_EXIF) $(OBJ_MDZR)
 
 clean:
 	rm -f mediarizer src/*.o src/exif_src/*.o src/mdzr_src/*.o \

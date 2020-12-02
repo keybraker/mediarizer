@@ -30,6 +30,8 @@
 #include <iostream>
 #include <vector>
 #include <omp.h>
+#include <algorithm>
+#include <chrono>
 
 #include "../exif_hdr/ExifTool.h"
 
@@ -72,22 +74,6 @@ using namespace std;
 		fprintf(stdout, "MESSG: " a_c_y "%-30s" a_c_re " | [%-20s, %-5d]\n", MSG, FILE, LINE); \
 	}
 
-enum months
-{
-	January = 1,
-	February = 2,
-	March = 3,
-	April = 4,
-	May = 5,
-	June = 6,
-	July = 7,
-	August = 8,
-	September = 9,
-	October = 10,
-	November = 11,
-	December = 12
-};
-
 typedef struct originalDateData originalDateData;
 typedef struct threader threader;
 
@@ -128,7 +114,7 @@ int isFile(const char *path);
 // int typeOfFileInt(const char* path);
 // inline bool existance(const string& name);
 
-const char *get_date_path(char *date);
+std::string get_date_path(char *date);
 std::vector<PhotoInfo> linked_list_to_vector(char *path);
 void *calculate_move_directory(PhotoInfo photo_info, char *move_path);
 

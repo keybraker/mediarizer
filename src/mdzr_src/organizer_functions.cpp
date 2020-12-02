@@ -15,48 +15,30 @@ int isFile(const char *path)
 	return S_ISREG(path_stat.st_mode);
 }
 
-const char *get_date_path(char *date)
+const char *g_months[] = {
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December" 
+};
+
+std::string get_date_path(std::string date)
 {
-	if (date == NULL) {
-		return (char *)"Undetermined";
-	}
-	std::string date_path = "", date_str = date;
+	if (date.empty())
+		return std::string("Undetermined");
 
-	date_path = date_str.substr(0, 4);
+	std::string date_year = date.substr(0, 4);
+	std::string date_month = g_months[stoi(date.substr(4, 2)) - 1];
 
-	int month_number = stoi(date_str.substr(4, 2));
-
-	switch (month_number)
-	{
-	case January:
-		date_path += "January";
-	case February:
-		date_path += "February";
-	case March:
-		date_path += "March";
-	case April:
-		date_path += "April";
-	case May:
-		date_path += "May";
-	case June:
-		date_path += "June";
-	case July:
-		date_path += "July";
-	case August:
-		date_path += "August";
-	case September:
-		date_path += "September";
-	case October:
-		date_path += "October";
-	case November:
-		date_path += "November";
-	case December:
-		date_path += "December";
-	default:
-		date_path += "Undetermined";
-	}
-
-	return date_path.c_str();
+	return date_year + "/" + date_month;
 }
 
 std::vector<PhotoInfo> linked_list_to_vector(char *path)
@@ -134,32 +116,34 @@ std::vector<PhotoInfo> linked_list_to_vector(char *path)
 
 void *calculate_move_directory(PhotoInfo photo_info, char *move_path)
 {
+	std::string date, move_path_str = std::string(move_path);
+
 	if (photo_info.createDate != NULL)
 	{
-		std::cout << "B photo_info.createDate: " << photo_info.createDate << endl; 
-		memcpy(photo_info.createDate, photo_info.createDate, 10);
-		photo_info.createDate[10] = '\0';
-		std::cout << "A photo_info.createDate: " << photo_info.createDate << endl;
+		date = std::string(photo_info.createDate);
+		std::cout << "B photo_info.createDate: " << date << endl;
+		date.resize(10);
+		std::cout << "A photo_info.createDate: " << date << endl;
 	}
 	else if (photo_info.modifyDate != NULL)
 	{
-		std::cout << "B photo_info.modifyDate: " << photo_info.modifyDate << endl; 
-		memcpy(photo_info.modifyDate, photo_info.modifyDate, 10);
-		photo_info.modifyDate[10] = '\0';
-		std::cout << "A photo_info.modifyDate: " << photo_info.modifyDate << endl;
+		date = std::string(photo_info.modifyDate);
+		std::cout << "B photo_info.modifyDate: " << date << endl;
+		date.resize(10);
+		std::cout << "A photo_info.modifyDate: " << date << endl;
+	}
+	else
+	{
+		return (void *)date.c_str();
 	}
 
-	char *date = photo_info.createDate
-					 ? photo_info.createDate
-					 : photo_info.modifyDate
-						   ? photo_info.modifyDate
-						   : NULL;
+	photo_info.move_directory = std::string(move_path);
+	photo_info.move_directory += "/";
+	photo_info.move_directory += get_date_path(date);
 
-	memcpy(photo_info.move_directory, move_path, sizeof(move_path));
-	strcat(photo_info.move_directory, "/");
-	strcat(photo_info.move_directory, get_date_path(date));
-
-	std::cout << "photo_info.move_directory: " << (photo_info.move_directory ? photo_info.move_directory : "NULL") << endl;
+	std::cout << "photo_info.move_directory: "
+			  << photo_info.move_directory
+			  << endl;
 
 	return NULL;
 }
@@ -179,7 +163,7 @@ void file_analyzer(char *path, char *move_path)
 	auto start = std::chrono::high_resolution_clock::now();
 
 	int i;
-// #pragma omp parallel for private(i)
+	#pragma omp parallel for private(i)
 	for (i = 0; i < (int)photo_list.size(); ++i)
 	{
 		// std::cout << "THREAD " << omp_get_thread_num() << "/" << omp_get_num_threads() << endl
