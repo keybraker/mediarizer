@@ -1,4 +1,20 @@
-#include "mdzr_hdr/organizer.h"
+//------------------------------------------------------------------------------
+// File:        organizer.cpp
+//
+// Description: A simple C++ library to organize and delete
+//				duplicate media files.
+//
+// License:     Copyright 2017-2020, Ioannis Tsiakkas (iantsiakkas at gmail.com)
+//
+//              This is software, in whole or part, is free for use in
+//              non-commercial applications, provided that this copyright notice
+//              is retained.  A licensing fee may be required for use in a
+//              commercial application.
+//
+// Created:     02-12-2020 - Ioannis Tsiakkas
+//------------------------------------------------------------------------------
+
+#include "mdzr_hdr/Organizer.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -54,7 +70,8 @@ void hlp()
 
 /* Flag set by ‘--verbose’. */
 static int
-	verbose_flag, version_flag, photo_flag, video_flag,
+	verbose_flag,
+	version_flag, photo_flag, video_flag,
 	jpg_flag, png_flag, avi_flag, mov_flag, wmv_flag,
 	mp4_flag, mts_flag, help_flag, dup_flag, dup_dlt_flag,
 	dlt_flag, input_flag, output_flag;
@@ -212,7 +229,7 @@ int main(int argc, char *argv[])
 			printf("?%s? ", argv[optind++]);
 		putchar('\n');
 	}
-		
+
 	//////////////////////////////////////////////////////////////////
 
 	if (src_file != NULL && src_path == NULL && dst_path != NULL)

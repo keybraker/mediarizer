@@ -1,7 +1,18 @@
-/**************************************************************
-	Organizer.h		-		A simple C++ library to organize and delete
-										duplicate media files.
-*/
+//------------------------------------------------------------------------------
+// File:        Organizer.h
+//
+// Description: A simple C++ library to organize and delete
+//				duplicate media files.
+//
+// License:     Copyright 2017-2020, Ioannis Tsiakkas (iantsiakkas at gmail.com)
+//
+//              This is software, in whole or part, is free for use in
+//              non-commercial applications, provided that this copyright notice
+//              is retained.  A licensing fee may be required for use in a
+//              commercial application.
+//
+// Created:     02-12-2020 - Ioannis Tsiakkas
+//------------------------------------------------------------------------------
 
 #ifndef __ORGANIZER_H
 #define __ORGANIZER_H
@@ -34,6 +45,7 @@
 #include <chrono>
 
 #include "../exif_hdr/ExifTool.h"
+#include "../mdzr_hdr/PhotoInfoClass.h"
 
 #define a_c_r "\x1b[31m"
 #define a_c_g "\x1b[32m"
@@ -95,38 +107,15 @@ struct originalDateData
 
 void help();
 
-// int hundredPercent(const char* path);
-// void percentige();
-
-// void folderSigning(const char* string, int version);
-// bool folderAlreadyOrganized(const char* string, int version);
-
-// string exec(const char* cmd);
-// void *transfer(threader *threaderer);
-
-// string dateOfCreation (const char *path);
 bool isDir(const char *path);
 int isFile(const char *path);
-// originalDateData *dateReturn(string originalDate);
-
-// char *destinationFinder(int year, int month, const char *pathToStore);
-// bool typeOfFile(const char* path);
-// int typeOfFileInt(const char* path);
-// inline bool existance(const string& name);
 
 std::string get_date_path(char *date);
-std::vector<PhotoInfo> linked_list_to_vector(char *path);
+std::vector<PhotoInfoClass> linked_list_to_vector(char *path);
 void *calculate_move_directory(PhotoInfo photo_info, char *move_path);
 
 void fileVersion(const char *path, const char *pathToStore);
 void folderVersion(const char *path, const char *pathToStore, int *arg);
 void file_analyzer(char *path, char *move_path);
-
-// int  duplicateFoundChecker(const char* string);
-// void duplicateFound(const char* string);
-// void duplicateRmer(void);
-// void duplicateVersion(const char *path, int xtrm);
-// void duplicateCleaner(const char *master, const char *path, int type);
-// void duplicateCleanerExecution(const char* imagePathMaster, const char* imagePathCandidate);
 
 #endif
