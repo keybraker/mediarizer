@@ -107,7 +107,6 @@ std::vector<PhotoInfoClass> linked_list_to_vector(char *path)
 
 void file_analyzer(char *path, char *move_path)
 {
-	std::cout << "analyzing photos and vectorizing";
 	auto start0 = std::chrono::high_resolution_clock::now();
 
 	std::vector<PhotoInfoClass> photo_list = linked_list_to_vector(path);
@@ -115,7 +114,8 @@ void file_analyzer(char *path, char *move_path)
 	auto stop0 = std::chrono::high_resolution_clock::now();
 	auto duration0 = std::chrono::duration_cast<std::chrono::microseconds>(stop0 - start0);
 
-	std::cout << "..done (processed " << photo_list.size() << " photos)" << endl;
+	std::cout << "done (processed " << photo_list.size() << " photos)" << endl;
+	std::cout << "vectorization: " << duration0.count() << endl;
 
 	auto start = std::chrono::high_resolution_clock::now();
 
@@ -123,50 +123,29 @@ void file_analyzer(char *path, char *move_path)
 #pragma omp parallel for private(i)
 	for (i = 0; i < (int)photo_list.size(); ++i)
 	{
-		// std::cout << i << ") " << endl;
-		// cout << "BEFOREPhotoInfo: { " << std::endl
-		//  << "fileName: " << photo_list[i].fileName << "," << std::endl
-		//  << "fileType: " << photo_list[i].fileType << "," << std::endl
-		//  << "fileSize: " << photo_list[i].fileSize << "," << std::endl
-		//  << "fileRes: " << photo_list[i].fileRes << "," << std::endl
-		//  << "source_directory: " << photo_list[i].source_directory << "," << std::endl
-		//  << "move_directory: " << photo_list[i].move_directory << "," << std::endl
-		//  << "createDate: " << photo_list[i].createDate << "," << std::endl
-		//  << "modifyDate: " << photo_list[i].modifyDate << "," << std::endl
-		//  << "}" << std::endl;
+#pragma omp task
 		photo_list[i].calculate_move_directory(move_path);
+#pragma omp taskwait
 		photo_list[i].execute_move();
-		// cout << "AFTERPhotoInfo: { " << std::endl
-		//  << "fileName: " << photo_list[i].fileName << "," << std::endl
-		//  << "fileType: " << photo_list[i].fileType << "," << std::endl
-		//  << "fileSize: " << photo_list[i].fileSize << "," << std::endl
-		//  << "fileRes: " << photo_list[i].fileRes << "," << std::endl
-		//  << "source_directory: " << photo_list[i].source_directory << "," << std::endl
-		//  << "move_directory: " << photo_list[i].move_directory << "," << std::endl;
-		//  << "createDate: " << photo_list[i].createDate << "," << std::endl
-		//  << "modifyDate: " << photo_list[i].modifyDate << "," << std::endl
-		//  << "}" << std::endl
-		//  << std::endl;
 	}
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
 
-	auto start2 = std::chrono::high_resolution_clock::now();
+	// auto start2 = std::chrono::high_resolution_clock::now();
 	// #pragma omp parallel
 	// #pragma omp single
-	for (PhotoInfoClass photo2 : photo_list)
-	{
-		// #pragma omp task firstprivate(photo2)
-		// #pragma omp critical(std::cout)
-		// 		std::cout << "THREAD " << omp_get_thread_num() << "/" << omp_get_num_threads() << endl;
-		photo2.calculate_move_directory(move_path);
-	}
-	auto stop2 = std::chrono::high_resolution_clock::now();
-	auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(stop2 - start2);
+	// for (PhotoInfoClass photo2 : photo_list)
+	// {
+	// #pragma omp task firstprivate(photo2)
+	// #pragma omp critical(std::cout)
+	// 		std::cout << "THREAD " << omp_get_thread_num() << "/" << omp_get_num_threads() << endl;
+	// photo2.calculate_move_directory(move_path);
+	// }
+	// auto stop2 = std::chrono::high_resolution_clock::now();
+	// auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(stop2 - start2);
 
-	std::cout << "mhden: " << duration0.count() << endl;
-	std::cout << "ena: " << duration.count() << endl;
-	std::cout << "duo: " << duration2.count() << endl;
+	std::cout << "copy and move: " << duration.count() << endl;
+	// std::cout << "duo: " << duration2.count() << endl;
 	// std::cout << duration.count() << "/" << duration2.count() << "=" << duration.count() / duration2.count() << endl;
 
 	return;
