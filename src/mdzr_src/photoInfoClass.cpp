@@ -82,7 +82,33 @@ void PhotoInfoClass::calculate_move_directory(std::string move_path)
 	}
 }
 
-std::ostream &operator<<(std::ostream &os, const PhotoInfoClass &photo_info)
+bool PhotoInfoClass::execute_move(void)
+{
+	if (move_directory.empty())
+	{
+		return false;
+	}
+	else
+	{
+		std::filesystem::path sourceFile = source_directory + "/" + fileName;
+		std::filesystem::path targetParent = move_directory;
+		std::filesystem::path target = targetParent / sourceFile.filename();
+		try // If you want to avoid exception handling, then use the error code overload of the following functions.
+		{
+			std::filesystem::create_directories(targetParent);											  // Recursively create target directory if not existing.
+			std::filesystem::copy_file(sourceFile, target, std::filesystem::copy_options::skip_existing); //overwrite_existing
+			return true;
+		}
+		catch (std::exception &e) // Not using fs::filesystem_error since std::bad_alloc can throw too.
+		{
+			std::cout << e.what();
+			return false;
+		}
+	}
+}
+
+std::ostream &
+operator<<(std::ostream &os, const PhotoInfoClass &photo_info)
 {
 	os << "PhotoInfo: { " << std::endl
 	   << "fileName: " << photo_info.fileName << "," << std::endl

@@ -17,7 +17,10 @@
 #ifndef __PHOTOCLASS_H
 #define __PHOTOCLASS_H
 
+#include <exception>
+#include <filesystem>
 #include <iostream>
+#include <fstream>
 
 class PhotoInfoClass
 {
@@ -44,6 +47,7 @@ public:
 				   std::string modifyDateInput);
 
 	void calculate_move_directory(std::string move_path);
+	bool execute_move(void);
 
 	// 	PhotoInfoClass& operator=(const PhotoInfoClass& photo_info) {
 	//        return *this;

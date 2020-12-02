@@ -221,7 +221,6 @@ int main(int argc, char *argv[])
 	// prnt_inf(__FILE__, __LINE__, concat("output  : ", output_flag ? "given" : "missing"));
 
 	/* Print any remaining command line arguments (not options). */
-	cout << optind << " < " << argc << endl;
 	if (optind < argc)
 	{
 		printf("non-option ARGV-elements: ");

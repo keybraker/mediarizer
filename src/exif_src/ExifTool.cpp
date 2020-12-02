@@ -41,7 +41,9 @@ int ExifTool::sNoWatchdog = 0;
 // SIGPIPE handler
 static void sigPipeAction(int sig)
 {
-    if (sig) { }
+    if (sig)
+    {
+    }
     sBrokenPipe = 1;
 }
 
@@ -175,9 +177,15 @@ ExifTool::ExifTool(const char *exec, const char *arg1)
     }
 
     // create our pipes
-    if(pipe(to)) { };
-    if(pipe(from)) { };
-    if(pipe(err)) { };
+    if (pipe(to))
+    {
+    };
+    if (pipe(from))
+    {
+    };
+    if (pipe(err))
+    {
+    };
 
     // fork and exec exiftool
     mPid = fork();
@@ -284,7 +292,11 @@ TagInfo *ExifTool::ImageInfo(const char *file, const char *opts, double timeout)
 
     // error unless command number is > 0
     if (cmdNum <= 0)
+    {
+
+        printf("cmdNum %d\n", cmdNum);
         return (TagInfo *)NULL;
+    }
 
     return GetInfo(cmdNum, timeout);
 }
