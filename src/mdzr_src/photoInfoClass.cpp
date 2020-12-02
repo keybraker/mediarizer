@@ -91,11 +91,10 @@ bool PhotoInfoClass::execute_move(void)
 	else
 	{
 		std::filesystem::path sourceFile = source_directory + "/" + fileName;
-		std::filesystem::path targetParent = move_directory;
-		std::filesystem::path target = targetParent / sourceFile.filename();
+		std::filesystem::path target = move_directory / sourceFile.filename();
 		try // If you want to avoid exception handling, then use the error code overload of the following functions.
 		{
-			std::filesystem::create_directories(targetParent);											  // Recursively create target directory if not existing.
+			// std::filesystem::create_directories(move_directory); // Recursively create target directory if not existing.
 			std::filesystem::copy_file(sourceFile, target, std::filesystem::copy_options::skip_existing); //overwrite_existing
 			return true;
 		}
@@ -107,18 +106,35 @@ bool PhotoInfoClass::execute_move(void)
 	}
 }
 
-std::ostream &
-operator<<(std::ostream &os, const PhotoInfoClass &photo_info)
+bool PhotoInfoClass::execute_folder_creation(void)
 {
-	os << "PhotoInfo: { " << std::endl
-	   << "fileName: " << photo_info.fileName << "," << std::endl
-	   << "fileType: " << photo_info.fileType << "," << std::endl
-	   << "fileSize: " << photo_info.fileSize << "," << std::endl
-	   << "fileRes: " << photo_info.fileRes << "," << std::endl
-	   << "source_directory: " << photo_info.source_directory << "," << std::endl
-	   << "move_directory: " << photo_info.move_directory << "," << std::endl
-	   << "createDate: " << photo_info.createDate << "," << std::endl
-	   << "modifyDate: " << photo_info.modifyDate << "," << std::endl
-	   << "}" << std::endl;
-	return os;
+	if (move_directory.empty())
+	{
+		return false;
+	}
+	else
+	{
+		try
+		{
+			// Recursively create target directory if not existing.
+			std::filesystem::create_directories(move_directory);
+			return true;
+		}
+		catch (std::exception &e)
+		{
+			std::cout << e.what();
+			return false;
+		}
+	}
+}
+
+T &operator=(T &&other) noexcept // move assignment
+{
+	if (this != &other)
+	{												   // no-op on self-move-assignment (delete[]/size=0 also ok)
+		delete[] mArray;							   // delete this storage
+		mArray = std::exchange(other.mArray, nullptr); // leave moved-from in valid state
+		size = std::exchange(other.size, 0);
+	}
+	return *this;
 }

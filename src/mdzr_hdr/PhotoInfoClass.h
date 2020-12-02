@@ -36,6 +36,9 @@ public:
 	std::string createDate;		  // date created
 	std::string modifyDate;		  // date modified
 
+	PhotoInfoClass &operator=(const PhotoInfoClass &photo_info);
+	PhotoInfoClass &operator==(const PhotoInfoClass &photo_info);
+
 	PhotoInfoClass(void);
 	PhotoInfoClass(std::string fileNameInput,
 				   std::string fileTypeInput,
@@ -48,10 +51,26 @@ public:
 
 	void calculate_move_directory(std::string move_path);
 	bool execute_move(void);
+	bool execute_folder_creation(void);
 
 	// 	PhotoInfoClass& operator=(const PhotoInfoClass& photo_info) {
 	//        return *this;
 	//    }
 };
+
+std::ostream &operator<<(std::ostream &os, const PhotoInfoClass &photo_info)
+{
+	os << "PhotoInfo: { " << std::endl
+	   << "fileName: " << photo_info.fileName << "," << std::endl
+	   << "fileType: " << photo_info.fileType << "," << std::endl
+	   << "fileSize: " << photo_info.fileSize << "," << std::endl
+	   << "fileRes: " << photo_info.fileRes << "," << std::endl
+	   << "source_directory: " << photo_info.source_directory << "," << std::endl
+	   << "move_directory: " << photo_info.move_directory << "," << std::endl
+	   << "createDate: " << photo_info.createDate << "," << std::endl
+	   << "modifyDate: " << photo_info.modifyDate << "," << std::endl
+	   << "}" << std::endl;
+	return os;
+}
 
 #endif

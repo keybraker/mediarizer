@@ -40,6 +40,8 @@
 #include <ctime>
 #include <iostream>
 #include <vector>
+#include <set>
+#include <unordered_set>
 #include <omp.h>
 #include <algorithm>
 #include <chrono>
