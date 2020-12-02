@@ -32,11 +32,12 @@ const char *g_months[] = {
 
 std::string get_date_path(std::string date)
 {
-	if (date.empty())
+	if (date.empty() || date.size() < 10)
 		return std::string("Undetermined");
-
+		
 	std::string date_year = date.substr(0, 4);
-	std::string date_month = g_months[stoi(date.substr(4, 2)) - 1];
+	int month_number = stoi(date.substr(4, 2));
+	std::string date_month = g_months[month_number - 1];
 
 	return date_year + "/" + date_month;
 }
