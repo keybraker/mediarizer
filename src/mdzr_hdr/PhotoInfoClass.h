@@ -39,7 +39,7 @@ public:
 	PhotoInfoClass &operator=(const PhotoInfoClass &photo_info);
 	friend bool operator==(PhotoInfoClass &photo_info_a, PhotoInfoClass &photo_info_b);
 	friend bool operator<(PhotoInfoClass &photo_info_a, PhotoInfoClass &photo_info_b);
-	friend std::ostream& operator<<(std::ostream &out, const PhotoInfoClass &point);
+	friend std::ostream &operator<<(std::ostream &out, const PhotoInfoClass &point);
 
 	PhotoInfoClass(void);
 	PhotoInfoClass(std::string fileNameInput,
@@ -53,6 +53,7 @@ public:
 
 	void calculate_move_directory(std::string move_path);
 	bool execute_move(void);
+	bool execute_date_update(void);
 	bool execute_folder_creation(void);
 };
 

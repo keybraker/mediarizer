@@ -116,7 +116,7 @@ void file_analyzer(char *path, char *move_path)
 	std::cout << "processed " << photo_list.size() << " photos in " << duration0.count() << " ms" << endl;
 
 	auto start = std::chrono::high_resolution_clock::now();
-	
+
 	int i;
 	// #pragma omp parallel for private(i)
 	for (i = 0; i < (int)photo_list.size(); ++i)
@@ -132,12 +132,14 @@ void file_analyzer(char *path, char *move_path)
 	std::cout << "calculated move path in " << duration.count() << " ms" << endl;
 
 	auto start1 = std::chrono::high_resolution_clock::now();
-		
+
 	std::set<std::string> unique_paths;
-	for (i = 0; i < (int)photo_list.size(); ++i) {
+	for (i = 0; i < (int)photo_list.size(); ++i)
+	{
 		long unsigned int num_of_uniques = unique_paths.size();
 		unique_paths.insert(photo_list[i].move_directory);
-		if(unique_paths.size() > num_of_uniques){
+		if (unique_paths.size() > num_of_uniques)
+		{
 			try
 			{
 				std::filesystem::create_directories(photo_list[i].move_directory);
@@ -176,6 +178,21 @@ void file_analyzer(char *path, char *move_path)
 	auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(stop2 - start2);
 
 	std::cout << "moved photos in " << duration2.count() << " ms" << endl;
+
+	auto start3 = std::chrono::high_resolution_clock::now();
+
+	// #pragma omp parallel for private(i)
+	for (i = 0; i < (int)photo_list.size(); ++i)
+	{
+		// #pragma omp task
+		photo_list[i].execute_date_update();
+		// #pragma omp taskwait
+	}
+
+	auto stop3 = std::chrono::high_resolution_clock::now();
+	auto duration3 = std::chrono::duration_cast<std::chrono::microseconds>(stop3 - start3);
+
+	std::cout << "calculated move path in " << duration3.count() << " ms" << endl;
 
 	return;
 }
