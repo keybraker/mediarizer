@@ -8,20 +8,10 @@ Why use Media Organizer:
 ***
 
 ## How it works
-```text
-make       |----------------| ./mediarizer /media.file /path/to/store           |------------------| 
----------> |   mediarizer   |-------------------------------------------------> | organised photos | 
-      	   |----------------| ./mediarizer /path/folder /path/to/store          | in year/month    | 
-                    |                                        	                |------------------| 
-                    |
-                    |         ./mediarizer -dup /path/folder                    |------------------| 
-                    \---------------------------------------------------------> | duplicate free   | 
-      	                                                                        | folders          | 
-                                                            	                |------------------| 
-```
 
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDisplay.jpg)
-<br/>**_( This is achieved in one run of the program )_**
+<br>
+>These is achieved in one run of the program
 
 ## Installation Guide
 
@@ -34,32 +24,18 @@ already implemented so there is no need for you to download it.
 ### Installation
 
 1. Open a terminal window and cd to cloned project
-```
+```bash
 cd .../Mediarizer
 ```
 
 2. To compile the program just type:
-```
+```bash
 make or make threaded
 ```
 
 ## Usage Guide
 
-### Simple execution
-
-a. Single image mode: Organises the one picture or video given to it.
-```
-./mediarizer -i /path/media.file -o /path/to/store/folder
-```
-
-b. Folder mode: Organises all the pictures and videos in a folder, and the folders in it.
-```
-./mediarizer -i /path/folder -o /path/to/store/folder
-```
-
-### Extreme execution (flags)
-
-## Flags
+### Flags
 | flag name	| flag acronym	| Description																| State		|
 | :---		| :---			| :----																		| :---		|
 | -photo	| -p			| _organizes *only* photos_													| working	|
@@ -71,26 +47,28 @@ b. Folder mode: Organises all the pictures and videos in a folder, and the folde
 | -hlp		| -h			| _displays a usage guide of Mediarizer_									| working	|
 | -vrs		| -v			| _displays current version_												| working	|
 
-> Multiple flags can be used in conjunction<br>
-> Multiple [file types](https://exiftool.org/#supported)_ can be used as comma-separated string ex: -type jpg,png<br>
-> Duplicate photos are compared by type, size, date and resolution, only than are they categorized as same<br>
+> a. Multiple flags can be used in conjunction<br>
+> b. Multiple [file types](https://exiftool.org/#supported)_ can be used as comma-separated string ex: -type jpg,png<br>
+> c. Duplicate photos are compared by type, size, date and resolution, only than are they categorized as same<br>
 
 ***
 
-## Additional Information 
+### Additional Information 
+> a. from photos with same name, only the first encountered is moved to new directory<br>
+> b. ```Makefile make clean``` will clear folder from executables<br>
+> c. unsupported files are not being copied<br>
+> d. corructed files may or may not cause the program to crash<br>
 
-> from photos with same name, only the first encountered is moved to new directory<br>
-> ```Makefile make clean``` will clear folder from executables<br>
-> unsupported files are not being copied<br>
-> corructed files may or may not cause the program to crash<br>
+### Examples
+a. Single image mode: Organises the one picture or video given to it.
+```bash
+./mediarizer -i /path/media.file -o /path/to/store/folder
+```
 
-***
-
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDuplicate.jpg)
-<br/>**_( These is achieved in one run of the program )_**
-
-***
-#### Flag Use Examples:
+b. Folder mode: Organises all the pictures and videos in a folder, and the folders in it.
+```bash
+./mediarizer -i /path/folder -o /path/to/store/folder
+```
 ##### Flags can be put in any order you wish even in the middle of the directories, like this:
 ```
 ./mediarizer -mp4 -i /path/source/folder -jpg -o /path/to/store/folder -png
@@ -101,31 +79,39 @@ is the same as,
 ```
 ***
 ##### Will only copy jpg and mp4 files:
-```
+```bash
 ./mediarizer -mp4 -jpg -i  /path/source/folder -o /path/to/store/folder
 ```
 ***
 ##### Will only copy photos not videos:
-```
+```bash
 ./mediarizer -i /path/source/folder -o /path/to/store/folder -photo
 ```
 ***
 ##### Duplicates will be deleted:
-```
+```bash
 ./mediarizer -dup -i  /path/source/folder
 ```
 ***
 ##### **! Only _videos_ will be copied:**
-```
+```bash
 ./mediarizer -video /path/media.file /path/to/store/folder
 ```
 ***
 ##### **! This is _NOT_ valid because -dup can only be used alone:**
-~~```./mediarizer -dup /path/media.file /path/to/store/folder -jpg```~~
+~~```bash ./mediarizer -dup /path/media.file /path/to/store/folder -jpg```~~
 ***
 
-**If you encounter any problem report it.** ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
-**Create pull requests if you find and solve an error.** 
+***
+
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDuplicate.jpg)
+<br>
+>These is achieved in one run of the program
+
+***
+
+>If you encounter any problem or error please report it. ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)<br>
+>Create pull requests if you find and solve an error.
 
 ## Release History
 
