@@ -141,16 +141,15 @@ g. duplicates files will be moved to folder _"duplicates"_:
 
 ### Release History
 
-* v2.0.0: 04 December 2020: Refactor application.
-* v1.7.0: 22 August   2017: Memory added, for stop and restart.
-* v1.6.0: 20 August   2017: Fully functional duplication deletion (BETA).
-* v1.5.0: 19 August   2017: Added duplication deletion.
-* v1.1.2: 18 August   2017: Added -flags for a more controlled organisation.
-* v1.1.1: 17 August   2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
-* v1.1.0: 17 August   2017: Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool.
-Basically every file is supported, implementations, are on the way !
-* v1.0.0: 12 August 2017: Full jpeg release with the help of [easyexif](http://owl.phy.queensu.ca/~phil/exiftool/)
-* v0.1.0: 9  August 2017: Creation.
+* v2.0.0: 04 December	2020: Refactor application.
+* v1.7.0: 22 August		2017: Memory added, for stop and restart.
+* v1.6.0: 20 August		2017: Fully functional duplication deletion (BETA).
+* v1.5.0: 19 August		2017: Added duplication deletion.
+* v1.1.2: 18 August		2017: Added -flags for a more controlled organisation.
+* v1.1.1: 17 August		2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
+* v1.1.0: 17 August		2017: Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool.
+* v1.0.0: 12 August		2017: Full jpeg release with the help of [easyexif](https://github.com/mayanklahiri/easyexif)
+* v0.1.0: 09 August		2017: Initial commit.
 
 <div id="4-2">
 
@@ -158,4 +157,5 @@ Basically every file is supported, implementations, are on the way !
 
 >Acknowledgments - **Phil Harvey** with the exeptional [**ExifTool**](http://owl.phy.queensu.ca/~phil/exiftool/)<br>
 >Author - **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)<br>
->Copyright © 2020 [Mediarizer](https://github.com/keybraker/Media-Organizer) - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)<br>
+>License -Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)<br><br>
+>Copyright © 2020 [Mediarizer](https://github.com/keybraker/Media-Organizer) 
