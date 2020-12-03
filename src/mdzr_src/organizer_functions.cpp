@@ -118,12 +118,12 @@ void file_analyzer(char *path, char *move_path)
 	auto start = std::chrono::high_resolution_clock::now();
 	
 	int i;
-	#pragma omp parallel for private(i)
+	// #pragma omp parallel for private(i)
 	for (i = 0; i < (int)photo_list.size(); ++i)
 	{
-		#pragma omp task
+		// #pragma omp task
 		photo_list[i].calculate_move_directory(move_path);
-		#pragma omp taskwait
+		// #pragma omp taskwait
 	}
 
 	auto stop = std::chrono::high_resolution_clock::now();
@@ -164,12 +164,12 @@ void file_analyzer(char *path, char *move_path)
 
 	auto start2 = std::chrono::high_resolution_clock::now();
 
-	#pragma omp parallel for private(i)
+	// #pragma omp parallel for private(i)
 	for (i = 0; i < (int)photo_list.size(); ++i)
 	{
-		#pragma omp task
+		// #pragma omp task
 		photo_list[i].execute_move();
-		#pragma omp taskwait
+		// #pragma omp taskwait
 	}
 
 	auto stop2 = std::chrono::high_resolution_clock::now();

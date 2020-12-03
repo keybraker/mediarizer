@@ -4,7 +4,8 @@
         "codecvt": "cpp",
         "set": "cpp",
         "unordered_set": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "chrono": "cpp"
     },
     "editor.formatOnSave": true
 }

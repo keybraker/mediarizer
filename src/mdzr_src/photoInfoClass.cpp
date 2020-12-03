@@ -129,6 +129,7 @@ bool PhotoInfoClass::execute_move(void)
 		{
 			// std::filesystem::create_directories(move_directory); // Recursively create target directory if not existing.
 			std::filesystem::copy_file(sourceFile, target, std::filesystem::copy_options::skip_existing); //overwrite_existing
+			// std::filesystem::remove(sourceFile);
 			return true;
 		}
 		catch (std::exception &e) // Not using fs::filesystem_error since std::bad_alloc can throw too.
