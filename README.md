@@ -71,18 +71,18 @@ b. Folder mode: Organises all the pictures and videos in a folder, and the folde
 | -hlp		| -h			| _displays a usage guide of Mediarizer_									| working	|
 | -vrs		| -v			| _displays current version_												| working	|
 
-> Multiple flags can be used in conjunction 
-> Multiple [file types](https://exiftool.org/#supported)_ can be used as comma-separated string ex: -type jpg,png
-> Duplicate photos are compared by type, size, date and resolution, only than are they categorized as same
+> Multiple flags can be used in conjunction<br>
+> Multiple [file types](https://exiftool.org/#supported)_ can be used as comma-separated string ex: -type jpg,png<br>
+> Duplicate photos are compared by type, size, date and resolution, only than are they categorized as same<br>
 
 ***
 
 ## Additional Information 
 
-> from photos with same name, only the first encountered is moved to new directory
-> ```Makefile make clean``` will clear folder from executables
-> unsupported files are not being copied
-> corructed files may or may not cause the program to crash
+> from photos with same name, only the first encountered is moved to new directory<br>
+> ```Makefile make clean``` will clear folder from executables<br>
+> unsupported files are not being copied<br>
+> corructed files may or may not cause the program to crash<br>
 
 ***
 
