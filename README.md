@@ -1,7 +1,11 @@
 # [Mediarizer](https://github.com/keybraker/Media-Organizer)
-Organises all your media in a chronological order.
+![alt text](https://github.com/keybraker/Mediarizer/blob/updating-code-quality/img/new_mediarizer_logo.png)
 
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerLogo.png)
+Why use Media Organizer:
+* Fast and easy organisation of photos / videos
+* Lightweight and runs on all harware and OS
+
+***
 
 ## How it works
 ```text
@@ -19,88 +23,71 @@ make       |----------------| ./mediarizer /media.file /path/to/store           
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDisplay.jpg)
 <br/>**_( This is achieved in one run of the program )_**
 
-Why use Media Organizer:
-* Fast and easy organisation of photos / videos
-* Lightweight and runs on all harware and OS
-***
-
 ## Installation Guide
 
 ### Prerequisites
-1. Make sure you have downloaded g++ (on macOS clang++ is installed with XCODE installation).
+1. Make sure you have downloaded g++ (on macOS clang++ is installed with Xcode installation).
 2. If you want to achieve better performance you should download OpenMP for multithreading.
 [ExifTool by Phil Harvey](http://owl.phy.queensu.ca/~phil/exiftool/) is used to parse metadata but is 
 already implemented so there is no need for you to download it.
 
 ### Installation
 
-#### 1. Open a terminal window and cd to cloned project
+1. Open a terminal window and cd to cloned project
 ```
 cd .../Mediarizer
 ```
 
-#### 2. To compile the program just type:
+2. To compile the program just type:
 ```
-make 
+make or make threaded
 ```
 
 ## Usage Guide
 
-##### a. Single image mode: Organises the one picture or video given to it.
+### Simple execution
+
+a. Single image mode: Organises the one picture or video given to it.
 ```
 ./mediarizer -i /path/media.file -o /path/to/store/folder
 ```
-##### b. Folder mode: Organises all the pictures and videos in a folder, and the folders in it.
+
+b. Folder mode: Organises all the pictures and videos in a folder, and the folders in it.
 ```
 ./mediarizer -i /path/folder -o /path/to/store/folder
 ```
-##### c. Duplicate mode (BETA): Deletes all duplicate pictures and videos in a folder, and the folders in it.
-```
-./mediarizer -dup /path/folder
-```
-***
 
-> Photos are copied to the new path if date information is available. <br/>Same photos with same names, from diffrent folders are not being copied.
-
-> To clean the program type ``` make clean ``` in ``` /mediarizer ```.
-
-> All corrupted or unsupported files are not being copied. If even one file is copputed or unsupported, a txt file is created called ``` corruptedFiles ```, in which every corrupted or unsupported file is listed by its full path, so that you can handle it manually.
-
-> Better run duplicate mode after organizing. It may be more cpu and time consuming but you can guarantee a fully, free of duplicates library due to the siple fact that duplicate files are only searched in current folder.
-
-> Keep in mind that duplicate mode is in its early stages of production so better use it in small folders. Works best when you have already used media organizer and than done some more organizing of events due to making folders smaller.
-***
-
-_Duplicate Mode Output:_
-```
-> |-is file.        
-> |-same size.      
-> |-same date.      
-> |-same res.       
-> '-rm -rf "/path/to/file.type" ( stored for deletion ).
-```
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDuplicate.jpg)
-<br/>**_( These is achieved in one run of the program )_**
+### Extreme execution (flags)
 
 ## Flags
-Category | Explanation
----------| -------------
--photo	 | _for photo organization only_
--video	 | _for video organization only_
--jpg   	 | _for jpg organization only_
--png   	 | _for png organization only_
--avi   	 | _for avi organization only_
--mov   	 | _for mov organization only_
--wmv   	 | _for wmv organization only_
--mp4   	 | _for mp4 organization only_
--mts   	 | _for mts organization only_
--hlp   	 | _for Media Organizer User Guide_
--vrs   	 | _for Version infromation_
--dup   	 | _(BETA) duplicate mode stores duplicates in file duplicatesToDelete.txt and than askes you to check the duplicates and delete them (use with caution)_
--dux   	 | _(BETA) duplicate mode extreme deletes duplicates when it finds them, faster than normal verison but the machine will keep the file with the smallest ASCII name (use with caution)_
--del   	 | _deletion mode deletes all source files keeping only the copies in destination path_
+| flag name	| flag acronym	| Description																| State		|
+| :---		| :---			| :----																		| :---		|
+| -photo	| -p			| _organizes *only* photos_													| working	|
+| -video	| -v			| _organizes *only* videos_													| working	|
+| -type		| -t			| _organizes *only* given [file type(s)](https://exiftool.org/#supported)_  | working	|
+| -del		| -d			| _deletes files in source directory_										| working	|
+| -dup		| -s			| _duplicates are moved into duplicate folder in move directory_			| beta		|
+| -dux		| -x			| _duplicates are deleted_													| beta		|
+| -hlp		| -h			| _displays a usage guide of Mediarizer_									| working	|
+| -vrs		| -v			| _displays current version_												| working	|
 
-* **You can use multiple flags, in order to transfer only the selected file types**
+> Multiple flags can be used in conjunction 
+> Multiple [file types](https://exiftool.org/#supported)_ can be used as comma-separated string ex: -type jpg,png
+> Duplicate photos are compared by type, size, date and resolution, only than are they categorized as same
+
+***
+
+## Additional Information 
+
+> from photos with same name, only the first encountered is moved to new directory
+> ```Makefile make clean``` will clear folder from executables
+> unsupported files are not being copied
+> corructed files may or may not cause the program to crash
+
+***
+
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDuplicate.jpg)
+<br/>**_( These is achieved in one run of the program )_**
 
 ***
 #### Flag Use Examples:
@@ -117,14 +104,10 @@ is the same as,
 ```
 ./mediarizer -mp4 -jpg -i  /path/source/folder -o /path/to/store/folder
 ```
-is the same as,
-```
-./mediarizer -mp4 -i  /path/source/folder -jpg -o /path/to/store/folder
-```
 ***
 ##### Will only copy photos not videos:
 ```
-./mediarizer -i  /path/source/folder -o /path/to/store/folder -photo
+./mediarizer -i /path/source/folder -o /path/to/store/folder -photo
 ```
 ***
 ##### Duplicates will be deleted:
@@ -134,45 +117,29 @@ is the same as,
 ***
 ##### **! Only _videos_ will be copied:**
 ```
-./mediarizer -video /path/media.file /path/to/store/folder -jpg
+./mediarizer -video /path/media.file /path/to/store/folder
 ```
 ***
 ##### **! This is _NOT_ valid because -dup can only be used alone:**
 ~~```./mediarizer -dup /path/media.file /path/to/store/folder -jpg```~~
 ***
 
-## File support list 
-### Photos: 
-* jpeg
-* png
-
-### Videos: 
-* avi
-* mov
-* wmv
-* mp4
-* m2ts
-
-**IF YOU HAVE ANY PROBLEM FEEL FREE TO WRITE AN ISSUE AND I WILL GET BACK TO YOU AS SOON AS POSIBLE.** ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
+**If you encounter any problem report it.** ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
+**Create pull requests if you find and solve an error.** 
 
 ## Release History
 
-* v1.7.0: 22 August 2017: Memory added, for stop and restart.
-* v1.6.0: 20 August 2017: Fully functional duplication deletion (BETA).
-* v1.5.0: 19 August 2017: Added duplication deletion.
-* v1.1.2: 18 August 2017: Added -flags for a more controlled organisation.
-* v1.1.1: 17 August 2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
-* v1.1.0: 17 August 2017: Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool.
-						  Basically everyfile is supported, implementations,
-						  are on the way !
+* v2.0.0: 04 December 2020: Refactor application.
+* v1.7.0: 22 August   2017: Memory added, for stop and restart.
+* v1.6.0: 20 August   2017: Fully functional duplication deletion (BETA).
+* v1.5.0: 19 August   2017: Added duplication deletion.
+* v1.1.2: 18 August   2017: Added -flags for a more controlled organisation.
+* v1.1.1: 17 August   2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
+* v1.1.0: 17 August   2017: Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool.
+Basically every file is supported, implementations, are on the way !
 * v1.0.0: 12 August 2017: Full jpeg release with the help of [easyexif](http://owl.phy.queensu.ca/~phil/exiftool/)
 * v0.1.0: 9  August 2017: Creation.
 
-***
-Future Improvements and features:
-1. Threads
-2. Support for more files
-3. GPS location organization
 
 ***
 Acknowledgments - **Phil Harvey** with the exeptional [**ExifTool**](http://owl.phy.queensu.ca/~phil/exiftool/)
@@ -181,6 +148,6 @@ Acknowledgments - **Phil Harvey** with the exeptional [**ExifTool**](http://owl.
 Author - **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
 
 ***
-Copyright © 2017 [Media Organizer](https://github.com/keybraker/Media-Organizer) - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)
+Copyright © 2020 [Media Organizer](https://github.com/keybraker/Media-Organizer) - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)
 
 
