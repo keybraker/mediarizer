@@ -30,7 +30,7 @@ const char *g_months[] = {
 	"November",
 	"December"};
 
-PhotoInfoClass::PhotoInfoClass(void) {}
+PhotoInfoClass::PhotoInfoClass(void) { }
 PhotoInfoClass::PhotoInfoClass(std::string fileNameInput,
 							   std::string fileTypeInput,
 							   std::string fileSizeInput,
@@ -48,6 +48,45 @@ PhotoInfoClass::PhotoInfoClass(std::string fileNameInput,
 	move_directory = move_directoryInput;
 	createDate = createDateInput;
 	modifyDate = modifyDateInput;
+}
+
+PhotoInfoClass &PhotoInfoClass::operator=(const PhotoInfoClass &photo_info) {
+	if (this != &photo_info) { // self-assignment check expected
+		this->fileName = photo_info.fileName;
+		this->fileType = photo_info.fileType;
+		this->fileSize = photo_info.fileSize;
+		this->fileRes = photo_info.fileRes;
+		this->source_directory = photo_info.source_directory;
+		this->move_directory = photo_info.move_directory;
+		this->createDate = photo_info.createDate;
+		this->modifyDate = photo_info.modifyDate;
+	}
+	return *this;
+}
+bool operator==(PhotoInfoClass &photo_info_a, PhotoInfoClass &photo_info_b){
+	return (
+		photo_info_a.fileName == photo_info_b.fileName &&
+		photo_info_a.fileType == photo_info_b.fileType &&
+		photo_info_a.fileSize == photo_info_b.fileSize &&
+		photo_info_a.fileRes == photo_info_b.fileRes &&
+		photo_info_a.source_directory == photo_info_b.source_directory &&
+		photo_info_a.move_directory == photo_info_b.move_directory &&
+		photo_info_a.createDate == photo_info_b.createDate &&
+		photo_info_a.modifyDate == photo_info_b.modifyDate);
+}
+std::ostream& operator<< (std::ostream &out, const PhotoInfoClass &photo_info)
+{
+    out << "PhotoInfo: { " << std::endl
+	   << "\t" << "fileName: " << photo_info.fileName << "," << std::endl
+	   << "\t" << "fileType: " << photo_info.fileType << "," << std::endl
+	   << "\t" << "fileSize: " << photo_info.fileSize << "," << std::endl
+	   << "\t" << "fileRes: " << photo_info.fileRes << "," << std::endl
+	   << "\t" << "source_directory: " << photo_info.source_directory << "," << std::endl
+	   << "\t" << "move_directory: " << photo_info.move_directory << "," << std::endl
+	   << "\t" << "createDate: " << photo_info.createDate << "," << std::endl
+	   << "\t" << "modifyDate: " << photo_info.modifyDate << "," << std::endl
+	   << "\t" << "}" << std::endl;
+	return out;
 }
 
 void PhotoInfoClass::calculate_move_directory(std::string move_path)
@@ -81,7 +120,6 @@ void PhotoInfoClass::calculate_move_directory(std::string move_path)
 		move_directory += date_year + "/" + date_month_name;
 	}
 }
-
 bool PhotoInfoClass::execute_move(void)
 {
 	if (move_directory.empty())
@@ -105,7 +143,6 @@ bool PhotoInfoClass::execute_move(void)
 		}
 	}
 }
-
 bool PhotoInfoClass::execute_folder_creation(void)
 {
 	if (move_directory.empty())
@@ -128,13 +165,17 @@ bool PhotoInfoClass::execute_folder_creation(void)
 	}
 }
 
-T &operator=(T &&other) noexcept // move assignment
+std::ostream &operator<<(std::ostream &os, const PhotoInfoClass photo_info)
 {
-	if (this != &other)
-	{												   // no-op on self-move-assignment (delete[]/size=0 also ok)
-		delete[] mArray;							   // delete this storage
-		mArray = std::exchange(other.mArray, nullptr); // leave moved-from in valid state
-		size = std::exchange(other.size, 0);
-	}
-	return *this;
+	os << "PhotoInfo: { " << std::endl
+	   << "fileName: " << photo_info.fileName << "," << std::endl
+	   << "fileType: " << photo_info.fileType << "," << std::endl
+	   << "fileSize: " << photo_info.fileSize << "," << std::endl
+	   << "fileRes: " << photo_info.fileRes << "," << std::endl
+	   << "source_directory: " << photo_info.source_directory << "," << std::endl
+	   << "move_directory: " << photo_info.move_directory << "," << std::endl
+	   << "createDate: " << photo_info.createDate << "," << std::endl
+	   << "modifyDate: " << photo_info.modifyDate << "," << std::endl
+	   << "}" << std::endl;
+	return os;
 }

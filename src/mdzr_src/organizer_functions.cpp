@@ -119,29 +119,25 @@ void file_analyzer(char *path, char *move_path)
 
 	auto start = std::chrono::high_resolution_clock::now();
 
-	std::unordered_set<PhotoInfoClass> setaki;
-    // for (PhotoInfoClass &i: photo_list) {
-	// 	std::cout << "UNO) " << i.fileName << endl;
-    //     setaki.insert(i);
+	// std::unordered_set<PhotoInfoClass> setaki;
+    // std::copy(photo_list.begin(),
+    //         photo_list.end(),
+    //         std::inserter(setaki, setaki.end()));
+ 
+    // for (PhotoInfoClass i: setaki) {
+	// 	std::cout << "DUO) " << i.fileName << endl;
     // }
- 
-
-
-	std::unordered_set<PhotoInfoClass> setaki;
-    std::copy(photo_list.begin(),
-            photo_list.end(),
-            std::inserter(setaki, setaki.end()));
- 
-    for (PhotoInfoClass i: setaki) {
-		std::cout << "DUO) " << i.fileName << endl;
-    }
 
 	int i;
 	#pragma omp parallel for private(i)
 	for (i = 0; i < (int)photo_list.size(); ++i)
 	{
+		cout << photo_list[i];
 		#pragma omp task
 		photo_list[i].calculate_move_directory(move_path);
+		#pragma omp taskwait
+		#pragma omp task
+		photo_list[i].execute_folder_creation();
 		#pragma omp taskwait
 		photo_list[i].execute_move();
 	}
