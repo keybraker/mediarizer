@@ -20,23 +20,20 @@ make       |----------------| ./mediarizer /media.file /path/to/store           
 <br/>**_( This is achieved in one run of the program )_**
 
 Why use Media Organizer:
-* Organises photos / videos extremly fast, the only limitation is your hardware
-* Cleans your library from duplicates
-* Lightweight and runs everywhere
+* Fast and easy organisation of photos / videos
+* Lightweight and runs on all harware and OS
 ***
 
 ## Installation Guide
-#### 1. Clone this repository with ( or download zip ):
-```
-git clone https://github.com/keybraker/Mediarizer.git
-```
 
-#### 2. Install ExifTool by Phil Harvey
-Download and install from here [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/).
-<br/>This program may very well be the best exif parser in the world (nj).
-<br/>This is the heart of the program and the essential tool that helped create this project.
+### Prerequisites
+1. Make sure you have downloaded g++ (on macOS clang++ is installed with XCODE installation).
+2. If you want to achieve better performance you should download OpenMP for multithreading.
+[ExifTool by Phil Harvey](http://owl.phy.queensu.ca/~phil/exiftool/) is used to parse metadata but is 
+already implemented so there is no need for you to download it.
 
-## Usage Guide
+### Installation
+
 #### 1. Open a terminal window and cd to cloned project
 ```
 cd .../Mediarizer
@@ -47,7 +44,8 @@ cd .../Mediarizer
 make 
 ```
 
-#### 3. Run the program:
+## Usage Guide
+
 ##### a. Single image mode: Organises the one picture or video given to it.
 ```
 ./mediarizer -i /path/media.file -o /path/to/store/folder
