@@ -1,3 +1,5 @@
+<div id="1">
+  
 # [Mediarizer](https://github.com/keybraker/Media-Organizer)
 ![alt text](https://github.com/keybraker/Mediarizer/blob/updating-code-quality/img/new_mediarizer_logo.png)
 
@@ -7,25 +9,41 @@ Why use Media Organizer:
 
 ***
 
-## How it works
-
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDisplay.jpg)
 <br>
 >These is achieved in one run of the program
 
-## Installation Guide
+1. [Mediarizer](#1)
+2. [Prerequisite and Build](#2)
+    1. [Prerequisites](#2-1)
+    2. [Build](#2-2)
+3. [Usage Guide](#3)
+    1. [Flags](#3-1)
+    2. [Examples](#3-2)
+    3. [Additional Information](#3-3)
+4. [Information](#4)
+    1. [Release History](#4-1)
+    2. [Acknowledgements](#4-2)
 
+<div id="2">
+  
+## Building, Installing, Using and Uninstalling Mediarizer
+
+<div id="2-1">
+  
 ### Prerequisites
 1. Make sure you have downloaded g++ (on macOS clang++ is installed with Xcode installation).
 2. If you want to achieve better performance you should download OpenMP for multithreading.
 [ExifTool by Phil Harvey](http://owl.phy.queensu.ca/~phil/exiftool/) is used to parse metadata but is 
 already implemented so there is no need for you to download it.
 
-### Installation
+<div id="2-2">
+  
+### Build
 
-1. Open a terminal window and cd to cloned project
+1. Open a terminal window and cd to cloned project (Mediarizer)
 ```bash
-cd .../Mediarizer
+cd Mediarizer
 ```
 
 2. To compile the program just type:
@@ -33,7 +51,11 @@ cd .../Mediarizer
 make or make threaded
 ```
 
+<div id="3">
+
 ## Usage Guide
+
+<div id="3-1">
 
 ### Flags
 | flag name	| flag acronym	| Description																| State		|
@@ -48,16 +70,12 @@ make or make threaded
 | -vrs		| -v			| _displays current version_												| working	|
 
 > a. Multiple flags can be used in conjunction<br>
-> b. Multiple [file types](https://exiftool.org/#supported)_ can be used as comma-separated string ex: -type jpg,png<br>
+> b. Multiple _[file types](https://exiftool.org/#supported)_ can be used as comma-separated string ex: -type jpg,png<br>
 > c. Duplicate photos are compared by type, size, date and resolution, only than are they categorized as same<br>
 
 ***
 
-### Additional Information 
-> a. from photos with same name, only the first encountered is moved to new directory<br>
-> b. ```Makefile make clean``` will clear folder from executables<br>
-> c. unsupported files are not being copied<br>
-> d. corructed files may or may not cause the program to crash<br>
+<div id="3-2">
 
 ### Examples
 a. Single image mode: Organises the one picture or video given to it.
@@ -100,9 +118,16 @@ is the same as,
 ***
 ##### **! This is _NOT_ valid because -dup can only be used alone:**
 ~~```bash ./mediarizer -dup /path/media.file /path/to/store/folder -jpg```~~
-***
 
 ***
+
+<div id="3-3">
+
+### Additional Information
+> a. from photos with same name, only the first encountered is moved to new directory<br>
+> b. ```Makefile make clean``` will clear folder from executables<br>
+> c. unsupported files are not being copied<br>
+> d. corructed files may or may not cause the program to crash<br>
 
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDuplicate.jpg)
 <br>
@@ -113,7 +138,13 @@ is the same as,
 >If you encounter any problem or error please report it. ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)<br>
 >Create pull requests if you find and solve an error.
 
-## Release History
+<div id="4">
+
+## Information
+
+<div id="4-1">
+
+### Release History
 
 * v2.0.0: 04 December 2020: Refactor application.
 * v1.7.0: 22 August   2017: Memory added, for stop and restart.
@@ -126,14 +157,10 @@ Basically every file is supported, implementations, are on the way !
 * v1.0.0: 12 August 2017: Full jpeg release with the help of [easyexif](http://owl.phy.queensu.ca/~phil/exiftool/)
 * v0.1.0: 9  August 2017: Creation.
 
+<div id="4-2">
 
-***
-Acknowledgments - **Phil Harvey** with the exeptional [**ExifTool**](http://owl.phy.queensu.ca/~phil/exiftool/)
+### Acknowledgements
 
-***
-Author - **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)
-
-***
-Copyright © 2020 [Media Organizer](https://github.com/keybraker/Media-Organizer) - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)
-
-
+>Acknowledgments - **Phil Harvey** with the exeptional [**ExifTool**](http://owl.phy.queensu.ca/~phil/exiftool/)<br>
+>Author - **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)<br>
+>Copyright © 2020 [Media Organizer](https://github.com/keybraker/Media-Organizer) - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)<br>
