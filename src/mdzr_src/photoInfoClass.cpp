@@ -63,18 +63,13 @@ PhotoInfoClass &PhotoInfoClass::operator=(const PhotoInfoClass &photo_info) {
 	}
 	return *this;
 }
-bool operator==(PhotoInfoClass &photo_info_a, PhotoInfoClass &photo_info_b){
-	return (
-		photo_info_a.fileName == photo_info_b.fileName &&
-		photo_info_a.fileType == photo_info_b.fileType &&
-		photo_info_a.fileSize == photo_info_b.fileSize &&
-		photo_info_a.fileRes == photo_info_b.fileRes &&
-		photo_info_a.source_directory == photo_info_b.source_directory &&
-		photo_info_a.move_directory == photo_info_b.move_directory &&
-		photo_info_a.createDate == photo_info_b.createDate &&
-		photo_info_a.modifyDate == photo_info_b.modifyDate);
+bool operator==(const PhotoInfoClass &photo_info_a, const PhotoInfoClass &photo_info_b){
+	return (photo_info_a.move_directory == photo_info_b.move_directory);
 }
-std::ostream& operator<< (std::ostream &out, const PhotoInfoClass &photo_info)
+bool operator<(const PhotoInfoClass &photo_info_a, const PhotoInfoClass &photo_info_b){
+	return (photo_info_a.move_directory < photo_info_b.move_directory);
+}
+std::ostream& operator<<(std::ostream &out, const PhotoInfoClass &photo_info)
 {
     out << "PhotoInfo: { " << std::endl
 	   << "\t" << "fileName: " << photo_info.fileName << "," << std::endl
@@ -85,7 +80,7 @@ std::ostream& operator<< (std::ostream &out, const PhotoInfoClass &photo_info)
 	   << "\t" << "move_directory: " << photo_info.move_directory << "," << std::endl
 	   << "\t" << "createDate: " << photo_info.createDate << "," << std::endl
 	   << "\t" << "modifyDate: " << photo_info.modifyDate << "," << std::endl
-	   << "\t" << "}" << std::endl;
+	   << "}" << std::endl;
 	return out;
 }
 
@@ -163,19 +158,4 @@ bool PhotoInfoClass::execute_folder_creation(void)
 			return false;
 		}
 	}
-}
-
-std::ostream &operator<<(std::ostream &os, const PhotoInfoClass photo_info)
-{
-	os << "PhotoInfo: { " << std::endl
-	   << "fileName: " << photo_info.fileName << "," << std::endl
-	   << "fileType: " << photo_info.fileType << "," << std::endl
-	   << "fileSize: " << photo_info.fileSize << "," << std::endl
-	   << "fileRes: " << photo_info.fileRes << "," << std::endl
-	   << "source_directory: " << photo_info.source_directory << "," << std::endl
-	   << "move_directory: " << photo_info.move_directory << "," << std::endl
-	   << "createDate: " << photo_info.createDate << "," << std::endl
-	   << "modifyDate: " << photo_info.modifyDate << "," << std::endl
-	   << "}" << std::endl;
-	return os;
 }

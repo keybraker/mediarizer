@@ -47,7 +47,6 @@ std::vector<PhotoInfoClass> linked_list_to_vector(char *path)
 			// std::cout << "name: " << i->name << " = 0, value: " << i->value << endl;
 			if (strcmp(i->name, "FileName") == 0)
 			{
-				std::cout << endl;
 				if (!first)
 				{
 					photo_list.push_back(new_photo);
@@ -114,52 +113,69 @@ void file_analyzer(char *path, char *move_path)
 	auto stop0 = std::chrono::high_resolution_clock::now();
 	auto duration0 = std::chrono::duration_cast<std::chrono::microseconds>(stop0 - start0);
 
-	std::cout << "done (processed " << photo_list.size() << " photos)" << endl;
-	std::cout << "vectorization: " << duration0.count() << endl;
+	std::cout << "processed " << photo_list.size() << " photos in " << duration0.count() << " ms" << endl;
 
 	auto start = std::chrono::high_resolution_clock::now();
-
-	// std::unordered_set<PhotoInfoClass> setaki;
-    // std::copy(photo_list.begin(),
-    //         photo_list.end(),
-    //         std::inserter(setaki, setaki.end()));
- 
-    // for (PhotoInfoClass i: setaki) {
-	// 	std::cout << "DUO) " << i.fileName << endl;
-    // }
-
+	
 	int i;
 	#pragma omp parallel for private(i)
 	for (i = 0; i < (int)photo_list.size(); ++i)
 	{
-		cout << photo_list[i];
 		#pragma omp task
 		photo_list[i].calculate_move_directory(move_path);
 		#pragma omp taskwait
-		#pragma omp task
-		photo_list[i].execute_folder_creation();
-		#pragma omp taskwait
-		photo_list[i].execute_move();
 	}
+
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
 
-	// auto start2 = std::chrono::high_resolution_clock::now();
-	// #pragma omp parallel
-	// #pragma omp single
-	// for (PhotoInfoClass photo2 : photo_list)
-	// {
-	// #pragma omp task firstprivate(photo2)
-	// #pragma omp critical(std::cout)
-	// 		std::cout << "THREAD " << omp_get_thread_num() << "/" << omp_get_num_threads() << endl;
-	// photo2.calculate_move_directory(move_path);
-	// }
-	// auto stop2 = std::chrono::high_resolution_clock::now();
-	// auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(stop2 - start2);
+	std::cout << "calculated move path in " << duration.count() << " ms" << endl;
 
-	std::cout << "copy and move: " << duration.count() << endl;
-	// std::cout << "duo: " << duration2.count() << endl;
-	// std::cout << duration.count() << "/" << duration2.count() << "=" << duration.count() / duration2.count() << endl;
+	auto start1 = std::chrono::high_resolution_clock::now();
+		
+	std::set<std::string> unique_paths;
+	for (i = 0; i < (int)photo_list.size(); ++i) {
+		long unsigned int num_of_uniques = unique_paths.size();
+		unique_paths.insert(photo_list[i].move_directory);
+		if(unique_paths.size() > num_of_uniques){
+			try
+			{
+				std::filesystem::create_directories(photo_list[i].move_directory);
+			}
+			catch (std::exception &e)
+			{
+				std::cout << e.what();
+			}
+		}
+	}
+
+	auto stop1 = std::chrono::high_resolution_clock::now();
+	auto duration1 = std::chrono::duration_cast<std::chrono::microseconds>(stop1 - start1);
+
+	std::cout << "created move path in " << duration1.count() << " ms" << endl;
+
+	// #pragma omp parallel for private(i)
+	// for (i = 0; i < (int)photo_list.size(); ++i)
+	// {
+	// 	#pragma omp task
+	// 	photo_list[i].execute_folder_creation();
+	// 	#pragma omp taskwait
+	// }
+
+	auto start2 = std::chrono::high_resolution_clock::now();
+
+	#pragma omp parallel for private(i)
+	for (i = 0; i < (int)photo_list.size(); ++i)
+	{
+		#pragma omp task
+		photo_list[i].execute_move();
+		#pragma omp taskwait
+	}
+
+	auto stop2 = std::chrono::high_resolution_clock::now();
+	auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(stop2 - start2);
+
+	std::cout << "moved photos in " << duration2.count() << " ms" << endl;
 
 	return;
 }

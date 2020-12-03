@@ -19,8 +19,8 @@
 
 #include <exception>
 #include <filesystem>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 
 class PhotoInfoClass
 {
@@ -38,7 +38,8 @@ public:
 
 	PhotoInfoClass &operator=(const PhotoInfoClass &photo_info);
 	friend bool operator==(PhotoInfoClass &photo_info_a, PhotoInfoClass &photo_info_b);
-	friend std::ostream& operator<< (std::ostream &out, const PhotoInfoClass &point);
+	friend bool operator<(PhotoInfoClass &photo_info_a, PhotoInfoClass &photo_info_b);
+	friend std::ostream& operator<<(std::ostream &out, const PhotoInfoClass &point);
 
 	PhotoInfoClass(void);
 	PhotoInfoClass(std::string fileNameInput,
