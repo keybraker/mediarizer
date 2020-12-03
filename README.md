@@ -78,48 +78,41 @@ make or make threaded
 <div id="3-2">
 
 ### Examples
-a. Single image mode: Organises the one picture or video given to it.
+a. single file sort
 ```bash
 ./mediarizer -i /path/media.file -o /path/to/store/folder
 ```
 
-b. Folder mode: Organises all the pictures and videos in a folder, and the folders in it.
+b. directory sort
 ```bash
 ./mediarizer -i /path/folder -o /path/to/store/folder
 ```
-##### Flags can be put in any order you wish even in the middle of the directories, like this:
-```
-./mediarizer -mp4 -i /path/source/folder -jpg -o /path/to/store/folder -png
-```
-is the same as,
-```
-./mediarizer -i /path/source/folder -o /path/to/store/folder -mp4 -jpg -png
-```
-***
-##### Will only copy jpg and mp4 files:
-```bash
-./mediarizer -mp4 -jpg -i  /path/source/folder -o /path/to/store/folder
-```
-***
-##### Will only copy photos not videos:
-```bash
-./mediarizer -i /path/source/folder -o /path/to/store/folder -photo
-```
-***
-##### Duplicates will be deleted:
-```bash
-./mediarizer -dup -i  /path/source/folder
-```
-***
-##### **! Only _videos_ will be copied:**
-```bash
-./mediarizer -video /path/media.file /path/to/store/folder
-```
-***
-##### **! This is _NOT_ valid because -dup can only be used alone:**
-~~```bash ./mediarizer -dup /path/media.file /path/to/store/folder -jpg```~~
 
-***
+c. flags can be used in any order
+```
+./mediarizer -i /path/source/folder -f mp4,jpg,png -o /path/to/store/folder
+./mediarizer -o /path/to/store/folder -i /path/source/folder -f mp4,jpg,png
+```
+
+d. this execution will only sort _mp4_ and _jpg_ files to move direcotry
+```bash
+./mediarizer -i  /path/source/folder -o /path/to/store/folder -f mp4,jpg
+```
+
+e. will only copy photos _not_ videos:
+```bash
+./mediarizer -i /path/source/folder -o /path/to/store/folder -p
+```
+
+f. will only copy photos _not_ videos:
+```bash
+./mediarizer /path/media.file /path/to/store/folder -v
+```
+
+g. duplicates files will be moved to folder _"duplicates"_:
+```bash
+./mediarizer -i /path/source/folder -d
+```
 
 <div id="3-3">
 
@@ -135,8 +128,9 @@ is the same as,
 
 ***
 
->If you encounter any problem or error please report it. ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)<br>
->Create pull requests if you find and solve an error.
+>If you encounter any problem or error please report it.<br>
+>Create pull requests if you find and solve an error.<br>
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
 
 <div id="4">
 
@@ -163,4 +157,4 @@ Basically every file is supported, implementations, are on the way !
 
 >Acknowledgments - **Phil Harvey** with the exeptional [**ExifTool**](http://owl.phy.queensu.ca/~phil/exiftool/)<br>
 >Author - **Ioannis Tsiakkas** - *(Keybraker)* - [Keybraker](https://github.com/keybraker)<br>
->Copyright © 2020 [Media Organizer](https://github.com/keybraker/Media-Organizer) - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)<br>
+>Copyright © 2020 [Mediarizer](https://github.com/keybraker/Media-Organizer) - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)<br>
