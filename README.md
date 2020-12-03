@@ -58,18 +58,17 @@ make or make threaded
 <div id="3-1">
 
 ### Flags
-| flag name	| flag acronym	| Description																| State		| Mandatory |
-| :---		  | :---		| :----																		| :---		| :-- |
-| -input	  | -i			| _gives path to file or directory_									| working	| yes |
-| -output	  | -o			| _path to output directory_												| working	| yes |
-| -photo	  | -p			| _organizes *only* photos_													| working	| no |
-| -video	  | -e			| _organizes *only* videos_													| working	| no |
-| -type		  | -t			| _organizes *only* given [file type(s)](https://exiftool.org/#supported)_  | working	| no |
-| -del		  | -d			| _deletes files in source directory_										| working	| no |
-| -dup		  | -s			| _duplicates are moved into duplicate folder in move directory_			| beta		| no |
-| -dux		  | -x			| _duplicates are deleted_													| beta		| no |
-| -hlp		  | -h			| _displays a usage guide of Mediarizer_									| working	| no |
-| -vrs		  | -v			| _displays current version_												| working	| no |
+| flag name		| flag acronym	| Argument 			| Description																| State		| Mandatory |
+| :---			| :---			| :---: 			| :----																		| :---		| :--		|
+| -input		| -i			| path / file		| _gives path to file or directory_											| working	| yes		|
+| -output		| -o			| path				| _path to output directory_												| working	| yes		|
+| -photo		| -p			| none 				| _organizes *only* photos_													| working	| no		|
+| -video		| -e			| none				| _organizes *only* videos_													| working	| no		|
+| -type			| -t			| type1, type2, ...	| _organizes *only* given [file type(s)](https://exiftool.org/#supported)_  | working	| no		|
+| -delete		| -x			| none				| _deletes files in source directory_										| working	| no		|
+| -duplicate	| -d			| none				| _duplicates are moved into duplicate folder in move directory_			| beta		| no		|
+| -help			| -h			| none				| _displays a usage guide of Mediarizer_									| working	| no		|
+| -version		| -v			| none				| _displays current version_												| working	| no		|
 
 > a. Multiple flags can be used in conjunction<br>
 > b. Multiple _[file types](https://exiftool.org/#supported)_ can be used as comma-separated string ex: -type jpg,png<br>
