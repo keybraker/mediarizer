@@ -53,7 +53,6 @@ public:
 
 	void calculate_move_directory(std::string move_path);
 	bool execute_move(void);
-	bool execute_date_update(void);
 	bool execute_folder_creation(void);
 };
 

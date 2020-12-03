@@ -113,7 +113,7 @@ void file_analyzer(char *path, char *move_path)
 	auto stop0 = std::chrono::high_resolution_clock::now();
 	auto duration0 = std::chrono::duration_cast<std::chrono::microseconds>(stop0 - start0);
 
-	std::cout << "processed " << photo_list.size() << " photos in " << duration0.count() << " ms" << endl;
+	std::cout << "processed " << photo_list.size() << " photos in\t\t\t\t" << duration0.count() << " ms" << endl;
 
 	auto start = std::chrono::high_resolution_clock::now();
 
@@ -129,7 +129,7 @@ void file_analyzer(char *path, char *move_path)
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
 
-	std::cout << "calculated move path in " << duration.count() << " ms" << endl;
+	std::cout << "calculated move path in\t\t\t\t" << duration.count() << " ms" << endl;
 
 	auto start1 = std::chrono::high_resolution_clock::now();
 
@@ -154,15 +154,7 @@ void file_analyzer(char *path, char *move_path)
 	auto stop1 = std::chrono::high_resolution_clock::now();
 	auto duration1 = std::chrono::duration_cast<std::chrono::microseconds>(stop1 - start1);
 
-	std::cout << "created move path in " << duration1.count() << " ms" << endl;
-
-	// #pragma omp parallel for private(i)
-	// for (i = 0; i < (int)photo_list.size(); ++i)
-	// {
-	// 	#pragma omp task
-	// 	photo_list[i].execute_folder_creation();
-	// 	#pragma omp taskwait
-	// }
+	std::cout << "created " << unique_paths.size() << " unique move paths in\t\t\t" << duration1.count() << " ms" << endl;
 
 	auto start2 = std::chrono::high_resolution_clock::now();
 
@@ -177,22 +169,7 @@ void file_analyzer(char *path, char *move_path)
 	auto stop2 = std::chrono::high_resolution_clock::now();
 	auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(stop2 - start2);
 
-	std::cout << "moved photos in " << duration2.count() << " ms" << endl;
-
-	auto start3 = std::chrono::high_resolution_clock::now();
-
-	// #pragma omp parallel for private(i)
-	for (i = 0; i < (int)photo_list.size(); ++i)
-	{
-		// #pragma omp task
-		photo_list[i].execute_date_update();
-		// #pragma omp taskwait
-	}
-
-	auto stop3 = std::chrono::high_resolution_clock::now();
-	auto duration3 = std::chrono::duration_cast<std::chrono::microseconds>(stop3 - start3);
-
-	std::cout << "calculated move path in " << duration3.count() << " ms" << endl;
+	std::cout << "moved " << photo_list.size() << " photos\t\t\t\t\t" << duration2.count() << " ms" << endl;
 
 	return;
 }

@@ -155,56 +155,6 @@ bool PhotoInfoClass::execute_move(void)
 		}
 	}
 }
-bool PhotoInfoClass::execute_date_update(void)
-{
-	// create our ExifTool object
-	ExifTool *et = new ExifTool();
-
-	// set new values of tags to write
-	et->SetNewValue("createDate", createDate.empty() ? createDate.c_str() : modifyDate.c_str());
-
-	// write the information
-	std::filesystem::path sourceFile = source_directory + "/" + fileName;
-	if (createDate.empty() == true)
-		std::cout << sourceFile << " <= " << createDate << std::endl;
-	else
-		std::cout << sourceFile << " <= " << modifyDate << std::endl;
-
-	et->WriteInfo(sourceFile.c_str());
-
-	// wait for exiftool to finish writing
-	int result = et->Complete(10);
-
-	if (result > 0)
-	{
-		// checking either the number of updated images or the number of update
-		// errors should be sufficient since we are only updating one file,
-		// but check both for completeness
-		int n_updated = et->GetSummary(SUMMARY_IMAGE_FILES_UPDATED);
-		int n_errors = et->GetSummary(SUMMARY_FILE_UPDATE_ERRORS);
-		if (n_updated == 1 && n_errors <= 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-		// print any exiftool messages
-		char *out = et->GetOutput();
-		if (out)
-			std::cout << out;
-		char *err = et->GetError();
-		if (err)
-			std::cerr << err;
-	}
-	else
-	{
-		std::cerr << "Error executing exiftool command!" << std::endl;
-	}
-	delete et;
-	return 0;
-}
 bool PhotoInfoClass::execute_folder_creation(void)
 {
 	if (move_directory.empty())
