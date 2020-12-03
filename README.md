@@ -58,16 +58,18 @@ make or make threaded
 <div id="3-1">
 
 ### Flags
-| flag name	| flag acronym	| Description																| State		|
-| :---		| :---			| :----																		| :---		|
-| -photo	| -p			| _organizes *only* photos_													| working	|
-| -video	| -v			| _organizes *only* videos_													| working	|
-| -type		| -t			| _organizes *only* given [file type(s)](https://exiftool.org/#supported)_  | working	|
-| -del		| -d			| _deletes files in source directory_										| working	|
-| -dup		| -s			| _duplicates are moved into duplicate folder in move directory_			| beta		|
-| -dux		| -x			| _duplicates are deleted_													| beta		|
-| -hlp		| -h			| _displays a usage guide of Mediarizer_									| working	|
-| -vrs		| -v			| _displays current version_												| working	|
+| flag name	| flag acronym	| Description																| State		| Mandatory |
+| :---		  | :---		| :----																		| :---		| :-- |
+| -input	  | -i			| _gives path to file or directory_									| working	| yes |
+| -output	  | -o			| _path to output directory_												| working	| yes |
+| -photo	  | -p			| _organizes *only* photos_													| working	| no |
+| -video	  | -e			| _organizes *only* videos_													| working	| no |
+| -type		  | -t			| _organizes *only* given [file type(s)](https://exiftool.org/#supported)_  | working	| no |
+| -del		  | -d			| _deletes files in source directory_										| working	| no |
+| -dup		  | -s			| _duplicates are moved into duplicate folder in move directory_			| beta		| no |
+| -dux		  | -x			| _duplicates are deleted_													| beta		| no |
+| -hlp		  | -h			| _displays a usage guide of Mediarizer_									| working	| no |
+| -vrs		  | -v			| _displays current version_												| working	| no |
 
 > a. Multiple flags can be used in conjunction<br>
 > b. Multiple _[file types](https://exiftool.org/#supported)_ can be used as comma-separated string ex: -type jpg,png<br>
@@ -81,11 +83,13 @@ make or make threaded
 a. single file sort
 ```bash
 ./mediarizer -i /path/media.file -o /path/to/store/folder
+./mediarizer --input /path/media.file --output /path/to/store/folder
 ```
 
 b. directory sort
 ```bash
 ./mediarizer -i /path/folder -o /path/to/store/folder
+./mediarizer --input /path/folder --output /path/to/store/folder
 ```
 
 c. flags can be used in any order
@@ -102,11 +106,13 @@ d. this execution will only sort _mp4_ and _jpg_ files to move direcotry
 e. will only copy photos _not_ videos:
 ```bash
 ./mediarizer -i /path/source/folder -o /path/to/store/folder -p
+./mediarizer -i /path/source/folder -o /path/to/store/folder --photo
 ```
 
 f. will only copy photos _not_ videos:
 ```bash
-./mediarizer /path/media.file /path/to/store/folder -v
+./mediarizer -i /path/source/folder -o /path/to/store/folder -v
+./mediarizer -i /path/source/folder -o /path/to/store/folder --video
 ```
 
 g. duplicates files will be moved to folder _"duplicates"_:
@@ -121,10 +127,6 @@ g. duplicates files will be moved to folder _"duplicates"_:
 > b. ```Makefile make clean``` will clear folder from executables<br>
 > c. unsupported files are not being copied<br>
 > d. corructed files may or may not cause the program to crash<br>
-
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDuplicate.jpg)
-<br>
->These is achieved in one run of the program
 
 ***
 
