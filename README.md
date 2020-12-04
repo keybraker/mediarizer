@@ -145,7 +145,8 @@ g. duplicates files will be moved to folder _"duplicates"_:
 ---
 
 > If you encounter any problem or error please report it.<br>
-> Create pull requests if you find and solve an error.<br> > ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
+> Create pull requests if you find and solve an error.<br>
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
 
 <div id="4">
 
@@ -171,5 +172,6 @@ g. duplicates files will be moved to folder _"duplicates"_:
 
 > Acknowledgments - **Phil Harvey** with the exeptional [**ExifTool**](http://owl.phy.queensu.ca/~phil/exiftool/)<br>
 > Author - **Ioannis Tsiakkas** - _(Keybraker)_ - [Keybraker](https://github.com/keybraker)<br>
-> License - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)<br><br>
-> Copyrights © Keybraker 2020 [Mediarizer](https://github.com/keybraker/Media-Organizer), All rights reserved
+> License - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)<br>
+
+Copyrights © Keybraker 2020 [Mediarizer](https://github.com/keybraker/Media-Organizer), All rights reserved
