@@ -114,6 +114,28 @@ int isFile(const char *path)
 	return S_ISREG(path_stat.st_mode);
 }
 
+std::vector<std::string> files_in_path(const std::filesystem::path &dir_path)
+{
+	std::vector<std::string> files;
+
+	for (const auto &entry : std::filesystem::directory_iterator(dir_path))
+	{
+		const auto filenameStr = entry.path().filename().string();
+		if (entry.is_directory())
+		{
+			// std::cout << "dir:  " << filenameStr << '\n';
+		}
+		else if (entry.is_regular_file())
+		{
+			// std::cout << "file: " << filenameStr << '\n';
+			files.push_back(filenameStr);
+		}
+		else
+			std::cout << "?? " << filenameStr << '\n';
+	}
+	return files;
+}
+
 std::vector<PhotoInfoClass> linked_list_to_vector(char *path, const char *arguments)
 {
 	ExifTool *et = new ExifTool();

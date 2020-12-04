@@ -140,7 +140,6 @@ bool PhotoInfoClass::execute_move(void)
 	{
 		std::filesystem::path sourceFile = source_directory + "/" + fileName;
 		std::filesystem::path target = move_directory / sourceFile.filename();
-
 		try // If you want to avoid exception handling, then use the error code overload of the following functions.
 		{
 			// std::filesystem::create_directories(move_directory); // Recursively create target directory if not existing.
@@ -150,6 +149,7 @@ bool PhotoInfoClass::execute_move(void)
 		}
 		catch (std::exception &e) // Not using fs::filesystem_error since std::bad_alloc can throw too.
 		{
+			std::cout << e.what();
 			return false;
 		}
 	}
@@ -170,7 +170,7 @@ bool PhotoInfoClass::execute_folder_creation(void)
 		}
 		catch (std::exception &e)
 		{
-			std::cout << e.what() << std::endl;
+			std::cout << e.what();
 			return false;
 		}
 	}

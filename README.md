@@ -141,6 +141,8 @@ g. duplicates files will be moved to folder _"duplicates"_:
 > b. `Makefile make clean` will clear folder from executables<br>
 > c. unsupported files are not being copied<br>
 > d. corructed files may or may not cause the program to crash<br>
+> e. using cloud storage services like (iCloud, OneDrive, Dropbox, etc) may result in files not being sorted
+as data is actually only on remote servers and you locally can see a shortcut of the remote file
 
 ---
 
