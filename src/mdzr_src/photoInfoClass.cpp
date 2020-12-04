@@ -150,7 +150,6 @@ bool PhotoInfoClass::execute_move(void)
 		}
 		catch (std::exception &e) // Not using fs::filesystem_error since std::bad_alloc can throw too.
 		{
-			std::cout << e.what();
 			return false;
 		}
 	}
@@ -171,7 +170,7 @@ bool PhotoInfoClass::execute_folder_creation(void)
 		}
 		catch (std::exception &e)
 		{
-			std::cout << e.what();
+			std::cout << e.what() << std::endl;
 			return false;
 		}
 	}

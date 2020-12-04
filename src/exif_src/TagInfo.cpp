@@ -19,8 +19,8 @@
 
 //------------------------------------------------------------------------------
 TagInfo::TagInfo()
-       : name(NULL), desc(NULL), id(NULL), value(NULL), valueLen(0),
-         num(NULL), numLen(0), copyNum(0), next(NULL)
+    : name(NULL), desc(NULL), id(NULL), value(NULL), valueLen(0),
+      num(NULL), numLen(0), copyNum(0), next(NULL)
 {
     group[0] = group[1] = group[2] = NULL;
 }
@@ -30,17 +30,19 @@ TagInfo::TagInfo()
 TagInfo::~TagInfo()
 {
     // delete our  members
-    delete [] group[0];
-    delete [] group[1];
-    delete [] group[2];
-    delete [] name;
-    delete [] desc;
-    delete [] id;
-    if (num != value) delete [] num;   // delete numerical value if unique
-    delete [] value;
+    delete[] group[0];
+    delete[] group[1];
+    delete[] group[2];
+    delete[] name;
+    delete[] desc;
+    delete[] id;
+    if (num != value)
+        delete[] num; // delete numerical value if unique
+    delete[] value;
 
     // delete remaining elements of linked list
-    while (next) {
+    while (next)
+    {
         TagInfo *info = next;
         // remove next entry from the list, then delete it
         next = info->next;
@@ -50,4 +52,3 @@ TagInfo::~TagInfo()
 }
 
 // end
-

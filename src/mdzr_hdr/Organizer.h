@@ -108,7 +108,8 @@ struct originalDateData
 	int second;
 };
 
-void help();
+void version(void);
+void help(void);
 
 bool isDir(const char *path);
 int isFile(const char *path);
@@ -117,8 +118,6 @@ std::string get_date_path(char *date);
 std::vector<PhotoInfoClass> linked_list_to_vector(char *path);
 void *calculate_move_directory(PhotoInfo photo_info, char *move_path);
 
-void fileVersion(const char *path, const char *pathToStore);
-void folderVersion(const char *path, const char *pathToStore, int *arg);
-void file_analyzer(char *path, char *move_path);
+void file_analyzer(char *path, char *move_path, const char *arguments);
 
 #endif
