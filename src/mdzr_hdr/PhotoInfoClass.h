@@ -22,6 +22,8 @@
 #include <fstream>
 #include <iostream>
 
+extern const char *g_months[];
+
 class PhotoInfoClass
 {
 	// PhotoInfoClass();

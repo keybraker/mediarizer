@@ -1,5 +1,6 @@
 CPP = g++
 CCFLAGS = -O3 -pedantic -Wall -Wextra -std=c++1z
+CCLINK = -I/usr/local/include -L/usr/local/lib -lexiv2
 CCNAME = -o mediarizer
 
 ifeq ($(OS), Windows_NT)
@@ -21,7 +22,7 @@ else
     endif
     ifeq ($(UNAME_S), Darwin)
         CCFLAGS += -D OSX -Xclang -fopenmp 
-		CCNAME = -lomp -o mediarizer
+		CCLINK += -lomp
     endif
     UNAME_P := $(shell uname -p)
     ifeq ($(UNAME_P), x86_64)
@@ -46,7 +47,9 @@ HDR_MDZR = src/mdzr_hdr/Organizer.h src/mdzr_hdr/PhotoInfoClass.h
 all: organizer
 
 organizer: src/organizer.o $(OBJ_EXIF) $(OBJ_MDZR)
-	$(CPP) $(CCFLAGS) $(CCNAME) src/organizer.o $(OBJ_EXIF) $(OBJ_MDZR)
+	$(CPP) $(CCFLAGS) \
+    $(CCNAME) src/organizer.o \
+    $(OBJ_EXIF) $(OBJ_MDZR) $(CCLINK)
 
 clean:
 	rm -f mediarizer src/*.o src/exif_src/*.o src/mdzr_src/*.o \

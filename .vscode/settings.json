@@ -1,10 +1,11 @@
 {
     "files.associations": {
         "*.tcc": "cpp",
-        "codecvt": "cpp",
-        "set": "cpp",
-        "unordered_set": "cpp",
-        "filesystem": "cpp",
+        "cstring": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "typeinfo": "cpp",
+        "cstdlib": "cpp",
         "chrono": "cpp",
         "array": "cpp",
         "atomic": "cpp",
@@ -12,16 +13,18 @@
         "cctype": "cpp",
         "clocale": "cpp",
         "cmath": "cpp",
+        "codecvt": "cpp",
         "cstdarg": "cpp",
         "cstddef": "cpp",
         "cstdint": "cpp",
         "cstdio": "cpp",
-        "cstdlib": "cpp",
         "ctime": "cpp",
         "cwchar": "cpp",
         "cwctype": "cpp",
         "deque": "cpp",
+        "set": "cpp",
         "unordered_map": "cpp",
+        "unordered_set": "cpp",
         "vector": "cpp",
         "exception": "cpp",
         "algorithm": "cpp",
@@ -50,8 +53,7 @@
         "ostream": "cpp",
         "sstream": "cpp",
         "stdexcept": "cpp",
-        "streambuf": "cpp",
-        "typeinfo": "cpp"
+        "streambuf": "cpp"
     },
     "editor.formatOnSave": true
 }

@@ -70,7 +70,9 @@ make or make threaded
 | -photo     | -p           |     none     | _organizes *only* photos_                                                | working | no        |
 | -video     | -f           |     none     | _organizes *only* videos_                                                | working | no        |
 | -recursive | -r           |     none     | _recursively process sub-directories_                                    | working | no        |
-| -delete    | -x           |     none     | _deletes files in source directory_                                      | working | no        |
+| -date      | -d           |     none     | _if image has no exif date filesystem data is used_                      | no      | no        |
+| -write     | -w           |     none     | _will add exif data to image that has none_                              | no      | no        |
+| -delete    | -x           |     none     | _deletes files in source directory_                                      | no      | no        |
 | -duplicate | -d           |     none     | _duplicates are moved into duplicate folder in move directory_           | beta    | no        |
 | -help      | -h           |     none     | _displays a usage guide of Mediarizer_                                   | working | no        |
 | -version   | -v           |     none     | _displays current version_                                               | working | no        |
@@ -137,18 +139,18 @@ g. duplicates files will be moved to folder _"duplicates"_:
 
 ### Additional Information
 
-> a. from photos with same name, only the first encountered is moved to new directory<br>
-> b. `Makefile make clean` will clear folder from executables<br>
-> c. unsupported files are not being copied<br>
-> d. corructed files may or may not cause the program to crash<br>
-> e. using cloud storage services like (iCloud, OneDrive, Dropbox, etc) may result in files not being sorted
-as data is actually only on remote servers and you locally can see a shortcut of the remote file
+> a. photos without exif data can be organized with date of creation in the file system using flag -d<br>
+> b. from photos with same name, only the first encountered is moved to new directory<br>
+> c. `Makefile make clean` will clear folder from executables<br>
+> d. unsupported files are not being copied<br>
+> e. corructed files may or may not cause the program to crash<br>
+> f. using cloud storage services like (iCloud, OneDrive, Dropbox, etc) may result in files not being sorted
+> as data is actually only on remote servers and you locally can see a shortcut of the remote file
 
 ---
 
 > If you encounter any problem or error please report it.<br>
-> Create pull requests if you find and solve an error.<br>
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
+> Create pull requests if you find and solve an error.<br> > ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
 
 <div id="4">
 

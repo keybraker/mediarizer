@@ -17,123 +17,157 @@
 #include "../mdzr_hdr/Organizer.h"
 #include "../mdzr_hdr/PhotoInfoClass.h"
 
-void version(void)
+inline int type(const std::filesystem::path &dir_path)
 {
-	std::cout << "Mediarizer Version: 2.0.0" << std::endl
-			  << "A project by Keybraker (https://github.com/keybraker)" << std::endl
-			  << "License - Released under the GNU LICENSE (https://www.gnu.org/philosophy/free-sw.html)" << std::endl
-			  << "Copyrights © Keybraker 2020, All rights reserved" << std::endl;
+	return std::filesystem::is_directory(dir_path)
+			   ? 0
+			   : std::filesystem::is_regular_file(dir_path)
+					 ? 1
+					 : -1;
 }
 
-void help(void)
-{
-	std::cout << "There are three modes to choose from:" << std::endl
-			  << "=====================================" << std::endl
-			  << std::endl
-			  << "1. File Mode" << std::endl
-			  << " ./mediarizer /path/media.file /path/to/store/folder" << std::endl
-			  << std::endl
-
-			  << "2. Folder Mode" << std::endl
-			  << " ./mediarizer /source/path/folder /path/to/store/folder" << std::endl
-			  << std::endl
-
-			  // << "3. Duplication Cleaning Mode" << std::endl
-			  // << " ./mediarizer -d /source/path/folder" << std::endl << std::endl
-
-			  << "Flags:" << std::endl
-			  << "======" << std::endl
-			  << std::endl
-			  << "flag name  "
-			  << " | flag acronym "
-			  << " | Argument     "
-			  << " | Description                                                              " << std::endl
-			  << "-input     "
-			  << " | -i           "
-			  << " | path / file  "
-			  << " | gives path to file or directory                                        " << std::endl
-			  << "-output    "
-			  << " | -o           "
-			  << " | path         "
-			  << " | path to output directory                                               " << std::endl
-			  << "-type      "
-			  << " | -t           "
-			  << " | tp1, tp2, .. "
-			  << " | organizes *only* given file type(s) (https://exiftool.org/#supported)  " << std::endl
-			  << "-photo     "
-			  << " | -p           "
-			  << " | none         "
-			  << " | organizes *only* photos                                                " << std::endl
-			  << "-video     "
-			  << " | -f           "
-			  << " | none         "
-			  << " | organizes *only* videos                                                " << std::endl
-			  << "-recursive "
-			  << " | -r           "
-			  << " | none         "
-			  << " | recursively process sub-directories                                    " << std::endl
-			  << "-delete    "
-			  << " | -x           "
-			  << " | none         "
-			  << " | deletes files in source directory                                      " << std::endl
-			  << "-duplicate "
-			  << " | -d           "
-			  << " | none         "
-			  << " | duplicates are moved into duplicate folder in move directory           " << std::endl
-			  << "-help      "
-			  << " | -h           "
-			  << " | none         "
-			  << " | displays a usage guide of Mediarizer                                   " << std::endl
-			  << "-version   "
-			  << " | -v           "
-			  << " | none         "
-			  << " | displays current version                                               " << std::endl
-			  << "-verbose   "
-			  << " | -s           "
-			  << " | none         "
-			  << " | outputs execution information while running                            " << std::endl
-			  << std::endl
-
-			  << "a. Multiple flags can be used in conjunction" << std::endl
-			  << "b. Multiple file types (https://exiftool.org/#supported) can be used as comma-separated string ex: -type jpg,png" << std::endl
-			  << "c. Duplicate photos are compared by type, size, date and resolution, only than are they categorized as same" << std::endl;
-}
-
-bool isDir(const char *path)
-{
-	struct stat sb;
-	if (stat(path, &sb) == 0 && S_ISDIR(sb.st_mode))
-		return true;
-	return false;
-}
-
-int isFile(const char *path)
-{
-	struct stat path_stat;
-	stat(path, &path_stat);
-	return S_ISREG(path_stat.st_mode);
-}
-
-std::vector<std::string> files_in_path(const std::filesystem::path &dir_path)
+std::vector<std::string> files_in_path(const std::filesystem::path &dir_path, bool isRecursive)
 {
 	std::vector<std::string> files;
+	if (dir_path.empty())
+		return files;
 
-	for (const auto &entry : std::filesystem::directory_iterator(dir_path))
+	switch (type(dir_path))
 	{
-		const auto filenameStr = entry.path().filename().string();
-		if (entry.is_directory())
+	case -1:
+		return files;
+		break;
+	case 0:
+		for (const auto &entry : std::filesystem::directory_iterator(dir_path))
 		{
-			// std::cout << "dir:  " << filenameStr << '\n';
+			if (type(entry) == -1)
+			{
+				return files;
+			}
+			else if (type(entry) == 0)
+			{
+				std::vector<std::string> filesEncapsulated = files_in_path(entry, isRecursive);
+				files.insert(files.end(), filesEncapsulated.begin(), filesEncapsulated.end());
+			}
+			else if (type(entry) == 1)
+			{
+				if (std::string(entry.path().filename())[0] == '.')
+					continue;
+				files.push_back(entry.path());
+			}
 		}
-		else if (entry.is_regular_file())
-		{
-			// std::cout << "file: " << filenameStr << '\n';
-			files.push_back(filenameStr);
-		}
-		else
-			std::cout << "?? " << filenameStr << '\n';
+		break;
+	case 1:
+		if (std::string(dir_path.filename())[0] == '.')
+			break;
+		files.push_back(dir_path);
+		break;
 	}
+
 	return files;
+}
+
+std::string generate_move_directory(std::string date)
+{
+	std::string move_directory = "";
+	if (date == "")
+	{
+		move_directory += std::string("Undetermined");
+	}
+	else
+	{
+		std::string date_year = date.substr(0, 4);
+		std::string date_month = date.substr(date.find(":") + 1, 4);
+		int month_number = stoi(date_month);
+		std::string date_month_name = g_months[month_number - 1];
+		move_directory += date_year + "/" + date_month_name;
+	}
+	return move_directory;
+}
+
+bool create_move_directory(std::string move_directory)
+{
+	if (move_directory.empty())
+		return false;
+	try
+	{
+		// Recursively create target directory if not existing.
+		std::filesystem::create_directories(move_directory);
+		return true;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what();
+		return false;
+	}
+}
+
+bool move_image_to_directory(std::string source_directory, std::string move_directory)
+{
+	if (move_directory.empty())
+		return false;
+
+	std::filesystem::path sourceFile = source_directory;
+	std::filesystem::path target = move_directory / sourceFile.filename();
+	try // If you want to avoid exception handling, then use the error code overload of the following functions.
+	{
+		// std::filesystem::create_directories(move_directory); // Recursively create target directory if not existing.
+		std::filesystem::copy_file(sourceFile, target, std::filesystem::copy_options::skip_existing); //overwrite_existing
+		// std::filesystem::remove(sourceFile);
+		return true;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what();
+		return false;
+	}
+}
+
+bool files_metadata_exiv2(std::vector<std::string> files, std::string move_path)
+{
+	// #pragma omp parallel for private(i)
+	for (auto file : files)
+	{
+		Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open(file);
+		assert(image.get() != 0);
+		image->readMetadata();
+
+		Exiv2::ExifData &image_exif_data = image->exifData();
+		// Exiv2::IptcData &iptcData = image->iptcData();
+		// Exiv2::XmpData &xmpData = image->xmpData();
+
+		if (image_exif_data.empty())
+		{
+			std::cout << "no exif data for image: " << file << std::endl;
+			continue;
+		}
+
+		std::string date = "";
+		std::string move_directory = move_path + "/";
+
+		auto key_pos = image_exif_data.findKey(Exiv2::ExifKey("Exif.Image.DateTime"));
+		if (key_pos != image_exif_data.end())
+			date = key_pos->value().toString();
+		else
+		{
+			auto key_pos = image_exif_data.findKey(Exiv2::ExifKey("Exif.Image.DateTimeOriginal"));
+			if (key_pos != image_exif_data.end())
+				date = key_pos->value().toString();
+			else
+				continue;
+		}
+
+		// Exiv2::ExifData::iterator end = image_exif_data.end();
+		// for (Exiv2::ExifData::iterator metadata = image_exif_data.begin(); metadata != end; ++metadata)
+		// {
+		// }
+
+		move_directory += generate_move_directory(date);
+		create_move_directory(move_directory);
+		move_image_to_directory(file, move_directory);
+	}
+
+	return true;
 }
 
 std::vector<PhotoInfoClass> linked_list_to_vector(char *path, const char *arguments)
@@ -210,89 +244,42 @@ std::vector<PhotoInfoClass> linked_list_to_vector(char *path, const char *argume
 
 void file_analyzer(char *path, char *move_path, const char *arguments)
 {
-	auto start0 = std::chrono::high_resolution_clock::now();
+	auto start_1 = std::chrono::high_resolution_clock::now();
+	auto files = files_in_path(path, true); // add is recursive
+	auto stop_1 = std::chrono::high_resolution_clock::now();
 
-	std::vector<PhotoInfoClass> photo_list = linked_list_to_vector(path, arguments);
-	if (photo_list.empty())
-	{
-		return;
-	}
+	auto start_2 = std::chrono::high_resolution_clock::now();
+	files_metadata_exiv2(files, std::string(move_path));
+	auto stop_2 = std::chrono::high_resolution_clock::now();
 
-	auto stop0 = std::chrono::high_resolution_clock::now();
-	auto duration0 = std::chrono::duration_cast<std::chrono::microseconds>(stop0 - start0);
+	auto start_3 = std::chrono::high_resolution_clock::now();
+	auto stop_3 = std::chrono::high_resolution_clock::now();
 
-	std::cout << "1. Processed " << photo_list.size() << " photo(s)"
-			  << std::setw(50 - 20 - std::to_string(photo_list.size()).length())
-			  << " | " << duration0.count()
-			  << std::setw(20 - std::to_string(duration0.count()).length())
-			  << " microsecs" << endl;
+	auto start_4 = std::chrono::high_resolution_clock::now();
+	auto stop_4 = std::chrono::high_resolution_clock::now();
 
-	auto start = std::chrono::high_resolution_clock::now();
+	auto start_5 = std::chrono::high_resolution_clock::now();
+	auto stop_5 = std::chrono::high_resolution_clock::now();
 
-	int i;
-	// #pragma omp parallel for private(i)
-	for (i = 0; i < (int)photo_list.size(); ++i)
-	{
-		// #pragma omp task
-		photo_list[i].calculate_move_directory(move_path);
-		// #pragma omp taskwait
-	}
+	auto duration_1 = std::chrono::duration_cast<std::chrono::microseconds>(stop_1 - start_1);
+	auto duration_2 = std::chrono::duration_cast<std::chrono::microseconds>(stop_2 - start_2);
+	auto duration_3 = std::chrono::duration_cast<std::chrono::microseconds>(stop_3 - start_3);
+	auto duration_4 = std::chrono::duration_cast<std::chrono::microseconds>(stop_4 - start_4);
+	auto duration_5 = std::chrono::duration_cast<std::chrono::microseconds>(stop_5 - start_5);
 
-	auto stop = std::chrono::high_resolution_clock::now();
-	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+	std::cout << std::endl
+			  << std::left << std::setfill('-') << std::setw(20)
+			  << "1. Indexed " << files.size() << " photo/s "
+			  << std::left << std::setfill('+') << std::setw(20)
+			  << duration_1.count() << " microsecs" << std::endl;
+	std::cout << std::left << std::setfill('-') << std::setw(20)
+			  << "2. Read " << files.size() << " photo/s "
+			  << std::left << std::setfill('+') << std::setw(20)
+			  << duration_2.count() << " microsecs" << std::endl;
+	std::cout << std::left << std::setfill('-') << std::setw(20)
+			  << "3. Read " << files.size() << " metadata "
+			  << std::left << std::setfill('+') << std::setw(20)
+			  << duration_3.count() << " microsecs" << std::endl;
 
-	std::cout << "2. Calculated move directory for " << photo_list.size() << " photo(s)"
-			  << std::setw(50 - 40 - std::to_string(photo_list.size()).length())
-			  << " | " << duration.count()
-			  << std::setw(20 - std::to_string(duration.count()).length())
-			  << " microsecs" << endl;
-
-	auto start1 = std::chrono::high_resolution_clock::now();
-
-	std::set<std::string> unique_paths;
-	for (i = 0; i < (int)photo_list.size(); ++i)
-	{
-		long unsigned int num_of_uniques = unique_paths.size();
-		unique_paths.insert(photo_list[i].move_directory);
-		if (unique_paths.size() > num_of_uniques)
-		{
-			try
-			{
-				std::filesystem::create_directories(photo_list[i].move_directory);
-			}
-			catch (std::exception &e)
-			{
-				std::cout << e.what() << std::endl;
-			}
-		}
-	}
-
-	auto stop1 = std::chrono::high_resolution_clock::now();
-	auto duration1 = std::chrono::duration_cast<std::chrono::microseconds>(stop1 - start1);
-
-	std::cout << "3. Created " << unique_paths.size() << " unique move path(s)"
-			  << std::setw(50 - 29 - std::to_string(unique_paths.size()).length())
-			  << " | " << duration1.count()
-			  << std::setw(20 - std::to_string(duration1.count()).length())
-			  << " microsecs" << endl;
-
-	auto start2 = std::chrono::high_resolution_clock::now();
-
-	// #pragma omp parallel for private(i)
-	for (i = 0; i < (int)photo_list.size(); ++i)
-	{
-		// #pragma omp task
-		photo_list[i].execute_move();
-		// #pragma omp taskwait
-	}
-
-	auto stop2 = std::chrono::high_resolution_clock::now();
-	auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(stop2 - start2);
-
-	std::cout << "4. Moved " << photo_list.size() << " photo(s)"
-			  << std::setw(50 - 16 - std::to_string(photo_list.size()).length())
-			  << " | " << duration2.count()
-			  << std::setw(20 - std::to_string(duration2.count()).length())
-			  << " microsecs" << endl;
 	return;
 }

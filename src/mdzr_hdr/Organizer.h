@@ -47,6 +47,8 @@
 #include <algorithm>
 #include <chrono>
 
+#include <exiv2/exiv2.hpp>
+
 #include "../exif_hdr/ExifTool.h"
 #include "../mdzr_hdr/PhotoInfoClass.h"
 
@@ -73,51 +75,94 @@
 
 using namespace std;
 
-#define exit_err(FILE, LINE, ERR)                                                           \
-	{                                                                                       \
-		fprintf(stderr, a_c_r "ERROR: %-30s" a_c_re " | [%-20s, %-5d]\n", ERR, FILE, LINE); \
-		exit(EXIT_FAILURE);                                                                 \
-	}
-
-#define prnt_scs(FILE, LINE, MSG)                                                              \
-	{                                                                                          \
-		fprintf(stdout, "SUCCS: " a_c_g "%-30s" a_c_re " | [%-20s, %-5d]\n", MSG, FILE, LINE); \
-	}
-
-#define prnt_inf(FILE, LINE, MSG)                                                              \
-	{                                                                                          \
-		fprintf(stdout, "MESSG: " a_c_y "%-30s" a_c_re " | [%-20s, %-5d]\n", MSG, FILE, LINE); \
-	}
-
-typedef struct originalDateData originalDateData;
-typedef struct threader threader;
-
-struct threader
+inline void version(void)
 {
-	const char *source;
-	const char *dest;
-};
+    std::cout << "Mediarizer Version: 2.0.0" << std::endl
+              << "A project by Keybraker (https://github.com/keybraker)" << std::endl
+              << "License - Released under the GNU LICENSE (https://www.gnu.org/philosophy/free-sw.html)" << std::endl
+              << "Copyrights © Keybraker 2020, All rights reserved" << std::endl;
+}
 
-struct originalDateData
+inline void help(void)
 {
-	int year;
-	int month;
-	int day;
-	int hour;
-	int minute;
-	int second;
-};
+    std::cout << "There are three modes to choose from:" << std::endl
+              << "=====================================" << std::endl
+              << std::endl
+              << "1. File Mode" << std::endl
+              << " ./mediarizer /path/media.file /path/to/store/folder" << std::endl
+              << std::endl
 
-void version(void);
-void help(void);
+              << "2. Folder Mode" << std::endl
+              << " ./mediarizer /source/path/folder /path/to/store/folder" << std::endl
+              << std::endl
 
-bool isDir(const char *path);
-int isFile(const char *path);
+              // << "3. Duplication Cleaning Mode" << std::endl
+              // << " ./mediarizer -d /source/path/folder" << std::endl << std::endl
+
+              << "Flags:" << std::endl
+              << "======" << std::endl
+              << std::endl
+              << "flag name  "
+              << " | flag acronym "
+              << " | Argument     "
+              << " | Description                                                              " << std::endl
+              << "-input     "
+              << " | -i           "
+              << " | path / file  "
+              << " | gives path to file or directory                                        " << std::endl
+              << "-output    "
+              << " | -o           "
+              << " | path         "
+              << " | path to output directory                                               " << std::endl
+              << "-type      "
+              << " | -t           "
+              << " | tp1, tp2, .. "
+              << " | organizes *only* given file type(s) (https://exiftool.org/#supported)  " << std::endl
+              << "-photo     "
+              << " | -p           "
+              << " | none         "
+              << " | organizes *only* photos                                                " << std::endl
+              << "-video     "
+              << " | -f           "
+              << " | none         "
+              << " | organizes *only* videos                                                " << std::endl
+              << "-recursive "
+              << " | -r           "
+              << " | none         "
+              << " | recursively process sub-directories                                    " << std::endl
+              << "-delete    "
+              << " | -x           "
+              << " | none         "
+              << " | deletes files in source directory                                      " << std::endl
+              << "-duplicate "
+              << " | -d           "
+              << " | none         "
+              << " | duplicates are moved into duplicate folder in move directory           " << std::endl
+              << "-help      "
+              << " | -h           "
+              << " | none         "
+              << " | displays a usage guide of Mediarizer                                   " << std::endl
+              << "-version   "
+              << " | -v           "
+              << " | none         "
+              << " | displays current version                                               " << std::endl
+              << "-verbose   "
+              << " | -s           "
+              << " | none         "
+              << " | outputs execution information while running                            " << std::endl
+              << std::endl
+
+              << "a. Multiple flags can be used in conjunction" << std::endl
+              << "b. Multiple file types (https://exiftool.org/#supported) can be used as comma-separated string ex: -type jpg,png" << std::endl
+              << "c. Duplicate photos are compared by type, size, date and resolution, only than are they categorized as same" << std::endl;
+}
 
 std::string get_date_path(char *date);
 std::vector<PhotoInfoClass> linked_list_to_vector(char *path);
 void *calculate_move_directory(PhotoInfo photo_info, char *move_path);
-
 void file_analyzer(char *path, char *move_path, const char *arguments);
+
+std::vector<std::string> files_in_path(const std::filesystem::path &dir_path, bool isRecursive);
+bool files_metadata_exiv2(std::vector<std::string> files, std::string move_path);
 
 #endif
