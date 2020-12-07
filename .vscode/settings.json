@@ -57,7 +57,13 @@
         "regex": "cpp",
         "bitset": "cpp",
         "condition_variable": "cpp",
-        "shared_mutex": "cpp"
+        "shared_mutex": "cpp",
+        "__config": "cpp",
+        "__locale": "cpp",
+        "__split_buffer": "cpp",
+        "__string": "cpp",
+        "__tree": "cpp",
+        "forward_list": "cpp"
     },
     "editor.formatOnSave": true
 }

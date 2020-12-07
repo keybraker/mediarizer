@@ -75,36 +75,37 @@ inline bool is_file_video(std::string file_name)
 }
 
 inline bool is_file_supported(
-	std::string file_name,
+	std::filesystem::path file_name,
 	bool photo_flag,
 	bool video_flag,
 	std::vector<std::string> types)
 {
-	if (file_name[0] == '.')
+	if (std::string(file_name.filename())[0] == '.')
+	{
 		return false;
+	}
 
 	if (photo_flag && !video_flag)
 	{
-		if (is_file_image(file_name))
+		if (is_file_image(file_name.filename()))
 			return true;
 	}
 	else if (!photo_flag && video_flag)
 	{
-		if (is_file_video(file_name))
+		if (is_file_video(file_name.filename()))
 			return true;
 	}
 	else if (photo_flag && video_flag)
 	{
-		if (is_file_image(file_name))
+		if (is_file_image(file_name.filename()))
 			return true;
-		if (is_file_video(file_name))
+		if (is_file_video(file_name.filename()))
 			return true;
 	}
 
 	if (types.size())
 		for (auto type : types)
 		{
-			std::cout << __LINE__ << ": " << photo_flag << ", " << video_flag << ", " << type << endl;
 			return is_in_file_list(photo_flag, video_flag, type);
 		}
 	else
@@ -145,13 +146,13 @@ std::vector<std::string> files_in_path(
 			}
 			else if (type(entry) == 1)
 			{
-				if (is_file_supported(std::string(entry.path()), photo_flag, video_flag, types))
+				if (is_file_supported(entry.path(), photo_flag, video_flag, types))
 					files.push_back(entry.path());
 			}
 		}
 		break;
 	case 1:
-		if (is_file_supported(std::string(dir_path.filename()), photo_flag, video_flag, types))
+		if (is_file_supported(dir_path, photo_flag, video_flag, types))
 			files.push_back(dir_path);
 		break;
 	}
@@ -164,7 +165,7 @@ std::string generate_move_directory(std::string date)
 	std::string move_directory = "";
 	if (date == "")
 	{
-		move_directory += std::string("Undetermined");
+		move_directory += std::string("undetermined");
 	}
 	else
 	{
@@ -223,12 +224,15 @@ bool files_metadata_exiv2(
 	std::vector<std::string> files,
 	std::string move_path,
 	bool move_flag,
-	bool delete_flag)
+	bool delete_flag,
+	bool verbose_flag)
 {
 	// #pragma omp parallel for private(i)
 	for (auto file : files)
 	{
-		Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open(file);
+		std::cout << "processing: " << file << std::endl;
+
+		auto image = Exiv2::ImageFactory::open(file);
 		assert(image.get() != 0);
 		image->readMetadata();
 
@@ -238,9 +242,11 @@ bool files_metadata_exiv2(
 
 		if (image_exif_data.empty())
 		{
-			std::cout << "no exif data for image: " << file << std::endl;
+			if (verbose_flag)
+				std::cout << "-- exif data unavailable for:" << file << std::endl;
 			// continue;
-			std::cout << "moving to Undetermined folder" << std::endl;
+			if (move_flag)
+				std::cout << "-- moving to undetermined folder" << std::endl;
 		}
 
 		std::string date = "";
@@ -291,7 +297,7 @@ void file_analyzer(char *path, char *move_path,
 	auto stop_1 = std::chrono::high_resolution_clock::now();
 
 	auto start_2 = std::chrono::high_resolution_clock::now();
-	files_metadata_exiv2(files, std::string(move_path), move_flag, delete_flag);
+	files_metadata_exiv2(files, std::string(move_path), move_flag, delete_flag, verbose_flag);
 	auto stop_2 = std::chrono::high_resolution_clock::now();
 
 	auto duration_1 = std::chrono::duration_cast<std::chrono::microseconds>(stop_1 - start_1);

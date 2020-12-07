@@ -137,7 +137,7 @@ void PhotoInfoClass::calculate_move_directory(std::string move_path)
 
 	if (date.empty() || date.size() < 10)
 	{
-		move_directory += std::string("Undetermined");
+		move_directory += std::string("undetermined");
 	}
 	else
 	{
