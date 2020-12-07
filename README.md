@@ -4,9 +4,8 @@
 ![alt text](https://raw.githubusercontent.com/keybraker/Mediarizer/master/img/new_mediarizer_logo.png)
 
 Why use Media Organizer:
-
-- Fast and easy organisation of photos / videos
-- Lightweight and runs on all harware and OS
+- Fast and easy organisation of photos / videos by date
+- Lightweight, fast and runs on all harware and OS
 
 ---
 
@@ -29,14 +28,14 @@ Why use Media Organizer:
 
 <div id="2">
   
-## Building, Installing, Using and Uninstalling Mediarizer
+## Building, Installing and Using Mediarizer
 
 <div id="2-1">
   
 ### Prerequisites
-1. Make sure you have downloaded g++ (on macOS clang++ is installed with Xcode installation).
-2. If you want to achieve better performance you should download OpenMP for multithreading.
-3. Download and install [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) by Phil Harvey.
+1. Make sure you have downloaded `g++` (on macOS `clang++` is installed with Xcode installation).
+2. WIP: __If you want to achieve better performance you should download OpenMP for multithreading.__
+3. Download and install [Exiv2](https://www.exiv2.org/) on your computer.
 
 <div id="2-2">
   
@@ -51,7 +50,7 @@ cd Mediarizer
 2. To compile the program just type:
 
 ```bash
-make or make threaded
+make
 ```
 
 <div id="3">
@@ -66,7 +65,7 @@ make or make threaded
 | :--------- | :----------- | :----------: | :----------------------------------------------------------------------- | :------ | :-------- |
 | -input     | -i           | path / file  | _gives path to file or directory_                                        | working | yes       |
 | -output    | -o           |     path     | _path to output directory_                                               | working | yes       |
-| -type      | -t           | tp1, tp2, .. | _organizes *only* given [file type(s)](https://exiftool.org/#supported)_ | working | no        |
+| -type      | -t           | tp1, tp2, .. | _organizes *only* given file type/s(_[image](https://dev.exiv2.org/projects/exiv2/wiki/Supported_image_formats), [video](https://dev.exiv2.org/projects/exiv2/wiki/Supported_video_formats)_) | working | no        |
 | -photo     | -p           |     none     | _organizes *only* photos_                                                | working | no        |
 | -video     | -v           |     none     | _organizes *only* videos_                                                | working | no        |
 | -recursive | -r           |     none     | _recursively process sub-directories_                                    | working | no        |
@@ -80,7 +79,7 @@ make or make threaded
 | -verbose   | -s           |     none     | _outputs execution information while running_                            | working | no        |
 
 > a. Multiple flags can be used in conjunction<br>
-> b. Multiple _[file types](https://exiftool.org/#supported)_ can be used as comma-separated string ex: -type jpg,png<br>
+> b. Multiple file types(_[image](https://dev.exiv2.org/projects/exiv2/wiki/Supported_image_formats)_), [video](https://dev.exiv2.org/projects/exiv2/wiki/Supported_video_formats)_ can be used as comma-separated string ex: -type jpg,png<br>
 > c. Duplicate photos are compared by type, size, date and resolution, only than are they categorized as same<br>
 
 ---
@@ -89,69 +88,63 @@ make or make threaded
 
 ### Examples
 
-a. single file sort
+a. sort single file
 
 ```bash
 ./mediarizer -i /path/media.file -o /path/to/store/folder
 ./mediarizer --input /path/media.file --output /path/to/store/folder
 ```
 
-b. directory sort
+b. sort directory
 
 ```bash
 ./mediarizer -i /path/folder -o /path/to/store/folder
 ./mediarizer --input /path/folder --output /path/to/store/folder
 ```
 
-c. flags can be used in any order
+c. sort directory and encapsulated directories
+
+```bash
+./mediarizer -i /path/folder -o /path/to/store/folder -r
+```
+
+d. flags can be used in any order
 
 ```
 ./mediarizer -i /path/source/folder -f mp4,jpg,png -o /path/to/store/folder
 ./mediarizer -o /path/to/store/folder -i /path/source/folder -f mp4,jpg,png
 ```
 
-d. this execution will only sort _mp4_ and _jpg_ files to move direcotry
+e. this execution will only sort _mp4_ and _jpg_ files to move direcotry
 
 ```bash
 ./mediarizer -i  /path/source/folder -o /path/to/store/folder -f mp4,jpg
 ```
 
-e. will only copy photos _not_ videos:
+f. will only copy photos _not_ videos:
 
 ```bash
 ./mediarizer -i /path/source/folder -o /path/to/store/folder -p
 ./mediarizer -i /path/source/folder -o /path/to/store/folder --photo
 ```
 
-f. will only copy photos _not_ videos:
-
-```bash
-./mediarizer -i /path/source/folder -o /path/to/store/folder -v
-./mediarizer -i /path/source/folder -o /path/to/store/folder --video
-```
-
-g. duplicates files will be moved to folder _"duplicates"_:
-
-```bash
-./mediarizer -i /path/source/folder -d
-```
-
 <div id="3-3">
 
 ### Additional Information
 
-> a. photos without exif data can be organized with date of creation in the file system using flag -d<br>
-> b. from photos with same name, only the first encountered is moved to new directory<br>
-> c. `Makefile make clean` will clear folder from executables<br>
+> a. photos without exif data can be organized with date of creation in the file system using flag `-D`<br>
+> b. when two photos have the same name, only the first encountered is moved to new directory<br>
+> c. `make clean` will clear folder from executables<br>
 > d. unsupported files are not being copied<br>
-> e. corructed files may or may not cause the program to crash<br>
-> f. using cloud storage services like (iCloud, OneDrive, Dropbox, etc) may result in files not being sorted
-> as data is actually only on remote servers and you locally can see a shortcut of the remote file
+> e. corructed files may cause the program to crash<br>
+> f. using cloud storage services like (iCloud, OneDrive, Dropbox, etc) may result in unexpected behaviour 
+as data is actually only on remote servers and you locally can see a shortcut of the remote file
 
 ---
 
 > If you encounter any problem or error please report it.<br>
-> Create pull requests if you find and solve an error.<br> > ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
+> Create pull requests if you find and solve an error.<br>
+![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
 
 <div id="4">
 
@@ -161,7 +154,7 @@ g. duplicates files will be moved to folder _"duplicates"_:
 
 ### Release History
 
-- v2.0.0: 04 December 2020: Refactor application.
+- v2.0.0: 08 December 2020: Refactor application.
 - v1.7.0: 22 August 2017: Memory added, for stop and restart.
 - v1.6.0: 20 August 2017: Fully functional duplication deletion (BETA).
 - v1.5.0: 19 August 2017: Added duplication deletion.
@@ -175,7 +168,7 @@ g. duplicates files will be moved to folder _"duplicates"_:
 
 ### Acknowledgements
 
-> Acknowledgments - **Phil Harvey** with the exeptional [**ExifTool**](http://owl.phy.queensu.ca/~phil/exiftool/)<br>
+> Acknowledgments - **Exiv2 Team** for [**Exiv2**](https://github.com/exiv2/exiv2)<br>
 > Author - **Ioannis Tsiakkas** - _(Keybraker)_ - [Keybraker](https://github.com/keybraker)<br>
 > License - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)<br>
 
