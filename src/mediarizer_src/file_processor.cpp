@@ -64,7 +64,8 @@ bool is_file_video(std::string file_name)
 	return false;
 }
 
-bool is_file_supported(std::filesystem::path file_name, bool photo_flag, bool video_flag, std::vector<std::string> types)
+bool is_file_supported(std::filesystem::path file_name, bool photo_flag,
+					   bool video_flag, std::vector<std::string> types)
 {
 	if (std::string(file_name.filename())[0] == '.')
 	{
@@ -91,18 +92,15 @@ bool is_file_supported(std::filesystem::path file_name, bool photo_flag, bool vi
 
 	if (types.size())
 		for (auto type : types)
-		{
 			return is_in_file_list(photo_flag, video_flag, type);
-		}
 	else
-	{
 		return true;
-	}
 
 	return false;
 }
 
-std::vector<std::string> files_in_path(const std::filesystem::path &dir_path, flag_struct &flags, vector<std::string> types)
+std::vector<std::string> files_in_path(const std::filesystem::path &dir_path,
+									   flag_struct &flags, vector<std::string> types)
 {
 	std::vector<std::string> files;
 	if (dir_path.empty())

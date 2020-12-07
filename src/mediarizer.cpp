@@ -23,7 +23,6 @@
 int main(int argc, char *argv[])
 {
 	flag_struct *flags = new flag_struct();
-	// static flag_struct flags;
 
 	flags->input_flag = false;
 	flags->output_flag = false;
