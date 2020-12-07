@@ -7,12 +7,12 @@ Why use Media Organizer:
 - Fast and easy organisation of photos / videos by date
 - Lightweight, fast and runs on all harware and OS
 
----
-
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDisplay.jpg)
 <br>
 
 > These is achieved in one run of the program
+
+---
 
 1. [Mediarizer](#1)
 2. [Prerequisite and Build](#2)
@@ -65,7 +65,7 @@ make
 | :--------- | :----------- | :----------: | :----------------------------------------------------------------------- | :------ | :-------- |
 | -input     | -i           | path / file  | _gives path to file or directory_                                        | working | yes       |
 | -output    | -o           |     path     | _path to output directory_                                               | working | yes       |
-| -type      | -t           | tp1, tp2, .. | _organizes *only* given file type/s(_[image](https://dev.exiv2.org/projects/exiv2/wiki/Supported_image_formats), [video](https://dev.exiv2.org/projects/exiv2/wiki/Supported_video_formats)_) | working | no        |
+| -type      | -t           | tp1, tp2, .. | _organizes *only* given file type/s([image](https://dev.exiv2.org/projects/exiv2/wiki/Supported_image_formats), [video](https://dev.exiv2.org/projects/exiv2/wiki/Supported_video_formats)) | working | no        |
 | -photo     | -p           |     none     | _organizes *only* photos_                                                | working | no        |
 | -video     | -v           |     none     | _organizes *only* videos_                                                | working | no        |
 | -recursive | -r           |     none     | _recursively process sub-directories_                                    | working | no        |
@@ -79,7 +79,7 @@ make
 | -verbose   | -s           |     none     | _outputs execution information while running_                            | working | no        |
 
 > a. Multiple flags can be used in conjunction<br>
-> b. Multiple file types(_[image](https://dev.exiv2.org/projects/exiv2/wiki/Supported_image_formats)_), [video](https://dev.exiv2.org/projects/exiv2/wiki/Supported_video_formats)_ can be used as comma-separated string ex: -type jpg,png<br>
+> b. Multiple file types([image](https://dev.exiv2.org/projects/exiv2/wiki/Supported_image_formats), [video](https://dev.exiv2.org/projects/exiv2/wiki/Supported_video_formats)) can be used as comma-separated string ex: -type jpg,png<br>
 > c. Duplicate photos are compared by type, size, date and resolution, only than are they categorized as same<br>
 
 ---
@@ -154,7 +154,7 @@ as data is actually only on remote servers and you locally can see a shortcut of
 
 ### Release History
 
-- v2.0.0: 08 December 2020: Refactor application.
+- v2.0.0: 08 December 2020: Refactored project and used [Exiv2](https://github.com/exiv2/exiv2).
 - v1.7.0: 22 August 2017: Memory added, for stop and restart.
 - v1.6.0: 20 August 2017: Fully functional duplication deletion (BETA).
 - v1.5.0: 19 August 2017: Added duplication deletion.
