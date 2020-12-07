@@ -14,28 +14,30 @@
 // Created:     02-12-2020 - Ioannis Tsiakkas
 //------------------------------------------------------------------------------
 
-#include "mediarizer_hdr/metadata.h"
+#include "mediarizer_hdr/processor.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
 
-static int
-	input_flag = false,
-	output_flag = false,
-	photo_flag = false,
-	video_flag = false,
-	type_flag = false,
-	recursive_flag = false,
-	date_flag = false,
-	move_flag = false,
-	write_flag = false,
-	delete_flag = false,
-	duplicate_flag = false,
-	verbose_flag = false;
-
 int main(int argc, char *argv[])
 {
+	flag_struct *flags = new flag_struct();
+	// static flag_struct flags;
+
+	flags->input_flag = false;
+	flags->output_flag = false;
+	flags->photo_flag = false;
+	flags->video_flag = false;
+	flags->type_flag = false;
+	flags->recursive_flag = false;
+	flags->date_flag = false;
+	flags->move_flag = false;
+	flags->write_flag = false;
+	flags->delete_flag = false;
+	flags->duplicate_flag = false;
+	flags->verbose_flag = false;
+
 	int c, option_index = 0; // getopt_long stores the option index
 	char *input = NULL, *output = NULL;
 	std::vector<std::string> types;
@@ -43,20 +45,20 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		static struct option long_options[] = {
-			{"input", required_argument, &input_flag, 'i'},
-			{"output", required_argument, &output_flag, 'o'},
-			{"type", required_argument, &type_flag, 't'},
-			{"photo", no_argument, &photo_flag, 'p'},
-			{"video", no_argument, &video_flag, 'v'},
-			{"recursive", no_argument, &recursive_flag, 'r'},
-			{"date", no_argument, &date_flag, 'D'},
-			{"move", no_argument, &move_flag, 'm'},
-			{"write", no_argument, &write_flag, 'w'},
-			{"delete", no_argument, &delete_flag, 'x'},
-			{"duplicate", no_argument, &duplicate_flag, 'd'},
+			{"input", required_argument, &flags->input_flag, 'i'},
+			{"output", required_argument, &flags->output_flag, 'o'},
+			{"type", required_argument, &flags->type_flag, 't'},
+			{"photo", no_argument, &flags->photo_flag, 'p'},
+			{"video", no_argument, &flags->video_flag, 'v'},
+			{"recursive", no_argument, &flags->recursive_flag, 'r'},
+			{"date", no_argument, &flags->date_flag, 'D'},
+			{"move", no_argument, &flags->move_flag, 'm'},
+			{"write", no_argument, &flags->write_flag, 'w'},
+			{"delete", no_argument, &flags->delete_flag, 'x'},
+			{"duplicate", no_argument, &flags->duplicate_flag, 'd'},
 			{"help", no_argument, NULL, 'h'},
 			{"Version", no_argument, NULL, 'V'},
-			{"verbose", no_argument, &verbose_flag, 's'},
+			{"verbose", no_argument, &flags->verbose_flag, 's'},
 			{0, 0, 0, 0}};
 
 		c = getopt_long(argc, argv, "i:o:t:pvrDwxdmhVs", long_options, &option_index);
@@ -68,16 +70,16 @@ int main(int argc, char *argv[])
 		{
 		case 'i':
 			std::cout << "input:\t" << optarg << std::endl;
-			input_flag = true;
+			flags->input_flag = true;
 			input = strdup(optarg);
 			break;
 		case 'o':
 			std::cout << "output:\t" << optarg << std::endl;
-			output_flag = true;
+			flags->output_flag = true;
 			output = strdup(optarg);
 			break;
 		case 't':
-			type_flag = true;
+			flags->type_flag = true;
 			types = split(std::string(strdup(optarg)), ",");
 			for (auto type : types)
 			{
@@ -92,28 +94,28 @@ int main(int argc, char *argv[])
 			}
 			break;
 		case 'p':
-			photo_flag = true;
+			flags->photo_flag = true;
 			break;
 		case 'v':
-			video_flag = true;
+			flags->video_flag = true;
 			break;
 		case 'r':
-			recursive_flag = true;
+			flags->recursive_flag = true;
 			break;
 		case 'D':
-			date_flag = true;
+			flags->date_flag = true;
 			break;
 		case 'w':
-			write_flag = true;
+			flags->write_flag = true;
 			break;
 		case 'x':
-			delete_flag = true;
+			flags->delete_flag = true;
 			break;
 		case 'd':
-			duplicate_flag = true;
+			flags->duplicate_flag = true;
 			break;
 		case 'm':
-			move_flag = true;
+			flags->move_flag = true;
 			break;
 		case 'h':
 			help();
@@ -123,7 +125,7 @@ int main(int argc, char *argv[])
 			exit(EXIT_SUCCESS);
 			break;
 		case 's':
-			verbose_flag = true;
+			flags->verbose_flag = true;
 			break;
 		case 0:
 			break;
@@ -136,22 +138,12 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	if (!input_flag || !output_flag)
+	if (!flags->input_flag || !flags->output_flag)
 	{
 		std::cout << "input and out directories are mandatory" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
-	file_analyzer(input, output,
-				  types,
-				  photo_flag,
-				  video_flag,
-				  recursive_flag,
-				  date_flag,
-				  move_flag,
-				  write_flag,
-				  delete_flag,
-				  duplicate_flag,
-				  verbose_flag);
+	file_analyzer(input, output, *flags, types);
 	return 1;
 }

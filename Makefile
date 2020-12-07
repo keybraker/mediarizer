@@ -39,16 +39,8 @@ endif
 MDRZ = -I mediarizer_hdr
 
 OBJ_MAIN = src/mediarizer.o
-OBJ_MDRZ = src/mediarizer_src/metadata.o # src/mediarizer_src/string.o src/mediarizer_src/file.o
-HDR_MDRZ = src/mediarizer_hdr/metadata.h # src/mediarizer_hdr/string.h src/mediarizer_hdr/file.h
-
-# EXIF = -I exif_hdr
-# MDRZ = -I mdzr_hdr 
-
-# OBJ_EXIF = src/exif_src/ExifTool.o src/exif_src/ExifToolPipe.o src/exif_src/TagInfo.o
-# HDR_EXIF = src/exif_hdr/ExifTool.h src/exif_hdr/ExifToolPipe.h src/exif_hdr/TagInfo.h
-# OBJ_MDZR = src/mdzr_src/organizer_functions.o src/mdzr_src/photoInfoClass.cpp
-# HDR_MDZR = src/mdzr_hdr/Organizer.h src/mdzr_hdr/PhotoInfoClass.h
+OBJ_MDRZ = src/mediarizer_src/meta_processor.o src/mediarizer_src/string_processor.o src/mediarizer_src/file_processor.o
+HDR_MDRZ = src/mediarizer_hdr/processor.h
 
 all: organizer
 
