@@ -168,7 +168,7 @@ as data is actually only on remote servers and you locally can see a shortcut of
 
 ### Acknowledgements
 
-> Acknowledgments - **Exiv2 Team** for [**Exiv2**](https://github.com/exiv2/exiv2)<br>
+> Acknowledgments - **Exiv2 Team** for [Exiv2](https://github.com/exiv2/exiv2)<br>
 > Author - **Ioannis Tsiakkas** - _(Keybraker)_ - [Keybraker](https://github.com/keybraker)<br>
 > License - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)<br>
 
