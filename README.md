@@ -1,7 +1,7 @@
 <div id="1">
   
 # [Mediarizer](https://github.com/keybraker/Media-Organizer)
-![alt text](https://github.com/keybraker/Mediarizer/blob/updating-code-quality/img/new_mediarizer_logo.png)
+![alt text](https://raw.githubusercontent.com/keybraker/Mediarizer/master/img/new_mediarizer_logo.png)
 
 Why use Media Organizer:
 
