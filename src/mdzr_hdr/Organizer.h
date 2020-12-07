@@ -170,6 +170,7 @@ inline void help(void)
               << "c. Duplicate photos are compared by type, size, date and resolution, only than are they categorized as same" << std::endl;
 }
 
+std::vector<std::string> split(std::string types, std::string delimiter);
 std::string get_date_path(char *date);
 std::vector<PhotoInfoClass> linked_list_to_vector(char *path);
 

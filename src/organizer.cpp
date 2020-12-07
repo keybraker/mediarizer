@@ -34,23 +34,6 @@ static int
 	duplicate_flag = false,
 	verbose_flag = false;
 
-std::vector<std::string> split(char *types)
-{
-	std::vector<std::string> vector_of_types;
-	std::string s = std::string(types);
-	std::string delimiter = ",";
-
-	size_t pos = 0;
-	std::string token;
-	while ((pos = s.find(delimiter)) != std::string::npos)
-	{
-		token = s.substr(0, pos);
-		std::cout << token << std::endl;
-		s.erase(0, pos + delimiter.length());
-	}
-	return vector_of_types;
-}
-
 int main(int argc, char *argv[])
 {
 	int c, option_index = 0; // getopt_long stores the option index
@@ -95,7 +78,7 @@ int main(int argc, char *argv[])
 			break;
 		case 't':
 			type_flag = true;
-			types = split(strdup(optarg));
+			types = split(std::string(strdup(optarg)), ",");
 			for (auto type : types)
 			{
 				for (auto image_type : image_types)

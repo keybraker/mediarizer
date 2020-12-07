@@ -17,6 +17,29 @@
 #include "../mdzr_hdr/Organizer.h"
 #include "../mdzr_hdr/PhotoInfoClass.h"
 
+inline bool replace(std::string &str, const std::string &from, const std::string &to)
+{
+	size_t start_pos = str.find(from);
+	if (start_pos == std::string::npos)
+		return false;
+	str.replace(start_pos, from.length(), to);
+	return true;
+}
+
+inline std::vector<std::string> split(std::string types, std::string delimiter)
+{
+	std::vector<std::string> vector_of_types;
+	size_t pos = 0;
+	while ((pos = types.find(delimiter)) != std::string::npos)
+	{
+		vector_of_types.push_back(types.substr(0, pos));
+		types.erase(0, pos + delimiter.length());
+	}
+	types.erase(std::remove(types.begin(), types.end(), '\n'), types.end());
+	vector_of_types.push_back(types);
+	return vector_of_types;
+}
+
 inline int type(const std::filesystem::path &dir_path)
 {
 	return std::filesystem::is_directory(dir_path)
@@ -223,6 +246,7 @@ bool move_image_to_directory(
 bool files_metadata_exiv2(
 	std::vector<std::string> files,
 	std::string move_path,
+	bool date_flag,
 	bool move_flag,
 	bool delete_flag,
 	bool verbose_flag)
@@ -260,10 +284,49 @@ bool files_metadata_exiv2(
 			auto key_pos = image_exif_data.findKey(Exiv2::ExifKey("Exif.Image.DateTimeOriginal"));
 			if (key_pos != image_exif_data.end())
 				date = key_pos->value().toString();
-			// else
-			// 	continue;
 		}
 
+		if (date.empty() && date_flag)
+		{
+			struct stat fileInfo;
+			if (stat(file.c_str(), &fileInfo) != 0)
+			{
+				std::cout << "error: " << strerror(errno) << '\n';
+			}
+			else
+			{
+				std::string date_ctime = std::ctime(&fileInfo.st_ctime);
+				replace(date_ctime, "  ", " ");
+				std::vector<std::string> date_array = split(date_ctime, " ");
+
+				// Mon Apr 23 11:16:57 2007
+				// 2015:03:11 21:31:49
+
+				for (int i = 0; i < 12; i++)
+				{
+					std::cout << "g_months[i]: " << g_months[i] << std::endl;
+					std::cout << std::string::npos << " != " << g_months[i].find(date_array[1]) << std::endl;
+					if (g_months[i].find(date_array[1]) != std::string::npos)
+					{
+						if (i > 9)
+						{
+							date_array[1] = to_string(i);
+						}
+						else
+						{
+							date_array[1] = "0";
+							date_array[1] += to_string(i);
+						}
+						break;
+					}
+				}
+
+				date = date_array[4] + ":" +
+					   date_array[1] + ":" +
+					   date_array[2] + " " +
+					   date_array[3];
+			}
+		}
 		// Exiv2::ExifData::iterator end = image_exif_data.end();
 		// for (Exiv2::ExifData::iterator metadata = image_exif_data.begin(); metadata != end; ++metadata)
 		// {
@@ -297,7 +360,7 @@ void file_analyzer(char *path, char *move_path,
 	auto stop_1 = std::chrono::high_resolution_clock::now();
 
 	auto start_2 = std::chrono::high_resolution_clock::now();
-	files_metadata_exiv2(files, std::string(move_path), move_flag, delete_flag, verbose_flag);
+	files_metadata_exiv2(files, std::string(move_path), date_flag, move_flag, delete_flag, verbose_flag);
 	auto stop_2 = std::chrono::high_resolution_clock::now();
 
 	auto duration_1 = std::chrono::duration_cast<std::chrono::microseconds>(stop_1 - start_1);
