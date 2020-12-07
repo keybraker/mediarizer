@@ -47,11 +47,12 @@
 #include <algorithm>
 #include <chrono>
 #include <regex>
+#include <exception>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
 
 #include <exiv2/exiv2.hpp>
-
-#include "../exif_hdr/ExifTool.h"
-#include "../mdzr_hdr/PhotoInfoClass.h"
 
 #define a_c_r "\x1b[31m"
 #define a_c_g "\x1b[32m"
@@ -75,6 +76,10 @@
 #define ACRE "\x1b[0m"
 
 using namespace std;
+
+extern std::string g_months[12];
+extern std::string image_types[26];
+extern std::string video_types[26];
 
 inline void version(void)
 {
@@ -172,7 +177,6 @@ inline void help(void)
 
 std::vector<std::string> split(std::string types, std::string delimiter);
 std::string get_date_path(char *date);
-std::vector<PhotoInfoClass> linked_list_to_vector(char *path);
 
 void file_analyzer(char *path, char *move_path,
                    std::vector<std::string> types,

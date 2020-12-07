@@ -14,7 +14,7 @@
 // Created:     02-12-2020 - Ioannis Tsiakkas
 //------------------------------------------------------------------------------
 
-#include "mdzr_hdr/Organizer.h"
+#include "mediarizer_hdr/metadata.h"
 
 #include <stdio.h>
 #include <stdlib.h>

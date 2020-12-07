@@ -14,8 +14,39 @@
 // Created:     02-12-2020 - Ioannis Tsiakkas
 //------------------------------------------------------------------------------
 
-#include "../mdzr_hdr/Organizer.h"
-#include "../mdzr_hdr/PhotoInfoClass.h"
+#include "../mediarizer_hdr/metadata.h"
+
+std::string g_months[12] = {
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December"};
+
+std::string image_types[26] = {
+	"jpeg", "jpg", "exv", "cr2",
+	"crw", "mrw", "tiff", "webp",
+	"dng", "nef", "pef", "arw",
+	"rw2", "sr2", "srw", "orf",
+	"png", "pgf", "raf", "eps",
+	"xmp", "gif", "psd", "tga",
+	"bmp", "jp2"};
+
+std::string video_types[26] = {
+	"jpeg", "jpg", "exv", "cr2",
+	"crw", "mrw", "tiff", "webp",
+	"dng", "nef", "pef", "arw",
+	"rw2", "sr2", "srw", "orf",
+	"png", "pgf", "raf", "eps",
+	"xmp", "gif", "psd", "tga",
+	"bmp", "jp2"};
 
 inline bool replace(std::string &str, const std::string &from, const std::string &to)
 {
