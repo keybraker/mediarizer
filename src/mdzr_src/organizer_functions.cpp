@@ -194,7 +194,7 @@ std::string generate_move_directory(std::string date)
 	{
 		std::string date_year = date.substr(0, 4);
 		std::string date_month = date.substr(date.find(":") + 1, 4);
-		int month_number = stoi(date_month);
+		int month_number = std::stoi(date_month);
 		std::string date_month_name = g_months[month_number - 1];
 		move_directory += date_year + "/" + date_month_name;
 	}
@@ -303,23 +303,18 @@ bool files_metadata_exiv2(
 				// 2015:03:11 21:31:49
 
 				for (int i = 0; i < 12; i++)
-				{
-					std::cout << "g_months[i]: " << g_months[i] << std::endl;
-					std::cout << std::string::npos << " != " << g_months[i].find(date_array[1]) << std::endl;
 					if (g_months[i].find(date_array[1]) != std::string::npos)
 					{
 						if (i > 9)
-						{
 							date_array[1] = to_string(i);
-						}
 						else
-						{
-							date_array[1] = "0";
-							date_array[1] += to_string(i);
-						}
+							date_array[1] = "0" + to_string(i);
+
 						break;
 					}
-				}
+
+				if (std::stoi(date_array[2]) < 10)
+					date_array[2] = "0" + date_array[2];
 
 				date = date_array[4] + ":" +
 					   date_array[1] + ":" +
