@@ -68,14 +68,15 @@ make or make threaded
 | -output    | -o           |     path     | _path to output directory_                                               | working | yes       |
 | -type      | -t           | tp1, tp2, .. | _organizes *only* given [file type(s)](https://exiftool.org/#supported)_ | working | no        |
 | -photo     | -p           |     none     | _organizes *only* photos_                                                | working | no        |
-| -video     | -f           |     none     | _organizes *only* videos_                                                | working | no        |
+| -video     | -v           |     none     | _organizes *only* videos_                                                | working | no        |
 | -recursive | -r           |     none     | _recursively process sub-directories_                                    | working | no        |
-| -date      | -d           |     none     | _if image has no exif date filesystem data is used_                      | no      | no        |
+| -date      | -D           |     none     | _if image has no exif date filesystem data is used_                      | no      | no        |
+| -move      | -m           |     none     | _move photos that have no metadata to to undetermined folder_            | working | no        |
 | -write     | -w           |     none     | _will add exif data to image that has none_                              | no      | no        |
 | -delete    | -x           |     none     | _deletes files in source directory_                                      | no      | no        |
-| -duplicate | -d           |     none     | _duplicates are moved into duplicate folder in move directory_           | beta    | no        |
+| -duplicate | -d           |     none     | _duplicates are moved into duplicate folder in move directory_           | no      | no        |
 | -help      | -h           |     none     | _displays a usage guide of Mediarizer_                                   | working | no        |
-| -version   | -v           |     none     | _displays current version_                                               | working | no        |
+| -version   | -V           |     none     | _displays current version_                                               | working | no        |
 | -verbose   | -s           |     none     | _outputs execution information while running_                            | working | no        |
 
 > a. Multiple flags can be used in conjunction<br>

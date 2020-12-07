@@ -22,7 +22,9 @@
 #include <fstream>
 #include <iostream>
 
-extern const char *g_months[];
+extern std::string g_months[12];
+extern std::string image_types[26];
+extern std::string video_types[26];
 
 class PhotoInfoClass
 {

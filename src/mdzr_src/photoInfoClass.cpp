@@ -17,7 +17,7 @@
 #include "../mdzr_hdr/PhotoInfoClass.h"
 #include "../exif_hdr/ExifTool.h"
 
-const char *g_months[] = {
+std::string g_months[12] = {
 	"January",
 	"February",
 	"March",
@@ -30,6 +30,24 @@ const char *g_months[] = {
 	"October",
 	"November",
 	"December"};
+
+std::string image_types[26] = {
+	"jpeg", "jpg", "exv", "cr2",
+	"crw", "mrw", "tiff", "webp",
+	"dng", "nef", "pef", "arw",
+	"rw2", "sr2", "srw", "orf",
+	"png", "pgf", "raf", "eps",
+	"xmp", "gif", "psd", "tga",
+	"bmp", "jp2"};
+
+std::string video_types[26] = {
+	"jpeg", "jpg", "exv", "cr2",
+	"crw", "mrw", "tiff", "webp",
+	"dng", "nef", "pef", "arw",
+	"rw2", "sr2", "srw", "orf",
+	"png", "pgf", "raf", "eps",
+	"xmp", "gif", "psd", "tga",
+	"bmp", "jp2"};
 
 PhotoInfoClass::PhotoInfoClass(void) {}
 PhotoInfoClass::PhotoInfoClass(std::string fileNameInput,

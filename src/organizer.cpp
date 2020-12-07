@@ -21,49 +21,62 @@
 #include <getopt.h>
 
 static int
-	input_flag,
-	output_flag,
-	photo_flag,
-	video_flag,
-	type_flag,
-	recursive_flag,
-	delete_flag,
-	duplicate_flag,
-	verbose_flag;
+	input_flag = false,
+	output_flag = false,
+	photo_flag = false,
+	video_flag = false,
+	type_flag = false,
+	recursive_flag = false,
+	date_flag = false,
+	move_flag = false,
+	write_flag = false,
+	delete_flag = false,
+	duplicate_flag = false,
+	verbose_flag = false;
+
+std::vector<std::string> split(char *types)
+{
+	std::vector<std::string> vector_of_types;
+	std::string s = std::string(types);
+	std::string delimiter = ",";
+
+	size_t pos = 0;
+	std::string token;
+	while ((pos = s.find(delimiter)) != std::string::npos)
+	{
+		token = s.substr(0, pos);
+		std::cout << token << std::endl;
+		s.erase(0, pos + delimiter.length());
+	}
+	return vector_of_types;
+}
 
 int main(int argc, char *argv[])
 {
-	int c, option_index = 0;			// getopt_long stores the option index
-	char *input = NULL, *output = NULL; //, *types = NULL;
+	int c, option_index = 0; // getopt_long stores the option index
+	char *input = NULL, *output = NULL;
+	std::vector<std::string> types;
 
 	while (1)
 	{
 		static struct option long_options[] = {
 			{"input", required_argument, &input_flag, 'i'},
-			{"Input", required_argument, &input_flag, 'I'},
 			{"output", required_argument, &output_flag, 'o'},
-			{"Output", required_argument, &output_flag, 'O'},
 			{"type", required_argument, &type_flag, 't'},
-			{"Type", required_argument, &type_flag, 'T'},
 			{"photo", no_argument, &photo_flag, 'p'},
-			{"Photo", no_argument, &photo_flag, 'P'},
-			{"video", no_argument, &video_flag, 'f'},
-			{"Video", no_argument, &video_flag, 'F'},
+			{"video", no_argument, &video_flag, 'v'},
 			{"recursive", no_argument, &recursive_flag, 'r'},
-			{"Recursive", no_argument, &recursive_flag, 'R'},
+			{"date", no_argument, &date_flag, 'D'},
+			{"move", no_argument, &move_flag, 'm'},
+			{"write", no_argument, &write_flag, 'w'},
 			{"delete", no_argument, &delete_flag, 'x'},
-			{"Delete", no_argument, &delete_flag, 'X'},
 			{"duplicate", no_argument, &duplicate_flag, 'd'},
-			{"Duplicate", no_argument, &duplicate_flag, 'D'},
 			{"help", no_argument, NULL, 'h'},
-			{"Help", no_argument, NULL, 'H'},
-			{"version", no_argument, NULL, 'v'},
 			{"Version", no_argument, NULL, 'V'},
 			{"verbose", no_argument, &verbose_flag, 's'},
-			{"Verbose", no_argument, &verbose_flag, 'S'},
 			{0, 0, 0, 0}};
 
-		c = getopt_long(argc, argv, "i:o:t:pfrxdhvsI:O:T:PFRXDHVS", long_options, &option_index);
+		c = getopt_long(argc, argv, "i:o:t:pvrDwxdmhVs", long_options, &option_index);
 
 		if (c == -1)
 			break;
@@ -75,77 +88,58 @@ int main(int argc, char *argv[])
 			input_flag = true;
 			input = strdup(optarg);
 			break;
-		case 'I':
-			std::cout << "input:\t" << optarg << std::endl;
-			input_flag = true;
-			input = strdup(optarg);
-			break;
 		case 'o':
-			std::cout << "output:\t" << optarg << std::endl;
-			output_flag = true;
-			output = strdup(optarg);
-			break;
-		case 'O':
 			std::cout << "output:\t" << optarg << std::endl;
 			output_flag = true;
 			output = strdup(optarg);
 			break;
 		case 't':
 			type_flag = true;
-			// types = strdup(optarg);
-			break;
-		case 'T':
-			type_flag = true;
-			// types = strdup(optarg);
+			types = split(strdup(optarg));
+			for (auto type : types)
+			{
+				for (auto image_type : image_types)
+					if (image_type == type)
+						break;
+				for (auto video_type : video_types)
+					if (video_type == type)
+						break;
+				std::cout << type << " is not a supported file type" << std::endl;
+				exit(EXIT_FAILURE);
+			}
 			break;
 		case 'p':
 			photo_flag = true;
 			break;
-		case 'P':
-			photo_flag = true;
-			break;
-		case 'f':
-			video_flag = true;
-			break;
-		case 'F':
+		case 'v':
 			video_flag = true;
 			break;
 		case 'r':
 			recursive_flag = true;
 			break;
-		case 'R':
-			recursive_flag = true;
+		case 'D':
+			date_flag = true;
+			break;
+		case 'w':
+			write_flag = true;
 			break;
 		case 'x':
-			delete_flag = true;
-			break;
-		case 'X':
 			delete_flag = true;
 			break;
 		case 'd':
 			duplicate_flag = true;
 			break;
-		case 'D':
-			duplicate_flag = true;
+		case 'm':
+			move_flag = true;
 			break;
 		case 'h':
-			version();
-			exit(EXIT_SUCCESS);
-		case 'H':
-			version();
-			exit(EXIT_SUCCESS);
-			break;
-		case 'v':
-			version();
+			help();
 			exit(EXIT_SUCCESS);
 		case 'V':
 			version();
 			exit(EXIT_SUCCESS);
 			break;
 		case 's':
-			verbose_flag = true;
-			break;
-		case 'S':
 			verbose_flag = true;
 			break;
 		case 0:
@@ -159,24 +153,22 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	std::string arguments = "";
-	if (recursive_flag)
+	if (!input_flag || !output_flag)
 	{
-		arguments += "-r";
+		std::cout << "input and out directories are mandatory" << std::endl;
+		exit(EXIT_FAILURE);
 	}
-	// if (type_flag)
-	// {
-	// 	if (recursive_flag)
-	// 		arguments += " ";
-	// 	arguments += "-ext" + std::string(types);
-	// }
-	// if (verbose_flag)
-	// {
-	// 	if (recursive_flag || type_flag)
-	// 		arguments += " ";
-	// 	arguments += "-v1";
-	// }
 
-	file_analyzer(input, output, arguments.c_str());
+	file_analyzer(input, output,
+				  types,
+				  photo_flag,
+				  video_flag,
+				  recursive_flag,
+				  date_flag,
+				  move_flag,
+				  write_flag,
+				  delete_flag,
+				  duplicate_flag,
+				  verbose_flag);
 	return 1;
 }

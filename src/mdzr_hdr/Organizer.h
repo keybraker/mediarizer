@@ -46,6 +46,7 @@
 #include <omp.h>
 #include <algorithm>
 #include <chrono>
+#include <regex>
 
 #include <exiv2/exiv2.hpp>
 
@@ -123,13 +124,25 @@ inline void help(void)
               << " | none         "
               << " | organizes *only* photos                                                " << std::endl
               << "-video     "
-              << " | -f           "
+              << " | -v           "
               << " | none         "
               << " | organizes *only* videos                                                " << std::endl
               << "-recursive "
               << " | -r           "
               << " | none         "
               << " | recursively process sub-directories                                    " << std::endl
+              << "-date      "
+              << " | -D           "
+              << " | none         "
+              << " | if image has no exif date filesystem data is used                      " << std::endl
+              << "-move      "
+              << " | -m           "
+              << " | none         "
+              << " | move photos that have no metadata to to undetermined folder            " << std::endl
+              << "-write     "
+              << " | -w           "
+              << " | none         "
+              << " | will add exif data to image that has none                              " << std::endl
               << "-delete    "
               << " | -x           "
               << " | none         "
@@ -143,7 +156,7 @@ inline void help(void)
               << " | none         "
               << " | displays a usage guide of Mediarizer                                   " << std::endl
               << "-version   "
-              << " | -v           "
+              << " | -V           "
               << " | none         "
               << " | displays current version                                               " << std::endl
               << "-verbose   "
@@ -159,10 +172,34 @@ inline void help(void)
 
 std::string get_date_path(char *date);
 std::vector<PhotoInfoClass> linked_list_to_vector(char *path);
-void *calculate_move_directory(PhotoInfo photo_info, char *move_path);
-void file_analyzer(char *path, char *move_path, const char *arguments);
 
-std::vector<std::string> files_in_path(const std::filesystem::path &dir_path, bool isRecursive);
+void file_analyzer(char *path, char *move_path,
+                   std::vector<std::string> types,
+                   bool photo_flag,
+                   bool video_flag,
+                   bool recursive_flag,
+                   bool date_flag,
+                   bool move_flag,
+                   bool write_flag,
+                   bool delete_flag,
+                   bool duplicate_flag,
+                   bool verbose_flag);
 bool files_metadata_exiv2(std::vector<std::string> files, std::string move_path);
+
+std::vector<std::string> files_in_path(
+    const std::filesystem::path &dir_path,
+    bool photo_flag,
+    bool video_flag,
+    std::vector<std::string> types,
+    bool isRecursive);
+std::string generate_move_directory(std::string date);
+bool create_move_directory(std::string move_directory);
+bool move_image_to_directory(
+    std::string source_directory,
+    std::string move_directory,
+    bool delete_flag);
+bool files_metadata_exiv2(
+    std::vector<std::string> files,
+    std::string move_path);
 
 #endif
