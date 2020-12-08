@@ -1,8 +1,7 @@
 //------------------------------------------------------------------------------
 // File:        string_manipulation.cpp
 //
-// Description: A simple C++ library to organize and delete
-//				duplicate media files.
+// Description: String manipulation functions that help at file ordering.
 //
 // License:     Copyright 2017-2020, Ioannis Tsiakkas (iantsiakkas at gmail.com)
 //
@@ -169,6 +168,8 @@ void help(void)
 			  << std::endl
 
 			  << "a. Multiple flags can be used in conjunction" << std::endl
-			  << "b. Multiple file types (https://exiftool.org/#supported) can be used as comma-separated string ex: -type jpg,png" << std::endl
+			  << "b. Multiple file types can be used as comma-separated string ex: -type jpg,png" << std::endl
+			  << "   1. image: https://dev.exiv2.org/projects/exiv2/wiki/Supported_image_formats" << std::endl
+			  << "   2. video: https://dev.exiv2.org/projects/exiv2/wiki/Supported_video_formats" << std::endl
 			  << "c. Duplicate photos are compared by type, size, date and resolution, only than are they categorized as same" << std::endl;
 }
