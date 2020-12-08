@@ -41,16 +41,24 @@ Why use Media Organizer:
   
 ### Build
 
-1. Open a terminal window and cd to cloned project (Mediarizer)
+1. Open a terminal windows and clone Mediarizer
+```bash
+https://github.com/keybraker/Mediarizer.git
+```
 
+2. Move to Mediarizer directory
 ```bash
 cd Mediarizer
 ```
 
-2. To compile the program just type:
-
+3. Compile Mediarizer
 ```bash
 make
+```
+
+4. Run Mediarizer ([examples](#3-2))
+```bash
+./mediarizer ...
 ```
 
 <div id="2-3">
@@ -71,7 +79,7 @@ make clean
 
 ### Flags
 
-| flag name  | flag acronym |   Argument   | Description                                                              | State   | Mandatory |
+| Name       | Acronym      |   Argument   | Description                                                              | State   | Mandatory |
 | :--------- | :----------- | :----------: | :----------------------------------------------------------------------- | :------ | :-------- |
 | -input     | -i           | path / file  | _gives path to file or directory_                                        | working | yes       |
 | -output    | -o           |     path     | _path to output directory_                                               | working | yes       |
@@ -163,15 +171,17 @@ as data is actually only on remote servers and you locally can see a shortcut of
 
 ### Release History
 
-- v2.0.0: 08 December 2020: Refactored project and used [Exiv2](https://github.com/exiv2/exiv2).
-- v1.7.0: 22 August   2017: Memory added, for stop and restart.
-- v1.6.0: 20 August   2017: Fully functional duplication deletion (BETA).
-- v1.5.0: 19 August   2017: Added duplication deletion.
-- v1.1.2: 18 August   2017: Added -flags for a more controlled organisation.
-- v1.1.1: 17 August   2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
-- v1.1.0: 17 August   2017: Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool.
-- v1.0.0: 12 August   2017: Full jpeg release with the help of [easyexif](https://github.com/mayanklahiri/easyexif)
-- v0.1.0: 09 August   2017: Initial commit.
+| Version    | Date             |  Argument                                                                                         |
+| :--------- | :-----------     | :----------                                                                                       |
+| v2.0.0     | 08-12-2020       | _Refactored project and used [Exiv2](https://github.com/exiv2/exiv2)_                             |
+| v1.7.0     | 22-08-2017       | _Memory added, for stop and restart_                                                              |
+| v1.6.0     | 20-08-2017       | _Fully functional duplication deletion (BETA)_                                                    |
+| v1.5.0     | 19-08-2017       | _Added duplication deletion_                                                                      |
+| v1.1.2     | 18-08-2017       | _Added -flags for a more controlled organisation_                                                 |
+| v1.1.1     | 17-08-2017       | _Now photos and videos are separated in to diffrent folders for maximum organisation_             |
+| v1.1.0     | 17-08-2017       | _Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool_ |
+| v1.0.0     | 12-08-2017       | _Full jpeg release with the help of [easyexif](https://github.com/mayanklahiri/easyexif)_         |
+| v0.1.0     | 09-08-2017       | _Initial commit_                                                                                  |
 
 <div id="4-2">
 
