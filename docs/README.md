@@ -160,8 +160,8 @@ as data is actually only on remote servers and you locally can see a shortcut of
 
 ---
 
-> If you encounter any problem or error, please report it.<br>
-> If you want to contribut please follow the [guidelines](CONTRIBUTING.md).<br>
+> if you encounter any problem or error, please report it.<br>
+> if you want to contribut please follow the [guidelines](CONTRIBUTING.md).<br>
 ![alt text](../img/tired.gif)
 
 <div id="4">
