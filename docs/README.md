@@ -34,7 +34,7 @@ Why use Media Organizer:
 ### Prerequisites
 1. Make sure you have downloaded `g++` (on macOS `clang++` which is installed alongside Xcode).
 2. Download and install [Exiv2](https://www.exiv2.org/) on your computer.
-   (if you want to sort videos as well do not forget to add `cmake .. -DEXIV2_VIDEO_ENABLE=On` flag)
+   **(if you want to sort videos as well do not forget to add `cmake .. -DEXIV2_VIDEO_ENABLE=On` flag)**
 3. WIP: __If you want to achieve better performance you should download OpenMP for multithreading.__
 
 <div id="2-2">
@@ -152,7 +152,7 @@ as data is actually only on remote servers and you locally can see a shortcut of
 ---
 
 > If you encounter any problem or error, please report it.<br>
-> Create pull requests if you find and solve an error.<br>
+> If you want to contribut please follow the [guidelines](CONTRIBUTING.md).<br>
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
 
 <div id="4">

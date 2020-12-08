@@ -1,6 +1,4 @@
 Contributing to the Mediarizer Project
-======================
-
 * [1. Introduction](#1-introduction)
 * [2. Contributing code via GitHub](#2-contributing-code-via-github)
 * [3. Reporting Bugs](#5-reporting-bugs)
