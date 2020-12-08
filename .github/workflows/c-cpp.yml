@@ -1,20 +1,20 @@
 name: C/C++ CI
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push, pull_request]
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, acOS-latest]
 
     steps:
-    - run: sudo apt-get update -y
-    - run: sudo apt-get install -y exiv2
+    - name: checkout v2
     - uses: actions/checkout@v2
+    - name: install exiv2
+    - run: sudo apt update
+    - run: sudo apt install exiv2
     - name: make
       run: make
     - name: make test
