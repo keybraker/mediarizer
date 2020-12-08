@@ -1,13 +1,13 @@
 <div id="1">
   
 # [Mediarizer](https://github.com/keybraker/Media-Organizer)
-![alt text](https://raw.githubusercontent.com/keybraker/Mediarizer/master/img/new_mediarizer_logo.png)
+![alt text](../img/new_mediarizer_logo.png)
 
 Why use Media Organizer:
 - Fast and easy organisation of photos / videos by date
 - Lightweight, fast and runs on all harware and OS
 
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDisplay.jpg)
+![alt text](../img/mediarizerDisplay.jpg)
 <br>
 
 ---
@@ -33,9 +33,9 @@ Why use Media Organizer:
   
 ### Prerequisites
 1. Make sure you have downloaded `g++` (on macOS `clang++` which is installed alongside Xcode).
-2. Download and install [Exiv2](https://www.exiv2.org/) on your computer.
-   **(if you want to sort videos as well do not forget to add `cmake .. -DEXIV2_VIDEO_ENABLE=On` flag)**
-3. WIP: __If you want to achieve better performance you should download OpenMP for multithreading.__
+2. Download and install [Exiv2](https://www.exiv2.org/) on your computer.<br>
+   **(!) _if you want to sort videos as well do not forget to add `cmake .. -DEXIV2_VIDEO_ENABLE=On` flag when building_**
+3. WIP: If you want to achieve better performance you should download OpenMP for multithreading.
 
 <div id="2-2">
   
@@ -153,7 +153,7 @@ as data is actually only on remote servers and you locally can see a shortcut of
 
 > If you encounter any problem or error, please report it.<br>
 > If you want to contribut please follow the [guidelines](CONTRIBUTING.md).<br>
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
+![alt text](../img/tired.gif)
 
 <div id="4">
 
