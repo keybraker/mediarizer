@@ -1,3 +1,5 @@
+SHELL=/bin/bash
+
 CPP = g++
 CCFLAGS = -O3 -pedantic -Wall -Wextra -std=c++1z
 CCLINK = -I/usr/local/include -L/usr/local/lib -lexiv2
@@ -54,18 +56,8 @@ organizer: $(OBJ_MAIN) $(OBJ_MDRZ)
 	$(CCLINK)
 
 test:
-	rm -rf .output
 	mkdir .output
-	./mediarizer -i img -o .output
-	cd .output
-	dir_num := $(shell ls | wc -l)
-	@if [ "$(dir_num)" = "1" ]; then echo "PASSED $(dir_num)/1"; else echo "FAILED $(dir_num)/1"; fi
-	cd ..
-	./mediarizer -i img -o .output -D
-	cd .output
-	dir_num = $(shell ls | wc -l)
-	@if [ "$(dir_num)" = "2" ]; then echo "PASSED $(dir_num)/2"; else echo "FAILED $(dir_num)/2"; fi
-	cd ..
+	./mediarizer -i img -o .output -D -r -p
 	rm -rf .output
 
 clean:
