@@ -130,8 +130,7 @@ c. sort directory and encapsulated directories
 d. flags can be used in any order
 
 ```
-./mediarizer -i /path/source/folder -f mp4,jpg,png -o /path/to/store/folder
-./mediarizer -o /path/to/store/folder -i /path/source/folder -f mp4,jpg,png
+./mediarizer -o /path/to/store/folder -D -i /path/source/folder -f mp4,jpg,png
 ```
 
 e. this execution will only sort _mp4_ and _jpg_ files to move direcotry
@@ -143,8 +142,7 @@ e. this execution will only sort _mp4_ and _jpg_ files to move direcotry
 f. will only copy photos _not_ videos:
 
 ```bash
-./mediarizer -i /path/source/folder -o /path/to/store/folder -p
-./mediarizer -i /path/source/folder -o /path/to/store/folder --photo
+./mediarizer -i /path/source/folder -o /path/to/store/folder -photo
 ```
 
 <div id="3-3">
