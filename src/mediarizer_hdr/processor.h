@@ -20,7 +20,6 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <stdio.h>
-#include <fstream>
 #include <iostream>
 #include <cassert>
 #include <fcntl.h>
@@ -32,16 +31,11 @@
 #include <time.h>
 #include <sys/stat.h>
 #include <string>
-#include <string.h>
 #include <pthread.h>
 #include <iomanip>
 #include <stdlib.h>
 #include <ctime>
-#include <iostream>
-#include <filesystem>
 #include <vector>
-#include <set>
-#include <unordered_set>
 #include <omp.h>
 #include <algorithm>
 #include <chrono>
@@ -49,7 +43,7 @@
 #include <exception>
 #include <filesystem>
 #include <fstream>
-#include <iostream>
+#include <getopt.h>
 
 #include <exiv2/exiv2.hpp>
 

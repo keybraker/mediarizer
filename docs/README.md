@@ -1,13 +1,13 @@
 <div id="1">
   
 # [Mediarizer](https://github.com/keybraker/Media-Organizer)
-![alt text](https://raw.githubusercontent.com/keybraker/Mediarizer/master/img/new_mediarizer_logo.png)
+![alt text](../img/new_mediarizer_logo.png)
 
 Why use Media Organizer:
 - Fast and easy organisation of photos / videos by date
 - Lightweight, fast and runs on all harware and OS
 
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDisplay.jpg)
+![alt text](../img/mediarizerDisplay.jpg)
 <br>
 
 ---
@@ -16,7 +16,7 @@ Why use Media Organizer:
 2. [Prerequisite and Build](#2)
    1. [Prerequisites](#2-1)
    2. [Build](#2-2)
-   3. [Build](#2-3)
+   3. [Clean](#2-3)
 3. [Usage Guide](#3)
    1. [Flags](#3-1)
    2. [Examples](#3-2)
@@ -33,23 +33,33 @@ Why use Media Organizer:
   
 ### Prerequisites
 1. Make sure you have downloaded `g++` (on macOS `clang++` which is installed alongside Xcode).
-2. Download and install [Exiv2](https://www.exiv2.org/) on your computer.
-3. WIP: __If you want to achieve better performance you should download OpenMP for multithreading.__
+2. Download and install [Exiv2](https://www.exiv2.org/) on your computer.<br>
+   **(!) _if you want to sort videos as well do not forget to add_** `cmake .. -DEXIV2_VIDEO_ENABLE=On` **_flag when building_**
+3. WIP: If you want to achieve better performance you should download OpenMP for multithreading.<br>
+   **(!)** _Keep in mind that Mediarizer interacts with the filesystem so there will be only a slight performance improvement as the main bottleneck is the I/O_
 
 <div id="2-2">
   
 ### Build
 
-1. Open a terminal window and cd to cloned project (Mediarizer)
+1. Open a terminal windows and clone Mediarizer
+```bash
+https://github.com/keybraker/Mediarizer.git
+```
 
+2. Move to Mediarizer directory
 ```bash
 cd Mediarizer
 ```
 
-2. To compile the program just type:
-
+3. Compile Mediarizer
 ```bash
 make
+```
+
+4. Run Mediarizer ([examples](#3-2))
+```bash
+./mediarizer ...
 ```
 
 <div id="2-3">
@@ -70,7 +80,7 @@ make clean
 
 ### Flags
 
-| flag name  | flag acronym |   Argument   | Description                                                              | State   | Mandatory |
+| Name       | Acronym      |   Argument   | Description                                                              | State   | Mandatory |
 | :--------- | :----------- | :----------: | :----------------------------------------------------------------------- | :------ | :-------- |
 | -input     | -i           | path / file  | _gives path to file or directory_                                        | working | yes       |
 | -output    | -o           |     path     | _path to output directory_                                               | working | yes       |
@@ -120,8 +130,7 @@ c. sort directory and encapsulated directories
 d. flags can be used in any order
 
 ```
-./mediarizer -i /path/source/folder -f mp4,jpg,png -o /path/to/store/folder
-./mediarizer -o /path/to/store/folder -i /path/source/folder -f mp4,jpg,png
+./mediarizer -o /path/to/store/folder -D -i /path/source/folder -f mp4,jpg,png
 ```
 
 e. this execution will only sort _mp4_ and _jpg_ files to move direcotry
@@ -130,11 +139,10 @@ e. this execution will only sort _mp4_ and _jpg_ files to move direcotry
 ./mediarizer -i  /path/source/folder -o /path/to/store/folder -f mp4,jpg
 ```
 
-f. will only copy photos _not_ videos:
+f. will only copy photos, _not_ videos:
 
 ```bash
-./mediarizer -i /path/source/folder -o /path/to/store/folder -p
-./mediarizer -i /path/source/folder -o /path/to/store/folder --photo
+./mediarizer -i /path/source/folder -o /path/to/store/folder -photo
 ```
 
 <div id="3-3">
@@ -150,9 +158,9 @@ as data is actually only on remote servers and you locally can see a shortcut of
 
 ---
 
-> If you encounter any problem or error, please report it.<br>
-> Create pull requests if you find and solve an error.<br>
-![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
+> if you encounter any problem or error, please report it.<br>
+> if you want to contribut please follow the [guidelines](CONTRIBUTING.md).<br>
+![alt text](../img/tired.gif)
 
 <div id="4">
 
@@ -162,22 +170,24 @@ as data is actually only on remote servers and you locally can see a shortcut of
 
 ### Release History
 
-- v2.0.0: 08 December 2020: Refactored project and used [Exiv2](https://github.com/exiv2/exiv2).
-- v1.7.0: 22 August   2017: Memory added, for stop and restart.
-- v1.6.0: 20 August   2017: Fully functional duplication deletion (BETA).
-- v1.5.0: 19 August   2017: Added duplication deletion.
-- v1.1.2: 18 August   2017: Added -flags for a more controlled organisation.
-- v1.1.1: 17 August   2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
-- v1.1.0: 17 August   2017: Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool.
-- v1.0.0: 12 August   2017: Full jpeg release with the help of [easyexif](https://github.com/mayanklahiri/easyexif)
-- v0.1.0: 09 August   2017: Initial commit.
+| Version    | Date             |  Argument                                                                                         |
+| :--------- | :-----------     | :----------                                                                                       |
+| v2.0.0     | 08-12-2020       | _Refactored project and used [Exiv2](https://github.com/exiv2/exiv2)_                             |
+| v1.7.0     | 22-08-2017       | _Memory added, for stop and restart_                                                              |
+| v1.6.0     | 20-08-2017       | _Fully functional duplication deletion (BETA)_                                                    |
+| v1.5.0     | 19-08-2017       | _Added duplication deletion_                                                                      |
+| v1.1.2     | 18-08-2017       | _Added -flags for a more controlled organisation_                                                 |
+| v1.1.1     | 17-08-2017       | _Now photos and videos are separated in to diffrent folders for maximum organisation_             |
+| v1.1.0     | 17-08-2017       | _Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool_ |
+| v1.0.0     | 12-08-2017       | _Full jpeg release with the help of [easyexif](https://github.com/mayanklahiri/easyexif)_         |
+| v0.1.0     | 09-08-2017       | _Initial commit_                                                                                  |
 
 <div id="4-2">
 
 ### Acknowledgements
 
-> Acknowledgments - **Exiv2 Team** for [Exiv2](https://github.com/exiv2/exiv2)<br>
-> Author - **Ioannis Tsiakkas** - _(Keybraker)_ - [Keybraker](https://github.com/keybraker)<br>
-> License - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)<br>
+> Acknowledgments - _[Exiv2](https://github.com/exiv2/exiv2)_<br>
+> Author - **Ioannis Tsiakkas** - _[Keybraker](https://github.com/keybraker)_<br>
+> License - _[GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)_<br>
 
 Copyrights © Keybraker 2020 [Mediarizer](https://github.com/keybraker/Media-Organizer), All rights reserved

@@ -1,4 +1,6 @@
-CPP = g++
+SHELL=/bin/bash
+
+CPP = g++-10
 CCFLAGS = -O3 -pedantic -Wall -Wextra -std=c++1z
 CCLINK = -I/usr/local/include -L/usr/local/lib -lexiv2
 CCNAME = -o mediarizer
@@ -39,7 +41,9 @@ endif
 MDRZ = -I mediarizer_hdr
 
 OBJ_MAIN = src/mediarizer.o
-OBJ_MDRZ = src/mediarizer_src/meta_processor.o src/mediarizer_src/string_processor.o src/mediarizer_src/file_processor.o
+OBJ_MDRZ = src/mediarizer_src/meta_processor.o \
+	src/mediarizer_src/string_processor.o \
+	src/mediarizer_src/file_processor.o
 HDR_MDRZ = src/mediarizer_hdr/processor.h
 
 all: organizer
@@ -48,6 +52,11 @@ organizer: $(OBJ_MAIN) $(OBJ_MDRZ)
 	$(CPP) $(CCFLAGS) $(CCNAME) \
 	$(OBJ_MAIN) $(OBJ_MDRZ) \
 	$(CCLINK)
+
+test:
+	mkdir .output
+	./mediarizer -i img -o .output -D -r -p
+	rm -rf .output
 
 clean:
 	rm -f mediarizer src/*.o src/mediarizer_src/*.o

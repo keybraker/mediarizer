@@ -11,14 +11,10 @@
 //              is retained.  A licensing fee may be required for use in a
 //              commercial application.
 //
-// Created:     02-12-2020 - Ioannis Tsiakkas
+// Created:     08-12-2020 - Ioannis Tsiakkas
 //------------------------------------------------------------------------------
 
 #include "mediarizer_hdr/processor.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <getopt.h>
 
 int main(int argc, char *argv[])
 {
@@ -144,5 +140,6 @@ int main(int argc, char *argv[])
 	}
 
 	file_analyzer(input, output, *flags, types);
-	return 1;
+
+	return 0;
 }
