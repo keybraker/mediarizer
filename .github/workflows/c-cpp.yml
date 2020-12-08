@@ -14,7 +14,6 @@ jobs:
     steps:
     - run:   |
         sudo apt-get update -y
-        sudo apt install gcc-10 g++-10
         sudo apt-get install -y exiv2
     - uses: actions/checkout@v2
     - name: make
