@@ -98,5 +98,5 @@ Once you have a GitHub login:
 # 3. Reporting Bugs #
 
 Bugs should be reported by creating Issues on GitHub.
-> before reporting a bug first check the Issue list if the bug is already known, and only if you cannot find any previous bug report<br>
-> then create a new Issue. When reporting a bug try to describe the problem in as much detail as possible and if the bug is triggered by an input file then attach that file > to the GitHub Issue, too.
+> before reporting a bug first check the issue list if the bug is already known<br>
+> If you cannot find any previous bug report, create a new Issue. When reporting a bug try to describe the problem in as much detail as possible and if the bug is triggered by an input file then attach that file to the GitHub issue if possible.
