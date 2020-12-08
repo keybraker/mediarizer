@@ -16,10 +16,6 @@
 
 #include "mediarizer_hdr/processor.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <getopt.h>
-
 int main(int argc, char *argv[])
 {
 	flag_struct *flags = new flag_struct();
@@ -144,5 +140,6 @@ int main(int argc, char *argv[])
 	}
 
 	file_analyzer(input, output, *flags, types);
-	return 1;
+
+	return 0;
 }

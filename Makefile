@@ -42,7 +42,8 @@ HDR_EXIF = inc/ExifTool.h inc/ExifToolPipe.h inc/TagInfo.h
 MDRZ = -I mediarizer_hdr
 
 OBJ_MAIN = src/mediarizer.o
-OBJ_MDRZ = src/mediarizer_src/meta_processor.o src/mediarizer_src/string_processor.o src/mediarizer_src/file_processor.o
+OBJ_MDRZ = src/mediarizer_src/meta_processor.o src/mediarizer_src/string_processor.o \
+	src/mediarizer_src/file_processor.o
 HDR_MDRZ = src/mediarizer_hdr/processor.h
 
 all: organizer
@@ -51,6 +52,21 @@ organizer: $(OBJ_MAIN) $(OBJ_MDRZ)
 	$(CPP) $(CCFLAGS) $(CCNAME) \
 	$(OBJ_MAIN) $(OBJ_MDRZ) \
 	$(CCLINK)
+
+test:
+	rm -rf .output
+	mkdir .output
+	./mediarizer -i img -o .output
+	cd .output
+	dir_num := $(shell ls | wc -l)
+	@if [ "$(dir_num)" = "1" ]; then echo "PASSED $(dir_num)/1"; else echo "FAILED $(dir_num)/1"; fi
+	cd ..
+	./mediarizer -i img -o .output -D
+	cd .output
+	dir_num = $(shell ls | wc -l)
+	@if [ "$(dir_num)" = "2" ]; then echo "PASSED $(dir_num)/2"; else echo "FAILED $(dir_num)/2"; fi
+	cd ..
+	rm -rf .output
 
 clean:
 	rm -f mediarizer src/*.o src/mediarizer_src/*.o
