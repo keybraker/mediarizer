@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - run:   |
+        sudo apt update
+        sudo apt install gcc-10 g++-10
     - uses: actions/checkout@v2
     - name: make
       run: make

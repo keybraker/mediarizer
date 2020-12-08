@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 
-CPP = g++
+CPP = g++-10
 CCFLAGS = -O3 -pedantic -Wall -Wextra -std=c++1z
 CCLINK = -I/usr/local/include -L/usr/local/lib -lexiv2
 CCNAME = -o mediarizer
@@ -38,13 +38,11 @@ else
 	endif
 endif
 
-OBJ_EXIF = src/ExifTool.o src/ExifToolPipe.o src/TagInfo.o
-HDR_EXIF = inc/ExifTool.h inc/ExifToolPipe.h inc/TagInfo.h
-
 MDRZ = -I mediarizer_hdr
 
 OBJ_MAIN = src/mediarizer.o
-OBJ_MDRZ = src/mediarizer_src/meta_processor.o src/mediarizer_src/string_processor.o \
+OBJ_MDRZ = src/mediarizer_src/meta_processor.o \
+	src/mediarizer_src/string_processor.o \
 	src/mediarizer_src/file_processor.o
 HDR_MDRZ = src/mediarizer_hdr/processor.h
 
