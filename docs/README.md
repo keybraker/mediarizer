@@ -186,8 +186,8 @@ as data is actually only on remote servers and you locally can see a shortcut of
 
 ### Acknowledgements
 
-> Acknowledgments - **Exiv2 Team** for [Exiv2](https://github.com/exiv2/exiv2)<br>
-> Author - **Ioannis Tsiakkas** - _(Keybraker)_ - [Keybraker](https://github.com/keybraker)<br>
-> License - Released under the [GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)<br>
+> Acknowledgments - _[Exiv2](https://github.com/exiv2/exiv2)_<br>
+> Author - **Ioannis Tsiakkas** - _[Keybraker](https://github.com/keybraker)_<br>
+> License - _[GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)_<br>
 
 Copyrights © Keybraker 2020 [Mediarizer](https://github.com/keybraker/Media-Organizer), All rights reserved
