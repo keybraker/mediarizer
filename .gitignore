@@ -34,5 +34,8 @@
 # Apple
 *.DS_Store
 
+# VSCode
+*.vscode
+
 # Mediarizer
 mediarizer

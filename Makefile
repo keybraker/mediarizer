@@ -36,6 +36,9 @@ else
 	endif
 endif
 
+OBJ_EXIF = src/ExifTool.o src/ExifToolPipe.o src/TagInfo.o
+HDR_EXIF = inc/ExifTool.h inc/ExifToolPipe.h inc/TagInfo.h
+
 MDRZ = -I mediarizer_hdr
 
 OBJ_MAIN = src/mediarizer.o

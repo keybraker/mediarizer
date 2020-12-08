@@ -11,7 +11,7 @@
 //              is retained.  A licensing fee may be required for use in a
 //              commercial application.
 //
-// Created:     02-12-2020 - Ioannis Tsiakkas
+// Created:     08-12-2020 - Ioannis Tsiakkas
 //------------------------------------------------------------------------------
 
 #include "../mediarizer_hdr/processor.h"

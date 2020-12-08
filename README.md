@@ -34,6 +34,7 @@ Why use Media Organizer:
 ### Prerequisites
 1. Make sure you have downloaded `g++` (on macOS `clang++` which is installed alongside Xcode).
 2. Download and install [Exiv2](https://www.exiv2.org/) on your computer.
+   (if you want to sort videos as well do not forget to add `cmake .. -DEXIV2_VIDEO_ENABLE=On` flag)
 3. WIP: __If you want to achieve better performance you should download OpenMP for multithreading.__
 
 <div id="2-2">
