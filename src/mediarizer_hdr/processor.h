@@ -1,8 +1,7 @@
 //------------------------------------------------------------------------------
-// File:        Organizer.h
+// File:        processor.h
 //
-// Description: A simple C++ library to organize and delete
-//				duplicate media files.
+// Description: Handling processors that help at photo and video organizing.
 //
 // License:     Copyright 2017-2020, Ioannis Tsiakkas (iantsiakkas at gmail.com)
 //

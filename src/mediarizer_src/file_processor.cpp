@@ -1,8 +1,7 @@
 //------------------------------------------------------------------------------
 // File:        organizer_functions.cpp
 //
-// Description: A simple C++ library to organize and delete
-//				duplicate media files.
+// Description: File manipulation functions that help at file ordering.
 //
 // License:     Copyright 2017-2020, Ioannis Tsiakkas (iantsiakkas at gmail.com)
 //

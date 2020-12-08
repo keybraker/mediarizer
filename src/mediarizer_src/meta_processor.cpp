@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // File:        meta_processor.cpp
 //
-// Description: A simple C++ library to organize and delete
-//				duplicate media files.
+// Description: Metadata manipulation and reading functions that help at
+//              file ordering.
 //
 // License:     Copyright 2017-2020, Ioannis Tsiakkas (iantsiakkas at gmail.com)
 //
@@ -66,9 +66,6 @@ bool files_metadata_exiv2(std::vector<std::string> files, std::string move_path,
 				replace(date_ctime, "  ", " ");
 				std::vector<std::string> date_array = split(date_ctime, " ");
 
-				// Mon Apr 23 11:16:57 2007
-				// 2015:03:11 21:31:49
-
 				for (int i = 0; i < 12; i++)
 					if (g_months[i].find(date_array[1]) != std::string::npos)
 					{
@@ -89,10 +86,6 @@ bool files_metadata_exiv2(std::vector<std::string> files, std::string move_path,
 					   date_array[3];
 			}
 		}
-		// Exiv2::ExifData::iterator end = image_exif_data.end();
-		// for (Exiv2::ExifData::iterator metadata = image_exif_data.begin(); metadata != end; ++metadata)
-		// {
-		// }
 
 		if (date.empty() && !flags.move_flag)
 			continue;

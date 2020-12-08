@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// File:        organizer.cpp
+// File:        mediarizer.cpp
 //
 // Description: A simple C++ library to organize and delete
-//				duplicate media files.
+//              duplicatehotos and video files.
 //
 // License:     Copyright 2017-2020, Ioannis Tsiakkas (iantsiakkas at gmail.com)
 //

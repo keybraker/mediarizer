@@ -10,14 +10,13 @@ Why use Media Organizer:
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/mediarizerDisplay.jpg)
 <br>
 
-> These is achieved in one run of the program
-
 ---
 
 1. [Mediarizer](#1)
 2. [Prerequisite and Build](#2)
    1. [Prerequisites](#2-1)
    2. [Build](#2-2)
+   3. [Build](#2-3)
 3. [Usage Guide](#3)
    1. [Flags](#3-1)
    2. [Examples](#3-2)
@@ -33,9 +32,9 @@ Why use Media Organizer:
 <div id="2-1">
   
 ### Prerequisites
-1. Make sure you have downloaded `g++` (on macOS `clang++` is installed with Xcode installation).
-2. WIP: __If you want to achieve better performance you should download OpenMP for multithreading.__
-3. Download and install [Exiv2](https://www.exiv2.org/) on your computer.
+1. Make sure you have downloaded `g++` (on macOS `clang++` which is installed alongside Xcode).
+2. Download and install [Exiv2](https://www.exiv2.org/) on your computer.
+3. WIP: __If you want to achieve better performance you should download OpenMP for multithreading.__
 
 <div id="2-2">
   
@@ -51,6 +50,16 @@ cd Mediarizer
 
 ```bash
 make
+```
+
+<div id="2-3">
+  
+### Clean
+
+1. In the Mediarizer folder type:
+
+```bash
+make clean
 ```
 
 <div id="3">
@@ -134,15 +143,14 @@ f. will only copy photos _not_ videos:
 
 > a. photos without exif data can be organized with date of creation in the file system using flag `-D`<br>
 > b. when two photos have the same name, only the first encountered is moved to new directory<br>
-> c. `make clean` will clear folder from executables<br>
-> d. unsupported files are not being copied<br>
-> e. corructed files may cause the program to crash<br>
-> f. using cloud storage services like (iCloud, OneDrive, Dropbox, etc) may result in unexpected behaviour 
+> c. unsupported files are not being copied<br>
+> d. corructed files may cause the program to crash<br>
+> e. using cloud storage services like (iCloud, OneDrive, Dropbox, etc) may result in unexpected behaviour 
 as data is actually only on remote servers and you locally can see a shortcut of the remote file
 
 ---
 
-> If you encounter any problem or error please report it.<br>
+> If you encounter any problem or error, please report it.<br>
 > Create pull requests if you find and solve an error.<br>
 ![alt text](https://raw.githubusercontent.com/keybraker/Media-Organizer/master/img/tired.gif)
 
@@ -155,14 +163,14 @@ as data is actually only on remote servers and you locally can see a shortcut of
 ### Release History
 
 - v2.0.0: 08 December 2020: Refactored project and used [Exiv2](https://github.com/exiv2/exiv2).
-- v1.7.0: 22 August 2017: Memory added, for stop and restart.
-- v1.6.0: 20 August 2017: Fully functional duplication deletion (BETA).
-- v1.5.0: 19 August 2017: Added duplication deletion.
-- v1.1.2: 18 August 2017: Added -flags for a more controlled organisation.
-- v1.1.1: 17 August 2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
-- v1.1.0: 17 August 2017: Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool.
-- v1.0.0: 12 August 2017: Full jpeg release with the help of [easyexif](https://github.com/mayanklahiri/easyexif)
-- v0.1.0: 09 August 2017: Initial commit.
+- v1.7.0: 22 August   2017: Memory added, for stop and restart.
+- v1.6.0: 20 August   2017: Fully functional duplication deletion (BETA).
+- v1.5.0: 19 August   2017: Added duplication deletion.
+- v1.1.2: 18 August   2017: Added -flags for a more controlled organisation.
+- v1.1.1: 17 August   2017: Now photos and videos are separated in to diffrent folders for maximum organisation.
+- v1.1.0: 17 August   2017: Huge improvement using [ExifTool](http://owl.phy.queensu.ca/~phil/exiftool/) as processing tool.
+- v1.0.0: 12 August   2017: Full jpeg release with the help of [easyexif](https://github.com/mayanklahiri/easyexif)
+- v0.1.0: 09 August   2017: Initial commit.
 
 <div id="4-2">
 
