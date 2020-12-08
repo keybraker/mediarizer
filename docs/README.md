@@ -139,7 +139,7 @@ e. this execution will only sort _mp4_ and _jpg_ files to move direcotry
 ./mediarizer -i  /path/source/folder -o /path/to/store/folder -f mp4,jpg
 ```
 
-f. will only copy photos _not_ videos:
+f. will only copy photos, _not_ videos:
 
 ```bash
 ./mediarizer -i /path/source/folder -o /path/to/store/folder -photo
