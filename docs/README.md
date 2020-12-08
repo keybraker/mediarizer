@@ -16,7 +16,7 @@ Why use Media Organizer:
 2. [Prerequisite and Build](#2)
    1. [Prerequisites](#2-1)
    2. [Build](#2-2)
-   3. [Build](#2-3)
+   3. [Clean](#2-3)
 3. [Usage Guide](#3)
    1. [Flags](#3-1)
    2. [Examples](#3-2)
@@ -34,8 +34,9 @@ Why use Media Organizer:
 ### Prerequisites
 1. Make sure you have downloaded `g++` (on macOS `clang++` which is installed alongside Xcode).
 2. Download and install [Exiv2](https://www.exiv2.org/) on your computer.<br>
-   **(!) _if you want to sort videos as well do not forget to add `cmake .. -DEXIV2_VIDEO_ENABLE=On` flag when building_**
-3. WIP: If you want to achieve better performance you should download OpenMP for multithreading.
+   **(!) _if you want to sort videos as well do not forget to add_** `cmake .. -DEXIV2_VIDEO_ENABLE=On` **_flag when building_**
+3. WIP: If you want to achieve better performance you should download OpenMP for multithreading.<br>
+   **(!)** _Keep in mind that Mediarizer interacts with the filesystem so there will be only a slight performance improvement as the main bottleneck is the I/O_
 
 <div id="2-2">
   
