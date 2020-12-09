@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Mediarizer</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+
+    <h2>
+        Mediarizer<br>
+        <small>
+            A one-step solution to a chronologically organized media library
+        </small>
+    </h2>
+
+    <div class="container">
+        <div>
+            <form>
+                <div class="omrs-input-group">
+                    <label class="omrs-input-underlined">
+                        <!-- <input id="source_directory_string" required> -->
+                        <input type="text" id="source_directory_string" required placeholder="directory or file" 
+                        value="/Users/keybraker/TEST/SOURCE">
+                        <span class="omrs-input-label">
+                            path to folder you want to organize
+                        </span>
+                        <span class="omrs-input-helper">
+                            <!-- <input id="input_directory" type="file" webkitdirectory directory multiple /> -->
+                        </span>
+                    </label>
+                </div>
+                <div class="omrs-input-group">
+                    <label class="omrs-input-underlined">
+                        <!-- <input id="output_directory_string" required> -->
+                        <input type="text" id="output_directory_string" required placeholder="directory" 
+                        value="/Users/keybraker/TEST/DESTINATION">
+                        <span class="omrs-input-label">
+                            path to folder you want to export library
+                        </span>
+                        <span class="omrs-input-helper">
+                            <!-- <input id="output_directory" type="file" webkitdirectory directory multiple /> -->
+                        </span>
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="multi-button">
+        <button id="organize">Organize</button>
+        <button id="clear">clear</button>
+    </div>
+    <!-- You can also require other files to run in this process -->
+    <script src="./on_click_handler.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{
+    "name": "Mediarizer",
+    "version": "1.0.0",
+    "description": "A one-step solution to a chronologically organized media librar",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "repository": "https://github.com/electron/Mediarizer",
+    "keywords": [
+        "Electron",
+        "quick",
+        "start",
+        "tutorial",
+        "demo"
+    ],
+    "author": "Keybraker",
+    "license": "CC0-1.0",
+    "devDependencies": {
+        "electron": "^11.0.4"
+    }
+}

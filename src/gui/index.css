@@ -1,0 +1,242 @@
+:root {
+    --border-size: 0.125rem;
+    --duration: 250ms;
+    --ease: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --font-family: monospace;
+    --color-primary: white;
+    --color-secondary: black;
+    --color-tertiary: dodgerblue;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --space: 1rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
+    padding: calc(var(--space) * 2);
+    max-width: 700px;
+}
+
+.multi-button {
+    display: flex;
+    width: 100%;
+    box-shadow: var(--shadow) 4px 4px;
+}
+
+.multi-button button {
+    flex-grow: 1;
+    cursor: pointer;
+    position: relative;
+    padding: calc(var(--space) / 1.125) var(--space) var(--space);
+    border: var(--border-size) solid black;
+    color: var(--color-secondary);
+    background-color: var(--color-primary);
+    font-size: 1.5rem;
+    font-family: var(--font-family);
+    text-transform: lowercase;
+    text-shadow: var(--shadow) 2px 2px;
+    transition: flex-grow var(--duration) var(--ease);
+}
+
+.multi-button button+button {
+    border-left: var(--border-size) solid black;
+    margin-left: calc(var(--border-size) * -1);
+}
+
+.multi-button button:hover,
+.multi-button button:focus {
+    flex-grow: 2;
+    color: white;
+    outline: none;
+    text-shadow: none;
+    background-color: var(--color-secondary);
+}
+
+.multi-button button:focus {
+    outline: var(--border-size) dashed var(--color-primary);
+    outline-offset: calc(var(--border-size) * -3);
+}
+
+.multi-button:hover button:focus:not(:hover) {
+    flex-grow: 1;
+    color: var(--color-secondary);
+    background-color: var(--color-primary);
+    outline-color: var(--color-tertiary);
+}
+
+.multi-button button:active {
+    transform: translateY(var(--border-size));
+}
+
+
+/** BEGIN: Non Openmrs CSS **/
+
+* {
+    font-family: var(--font-family);
+}
+
+div.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin-top: 30px;
+    border: var(--border-size) solid black;
+    padding: 30px 30px 30px 30px;
+    box-shadow: var(--shadow) 4px 4px;
+    width: 100%;
+}
+
+h4.title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+:root {
+    --omrs-color-ink-lowest-contrast: rgba(47, 60, 85, 0.18);
+    --omrs-color-ink-low-contrast: rgba(60, 60, 67, 0.3);
+    --omrs-color-ink-medium-contrast: rgba(19, 19, 21, 0.6);
+    --omrs-color-interaction: #1e4bd1;
+    --omrs-color-interaction-minus-two: rgba(73, 133, 224, 0.12);
+    --omrs-color-danger: #b50706;
+    --omrs-color-bg-low-contrast: #eff1f2;
+    --omrs-color-ink-high-contrast: #121212;
+    --omrs-color-bg-high-contrast: #ffffff;
+}
+
+
+/** END: Non Openmrs CSS **/
+
+div.omrs-input-group {
+    margin-bottom: 3rem;
+    width: 100%;
+}
+
+
+/* Input*/
+
+.omrs-input-underlined>input,
+.omrs-input-filled>input {
+    border: none;
+    border-bottom: 0.125rem solid var(--omrs-color-ink-medium-contrast);
+    width: 100%;
+    height: 2rem;
+    font-size: 1.0625rem;
+    padding-left: 0.875rem;
+    line-height: 147.6%;
+    padding-top: 0.825rem;
+    padding-bottom: 0.5rem;
+}
+
+.omrs-input-underlined>input:focus,
+.omrs-input-filled>input:focus {
+    outline: none;
+}
+
+
+/*.omrs-input-underlined>.omrs-input-label,
+.omrs-input-filled>.omrs-input-label {
+    position: absolute;
+    top: 10%;
+    left: 0.875rem;
+    line-height: 147.6%;
+    color: var(--omrs-color-ink-medium-contrast);
+    transition: top .2s;
+}*/
+
+.omrs-input-underlined>svg,
+.omrs-input-filled>svg {
+    position: absolute;
+    top: 0.9375rem;
+    right: 0.875rem;
+    fill: var(--omrs-color-ink-medium-contrast);
+}
+
+.omrs-input-underlined>.omrs-input-helper,
+.omrs-input-filled>.omrs-input-helper {
+    font-size: 0.9375rem;
+    color: var(--omrs-color-ink-medium-contrast);
+    letter-spacing: 0.0275rem;
+    margin: 0.125rem 0.875rem;
+}
+
+.omrs-input-underlined>input:hover,
+.omrs-input-filled>input:hover {
+    background: var(--omrs-color-interaction-minus-two);
+    border-color: var(--omrs-color-ink-high-contrast);
+}
+
+
+/*
+.omrs-input-underlined>input:focus+.omrs-input-label,
+.omrs-input-underlined>input:valid+.omrs-input-label,
+.omrs-input-filled>input:focus+.omrs-input-label,
+.omrs-input-filled>input:valid+.omrs-input-label {
+    top: -40%;
+    font-size: 0.9375rem;
+    margin-bottom: 32px;
+    ;
+}*/
+
+.omrs-input-underlined:not(.omrs-input-danger)>input:focus+.omrs-input-label,
+.omrs-input-filled:not(.omrs-input-danger)>input:focus+.omrs-input-label {
+    color: var(--omrs-color-interaction);
+}
+
+.omrs-input-underlined:not(.omrs-input-danger)>input:focus,
+.omrs-input-filled:not(.omrs-input-danger)>input:focus {
+    border-color: var(--omrs-color-interaction);
+}
+
+.omrs-input-underlined:not(.omrs-input-danger)>input:focus~svg,
+.omrs-input-filled:not(.omrs-input-danger)>input:focus~svg {
+    fill: var(--omrs-color-ink-high-contrast);
+}
+
+
+/** DISABLED **/
+
+.omrs-input-underlined>input:disabled {
+    background: var(--omrs-color-bg-low-contrast);
+    cursor: not-allowed;
+}
+
+.omrs-input-underlined>input:disabled+.omrs-input-label,
+.omrs-input-underlined>input:disabled~.omrs-input-helper {
+    color: var(--omrs-color-ink-low-contrast);
+}
+
+.omrs-input-underlined>input:disabled~svg {
+    fill: var(--omrs-color-ink-low-contrast);
+}
+
+
+/** DANGER **/
+
+.omrs-input-underlined.omrs-input-danger>.omrs-input-label,
+.omrs-input-underlined.omrs-input-danger>.omrs-input-helper,
+.omrs-input-filled.omrs-input-danger>.omrs-input-label,
+.omrs-input-filled.omrs-input-danger>.omrs-input-helper {
+    color: var(--omrs-color-danger);
+}
+
+.omrs-input-danger>svg {
+    fill: var(--omrs-color-danger);
+}
+
+.omrs-input-danger>input {
+    border-color: var(--omrs-color-danger);
+}
+
+.omrs-input-underlined>input {
+    background: var(--omrs-color-bg-high-contrast);
+}
+
+.omrs-input-filled>input {
+    background: var(--omrs-color-bg-low-contrast);
+}

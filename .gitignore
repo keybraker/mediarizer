@@ -40,3 +40,7 @@
 # Mediarizer
 mediarizer
 .output
+
+# nodejs
+node_modules
+package-lock.json
