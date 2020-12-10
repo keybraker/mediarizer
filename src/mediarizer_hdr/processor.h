@@ -87,6 +87,6 @@ bool move_image_to_directory(std::string source_directory, std::string move_dire
 
 // meta_processor.cpp
 bool files_metadata_exiv2(std::vector<std::string> files, std::string move_path);
-void file_analyzer(char *path, char *move_path, flag_struct &flags, vector<std::string> types);
+bool file_analyzer(char *path, char *move_path, flag_struct &flags, vector<std::string> types);
 
 #endif

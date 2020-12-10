@@ -18,6 +18,13 @@
 
 int main(int argc, char *argv[])
 {
+	if (argc == 1)
+	{
+		std::cout << "missing mandatory arguments, -help for more information"
+				  << std::endl;
+		return 0;
+	}
+
 	flag_struct *flags = new flag_struct();
 
 	flags->input_flag = false;
@@ -114,10 +121,10 @@ int main(int argc, char *argv[])
 			break;
 		case 'h':
 			help();
-			exit(EXIT_SUCCESS);
+			return EXIT_SUCCESS;
 		case 'V':
 			version();
-			exit(EXIT_SUCCESS);
+			return EXIT_SUCCESS;
 			break;
 		case 's':
 			flags->verbose_flag = true;
@@ -126,20 +133,23 @@ int main(int argc, char *argv[])
 			break;
 		case '?':
 			std::cout << "there was an error with given flags" << std::endl;
-			exit(EXIT_FAILURE);
+			return EXIT_FAILURE;
 		default:
 			std::cout << "there was an error with given flags" << std::endl;
-			exit(EXIT_FAILURE);
+			return EXIT_FAILURE;
 		}
 	}
 
 	if (!flags->input_flag || !flags->output_flag)
 	{
-		std::cout << "input and out directories are mandatory" << std::endl;
+		std::cout << "input and output directories are mandatory" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
-	file_analyzer(input, output, *flags, types);
+	for (int i = 0; i < 80; i++)
+	{
+		std::cout << "processing: " << i << ", lol" << std::endl;
+	}
 
-	return 0;
+	return file_analyzer(input, output, *flags, types);
 }

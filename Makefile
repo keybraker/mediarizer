@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 
-CPP = g++-10
+CPP = g++
 CCFLAGS = -O3 -pedantic -Wall -Wextra -std=c++1z
 CCLINK = -I/usr/local/include -L/usr/local/lib -lexiv2
 CCNAME = -o mediarizer

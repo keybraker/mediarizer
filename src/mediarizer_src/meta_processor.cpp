@@ -98,7 +98,7 @@ bool files_metadata_exiv2(std::vector<std::string> files, std::string move_path,
 	return true;
 }
 
-void file_analyzer(char *path, char *move_path, flag_struct &flags, vector<std::string> types)
+bool file_analyzer(char *path, char *move_path, flag_struct &flags, vector<std::string> types)
 {
 	auto start_1 = std::chrono::high_resolution_clock::now();
 	auto files = files_in_path(path, flags, types);
@@ -123,5 +123,6 @@ void file_analyzer(char *path, char *move_path, flag_struct &flags, vector<std::
 				  << std::left << std::setfill('+') << std::setw(20)
 				  << duration_2.count() << " microsecs" << std::endl;
 	}
-	return;
+
+	return 0;
 }
