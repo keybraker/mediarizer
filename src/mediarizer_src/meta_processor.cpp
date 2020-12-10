@@ -124,5 +124,5 @@ bool file_analyzer(char *path, char *move_path, flag_struct &flags, vector<std::
 				  << duration_2.count() << " microsecs" << std::endl;
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
