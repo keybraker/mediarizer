@@ -26,6 +26,7 @@ body {
 .multi-button {
     display: flex;
     width: 100%;
+    margin-top: 20px;
     box-shadow: var(--shadow) 4px 4px;
 }
 
@@ -84,8 +85,9 @@ body {
 div.container {
     display: flex;
     align-items: flex-start;
-    justify-content: space-around;
-    margin-top: 30px;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
     border: var(--border-size) solid black;
     padding: 30px 30px 30px 30px;
     box-shadow: var(--shadow) 4px 4px;
@@ -113,7 +115,8 @@ h4.title {
 /** END: Non Openmrs CSS **/
 
 div.omrs-input-group {
-    margin-bottom: 3rem;
+    margin-bottom: 20px;
+    margin-left: 20px;
     width: 100%;
 }
 
@@ -239,4 +242,31 @@ div.omrs-input-group {
 
 .omrs-input-filled>input {
     background: var(--omrs-color-bg-low-contrast);
+}
+
+.float_flex {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 20px;
+    padding: 20px 20px 20px 20px;
+    width: 100%;
+}
+
+.center {
+    text-align: center;
+}
+
+.terminal {
+    text-align: left;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    position: relative;
+    max-height: 100px;
+    background-color: black;
+}
+
+.terminal-text {
+    color: green;
 }

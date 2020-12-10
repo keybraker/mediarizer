@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>Mediarizer</title>
@@ -11,22 +10,21 @@
 </head>
 
 <body>
+    <div class="float_flex">
+        <h2>
+            Mediarizer by Keybraker<br>
+            <small>
+                A one-step solution to a chronologically organized media library
+            </small>
+        </h2>
 
-    <h2>
-        Mediarizer<br>
-        <small>
-            A one-step solution to a chronologically organized media library
-        </small>
-    </h2>
-
-    <div class="container">
-        <div>
+        <div class="container">
+            <h5>organize</h5>
             <form>
                 <div class="omrs-input-group">
                     <label class="omrs-input-underlined">
-                        <!-- <input id="source_directory_string" required> -->
-                        <input type="text" id="source_directory_string" required placeholder="directory or file" 
-                        value="/Users/keybraker/TEST/SOURCE">
+                        <input type="text" id="source_directory_string" required placeholder="directory or file"
+                            value="/Users/keybraker/TEST/SOURCE">
                         <span class="omrs-input-label">
                             path to folder you want to organize
                         </span>
@@ -37,9 +35,8 @@
                 </div>
                 <div class="omrs-input-group">
                     <label class="omrs-input-underlined">
-                        <!-- <input id="output_directory_string" required> -->
-                        <input type="text" id="output_directory_string" required placeholder="directory" 
-                        value="/Users/keybraker/TEST/DESTINATION">
+                        <input type="text" id="output_directory_string" required placeholder="directory"
+                            value="/Users/keybraker/TEST/DESTINATION">
                         <span class="omrs-input-label">
                             path to folder you want to export library
                         </span>
@@ -50,14 +47,55 @@
                 </div>
             </form>
         </div>
+
+        <div class="container">
+            <h5>flags</h5>
+            <div>
+                <label class="omrs-input-underlined">
+                    <input type="text" id="type_string" required placeholder="example: jpg,png, etc">
+                    <span class="omrs-input-label">type</span>
+                </label>
+            </div>
+            <div>
+                <form action="/action_page.php">
+                    <input type="checkbox" id="recursive" name="recursive" value="recursive">
+                    <label for="vehicle1">recursive</label><br>
+                    <input type="checkbox" id="photo" name="photo" value="photo">
+                    <label for="vehicle1">photo</label><br>
+                    <input type="checkbox" id="video" name="video" value="video">
+                    <label for="vehicle2">video</label><br>
+                    <!-- <input type="submit" value="Submit"> -->
+                </form>
+            </div>
+            <div>
+                <form action="/action_page.php">
+                    <input type="checkbox" id="date" name="date" value="date">
+                    <label for="vehicle1">date</label><br>
+                    <input type="checkbox" id="delete" name="delete" value="delete">
+                    <label for="vehicle2">delete</label><br>
+                    <input type="checkbox" id="move" name="move" value="move">
+                    <label for="vehicle2">move</label><br>
+                    <!-- <input type="submit" value="Submit"> -->
+                </form>
+            </div>
+        </div>
+
+        <div class="container terminal">
+            <code class="terminal-text" id="terminal_output">$</code>
+        </div>
+
+        <div class="multi-button">
+            <button id="organize">Organize</button>
+            <button id="clear">clear</button>
+        </div>
+
     </div>
 
-    <div class="multi-button">
-        <button id="organize">Organize</button>
-        <button id="clear">clear</button>
-    </div>
-    <!-- You can also require other files to run in this process -->
     <script src="./on_click_handler.js"></script>
 </body>
+
+<footer class="center">
+    <a href="https://github.com/keybraker/Mediarizer">Mediarizer</a> - 2.0.0<br> Copyrights © <a href="https://github.com/keybraker">Keybraker</a> 2020 Mediarizer<br>All rights reserved
+</footer>
 
 </html>

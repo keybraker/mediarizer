@@ -9,6 +9,10 @@ function createWindow() {
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        maxWidth: 1280,
+        minWidth: 480,
+        maxHeight: 960,
+        minHeight: 360,
         webPreferences: {
             preload: path.join(__dirname, 'on_click_handler.js'),
             // nodeIntegration: true

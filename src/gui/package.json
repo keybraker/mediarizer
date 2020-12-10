@@ -1,5 +1,5 @@
 {
-    "name": "Mediarizer",
+    "name": "MediarizerGUI",
     "version": "1.0.0",
     "description": "A one-step solution to a chronologically organized media librar",
     "main": "main.js",
