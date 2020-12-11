@@ -280,6 +280,7 @@ div.omrs-input-group {
     padding-bottom: 12px;
     padding-left: 12px;
     overflow: auto;
+    overflow: auto;
 }
 
 .terminal {
@@ -288,6 +289,7 @@ div.omrs-input-group {
     overflow-x: scroll;
     position: relative;
     max-height: 100px;
+    max-width: 600px;
     background-color: black;
 }
 
@@ -301,5 +303,5 @@ div.omrs-input-group {
     flex-direction: column;
     justify-content: flex-start;
     max-height: 100px;
-    max-height: 100px;
+    max-width: 100px;
 }

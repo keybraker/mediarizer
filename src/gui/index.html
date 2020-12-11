@@ -24,20 +24,18 @@
             <form>
                 <div class="omrs-input-group">
                     <label class="omrs-input-underlined">
-                        <input type="text" id="source_directory_string" required placeholder="directory or file"
-                            value="/Users/keybraker/TEST/SOURCE">
+                        <input type="text" id="source_directory_string" required placeholder="directory or file">
                         <span class="omrs-input-label">
                             path to folder you want to organize
                         </span>
                         <span class="omrs-input-helper">
-                            <!-- <input id="input_directory" type="file" webkitdirectory directory multiple /> -->
+                            <!-- <input class="custom-file-input" id="input_directory" type="file" webkitdirectory directory multiple /> -->
                         </span>
                     </label>
                 </div>
                 <div class="omrs-input-group">
                     <label class="omrs-input-underlined">
-                        <input type="text" id="output_directory_string" required placeholder="directory"
-                            value="/Users/keybraker/TEST/DESTINATION">
+                        <input type="text" id="output_directory_string" required placeholder="directory">
                         <span class="omrs-input-label">
                             path to folder you want to export library
                         </span>
@@ -58,7 +56,7 @@
                 </label>
             </div>
             <div>
-                <form action="/action_page.php">
+                <form>
                     <input type="checkbox" id="recursive" name="recursive" value="recursive">
                     <label for="vehicle1">recursive</label><br>
                     <input type="checkbox" id="photo" name="photo" value="photo">
@@ -71,7 +69,7 @@
                 </form>
             </div>
             <div>
-                <form action="/action_page.php">
+                <form>
                     <input type="checkbox" id="delete" name="delete" value="delete">
                     <label for="vehicle2">delete</label><br>
                     <input type="checkbox" id="move" name="move" value="move">
