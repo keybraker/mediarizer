@@ -48,7 +48,9 @@ function organize(evt) {
         });
 
         execution_spawn.on("exit", (code) => {
-            // alert(!code ? "Successfully organized library" : "Failed to organize library");
+            if (code) {
+                alert("Failed to organize library");
+            }
         });
     }
 
