@@ -119,8 +119,11 @@ std::vector<std::string> files_in_path(const std::filesystem::path &dir_path,
 			}
 			else if (type(entry) == 0)
 			{
-				std::vector<std::string> files_recursive = files_in_path(entry, flags, types);
-				files.insert(files.end(), files_recursive.begin(), files_recursive.end());
+				if (flags.recursive_flag)
+				{
+					std::vector<std::string> files_recursive = files_in_path(entry, flags, types);
+					files.insert(files.end(), files_recursive.begin(), files_recursive.end());
+				}
 			}
 			else if (type(entry) == 1)
 			{

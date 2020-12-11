@@ -85,15 +85,17 @@ int main(int argc, char *argv[])
 			types = split(std::string(strdup(optarg)), ",");
 			for (auto type : types)
 			{
+				type.erase(std::remove_if(type.begin(), type.end(), ::isspace), type.end());
 				for (auto image_type : image_types)
 					if (image_type == type)
-						break;
+						goto found;
 				for (auto video_type : video_types)
 					if (video_type == type)
-						break;
+						goto found;
 				std::cout << type << " is not a supported file type" << std::endl;
 				exit(EXIT_FAILURE);
 			}
+		found:
 			break;
 		case 'p':
 			flags->photo_flag = true;
@@ -145,11 +147,6 @@ int main(int argc, char *argv[])
 		std::cout << "input and output directories are mandatory" << std::endl;
 		exit(EXIT_FAILURE);
 	}
-
-	for (int i = 0; i < 80; i++)
-	{
-		std::cout << "processing: " << i << ", lol" << std::endl;
-	}
-
+	
 	return file_analyzer(input, output, *flags, types);
 }

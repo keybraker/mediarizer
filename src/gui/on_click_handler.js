@@ -13,18 +13,32 @@ function organize(evt) {
     } else if (!source_directory_string || !output_directory_string) {
         alert("both source and output paths are required");
     } else {
-        console.log("execution");
+        const flags = [];
 
+        flags.push("-i" + source_directory_string);
+        flags.push("-o" + output_directory_string);
 
-        let terminal_output = "";
-        const execution_spawn = spawn("/Users/keybraker/Github/Mediarizer/mediarizer", [
-            "-i " + source_directory_string,
-            "-o " + output_directory_string,
-            "-s"
-        ]);
+        if (document.getElementById("type_string").value)
+            flags.push("-t" + document.getElementById("type_string").value);
+        if (document.getElementById("recursive").checked)
+            flags.push("-r");
+        if (document.getElementById("photo").checked)
+            flags.push("-p");
+        if (document.getElementById("video").checked)
+            flags.push("-v");
+        if (document.getElementById("date").checked)
+            flags.push("-D");
+        if (document.getElementById("delete").checked)
+            flags.push("-x");
+        if (document.getElementById("move").checked)
+            flags.push("-m");
+        if (document.getElementById("verbose").checked)
+            flags.push("-s");
+
+        let terminal_output = "\n";
+        const execution_spawn = spawn("/Users/keybraker/Github/Mediarizer/mediarizer", flags);
 
         execution_spawn.stdout.on("data", (data) => {
-            console.log(`stdout: ${data}`);
             terminal_output += data;
             document.getElementById("terminal_output").innerHTML = terminal_output;
         });

@@ -11,8 +11,9 @@
 
 <body>
     <div class="float_flex">
+        <!-- <img class="logo" src="../../img/mediarizer_logo2.svg" /> -->
         <h2>
-            Mediarizer by Keybraker<br>
+            Mediarizer<br>
             <small>
                 A one-step solution to a chronologically organized media library
             </small>
@@ -49,7 +50,7 @@
         </div>
 
         <div class="container">
-            <h5>flags</h5>
+            <h5>options</h5>
             <div>
                 <label class="omrs-input-underlined">
                     <input type="text" id="type_string" required placeholder="example: jpg,png, etc">
@@ -64,24 +65,28 @@
                     <label for="vehicle1">photo</label><br>
                     <input type="checkbox" id="video" name="video" value="video">
                     <label for="vehicle2">video</label><br>
+                    <input type="checkbox" id="date" name="date" value="date">
+                    <label for="vehicle1">date</label><br>
                     <!-- <input type="submit" value="Submit"> -->
                 </form>
             </div>
             <div>
                 <form action="/action_page.php">
-                    <input type="checkbox" id="date" name="date" value="date">
-                    <label for="vehicle1">date</label><br>
                     <input type="checkbox" id="delete" name="delete" value="delete">
                     <label for="vehicle2">delete</label><br>
                     <input type="checkbox" id="move" name="move" value="move">
                     <label for="vehicle2">move</label><br>
+                    <input type="checkbox" id="verbose" name="verbose" value="verbose">
+                    <label for="vehicle2">verbose</label><br>
                     <!-- <input type="submit" value="Submit"> -->
                 </form>
             </div>
         </div>
 
         <div class="container terminal">
-            <code class="terminal-text" id="terminal_output">$</code>
+            <pre>
+                <code class="terminal-text" id="terminal_output"></code>
+            </pre>
         </div>
 
         <div class="multi-button">
