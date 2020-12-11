@@ -201,7 +201,6 @@ div.omrs-input-group {
     fill: var(--omrs-color-ink-high-contrast);
 }
 
-
 /** DISABLED **/
 
 .omrs-input-underlined>input:disabled {
@@ -217,7 +216,6 @@ div.omrs-input-group {
 .omrs-input-underlined>input:disabled~svg {
     fill: var(--omrs-color-ink-low-contrast);
 }
-
 
 /** DANGER **/
 
@@ -289,7 +287,7 @@ div.omrs-input-group {
     overflow-x: scroll;
     position: relative;
     max-height: 100px;
-    max-width: 600px;
+    max-width: 650px;
     background-color: black;
 }
 
@@ -302,6 +300,37 @@ div.omrs-input-group {
     align-items: flex-start;
     flex-direction: column;
     justify-content: flex-start;
-    max-height: 100px;
-    max-width: 100px;
+    max-height: 400px;
+    max-width: 400px;
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  }
+  
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: left;
+    padding: 5px 5px 5px 5px;
+    border-radius: 6px;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+
+    max-width: 200px;
+    width: 200px;
+    top: 125%;
+    left: 50%;
+    margin-left: -100px;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }

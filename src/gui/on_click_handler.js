@@ -36,7 +36,7 @@ function organize(evt) {
             flags.push("-s");
 
         let terminal_output = "\n";
-        const execution_spawn = spawn("/Users/keybraker/Github/Mediarizer/mediarizer", flags);
+        const execution_spawn = spawn("../../mediarizer", flags);
 
         execution_spawn.stdout.on("data", (data) => {
             terminal_output += data;

@@ -15,9 +15,9 @@ jobs:
     - name: install exiv2
     - run: sudo apt update
     - run: sudo apt install exiv2
-    - name: make
-      run: make
-    - name: make test
-      run: make test
-    - name: make clean
-      run: make clean
+    # - name: make
+    #   run: make
+    # - name: make test
+    #   run: make test
+    # - name: make clean
+    #   run: make clean

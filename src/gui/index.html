@@ -11,13 +11,13 @@
 
 <body>
     <div class="float_flex">
-        <!-- <img class="logo" src="../../img/mediarizer_logo2.svg" /> -->
-        <h2>
+        <img class="logo" src="../../img/mediarizer_logo.svg" />
+        <!-- <h2>
             Mediarizer<br>
             <small>
                 A one-step solution to a chronologically organized media library
             </small>
-        </h2>
+        </h2> -->
 
         <div class="container">
             <h5>organize</h5>
@@ -51,31 +51,58 @@
             <h5>options</h5>
             <div>
                 <label class="omrs-input-underlined">
-                    <input type="text" id="type_string" required placeholder="example: jpg,png, etc">
+                    <input type="text" id="type_string" required placeholder="example: jpg,png etc">
                     <span class="omrs-input-label">type</span>
+                    <div class="tooltip">(i)
+                        <span class="tooltiptext">will only organize the types you enter</span>
+                    </div>
                 </label>
             </div>
             <div>
                 <form>
                     <input type="checkbox" id="recursive" name="recursive" value="recursive">
-                    <label for="vehicle1">recursive</label><br>
+                    <label for="vehicle1">recursive</label>
+                    <div class="tooltip">(i)
+                        <span class="tooltiptext">will organize folders in given direcotry</span>
+                    </div><br>
                     <input type="checkbox" id="photo" name="photo" value="photo">
-                    <label for="vehicle1">photo</label><br>
+                    <label for="vehicle1">photo</label>
+                    <div class="tooltip">(i)
+                        <span class="tooltiptext">only organize of photos</span>
+                    </div><br>
                     <input type="checkbox" id="video" name="video" value="video">
-                    <label for="vehicle2">video</label><br>
+                    <label for="vehicle2">video</label>
+                    <div class="tooltip">(i)
+                        <span class="tooltiptext">only organize of videos</span>
+                    </div><br>
                     <input type="checkbox" id="date" name="date" value="date">
-                    <label for="vehicle1">date</label><br>
+                    <label for="vehicle1">date</label>
+                    <div class="tooltip">(i)
+                        <span class="tooltiptext">will use filesystem data in case no exif data present</span>
+                    </div><br>
                     <!-- <input type="submit" value="Submit"> -->
                 </form>
             </div>
             <div>
                 <form>
                     <input type="checkbox" id="delete" name="delete" value="delete">
-                    <label for="vehicle2">delete</label><br>
+                    <label for="vehicle2">delete</label>
+                    <div class="tooltip">(i)
+                        <span class="tooltiptext">will delete original files</span>
+                    </div>
+                    <br>
                     <input type="checkbox" id="move" name="move" value="move">
-                    <label for="vehicle2">move</label><br>
+                    <label for="vehicle2">move</label>
+                    <div class="tooltip">(i)
+                        <span class="tooltiptext">will move files to undetermined folder in case no exif data present</span>
+                    </div>
+                    <br>
                     <input type="checkbox" id="verbose" name="verbose" value="verbose">
-                    <label for="vehicle2">verbose</label><br>
+                    <label for="vehicle2">verbose</label>
+                    <div class="tooltip">(i)
+                        <span class="tooltiptext">will display more information while running</span>
+                    </div>
+                    <br>
                     <!-- <input type="submit" value="Submit"> -->
                 </form>
             </div>
@@ -98,7 +125,7 @@
 </body>
 
 <footer class="center">
-    <a href="https://github.com/keybraker/Mediarizer">Mediarizer</a> - 2.0.0<br> Copyrights © <a href="https://github.com/keybraker">Keybraker</a> 2020 Mediarizer<br>All rights reserved
+    Version - 2.0.0<br> Copyrights © <a href="https://github.com/keybraker">Keybraker</a> 2020 <a href="https://github.com/keybraker/Mediarizer">Mediarizer</a><br>All rights reserved
 </footer>
 
 </html>
