@@ -57,6 +57,14 @@ function organize(evt) {
 function clear(evt) {
     document.getElementById("source_directory_string").value = "";
     document.getElementById("output_directory_string").value = "";
+    document.getElementById("type_string").value = "";
+    document.getElementById("recursive").checked = false;
+    document.getElementById("photo").checked = false;
+    document.getElementById("video").checked = false;
+    document.getElementById("date").checked = false;
+    document.getElementById("delete").checked = false;
+    document.getElementById("move").checked = false;
+    document.getElementById("verbose").checked = false;
     document.getElementById("terminal_output").innerHTML = "";
 }
 
