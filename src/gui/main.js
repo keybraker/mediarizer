@@ -7,8 +7,8 @@ var child;
 function createWindow() {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 700,
+        height: 900,
         maxWidth: 1280,
         minWidth: 480,
         maxHeight: 960,
