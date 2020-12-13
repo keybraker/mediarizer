@@ -22,7 +22,8 @@ Why use Media Organizer:
    2. [Examples](#3-2)
    3. [Additional Information](#3-3)
 4. [User Interface](#4)
-   1. [GUI](#4-1)
+   1. [GUI Instalation](#4-1)
+   1. [GUI Description](#4-2)
 5. [Information](#5)
    1. [Release History](#5-1)
    2. [Acknowledgements](#5-2)
@@ -168,7 +169,24 @@ as data is actually only on remote servers and you locally can see a shortcut of
 
 ## User interface
 
-<div id="5-1">
+<div id="4-1">
+
+1. Move to GUI Mediarizer directory
+```bash
+cd Mediarizer/src/gui
+```
+
+2. Compile Mediarizer
+```bash
+npm install
+```
+
+3. Run GUI Mediarizer
+```bash
+npm start
+```
+
+<div id="4-2">
 
 ### GUI presentation
 
