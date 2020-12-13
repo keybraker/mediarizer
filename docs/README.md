@@ -1,7 +1,7 @@
 <div id="1">
   
 # [Mediarizer](https://github.com/keybraker/Media-Organizer)
-![alt text](../img/mediarizer_logo2.svg)
+![alt text](../img/mediarizer.svg)
 
 Why use Media Organizer:
 - Fast and easy organisation of photos / videos by date
@@ -21,8 +21,8 @@ Why use Media Organizer:
    1. [Flags](#3-1)
    2. [Examples](#3-2)
    3. [Additional Information](#3-3)
-4. [User Interface](#4)
-   1. [GUI Instalation](#4-1)
+4. [Graphical User Interface](#4)
+   1. [GUI Installation](#4-1)
    1. [GUI Description](#4-2)
 5. [Information](#5)
    1. [Release History](#5-1)
