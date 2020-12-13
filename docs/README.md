@@ -1,7 +1,7 @@
 <div id="1">
   
 # [Mediarizer](https://github.com/keybraker/Media-Organizer)
-![alt text](../img/new_mediarizer_logo.png)
+![alt text](../img/mediarizer_logo2.svg)
 
 Why use Media Organizer:
 - Fast and easy organisation of photos / videos by date
@@ -21,9 +21,11 @@ Why use Media Organizer:
    1. [Flags](#3-1)
    2. [Examples](#3-2)
    3. [Additional Information](#3-3)
-4. [Information](#4)
-   1. [Release History](#4-1)
-   2. [Acknowledgements](#4-2)
+4. [User Interface](#4)
+   1. [GUI](#4-1)
+5. [Information](#5)
+   1. [Release History](#5-1)
+   2. [Acknowledgements](#5-2)
 
 <div id="2">
   
@@ -164,9 +166,19 @@ as data is actually only on remote servers and you locally can see a shortcut of
 
 <div id="4">
 
+## User interface
+
+<div id="5-1">
+
+### GUI presentation
+
+![alt text](../img/mediarizer_gui_desc.svg)
+
+<div id="5">
+
 ## Information
 
-<div id="4-1">
+<div id="5-1">
 
 ### Release History
 
@@ -182,7 +194,7 @@ as data is actually only on remote servers and you locally can see a shortcut of
 | v1.0.0     | 12-08-2017       | _Full jpeg release with the help of [easyexif](https://github.com/mayanklahiri/easyexif)_         |
 | v0.1.0     | 09-08-2017       | _Initial commit_                                                                                  |
 
-<div id="4-2">
+<div id="5-2">
 
 ### Acknowledgements
 
