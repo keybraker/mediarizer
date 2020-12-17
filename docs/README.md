@@ -13,7 +13,7 @@ Why use Media Organizer:
 ---
 
 1. [Mediarizer](#1)
-2. [Prerequisite and Build](#2)
+2. [Prerequisites, Build and Clean](#2)
    1. [Prerequisites](#2-1)
    2. [Build](#2-2)
    3. [Clean](#2-3)
@@ -30,7 +30,7 @@ Why use Media Organizer:
 
 <div id="2">
   
-## Building, Installing and Using Mediarizer
+## Prerequisites, Build and Clean
 
 <div id="2-1">
   
@@ -45,22 +45,17 @@ Why use Media Organizer:
   
 ### Build
 
-1. Open a terminal windows and clone Mediarizer
+1. Clone and move to Mediarizer folder
 ```bash
-https://github.com/keybraker/Mediarizer.git
+git clone https://github.com/keybraker/Mediarizer.git && cd Mediarizer
 ```
 
-2. Move to Mediarizer directory
-```bash
-cd Mediarizer
-```
-
-3. Compile Mediarizer
+2. Compile Mediarizer
 ```bash
 make
 ```
 
-4. Run Mediarizer ([examples](#3-2))
+3. Run Mediarizer ([examples](#3-2))
 ```bash
 ./mediarizer ...
 ```

@@ -1,5 +1,4 @@
 let spawn = require("child_process").spawn;
-
 let path = require('path');
 
 function organize(evt) {

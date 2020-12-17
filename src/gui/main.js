@@ -14,6 +14,7 @@ function createWindow() {
         maxHeight: 960,
         minHeight: 360,
         webPreferences: {
+            contextIsolation: true,
             preload: path.join(__dirname, 'on_click_handler.js'),
             // nodeIntegration: true
         }
