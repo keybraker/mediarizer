@@ -215,4 +215,4 @@ npm start
 > Author - **Ioannis Tsiakkas** - _[Keybraker](https://github.com/keybraker)_<br>
 > License - _[GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)_<br>
 
-Copyrights © Keybraker 2020 [Mediarizer](https://github.com/keybraker/Media-Organizer), All rights reserved
+Copyrights © Keybraker 2020 [Mediarizer](https://github.com/keybraker/Mediarizer), All rights reserved
