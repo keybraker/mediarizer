@@ -1,7 +1,6 @@
 <h1 align="center">Mediarizer</h1>
 
 <p align="center">
-  Why use Media Organizer<br>
   Fast and easy organisation of photos / videos by date<br>
   Lightweight, fast and runs on all harware and OS<br>
 </p>
