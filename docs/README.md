@@ -1,11 +1,12 @@
-<div id="1">
-  
-# [Mediarizer](https://github.com/keybraker/Media-Organizer)
-![alt text](../img/new_mediarizer_logo.png)
+<h1 align="center">Mediarizer</h1>
 
-Why use Media Organizer:
-- Fast and easy organisation of photos / videos by date
-- Lightweight, fast and runs on all harware and OS
+<p align="center">
+  Why use Media Organizer<br>
+  Fast and easy organisation of photos / videos by date<br>
+  Lightweight, fast and runs on all harware and OS<br>
+</p>
+
+---
 
 ![alt text](../img/mediarizerDisplay.jpg)
 <br>
@@ -42,35 +43,33 @@ Why use Media Organizer:
   
 ### Build
 
-1. Open a terminal windows and clone Mediarizer
-```bash
-https://github.com/keybraker/Mediarizer.git
-```
+1. Open a terminal windows and clone Mediarizer and move to directory
 
-2. Move to Mediarizer directory
-```bash
-cd Mediarizer
-```
+      ```bash
+      $ git clone https://github.com/keybraker/Mediarizer.git && cd Mediarizer
+      ```
 
-3. Compile Mediarizer
-```bash
-make
-```
+2. Compile Mediarizer
 
-4. Run Mediarizer ([examples](#3-2))
-```bash
-./mediarizer ...
-```
+      ```bash
+      $ make
+      ```
+
+3. Run Mediarizer ([examples](#3-2))
+
+      ```bash
+      $ ./mediarizer ...
+      ```
 
 <div id="2-3">
   
 ### Clean
 
-1. In the Mediarizer folder type:
+1. In the Mediarizer folder type
 
-```bash
-make clean
-```
+      ```bash
+      $ make clean
+      ```
 
 <div id="3">
 
@@ -107,43 +106,43 @@ make clean
 
 ### Examples
 
-a. sort single file
+1. sort single file
 
-```bash
-./mediarizer -i /path/media.file -o /path/to/store/folder
-./mediarizer --input /path/media.file --output /path/to/store/folder
-```
+      ```bash
+      $ ./mediarizer -i /path/media.file -o /path/to/store/folder
+      $ ./mediarizer --input /path/media.file --output /path/to/store/folder
+      ```
 
-b. sort directory
+2. sort directory
 
-```bash
-./mediarizer -i /path/folder -o /path/to/store/folder
-./mediarizer --input /path/folder --output /path/to/store/folder
-```
+      ```bash
+      $ ./mediarizer -i /path/folder -o /path/to/store/folder
+      $ ./mediarizer --input /path/folder --output /path/to/store/folder
+      ```
 
-c. sort directory and encapsulated directories
+3. sort directory and encapsulated directories
 
-```bash
-./mediarizer -i /path/folder -o /path/to/store/folder -r
-```
+      ```bash
+      $ ./mediarizer -i /path/folder -o /path/to/store/folder -r
+      ```
 
-d. flags can be used in any order
+4. flags can be used in any order
 
-```
-./mediarizer -o /path/to/store/folder -D -i /path/source/folder -f mp4,jpg,png
-```
+      ```bash
+      $ ./mediarizer -o /path/to/store/folder -D -i /path/source/folder -f mp4,jpg,png
+      ```
 
-e. this execution will only sort _mp4_ and _jpg_ files to move direcotry
+5. this execution will only sort _mp4_ and _jpg_ files to move direcotry
 
-```bash
-./mediarizer -i  /path/source/folder -o /path/to/store/folder -f mp4,jpg
-```
+      ```bash
+      $ ./mediarizer -i  /path/source/folder -o /path/to/store/folder -f mp4,jpg
+      ```
 
-f. will only copy photos, _not_ videos:
+6. will only copy photos, _not_ videos:
 
-```bash
-./mediarizer -i /path/source/folder -o /path/to/store/folder -photo
-```
+      ```bash
+      $ ./mediarizer -i /path/source/folder -o /path/to/store/folder -photo
+      ```
 
 <div id="3-3">
 
@@ -190,4 +189,6 @@ as data is actually only on remote servers and you locally can see a shortcut of
 > Author - **Ioannis Tsiakkas** - _[Keybraker](https://github.com/keybraker)_<br>
 > License - _[GNU LICENSE](http://www.gnu.org/philosophy/free-sw.html)_<br>
 
-Copyrights © Keybraker 2020 [Mediarizer](https://github.com/keybraker/Media-Organizer), All rights reserved
+<p align="center">
+  Copyrights © Keybraker 2020-2021 Mediarizer, All rights reserved
+</p>
