@@ -6,8 +6,6 @@
   Lightweight, fast and runs on all harware and OS<br>
 </p>
 
----
-
 ![alt text](../img/mediarizerDisplay.jpg)
 <br>
 
