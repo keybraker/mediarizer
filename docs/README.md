@@ -180,7 +180,7 @@ as data is actually only on remote servers and you locally can see a shortcut of
 
 <div id="4-2">
 
-### Acknowledgements
+---
 
 > Acknowledgments - _[Exiv2](https://github.com/exiv2/exiv2)_<br>
 > Author - **Ioannis Tsiakkas** - _[Keybraker](https://github.com/keybraker)_<br>
