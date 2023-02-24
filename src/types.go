@@ -15,3 +15,10 @@ type FileInfo struct {
 	FileType FileType
 	Created  time.Time
 }
+
+const (
+	FileTypeUnknown FileType = iota
+	FileTypeFolder
+	FileTypeImage
+	FileTypeVideo
+)
