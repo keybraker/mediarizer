@@ -1,3 +1,5 @@
+> [Mediarizer 2](https://github.com/keybraker/mediarizer-2) has been released, check it out!
+
 <h1 align="center">Mediarizer</h1>
 
 <p align="center">
