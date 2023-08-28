@@ -1,4 +1,4 @@
-> [Mediarizer 2](https://github.com/keybraker/mediarizer-2) has been released, check it out!
+> ! **[Mediarizer 2 has been released, check it out!](https://github.com/keybraker/mediarizer-2)**; faster, safer and more feature complete, version 2 is here!
 
 <h1 align="center">Mediarizer</h1>
 
